@@ -14,6 +14,9 @@
 		9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
 		9C7AD84924C011D500AAEBB0 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */; };
+		9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
+		9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86524C0360800AAEBB0 /* NetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,6 +42,9 @@
 		9C545BED24BF4C3D00138C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C545BEF24BF4C3D00138C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C7AD84724C011D500AAEBB0 /* ProModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
+		9C7AD86224C035E200AAEBB0 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		9C7AD86524C0360800AAEBB0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +79,7 @@
 		9C545BE024BF4C3C00138C78 /* Depromeet8th4 */ = {
 			isa = PBXGroup;
 			children = (
+				9C7AD84C24C0177B00AAEBB0 /* Service */,
 				9C7AD84124C00F1F00AAEBB0 /* App */,
 				9C7AD84224C00F3600AAEBB0 /* Scene */,
 				9C545BEA24BF4C3D00138C78 /* Assets.xcassets */,
@@ -105,6 +112,16 @@
 				9C7AD84724C011D500AAEBB0 /* ProModule.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9C7AD84C24C0177B00AAEBB0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				9C7AD86224C035E200AAEBB0 /* BaseService.swift */,
+				9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */,
+				9C7AD86524C0360800AAEBB0 /* NetworkService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -179,8 +196,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C545BE624BF4C3C00138C78 /* ViewController.swift in Sources */,
+				9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */,
+				9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */,
 				9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */,
 				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
+				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,6 +342,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.Depromeet8th4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -339,6 +360,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.Depromeet8th4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
