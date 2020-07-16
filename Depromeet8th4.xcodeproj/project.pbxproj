@@ -17,6 +17,7 @@
 		9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */; };
 		9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
 		9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86524C0360800AAEBB0 /* NetworkService.swift */; };
+		9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +46,7 @@
 		9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		9C7AD86224C035E200AAEBB0 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		9C7AD86524C0360800AAEBB0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 		9C545BE024BF4C3C00138C78 /* Depromeet8th4 */ = {
 			isa = PBXGroup;
 			children = (
+				9C7AD86724C036FD00AAEBB0 /* API */,
 				9C7AD84C24C0177B00AAEBB0 /* Service */,
 				9C7AD84124C00F1F00AAEBB0 /* App */,
 				9C7AD84224C00F3600AAEBB0 /* Scene */,
@@ -122,6 +125,14 @@
 				9C7AD86524C0360800AAEBB0 /* NetworkService.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		9C7AD86724C036FD00AAEBB0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,6 +210,7 @@
 				9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */,
 				9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */,
 				9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */,
+				9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */,
 				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 			);
