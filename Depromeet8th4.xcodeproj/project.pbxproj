@@ -12,7 +12,23 @@
 		9C545BE624BF4C3C00138C78 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE524BF4C3C00138C78 /* ViewController.swift */; };
 		9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
 		9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */; };
+		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
+		9C7AD84924C011D500AAEBB0 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9C7AD84A24C011D500AAEBB0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9C7AD84924C011D500AAEBB0 /* ProModule.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9C545BDE24BF4C3C00138C78 /* Depromeet8th4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Depromeet8th4.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		9C545BEA24BF4C3D00138C78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C545BED24BF4C3D00138C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C545BEF24BF4C3D00138C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C7AD84724C011D500AAEBB0 /* ProModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +58,7 @@
 			children = (
 				9C545BE024BF4C3C00138C78 /* Depromeet8th4 */,
 				9C545BDF24BF4C3C00138C78 /* Products */,
+				9C7AD84624C011D500AAEBB0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,6 +99,14 @@
 			path = Scene;
 			sourceTree = "<group>";
 		};
+		9C7AD84624C011D500AAEBB0 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9C7AD84724C011D500AAEBB0 /* ProModule.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -90,6 +117,7 @@
 				9C545BDA24BF4C3C00138C78 /* Sources */,
 				9C545BDB24BF4C3C00138C78 /* Frameworks */,
 				9C545BDC24BF4C3C00138C78 /* Resources */,
+				9C7AD84A24C011D500AAEBB0 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);

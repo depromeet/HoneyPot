@@ -1,0 +1,169 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire.git",
+        "state": {
+          "branch": null,
+          "revision": "2777659076fda38bd4e487739ee331c7a65b5924",
+          "version": "5.2.1"
+        }
+      },
+      {
+        "package": "Immutable",
+        "repositoryURL": "https://github.com/devxoul/Immutable.git",
+        "state": {
+          "branch": null,
+          "revision": "3701f738a11b8f65b6f740ffd0978d200b466c4a",
+          "version": "0.6.0"
+        }
+      },
+      {
+        "package": "Kingfisher",
+        "repositoryURL": "https://github.com/onevcat/Kingfisher",
+        "state": {
+          "branch": null,
+          "revision": "1339ebea9498ef6c3fc75cc195d7163d7c7167f9",
+          "version": "5.14.1"
+        }
+      },
+      {
+        "package": "Moya",
+        "repositoryURL": "https://github.com/Moya/Moya",
+        "state": {
+          "branch": null,
+          "revision": "b3e5a233e0d85fd4d69f561c80988590859c7dee",
+          "version": "14.0.0"
+        }
+      },
+      {
+        "package": "MoyaSugar",
+        "repositoryURL": "https://github.com/devxoul/MoyaSugar",
+        "state": {
+          "branch": null,
+          "revision": "079f25af9798977885058895085051379755bc7c",
+          "version": "1.3.3"
+        }
+      },
+      {
+        "package": "ReactiveSwift",
+        "repositoryURL": "https://github.com/Moya/ReactiveSwift.git",
+        "state": {
+          "branch": null,
+          "revision": "f195d82bb30e412e70446e2b4a77e1b514099e88",
+          "version": "6.1.0"
+        }
+      },
+      {
+        "package": "ReactorKit",
+        "repositoryURL": "https://github.com/ReactorKit/ReactorKit",
+        "state": {
+          "branch": null,
+          "revision": "30cf86f659b8171785d21f0a42918f526acf94c3",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "ReusableKit",
+        "repositoryURL": "https://github.com/devxoul/ReusableKit",
+        "state": {
+          "branch": null,
+          "revision": "9a5756ba41f7a864ff0738c21876d52b9e67eec7",
+          "version": "3.0.0"
+        }
+      },
+      {
+        "package": "RIBs",
+        "repositoryURL": "https://github.com/uber/RIBs",
+        "state": {
+          "branch": "master",
+          "revision": "ffc489f00db785c8c0051678393f7aba0d52f1a4",
+          "version": null
+        }
+      },
+      {
+        "package": "RxDataSources",
+        "repositoryURL": "https://github.com/RxSwiftCommunity/RxDataSources",
+        "state": {
+          "branch": null,
+          "revision": "a18cee01c9ee55f04d0c7eb15c77a96c3648c88e",
+          "version": "4.0.1"
+        }
+      },
+      {
+        "package": "RxExpect",
+        "repositoryURL": "https://github.com/devxoul/RxExpect.git",
+        "state": {
+          "branch": null,
+          "revision": "c3a3bb3d46ee831582c6619ecc48cda1cdbff890",
+          "version": "2.0.0"
+        }
+      },
+      {
+        "package": "RxGesture",
+        "repositoryURL": "https://github.com/RxSwiftCommunity/RxGesture",
+        "state": {
+          "branch": null,
+          "revision": "867f176b6695829e350fafc00b5a849bb46a1857",
+          "version": "3.0.3"
+        }
+      },
+      {
+        "package": "RxSwift",
+        "repositoryURL": "https://github.com/ReactiveX/RxSwift",
+        "state": {
+          "branch": null,
+          "revision": "002d325b0bdee94e7882e1114af5ff4fe1e96afa",
+          "version": "5.1.1"
+        }
+      },
+      {
+        "package": "RxViewController",
+        "repositoryURL": "https://github.com/devxoul/RxViewController",
+        "state": {
+          "branch": null,
+          "revision": "2974fc02742497ee26ba3622ced199818d580444",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/SnapKit/SnapKit",
+        "state": {
+          "branch": null,
+          "revision": "d458564516e5676af9c70b4f4b2a9178294f1bc6",
+          "version": "5.0.1"
+        }
+      },
+      {
+        "package": "SwiftyColor",
+        "repositoryURL": "https://github.com/devxoul/SwiftyColor",
+        "state": {
+          "branch": null,
+          "revision": "4b169b77446ef1d9878b162a0a38258f7563ed5b",
+          "version": "1.2.1"
+        }
+      },
+      {
+        "package": "Then",
+        "repositoryURL": "https://github.com/devxoul/Then",
+        "state": {
+          "branch": null,
+          "revision": "e421a7b3440a271834337694e6050133a3958bc7",
+          "version": "2.7.0"
+        }
+      },
+      {
+        "package": "WeakMapTable",
+        "repositoryURL": "https://github.com/ReactorKit/WeakMapTable.git",
+        "state": {
+          "branch": null,
+          "revision": "eda6ba374666bb2177034b6418025103cc72bcbf",
+          "version": "1.1.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
