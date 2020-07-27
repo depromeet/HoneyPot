@@ -11,11 +11,8 @@ import SnapKit
 import Then
 
 class DetailViewController: BaseViewController {
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .systemBackground
     }
-    
 }
