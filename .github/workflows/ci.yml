@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: iOS - ${{ matrix.destination }}
-        run: xcodebuild -workspace "YoutubeExample.xcworkspace" -scheme "YoutubeExample" -destination "${{ matrix.destination }}"
+        run: xcodebuild -workspace "Depromeet8th4.xcworkspace" -scheme "Depromeet8th4" -destination "${{ matrix.destination }}"
   swiftlint:
     runs-on: ubuntu-latest
     steps:
