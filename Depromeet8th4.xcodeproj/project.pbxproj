@@ -14,6 +14,7 @@
 		9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
 		9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */; };
 		9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60775D24C1534600E5CBEE /* BaseViewController.swift */; };
+		9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61724D42666009DD6D7 /* VerticalButton.swift */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
 		9C7AD84924C011D500AAEBB0 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */; };
@@ -47,6 +48,7 @@
 		9C545BED24BF4C3D00138C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C545BEF24BF4C3D00138C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C60775D24C1534600E5CBEE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		9C7AD84724C011D500AAEBB0 /* ProModule.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ProModule.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceProvider.swift; sourceTree = "<group>"; };
 		9C7AD86224C035E200AAEBB0 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				9CF363AD24D0530A0008380C /* NavigationBar.swift */,
+				9C71F61724D42666009DD6D7 /* VerticalButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */,
 				9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */,
 				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
+				9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
