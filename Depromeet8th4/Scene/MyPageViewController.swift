@@ -17,13 +17,48 @@ class MyPageViewController: BaseViewController {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
         static let buttonTitle = 0x323232.color
+        static let separatorBackground = 0xECECEC.color
     }
+
+    private enum Menu {
+        case invite, notice, customer, setting
+
+        var title: String {
+            switch self {
+            case .invite: return "친구초대"
+            case .notice: return "공지사항"
+            case .customer: return "고객센터"
+            case .setting: return "환경설정"
+            }
+        }
+
+        var image: UIImage {
+            switch self {
+            case .invite: return #imageLiteral(resourceName: "icon_friend_w24h24")
+            case .notice: return #imageLiteral(resourceName: "icon_sound_w24h24")
+            case .customer: return #imageLiteral(resourceName: "icon_contact_w24h24")
+            case .setting: return #imageLiteral(resourceName: "icon_setting_w24h24")
+            }
+        }
+    }
+
+    private let menus: [Menu] = [.invite, .notice, .customer, .setting]
 
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack,
         rightView: buttonAlert
     ).then {
         $0.backgroundColor = .clear
+    }
+
+    lazy var tableView = UITableView().then {
+        $0.delegate = self
+        $0.dataSource = self
+        $0.register(MenuCell.self, forCellReuseIdentifier: "cell")
+        $0.rowHeight = 56
+        $0.separatorInset = .zero
+        $0.separatorColor = Color.separatorBackground
+        $0.tableFooterView = UIView(frame: .zero)
     }
 
     let viewContainer = UIView().then {
@@ -80,6 +115,7 @@ class MyPageViewController: BaseViewController {
 
     override func setupConstraints() {
         setupNavigationBar()
+        setupTableView()
         setupProfile()
         setupInfo()
     }
@@ -91,45 +127,78 @@ class MyPageViewController: BaseViewController {
             })
             .disposed(by: disposeBag)
     }
+
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        if let header = tableView.tableHeaderView {
+            header.frame.size.height = 248
+        }
+    }
+}
+
+extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return menus.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let menu = menus[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MenuCell
+        cell.imageViewIcon.image = menu.image
+        cell.labelTitle.text = menu.title
+        return cell
+    }
 }
 
 extension MyPageViewController {
     private func setupNavigationBar() {
-        view.backgroundColor = Color.navigationBackground
+        view.backgroundColor = .systemBackground
         view.addSubview(navigationBar)
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
         }
+        let viewBackground = UIView().then {
+            $0.backgroundColor = Color.navigationBackground
+        }
+        view.insertSubview(viewBackground, belowSubview: navigationBar)
+        viewBackground.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(navigationBar)
+        }
+    }
+    private func setupTableView() {
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
+        }
     }
     private func setupProfile() {
-        view.addSubview(viewContainer)
-        viewContainer.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
         viewContainer.addSubview(viewProfile)
         viewProfile.snp.makeConstraints {
             $0.top.equalToSuperview().inset(13)
-            $0.leading.trailing.equalTo(viewContainer.safeAreaLayoutGuide).inset(15)
+            $0.leading.trailing.equalTo(viewContainer.safeAreaLayoutGuide).inset(15).priority(999)
             $0.height.equalTo(100)
         }
         viewProfile.addSubview(imageViewProfile)
         imageViewProfile.snp.makeConstraints {
             $0.top.leading.bottom.equalToSuperview().inset(22)
-            $0.width.equalTo(imageViewProfile.snp.height)
+            $0.width.equalTo(imageViewProfile.snp.height).priority(999)
         }
         viewProfile.addSubview(buttonEdit)
         buttonEdit.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(10)
-            $0.width.height.equalTo(44)
+            $0.width.height.equalTo(44).priority(999)
         }
         viewProfile.addSubview(labelUsername)
         labelUsername.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(imageViewProfile.snp.trailing).offset(14)
-            $0.trailing.equalTo(buttonEdit.snp.leading).offset(14)
+            $0.leading.equalTo(imageViewProfile.snp.trailing).offset(14).priority(999)
+            $0.trailing.equalTo(buttonEdit.snp.leading).offset(-14)
         }
     }
     private func setupInfo() {
@@ -143,8 +212,17 @@ extension MyPageViewController {
         viewContainer.addSubview(stackViewButtons)
         stackViewButtons.snp.makeConstraints {
             $0.top.equalTo(viewProfile.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.leading.trailing.equalToSuperview().inset(15).priority(999)
             $0.height.equalTo(87)
         }
+        let viewSeparator = UIView().then {
+            $0.backgroundColor = 0xF8F9FA.color
+        }
+        viewContainer.addSubview(viewSeparator)
+        viewSeparator.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(viewContainer.safeAreaLayoutGuide)
+            $0.height.equalTo(8)
+        }
+        tableView.tableHeaderView = viewContainer
     }
 }
