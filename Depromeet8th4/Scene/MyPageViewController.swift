@@ -16,6 +16,7 @@ import Then
 class MyPageViewController: BaseViewController {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
+        static let buttonTitle = 0x323232.color
     }
 
     lazy var navigationBar = NavigationBar(
@@ -24,11 +25,21 @@ class MyPageViewController: BaseViewController {
     ).then {
         $0.backgroundColor = .clear
     }
+
+    let viewContainer = UIView().then {
+        $0.backgroundColor = .systemBackground
+    }
+
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
     let buttonAlert = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_alert_w24h24"), for: .normal)
+    }
+
+    let viewProfile = UIView().then {
+        $0.layer.cornerRadius = 10
+        $0.backgroundColor = 0xEEEEEE.color
     }
     let imageViewProfile = UIImageView().then {
         $0.contentMode = .scaleAspectFill
@@ -42,9 +53,35 @@ class MyPageViewController: BaseViewController {
         $0.setImage(#imageLiteral(resourceName: "icon_indicator_w24h24"), for: .normal)
     }
 
+    let buttonPay = VerticalButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_card_w48h48"), for: .normal)
+        $0.setTitle("결제정보", for: .normal)
+        $0.setTitleColor(Color.buttonTitle, for: .normal)
+        $0.imageView?.contentMode = .center
+        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.textAlignment = .center
+    }
+    let buttonPurchase = VerticalButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_cart_w48h48"), for: .normal)
+        $0.setTitle("구매내역", for: .normal)
+        $0.setTitleColor(Color.buttonTitle, for: .normal)
+        $0.imageView?.contentMode = .center
+        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.textAlignment = .center
+    }
+    let buttonLike = VerticalButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_heart_w48h48"), for: .normal)
+        $0.setTitle("관심정보", for: .normal)
+        $0.setTitleColor(Color.buttonTitle, for: .normal)
+        $0.imageView?.contentMode = .center
+        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.textAlignment = .center
+    }
+
     override func setupConstraints() {
         setupNavigationBar()
         setupProfile()
+        setupInfo()
     }
 
     override func setupBindings() {
@@ -66,17 +103,10 @@ extension MyPageViewController {
         }
     }
     private func setupProfile() {
-        let viewContainer = UIView().then {
-            $0.backgroundColor = .systemBackground
-        }
         view.addSubview(viewContainer)
         viewContainer.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
-        }
-        let viewProfile = UIView().then {
-            $0.layer.cornerRadius = 10
-            $0.backgroundColor = 0xEEEEEE.color
         }
         viewContainer.addSubview(viewProfile)
         viewProfile.snp.makeConstraints {
@@ -100,6 +130,21 @@ extension MyPageViewController {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(imageViewProfile.snp.trailing).offset(14)
             $0.trailing.equalTo(buttonEdit.snp.leading).offset(14)
+        }
+    }
+    private func setupInfo() {
+        let stackViewButtons = UIStackView(
+            arrangedSubviews: [buttonPay, buttonPurchase, buttonLike]
+        ).then {
+            $0.axis = .horizontal
+            $0.alignment = .fill
+            $0.distribution = .fillEqually
+        }
+        viewContainer.addSubview(stackViewButtons)
+        stackViewButtons.snp.makeConstraints {
+            $0.top.equalTo(viewProfile.snp.bottom).offset(20)
+            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.height.equalTo(87)
         }
     }
 }
