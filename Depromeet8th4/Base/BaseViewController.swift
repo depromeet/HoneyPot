@@ -33,12 +33,17 @@ class BaseViewController: UIViewController {
     override func updateViewConstraints() {
         if !self.didSetupConstraints {
             self.setupConstraints()
+            self.setupBindings()
             self.didSetupConstraints = true
         }
         super.updateViewConstraints()
     }
 
     func setupConstraints() {
+
+    }
+
+    func setupBindings() {
 
     }
 
