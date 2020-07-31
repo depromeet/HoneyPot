@@ -25,8 +25,7 @@ class NavigationBar: UIView {
     }
 
     let imageViewLogo = UIImageView().then {
-        $0.image = nil
-        $0.backgroundColor = .red
+        $0.image = #imageLiteral(resourceName: "image_logo_w79h22")
         $0.contentMode = .scaleAspectFit
     }
     let labelTitle = UILabel().then {
@@ -43,13 +42,13 @@ class NavigationBar: UIView {
             addSubview(left)
             left.snp.makeConstraints {
                 $0.top.bottom.equalToSuperview()
-                $0.leading.equalToSuperview().inset(16)
+                $0.leading.equalToSuperview().inset(8)
                 $0.width.equalTo(left.snp.height)
             }
         } else {
             addSubview(imageViewLogo)
             imageViewLogo.snp.makeConstraints {
-                $0.leading.equalToSuperview().inset(16)
+                $0.leading.equalToSuperview().inset(18)
                 $0.centerY.equalToSuperview()
             }
         }
@@ -57,7 +56,7 @@ class NavigationBar: UIView {
             addSubview(right)
             right.snp.makeConstraints {
                 $0.top.bottom.equalToSuperview()
-                $0.trailing.equalToSuperview().inset(16)
+                $0.trailing.equalToSuperview().inset(8)
                 $0.width.equalTo(right.snp.height)
             }
         }
@@ -68,18 +67,5 @@ class NavigationBar: UIView {
                 $0.center.equalToSuperview()
             }
         }
-    }
-
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-
-        0xD3D3D3.color.setStroke()
-
-        let startPoint = CGPoint(x: 0, y: bounds.height)
-        let endPoint = CGPoint(x: bounds.width, y: bounds.height)
-        let path = UIBezierPath()
-        path.move(to: startPoint)
-        path.addLine(to: endPoint)
-        path.stroke()
     }
 }
