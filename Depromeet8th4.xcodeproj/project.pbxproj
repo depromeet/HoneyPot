@@ -128,7 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				9C545BE524BF4C3C00138C78 /* MainViewController.swift */,
-				9C4DB81724D19C2800254C79 /* MyPageViewController.swift */,
+				9CE4CDB224D6592E00A8A25E /* MyPage */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -159,12 +159,20 @@
 			path = API;
 			sourceTree = "<group>";
 		};
+		9CE4CDB224D6592E00A8A25E /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				9C4DB81724D19C2800254C79 /* MyPageViewController.swift */,
+				9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
 		9CF363AA24D052D50008380C /* View */ = {
 			isa = PBXGroup;
 			children = (
 				9CF363AD24D0530A0008380C /* NavigationBar.swift */,
 				9C71F61724D42666009DD6D7 /* VerticalButton.swift */,
-				9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
