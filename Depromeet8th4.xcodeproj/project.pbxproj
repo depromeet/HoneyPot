@@ -25,6 +25,7 @@
 		9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */; };
 		9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */; };
 		9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */; };
+		9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBD24D6638900A8A25E /* AccountService.swift */; };
 		9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF363AD24D0530A0008380C /* NavigationBar.swift */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +63,7 @@
 		9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
+		9CE4CDBD24D6638900A8A25E /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
 		9CF363AD24D0530A0008380C /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,6 +155,7 @@
 				9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */,
 				9C7AD86524C0360800AAEBB0 /* NetworkService.swift */,
 				9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */,
+				9CE4CDBD24D6638900A8A25E /* AccountService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
 				9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */,
 				9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */,
+				9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */,
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 			);
