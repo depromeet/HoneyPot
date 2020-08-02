@@ -10,8 +10,10 @@ import Foundation
 
 protocol ServiceProviderType: class {
     var networkService: NetworkServiceType { get }
+    var userDefaultsService: UserDefaultsServiceType { get }
 }
 
 class ServiceProvider: ServiceProviderType {
     lazy var networkService: NetworkServiceType = NetworkService(provider: self)
+    lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
 }
