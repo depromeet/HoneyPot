@@ -42,7 +42,7 @@ class MyPageViewController: BaseViewController {
         }
     }
 
-    private let menus: [Menu] = [.invite, .notice, .customer, .setting]
+    private let menus: Observable<[Menu]> = .just([.invite, .notice, .customer, .setting])
 
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack,
@@ -52,8 +52,6 @@ class MyPageViewController: BaseViewController {
     }
 
     lazy var tableView = UITableView().then {
-        $0.delegate = self
-        $0.dataSource = self
         $0.register(MenuCell.self, forCellReuseIdentifier: "cell")
         $0.rowHeight = 56
         $0.separatorInset = .zero
@@ -126,6 +124,12 @@ class MyPageViewController: BaseViewController {
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
+
+        menus
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: MenuCell.self)) { _, menu, cell in
+                cell.imageViewIcon.image = menu.image
+                cell.labelTitle.text = menu.title
+            }.disposed(by: disposeBag)
     }
 
     override func viewWillLayoutSubviews() {
@@ -134,20 +138,6 @@ class MyPageViewController: BaseViewController {
         if let header = tableView.tableHeaderView {
             header.frame.size.height = 248
         }
-    }
-}
-
-extension MyPageViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menus.count
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let menu = menus[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as! MenuCell
-        cell.imageViewIcon.image = menu.image
-        cell.labelTitle.text = menu.title
-        return cell
     }
 }
 
