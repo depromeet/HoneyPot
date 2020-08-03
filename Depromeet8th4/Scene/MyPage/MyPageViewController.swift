@@ -51,7 +51,7 @@ class MyPageViewController: BaseViewController {
         $0.backgroundColor = .clear
     }
 
-    lazy var tableView = UITableView().then {
+    let tableView = UITableView().then {
         $0.register(MenuCell.self, forCellReuseIdentifier: "cell")
         $0.rowHeight = 56
         $0.separatorInset = .zero
@@ -130,6 +130,16 @@ class MyPageViewController: BaseViewController {
                 cell.imageViewIcon.image = menu.image
                 cell.labelTitle.text = menu.title
             }.disposed(by: disposeBag)
+
+        tableView.rx.modelSelected(Menu.self)
+            .filter { $0 == .setting }
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let reactor = SettingReactor(service: self.service)
+                let setting = SettingViewController(service: self.service, reactor: reactor)
+                self.navigationController?.pushViewController(setting, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 
     override func viewWillLayoutSubviews() {
