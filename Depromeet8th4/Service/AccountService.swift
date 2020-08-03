@@ -7,29 +7,31 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 extension UserDefaultsKey {
     static var userID: Key<String> { return "userID" }
 }
 
 protocol AccountServiceType {
-    var userID: String { get set }
+    var userID: String { get }
+    func getUserID() -> Observable<String>
+    func setUserID(newUserID: String) -> Observable<String>
 }
 
 class AccountService: BaseService, AccountServiceType {
-    override init(provider: ServiceProviderType) {
-        if let userID = provider.userDefaultsService.value(forKey: .userID) {
-            self.userID = userID
-        } else {
-            self.userID = "1"
-        }
-        super.init(provider: provider)
+    var userID: String {
+        provider.userDefaultsService.value(forKey: .userID) ?? "1"
     }
 
-    var userID: String {
-        didSet {
-            NSLog("didSet userID to: %@", userID)
-            provider.userDefaultsService.set(value: userID, forKey: .userID)
-        }
+    func getUserID() -> Observable<String> {
+        return Observable
+            .just(provider.userDefaultsService.value(forKey: .userID) ?? "1")
+    }
+
+    func setUserID(newUserID: String) -> Observable<String> {
+        provider.userDefaultsService.set(value: newUserID, forKey: .userID)
+        return .just(newUserID)
     }
 }
