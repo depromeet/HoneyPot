@@ -11,10 +11,10 @@ import ReactorKit
 
 final class SettingReactor: Reactor {
 
-    let service: ServiceProviderType
+    let provider: ServiceProviderType
 
-    init(service: ServiceProviderType) {
-        self.service = service
+    init(provider: ServiceProviderType) {
+        self.provider = provider
     }
     // MARK: - Reactor
     var initialState = State()
@@ -33,11 +33,11 @@ final class SettingReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .getUserID:
-            return service.accountService
+            return provider.accountService
                 .getUserID()
                 .map { Mutation.setUserID($0) }
         case .setUserID(let userID):
-            return service.accountService
+            return provider.accountService
                 .setUserID(newUserID: userID)
                 .map { Mutation.setUserID($0) }
         }
