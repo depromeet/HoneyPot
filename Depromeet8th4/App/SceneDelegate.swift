@@ -18,8 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let service = ServiceProvider()
-        let mainViewController = MainViewController(service: service)
+        let provider = ServiceProvider()
+        let mainViewController = MainViewController(provider: provider)
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.setNavigationBarHidden(true, animated: false)
         window.rootViewController = navigationController
@@ -27,7 +27,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
 
         let navigator = Navigator()
-        NavigationMap.initialize(navigator: navigator, viewController: navigationController, provider: service)
+        NavigationMap.initialize(navigator: navigator, viewController: navigationController, provider: provider)
         self.navigator = navigator
     }
 }
