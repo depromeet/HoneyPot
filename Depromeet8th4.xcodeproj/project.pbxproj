@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C1D557924DADF280048BBDF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1D557824DADF280048BBDF /* MainViewController.xib */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9C1D557824DADF280048BBDF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		9C4DB81724D19C2800254C79 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9C545BDE24BF4C3C00138C78 /* Depromeet8th4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Depromeet8th4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C545BE124BF4C3C00138C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9C1D557724DADF150048BBDF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				9C545BE524BF4C3C00138C78 /* MainViewController.swift */,
+				9C1D557824DADF280048BBDF /* MainViewController.xib */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		9C545BD524BF4C3C00138C78 = {
 			isa = PBXGroup;
 			children = (
@@ -138,7 +149,7 @@
 		9C7AD84224C00F3600AAEBB0 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
-				9C545BE524BF4C3C00138C78 /* MainViewController.swift */,
+				9C1D557724DADF150048BBDF /* Main */,
 				9CE4CDB224D6592E00A8A25E /* MyPage */,
 				9CE4CDBF24D6A76900A8A25E /* Setting */,
 			);
@@ -268,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */,
+				9C1D557924DADF280048BBDF /* MainViewController.xib in Resources */,
 				9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
