@@ -17,9 +17,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let service = ServiceProvider()
-//        let mainViewController = MainViewController(service: service)
-        let mainVC = MainVC(service: service)
-        let navigationController = UINavigationController(rootViewController: mainVC)
+        let mainViewController = MainViewController(service: service)
+        let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.setNavigationBarHidden(false, animated: false)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()

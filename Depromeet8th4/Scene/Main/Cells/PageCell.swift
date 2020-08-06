@@ -21,7 +21,7 @@ class PageCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addSubview(label)
-        self.backgroundColor = .gray
+        self.backgroundColor = .white
         label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }

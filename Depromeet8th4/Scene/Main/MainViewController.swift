@@ -9,7 +9,9 @@
 import UIKit
 import Then
 
-class MainVC: BaseViewController, CustomMenuBarDelegate {
+class MainViewController : BaseViewController, CustomMenuBarDelegate {
+    
+    let menu = ["전체", "살림", "패션", "뷰티", "푸드", "가전", "스포츠", "잡화"]
     
     let pageCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
@@ -61,11 +63,12 @@ class MainVC: BaseViewController, CustomMenuBarDelegate {
         self.view.addSubview(customMenuBar)
         customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
-        customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 4
+        customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 8
+//        customMenuBar.indicatorViewWidthConstraint.constant = 50
         customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         customMenuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        customMenuBar.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        customMenuBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     func setupPageCollectionView(){
@@ -84,9 +87,9 @@ class MainVC: BaseViewController, CustomMenuBarDelegate {
     
 }
 
-extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return menu.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -96,7 +99,8 @@ extension MainVC: UICollectionViewDelegate, UICollectionViewDataSource, UICollec
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        customMenuBar.indicatorViewLeadingConstraint.constant = scrollView.contentOffset.x / 4
+        customMenuBar.indicatorViewLeadingConstraint.constant = scrollView.contentOffset.x / 8
+//        customMenuBar.indicatorViewLeadingConstraint.constant = 50
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

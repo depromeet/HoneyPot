@@ -12,17 +12,25 @@ import Then
 class CustomCell: UICollectionViewCell {
 
     var tabLabel = UILabel().then {
-        $0.text = "tab"
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-        $0.textColor = .lightGray
+        $0.textColor = UIColor(named: "color_unselect")
         $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    var sortButton = UIButton().then {
+        $0.setTitle("추천순", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
     }
     
     override var isSelected: Bool {
         didSet {
-            print("selected!")
-            self.tabLabel.textColor = isSelected ? .black : .lightGray
+            if isSelected {
+                self.tabLabel.textColor = UIColor(named: "color_select")
+                self.tabLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+            } else {
+                self.tabLabel.textColor = UIColor(named: "color_unselect")
+                self.tabLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
+            }
         }
     }
     
