@@ -75,6 +75,7 @@ class CustomMenuBar: UIView {
     
 }
 
+
 extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

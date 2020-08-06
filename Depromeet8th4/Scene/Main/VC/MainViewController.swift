@@ -64,7 +64,6 @@ class MainViewController : BaseViewController, CustomMenuBarDelegate {
         customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
         customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 8
-//        customMenuBar.indicatorViewWidthConstraint.constant = 50
         customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         customMenuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
@@ -94,13 +93,11 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PageCell.reusableIdentifier, for: indexPath) as! PageCell
-        cell.label.text = "\(indexPath.row)번째 view"
         return cell
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         customMenuBar.indicatorViewLeadingConstraint.constant = scrollView.contentOffset.x / 8
-//        customMenuBar.indicatorViewLeadingConstraint.constant = 50
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {

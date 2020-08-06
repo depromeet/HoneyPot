@@ -17,11 +17,6 @@ class CustomCell: UICollectionViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
-    var sortButton = UIButton().then {
-        $0.setTitle("추천순", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: <#T##CGFloat#>, weight: <#T##UIFont.Weight#>)
-    }
-    
     override var isSelected: Bool {
         didSet {
             if isSelected {
