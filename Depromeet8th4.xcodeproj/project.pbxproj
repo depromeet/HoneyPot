@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9C1D557924DADF280048BBDF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1D557824DADF280048BBDF /* MainViewController.xib */; };
 		9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1D557524DADC510048BBDF /* NavigationMap.swift */; };
+		9C1D557924DADF280048BBDF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1D557824DADF280048BBDF /* MainViewController.xib */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
@@ -25,6 +25,8 @@
 		9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
 		9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86524C0360800AAEBB0 /* NetworkService.swift */; };
 		9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */; };
+		9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B534924DE8E7A005C3CA8 /* SearchReactor.swift */; };
+		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
 		9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */; };
 		9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */; };
 		9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBD24D6638900A8A25E /* AccountService.swift */; };
@@ -48,8 +50,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9C1D557824DADF280048BBDF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		9C1D557524DADC510048BBDF /* NavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMap.swift; sourceTree = "<group>"; };
+		9C1D557824DADF280048BBDF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		9C4DB81724D19C2800254C79 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9C545BDE24BF4C3C00138C78 /* Depromeet8th4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Depromeet8th4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C545BE124BF4C3C00138C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,8 @@
 		9C7AD86224C035E200AAEBB0 /* BaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
 		9C7AD86524C0360800AAEBB0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemAPI.swift; sourceTree = "<group>"; };
+		9C7B534924DE8E7A005C3CA8 /* SearchReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchReactor.swift; sourceTree = "<group>"; };
+		9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
 		9CE4CDBD24D6638900A8A25E /* AccountService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
@@ -154,6 +158,7 @@
 				9C1D557724DADF150048BBDF /* Main */,
 				9CE4CDB224D6592E00A8A25E /* MyPage */,
 				9CE4CDBF24D6A76900A8A25E /* Setting */,
+				9CE4CDB324D65B2600A8A25E /* Search */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -194,6 +199,15 @@
 				9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		9CE4CDB324D65B2600A8A25E /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */,
+				9C7B534924DE8E7A005C3CA8 /* SearchReactor.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		9CE4CDBA24D6628400A8A25E /* Types */ = {
@@ -305,6 +319,7 @@
 				9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */,
 				9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */,
 				9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */,
+				9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */,
 				9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */,
 				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
 				9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */,
@@ -312,6 +327,7 @@
 				9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */,
 				9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */,
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
+				9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
