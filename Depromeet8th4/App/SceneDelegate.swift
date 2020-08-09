@@ -7,21 +7,27 @@
 //
 
 import UIKit
+import URLNavigator
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var navigator: NavigatorType?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let service = ServiceProvider()
-        let mainViewController = MainViewController(service: service)
+        let provider = ServiceProvider()
+        let mainViewController = MainViewController(provider: provider)
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.setNavigationBarHidden(false, animated: false)
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
         self.window = window
+
+        let navigator = Navigator()
+        NavigationMap.initialize(navigator: navigator, viewController: navigationController, provider: provider)
+        self.navigator = navigator
     }
 }

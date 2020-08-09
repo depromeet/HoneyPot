@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icon_search_w24h24.png",
+      "filename" : "icon_close_w10h10.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_search_w24h24@2x.png",
+      "filename" : "icon_close_w10h10@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_search_w24h24@3x.png",
+      "filename" : "icon_close_w10h10@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

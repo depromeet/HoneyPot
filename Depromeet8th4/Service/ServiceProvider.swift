@@ -12,10 +12,12 @@ protocol ServiceProviderType: class {
     var networkService: NetworkServiceType { get }
     var userDefaultsService: UserDefaultsServiceType { get }
     var accountService: AccountServiceType { get }
+    var searchWordService: SearchWordServiceType { get }
 }
 
 class ServiceProvider: ServiceProviderType {
     lazy var networkService: NetworkServiceType = NetworkService(provider: self)
     lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
     lazy var accountService: AccountServiceType = AccountService(provider: self)
+    lazy var searchWordService: SearchWordServiceType = SearchWordService(provider: self)
 }

@@ -11,12 +11,12 @@ import RxSwift
 
 class BaseViewController: UIViewController {
 
-    let service: ServiceProviderType
+    let provider: ServiceProviderType
     var disposeBag = DisposeBag()
 
     /// Service Provider DI 전용 생성자
-    init(service: ServiceProviderType) {
-        self.service = service
+    init(provider: ServiceProviderType) {
+        self.provider = provider
         super.init(nibName: nil, bundle: nil)
     }
 
