@@ -15,11 +15,6 @@ extension UserDefaultsKey {
     }
 }
 
-enum WordEvent {
-    case add(String)
-    case remove(String)
-}
-
 protocol SearchWordServiceType {
     func getWords() -> Observable<[String: Double]>
     func addWord(word: String) -> Observable<[String: Double]>
