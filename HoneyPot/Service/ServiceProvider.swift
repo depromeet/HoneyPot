@@ -13,6 +13,7 @@ protocol ServiceProviderType: class {
     var userDefaultsService: UserDefaultsServiceType { get }
     var accountService: AccountServiceType { get }
     var searchWordService: SearchWordServiceType { get }
+    var flagService: FlagServiceType { get }
 }
 
 class ServiceProvider: ServiceProviderType {
@@ -20,4 +21,5 @@ class ServiceProvider: ServiceProviderType {
     lazy var userDefaultsService: UserDefaultsServiceType = UserDefaultsService(provider: self)
     lazy var accountService: AccountServiceType = AccountService(provider: self)
     lazy var searchWordService: SearchWordServiceType = SearchWordService(provider: self)
+    lazy var flagService: FlagServiceType = FlagService(provider: self)
 }
