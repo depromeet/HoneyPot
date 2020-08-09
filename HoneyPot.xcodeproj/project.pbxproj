@@ -139,6 +139,8 @@
 		9C90414524EA93E1000E21A3 /* PageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6D6EC6024DB40EF00E27C06 /* PageCell.xib */; };
 		9C90414624EA93E1000E21A3 /* SortCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6AB8EDC24DE6BC100EE3CB1 /* SortCell.xib */; };
 		9C90414824EA93E1000E21A3 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9CA2AD2E24F2587700351BDA /* FlagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2AD2D24F2587700351BDA /* FlagService.swift */; };
+		9CA2AD2F24F2587700351BDA /* FlagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2AD2D24F2587700351BDA /* FlagService.swift */; };
 		9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */; };
 		9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */; };
 		9CA7FA7824EF99CA004BA440 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3024ED23C100ABCC7C /* Logger.swift */; };
@@ -268,6 +270,7 @@
 		9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSubCommentCell.swift; sourceTree = "<group>"; };
 		9C90414D24EA93E1000E21A3 /* HoneyPot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyPot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C90414E24EA93E2000E21A3 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "/Users/Soso/dev/HoneyPot/HoneyPot/Info-Release.plist"; sourceTree = "<absolute>"; };
+		9CA2AD2D24F2587700351BDA /* FlagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagService.swift; sourceTree = "<group>"; };
 		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
 		9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetItemCell.swift; sourceTree = "<group>"; };
 		9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -526,6 +529,7 @@
 				9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */,
 				9CE4CDBD24D6638900A8A25E /* AccountService.swift */,
 				9C7B534F24DEA538005C3CA8 /* SearchWordService.swift */,
+				9CA2AD2D24F2587700351BDA /* FlagService.swift */,
 				9C1D557524DADC510048BBDF /* NavigationMap.swift */,
 				9C697D3024ED23C100ABCC7C /* Logger.swift */,
 			);
@@ -873,6 +877,7 @@
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
 				9C0D59CD24DEE159007779CD /* SearchHeader.swift in Sources */,
 				9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */,
+				9CA2AD2E24F2587700351BDA /* FlagService.swift in Sources */,
 				9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */,
 				9C697D3124ED23C100ABCC7C /* Logger.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
@@ -947,6 +952,7 @@
 				9C90412C24EA93E1000E21A3 /* DiscountEntity.swift in Sources */,
 				9C90412D24EA93E1000E21A3 /* BaseTableViewCell.swift in Sources */,
 				9C90412E24EA93E1000E21A3 /* SearchHeader.swift in Sources */,
+				9CA2AD2F24F2587700351BDA /* FlagService.swift in Sources */,
 				9CD03D2024ECC6A90049EB93 /* CommentViewController.swift in Sources */,
 				9C90412F24EA93E1000E21A3 /* ListReactor.swift in Sources */,
 				9C90413024EA93E1000E21A3 /* SearchReactor.swift in Sources */,
