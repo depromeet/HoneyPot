@@ -37,7 +37,6 @@
 		B6D6EC6124DB40EF00E27C06 /* PageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC5F24DB40EF00E27C06 /* PageCell.swift */; };
 		B6D6EC6224DB40EF00E27C06 /* PageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6D6EC6024DB40EF00E27C06 /* PageCell.xib */; };
 		B6D6EC6524DB41E000E27C06 /* NSObject + reusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC6424DB41E000E27C06 /* NSObject + reusableIdentifier.swift */; };
-		B6D6EC6824DBEC7700E27C06 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC6724DBEC7700E27C06 /* SelectViewController.swift */; };
 		B6D6EC6B24DBF8CE00E27C06 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC6924DBF8CE00E27C06 /* ProductCell.swift */; };
 		B6D6EC6C24DBF8CE00E27C06 /* ProductCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6D6EC6A24DBF8CE00E27C06 /* ProductCell.xib */; };
 /* End PBXBuildFile section */
@@ -88,7 +87,6 @@
 		B6D6EC5F24DB40EF00E27C06 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		B6D6EC6024DB40EF00E27C06 /* PageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageCell.xib; sourceTree = "<group>"; };
 		B6D6EC6424DB41E000E27C06 /* NSObject + reusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject + reusableIdentifier.swift"; sourceTree = "<group>"; };
-		B6D6EC6724DBEC7700E27C06 /* SelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelectViewController.swift; path = Depromeet8th4/Extensions/SelectViewController.swift; sourceTree = SOURCE_ROOT; };
 		B6D6EC6924DBF8CE00E27C06 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductCell.swift; path = Depromeet8th4/Extensions/ProductCell.swift; sourceTree = SOURCE_ROOT; };
 		B6D6EC6A24DBF8CE00E27C06 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductCell.xib; path = Depromeet8th4/Extensions/ProductCell.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
@@ -276,7 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				B6D6EC5224DB3B8500E27C06 /* MainViewController.swift */,
-				B6D6EC6724DBEC7700E27C06 /* SelectViewController.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -367,7 +364,6 @@
 				9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */,
 				9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */,
 				9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */,
-				B6D6EC6824DBEC7700E27C06 /* SelectViewController.swift in Sources */,
 				9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */,
 				B6D6EC6124DB40EF00E27C06 /* PageCell.swift in Sources */,
 				9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */,

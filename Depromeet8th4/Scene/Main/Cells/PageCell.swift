@@ -12,7 +12,7 @@ import Then
 class PageCell: UICollectionViewCell {
     
     var productTableView = UITableView().then {
-        $0.backgroundColor = .yellow
+        $0.separatorStyle = .none
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
@@ -62,7 +62,7 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 50
+            return 40
         } else {
             return 400
         }

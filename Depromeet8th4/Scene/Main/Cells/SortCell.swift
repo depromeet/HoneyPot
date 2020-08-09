@@ -16,15 +16,23 @@ class SortCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
     
+    var sortLabel = UILabel().then {
+        $0.text = "최신순"
+        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.textAlignment = .left
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+    
         addSubview(sortButton)
-        sortButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 10).isActive = true
+        sortButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         sortButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
         
-        
+        addSubview(sortLabel)
+        sortLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        sortLabel.trailingAnchor.constraint(equalTo: sortButton.leadingAnchor).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
