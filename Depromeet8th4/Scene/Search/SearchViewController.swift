@@ -124,10 +124,23 @@ class SearchViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
-        textFieldSearch.rx.controlEvent(.editingDidEndOnExit)
+        let keyword = textFieldSearch.rx.controlEvent(.editingDidEndOnExit)
             .withLatestFrom(textFieldSearch.rx.text.orEmpty)
+            .filter { !$0.isEmpty }
+            .share()
+
+        keyword
             .map { Reactor.Action.addWord($0) }
             .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        keyword
+            .subscribe(onNext: { [weak self] keyword in
+                guard let self = self else { return }
+                let reactor = ListReactor(provider: self.provider, keyword: keyword)
+                let listViewController = ListViewController(reactor: reactor)
+                self.navigationController?.pushViewController(listViewController, animated: true)
+            })
             .disposed(by: disposeBag)
 
         buttonClear.rx.tap
