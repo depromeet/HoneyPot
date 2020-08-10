@@ -16,7 +16,7 @@ class CustomCell: UICollectionViewCell {
         $0.textColor = UIColor(named: "color_unselect")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -28,7 +28,7 @@ class CustomCell: UICollectionViewCell {
             }
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addSubview(tabLabel)

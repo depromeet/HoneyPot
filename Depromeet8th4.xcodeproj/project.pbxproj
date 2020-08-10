@@ -11,7 +11,6 @@
 		9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D59CE24DEE1AC007779CD /* BaseTableViewHeader.swift */; };
 		9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D59D124DEE8E2007779CD /* SearchSection.swift */; };
 		9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1D557524DADC510048BBDF /* NavigationMap.swift */; };
-		9C1D557924DADF280048BBDF /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9C1D557824DADF280048BBDF /* MainViewController.xib */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
@@ -69,7 +68,6 @@
 		9C0D59CE24DEE1AC007779CD /* BaseTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeader.swift; sourceTree = "<group>"; };
 		9C0D59D124DEE8E2007779CD /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		9C1D557524DADC510048BBDF /* NavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMap.swift; sourceTree = "<group>"; };
-		9C1D557824DADF280048BBDF /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		9C4DB81724D19C2800254C79 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9C545BDE24BF4C3C00138C78 /* Depromeet8th4.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Depromeet8th4.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C545BE124BF4C3C00138C78 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -323,6 +321,7 @@
 				9C545BDB24BF4C3C00138C78 /* Frameworks */,
 				9C545BDC24BF4C3C00138C78 /* Resources */,
 				9C7AD84A24C011D500AAEBB0 /* Embed Frameworks */,
+				B67CF9F224E023510078EA6D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -385,6 +384,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B67CF9F224E023510078EA6D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  swiftlint autocorrect\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C545BDA24BF4C3C00138C78 /* Sources */ = {
