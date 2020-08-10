@@ -10,7 +10,6 @@ import UIKit
 import ReactorKit
 import RxSwift
 import RxCocoa
-import RxGesture
 import RxViewController
 import RxDataSources
 import ReusableKit
@@ -19,7 +18,7 @@ import SwiftyColor
 import SnapKit
 import Then
 
-class ListViewController: BaseViewController {
+class ListViewController: BaseViewController, View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
     }
@@ -51,14 +50,43 @@ class ListViewController: BaseViewController {
         $0.clipsToBounds = false
     }
 
+    init(reactor: ListReactor) {
+        super.init(provider: reactor.provider)
+        self.reactor = reactor
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
+    }
 
-        // 임시 데이터
-        Observable.of([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-            .bind(to: tableView.rx.items(Reusable.itemCell)) { i, data, cell in
-                print(i, data, cell)
+    func bind(reactor: ListReactor) {
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        buttonBack.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        tableView.rx.modelSelected(String.self)
+            .subscribe(onNext: { item in
+                print(item)
+            })
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.items }
+            .bind(to: tableView.rx.items(Reusable.itemCell)) { i, item, cell in
+                print(i, item, cell)
             }
             .disposed(by: disposeBag)
     }
