@@ -12,8 +12,8 @@ import URLNavigator
 struct NavigationMap {
     static func initialize(navigator: NavigatorType, viewController: UIViewController, provider: ServiceProviderType) {
         guard let navigationController = viewController as? UINavigationController else { return }
-        print(navigationController)
         navigator.register("honeypot://item/<id>") { (url, values, _) in
+            print(navigationController)
             print(url, values)
             return nil
         }
