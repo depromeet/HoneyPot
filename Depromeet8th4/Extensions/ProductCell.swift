@@ -76,7 +76,7 @@ class ProductCell: UITableViewCell {
         productImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
         productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-        productImageView.heightAnchor.constraint(equalToConstant: 222)
+        productImageView.heightAnchor.constraint(equalToConstant: 222).isActive = true
 
         addSubview(productNameLabel)
         productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 30).isActive = true
