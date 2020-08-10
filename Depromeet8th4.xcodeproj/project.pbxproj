@@ -31,6 +31,7 @@
 		9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B535124DEB116005C3CA8 /* SearchCell.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
+		9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7A2FA24E16F550079C21F /* ListReactor.swift */; };
 		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
 		9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */; };
 		9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */; };
@@ -91,6 +92,7 @@
 		9C7B535124DEB116005C3CA8 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		9C835DDA24DFF4DC000901FF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9C835DDC24DFFB9C000901FF /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
 		9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			isa = PBXGroup;
 			children = (
 				9C835DDA24DFF4DC000901FF /* ListViewController.swift */,
+				9CD7A2FA24E16F550079C21F /* ListReactor.swift */,
 				9C835DDC24DFFB9C000901FF /* ItemCell.swift */,
 			);
 			path = List;
@@ -455,6 +458,7 @@
 				9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */,
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
 				9C0D59CD24DEE159007779CD /* SearchHeader.swift in Sources */,
+				9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */,
 				9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 				9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */,
