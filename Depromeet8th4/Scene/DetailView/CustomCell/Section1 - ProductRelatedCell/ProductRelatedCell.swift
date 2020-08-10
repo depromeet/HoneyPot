@@ -11,14 +11,10 @@ import UIKit
 class ProductRelatedCell: UITableViewCell {
     //MARK:- Properties
     @IBOutlet weak var productName: UILabel!
-    @IBOutlet weak var productCategory: UILabel!
     @IBOutlet weak var originalPrice: UILabel!
     @IBOutlet weak var discountRate: UILabel!
     @IBOutlet weak var discountedPrice: UILabel!
-    @IBOutlet weak var personEmoticon: UIImageView!
-    @IBOutlet weak var timeEmoticon: UIImageView!
-    @IBOutlet weak var participantsCount: UILabel!
-    @IBOutlet weak var deadLine: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

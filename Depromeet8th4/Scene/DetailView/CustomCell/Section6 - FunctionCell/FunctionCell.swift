@@ -24,4 +24,12 @@ class FunctionCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    func setupButtonUI() {
+        participateButton.layer.cornerRadius = 2
+        shareButton.layer.borderWidth = 1.0
+        shareButton.layer.borderColor = UIColor.gray.cgColor
+        likeButton.layer.borderWidth = 1.0
+        likeButton.layer.borderColor = UIColor.gray.cgColor
+    }
+    
 }

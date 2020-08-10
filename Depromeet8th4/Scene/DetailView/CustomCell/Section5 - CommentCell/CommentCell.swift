@@ -16,6 +16,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var commentContent: UILabel!
     @IBOutlet weak var thumbsUpCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
+    @IBOutlet weak var moreButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

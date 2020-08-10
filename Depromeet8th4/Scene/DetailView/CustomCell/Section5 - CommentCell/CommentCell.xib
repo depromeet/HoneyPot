@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="CommentCell" customModule="Depromeet8th4" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" id="KGk-i7-Jjw" customClass="CommentCell" customModule="Depromeet8th4" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="375" height="115"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -99,6 +99,14 @@
                         <color key="textColor" red="0.64314609769999997" green="0.64312142130000005" blue="0.64313817019999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2eF-Kj-otN">
+                        <rect key="frame" x="333" y="19" width="24" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="VHF-dI-IIs"/>
+                            <constraint firstAttribute="width" constant="24" id="ZSM-LZ-iDX"/>
+                        </constraints>
+                        <state key="normal" title="더보기"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="bhl-hy-utl" firstAttribute="top" secondItem="Qc3-AG-Bw4" secondAttribute="bottom" constant="10" id="0dg-Xm-Eee"/>
@@ -111,12 +119,14 @@
                     <constraint firstItem="G8A-KD-FBG" firstAttribute="leading" secondItem="or1-Jq-ZbV" secondAttribute="trailing" constant="22" id="NPC-bg-c5N"/>
                     <constraint firstItem="Ln0-Oh-IJS" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="SPh-F8-NkY"/>
                     <constraint firstItem="or1-Jq-ZbV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="21" id="Xv0-u0-YOt"/>
+                    <constraint firstAttribute="trailing" secondItem="2eF-Kj-otN" secondAttribute="trailing" constant="18" id="adE-ga-QtJ"/>
                     <constraint firstItem="rIt-8Y-zzF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="23" id="aqM-Uv-3sx"/>
                     <constraint firstItem="tnE-Om-ux7" firstAttribute="leading" secondItem="yHf-XB-6Bt" secondAttribute="trailing" constant="3" id="cbG-vm-G73"/>
                     <constraint firstItem="G8A-KD-FBG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="eyp-8j-hY7"/>
                     <constraint firstItem="Qc3-AG-Bw4" firstAttribute="top" secondItem="or1-Jq-ZbV" secondAttribute="bottom" constant="6" id="lFk-tj-myu"/>
                     <constraint firstItem="rIt-8Y-zzF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="18" id="mPa-BI-grx"/>
                     <constraint firstItem="or1-Jq-ZbV" firstAttribute="leading" secondItem="rIt-8Y-zzF" secondAttribute="trailing" constant="8" id="oXf-K4-Jd3"/>
+                    <constraint firstItem="2eF-Kj-otN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="19" id="qqr-xe-GLY"/>
                     <constraint firstItem="U6E-hh-g2W" firstAttribute="leading" secondItem="or1-Jq-ZbV" secondAttribute="trailing" constant="8" id="s4Q-wI-t0m"/>
                     <constraint firstItem="U6E-hh-g2W" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="25" id="tIh-nR-ICE"/>
                     <constraint firstItem="Qc3-AG-Bw4" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="tLy-ac-yaU"/>
@@ -128,6 +138,7 @@
                 <outlet property="commentContent" destination="Qc3-AG-Bw4" id="sWu-ZL-IuR"/>
                 <outlet property="commentCount" destination="tnE-Om-ux7" id="Qwa-3g-7DD"/>
                 <outlet property="commentedTime" destination="U6E-hh-g2W" id="FIX-u6-9ZT"/>
+                <outlet property="moreButton" destination="2eF-Kj-otN" id="BUl-hB-U0b"/>
                 <outlet property="thumbsUpCount" destination="bhl-hy-utl" id="9ON-er-v8f"/>
                 <outlet property="userName" destination="or1-Jq-ZbV" id="rkw-jC-ScL"/>
                 <outlet property="userProfileImage" destination="rIt-8Y-zzF" id="DbP-dk-xmq"/>

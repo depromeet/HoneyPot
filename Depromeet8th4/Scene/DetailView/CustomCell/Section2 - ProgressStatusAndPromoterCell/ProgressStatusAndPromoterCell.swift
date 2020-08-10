@@ -11,12 +11,11 @@ import UIKit
 class ProgressStatusAndPromoterCell: UITableViewCell {
     //MARK:- Properties
     @IBOutlet weak var honeyPotIcon: UIImageView!
-    @IBOutlet weak var participantsCount: UILabel!
+    @IBOutlet weak var destDiscountPercent: UILabel!
+    @IBOutlet weak var insufficientPersonCount: UILabel!
+    @IBOutlet weak var discountGuideButton: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
     
-    @IBOutlet weak var promoterImage: UIImageView!
-    @IBOutlet weak var destParticipantCount: UILabel!
-    @IBOutlet weak var protomerName: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

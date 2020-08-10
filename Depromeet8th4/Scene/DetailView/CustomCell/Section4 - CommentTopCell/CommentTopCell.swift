@@ -12,6 +12,7 @@ class CommentTopCell: UITableViewCell {
 
     @IBOutlet weak var commentIcon: UIImageView!
     @IBOutlet weak var commentCount: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
