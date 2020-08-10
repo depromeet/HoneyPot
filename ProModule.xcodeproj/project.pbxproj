@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C1D557424DADC0C0048BBDF /* URLNavigator in Frameworks */ = {isa = PBXBuildFile; productRef = 9C1D557324DADC0C0048BBDF /* URLNavigator */; };
 		9C39B5B324AF27BA0003D013 /* SwiftyColor in Frameworks */ = {isa = PBXBuildFile; productRef = 9C39B5B224AF27BA0003D013 /* SwiftyColor */; };
 		9C39B5B624AF27E20003D013 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9C39B5B524AF27E20003D013 /* ReactorKit */; };
 		9C59C2F224B190BA00402BC5 /* ReusableKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9C59C2F124B190BA00402BC5 /* ReusableKit */; };
@@ -54,6 +55,7 @@
 				9C7AD85B24C020FA00AAEBB0 /* Moya in Frameworks */,
 				9CEE728824AADD2300F649EC /* RxSwift in Frameworks */,
 				9C7AD85D24C020FA00AAEBB0 /* RxMoya in Frameworks */,
+				9C1D557424DADC0C0048BBDF /* URLNavigator in Frameworks */,
 				9CEE728524AADD1600F649EC /* RIBs in Frameworks */,
 				9C59C2F924B190E700402BC5 /* RxDataSources in Frameworks */,
 				9C59C2F424B190BA00402BC5 /* RxReusableKit in Frameworks */,
@@ -138,6 +140,7 @@
 				9C7AD85C24C020FA00AAEBB0 /* RxMoya */,
 				9C7AD85F24C0212A00AAEBB0 /* MoyaSugar */,
 				9CB156BB24CBEAAB0014BF96 /* Kingfisher */,
+				9C1D557324DADC0C0048BBDF /* URLNavigator */,
 			);
 			productName = ProModule;
 			productReference = 9CEE726D24AADBAD00F649EC /* ProModule.framework */;
@@ -180,6 +183,7 @@
 				9C7AD85924C020FA00AAEBB0 /* XCRemoteSwiftPackageReference "Moya" */,
 				9C7AD85E24C0212A00AAEBB0 /* XCRemoteSwiftPackageReference "MoyaSugar" */,
 				9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */,
 			);
 			productRefGroup = 9CEE726E24AADBAD00F649EC /* Products */;
 			projectDirPath = "";
@@ -405,6 +409,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/devxoul/URLNavigator";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
 		9C39B5B124AF27BA0003D013 /* XCRemoteSwiftPackageReference "SwiftyColor" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/SwiftyColor";
@@ -512,6 +524,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		9C1D557324DADC0C0048BBDF /* URLNavigator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */;
+			productName = URLNavigator;
+		};
 		9C39B5B224AF27BA0003D013 /* SwiftyColor */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9C39B5B124AF27BA0003D013 /* XCRemoteSwiftPackageReference "SwiftyColor" */;
