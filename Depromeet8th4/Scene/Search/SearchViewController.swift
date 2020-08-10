@@ -69,6 +69,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
         $0.rightView = buttonClear
         $0.rightViewMode = .always
         $0.autocorrectionType = .no
+        $0.returnKeyType = .done
     }
     let tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(Reusable.searchCell)
