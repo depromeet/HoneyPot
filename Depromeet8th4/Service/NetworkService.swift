@@ -20,7 +20,15 @@ protocol NetworkServiceType {
 }
 
 class NetworkService: BaseService, NetworkServiceType {
-    private let networkProvider = MoyaSugarProvider<MultiSugarTarget>()
+    private lazy var endpointClosure = { [weak self] (target: MultiSugarTarget) -> Endpoint in
+        let defaultEndpoint = MoyaProvider.defaultEndpointMapping(for: target)
+        if let userID = self?.provider.accountService.userID {
+            return defaultEndpoint.adding(newHTTPHeaderFields: ["User-ID": userID])
+        } else {
+            return defaultEndpoint
+        }
+    }
+    private lazy var networkProvider = MoyaSugarProvider<MultiSugarTarget>(endpointClosure: endpointClosure)
     private var disposeBag = DisposeBag()
 
     /// 기본 API 호출 메소드
