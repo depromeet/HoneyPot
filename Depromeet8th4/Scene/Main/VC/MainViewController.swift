@@ -23,6 +23,23 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
 
     var customMenuBar = CustomMenuBar()
 
+    private enum Color {
+        static let navigationBackground = 0xFFD136.color
+    }
+
+    lazy var navigationBar = NavigationBar(
+        rightViews: [buttonSearch, buttonAccount]
+    ).then {
+        $0.backgroundColor = .clear
+    }
+
+    let buttonSearch = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_search_w24h24"), for: .normal)
+    }
+    let buttonAccount = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_my_w24h24"), for: .normal)
+    }
+
     func customMenuBar(scrollTo index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
         self.pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
@@ -32,31 +49,26 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         super.viewDidLoad()
 
         self.view.backgroundColor = .white
-        self.setNavigation()
-
+        self.setupNavigationBar()
         self.setupCustomTabBar()
         self.setupPageCollectionView()
     }
 
-    func setNavigation() {
-        self.navigationController?.navigationBar.barTintColor = UIColor(named: "color_main")
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = false
-
-        let logoButton = UIButton().then {
-            $0.setImage(UIImage(named: "image_logo_w79h22"), for: .normal)
+    private func setupNavigationBar() {
+        view.backgroundColor = .systemBackground
+        view.addSubview(navigationBar)
+        navigationBar.snp.makeConstraints {
+            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
         }
-
-        let searchButton = UIButton().then {
-            $0.setImage(UIImage(named: "icon_search_w24h24"), for: .normal)
+        let viewBackground = UIView().then {
+            $0.backgroundColor = Color.navigationBackground
         }
-
-        let mypageButton = UIButton().then {
-            $0.setImage(UIImage(named: "icon_my_w24h24"), for: .normal)
+        view.insertSubview(viewBackground, belowSubview: navigationBar)
+        viewBackground.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.bottom.equalTo(navigationBar)
         }
-
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoButton)
-        self.navigationItem.rightBarButtonItems = [UIBarButtonItem(customView: searchButton), UIBarButtonItem(customView: mypageButton)]
     }
 
     func setupCustomTabBar() {
@@ -66,7 +78,7 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 8
         customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        customMenuBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        customMenuBar.topAnchor.constraint(equalTo: self.navigationBar.bottomAnchor).isActive = true
         customMenuBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
 
@@ -82,6 +94,24 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         pageCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         pageCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         pageCollectionView.topAnchor.constraint(equalTo: self.customMenuBar.bottomAnchor).isActive = true
+    }
+
+    override func setupBindings() {
+        buttonSearch.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let searchViewController = SearchViewController(reactor: .init(provider: self.provider))
+                self.navigationController?.pushViewController(searchViewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+
+        buttonAccount.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let myPageViewController = MyPageViewController(provider: self.provider)
+                self.navigationController?.pushViewController(myPageViewController, animated: true)
+            })
+            .disposed(by: disposeBag)
     }
 
 }
