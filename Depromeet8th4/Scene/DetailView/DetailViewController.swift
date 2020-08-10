@@ -15,7 +15,6 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         registerXib()
     }
-    
     func registerXib() {
         tableView.register(ProductImageCell.self, forCellReuseIdentifier: "ProductImageCell")
         tableView.register(ProductRelatedCell.self, forCellReuseIdentifier: "ProductRelatedCell")
@@ -25,13 +24,10 @@ class DetailViewController: UIViewController {
         tableView.register(FunctionCell.self, forCellReuseIdentifier: "FunctionCell")
     }
 }
-
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
-    
     //MARK:- DataSource & Delegate Methods.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
@@ -41,7 +37,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
         }
     }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
