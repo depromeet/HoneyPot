@@ -9,7 +9,6 @@
 import UIKit
 
 class ProductRelatedCell: UITableViewCell {
-    //MARK:- Properties
     @IBOutlet weak var productName: UILabel!
     @IBOutlet weak var originalPrice: UILabel!
     @IBOutlet weak var discountRate: UILabel!

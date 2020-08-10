@@ -9,7 +9,6 @@
 import UIKit
 
 class ProgressStatusAndPromoterCell: UITableViewCell {
-    //MARK:- Properties
     @IBOutlet weak var honeyPotIcon: UIImageView!
     @IBOutlet weak var destDiscountPercent: UILabel!
     @IBOutlet weak var insufficientPersonCount: UILabel!

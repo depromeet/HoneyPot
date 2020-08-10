@@ -9,7 +9,6 @@
 import UIKit
 
 class ProductImageCell: UITableViewCell {
-    //MARK:- Properties
     @IBOutlet var photoView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
     override func awakeFromNib() {

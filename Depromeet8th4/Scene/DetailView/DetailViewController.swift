@@ -9,7 +9,6 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    //MARK:- Properties & Setting Methods.
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +27,6 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
-    //MARK:- DataSource & Delegate Methods.
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 5:
@@ -66,4 +64,3 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
 }
-
