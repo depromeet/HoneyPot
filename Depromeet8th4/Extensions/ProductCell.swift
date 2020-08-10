@@ -12,7 +12,7 @@ import Then
 class ProductCell: UITableViewCell {
 
     var productImageView = UIImageView().then {
-        $0.image = UIImage(named: "sampleImage")
+        $0.image = nil
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
