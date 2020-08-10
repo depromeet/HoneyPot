@@ -14,10 +14,10 @@ class NavigationBar: UIView {
     init(
         title: String? = nil,
         leftView: UIView? = nil,
-        rightView: UIView? = nil
+        rightViews: [UIView] = []
     ) {
         super.init(frame: .zero)
-        setupViews(title: title, leftView: leftView, rightView: rightView)
+        setupViews(title: title, leftView: leftView, rightViews: rightViews)
     }
 
     required init?(coder: NSCoder) {
@@ -32,11 +32,15 @@ class NavigationBar: UIView {
         $0.textColor = .black
         $0.font = .systemFont(ofSize: 18, weight: .bold)
     }
+    let stackViewRight = UIStackView().then {
+        $0.axis = .horizontal
+        $0.distribution = .fillEqually
+    }
 
     func setupViews(
         title: String?,
         leftView: UIView?,
-        rightView: UIView?
+        rightViews: [UIView]
     ) {
         if let left = leftView {
             addSubview(left)
@@ -52,12 +56,15 @@ class NavigationBar: UIView {
                 $0.centerY.equalToSuperview()
             }
         }
-        if let right = rightView {
-            addSubview(right)
-            right.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview()
-                $0.trailing.equalToSuperview().inset(8)
-                $0.width.equalTo(right.snp.height)
+        addSubview(stackViewRight)
+        stackViewRight.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(4)
+            $0.trailing.equalToSuperview().inset(12)
+        }
+        for rightView in rightViews {
+            stackViewRight.addArrangedSubview(rightView)
+            rightView.snp.makeConstraints {
+                $0.width.equalTo(rightView.snp.height)
             }
         }
         if let title = title {

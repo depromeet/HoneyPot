@@ -46,7 +46,7 @@ class MyPageViewController: BaseViewController {
 
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack,
-        rightView: buttonAlert
+        rightViews: [buttonAlert]
     ).then {
         $0.backgroundColor = .clear
     }
