@@ -45,8 +45,8 @@ class NavigationBar: UIView {
         if let left = leftView {
             addSubview(left)
             left.snp.makeConstraints {
-                $0.top.bottom.equalToSuperview()
-                $0.leading.equalToSuperview().inset(8)
+                $0.top.bottom.equalToSuperview().inset(4)
+                $0.leading.equalToSuperview().inset(12)
                 $0.width.equalTo(left.snp.height)
             }
         } else {
