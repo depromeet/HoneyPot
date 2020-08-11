@@ -22,21 +22,31 @@ final class ListReactor: Reactor {
 
     struct State {
         let keyword: String
-        var sort: String = ""
+        let sortList: [SortKind] = SortKind.allCases
+        var sortIndex: Int = 0
+        var sortTitle: String = SortKind.suggestion.title
         var items: [String] = []
     }
     enum Action {
         case refresh
+        case selectSortIndex(Int)
     }
     enum Mutation {
         case setItems([String])
+        case setSortTitle(Int)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return requestItems(sort: currentState.sort)
+            return requestItems()
                 .map { Mutation.setItems($0) }
+        case .selectSortIndex(let index):
+            return Observable.concat(
+                .just(Mutation.setSortTitle(index)),
+                requestItems()
+                    .map { Mutation.setItems($0) }
+            )
         }
     }
 
@@ -45,11 +55,13 @@ final class ListReactor: Reactor {
         switch mutation {
         case .setItems(let items):
             state.items = items
+        case .setSortTitle(let index):
+            state.sortTitle = state.sortList[index].title
         }
         return state
     }
 
-    private func requestItems(sort: String) -> Observable<[String]> {
+    private func requestItems() -> Observable<[String]> {
         return .just(["1", "2", "3", "4", "5", "6", ""])
     }
 }
