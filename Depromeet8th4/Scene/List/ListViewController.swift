@@ -18,6 +18,20 @@ import SwiftyColor
 import SnapKit
 import Then
 
+enum SortKind: String, CaseIterable {
+    case suggestion, popular, recent, closing, cheap
+
+    var title: String {
+        switch self {
+        case .suggestion: return "추천순"
+        case .popular: return "인기순"
+        case .recent: return "최신순"
+        case .closing: return "마감임박순"
+        case .cheap: return "가격낮은순"
+        }
+    }
+}
+
 class ListViewController: BaseViewController, View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
@@ -50,6 +64,17 @@ class ListViewController: BaseViewController, View {
         $0.clipsToBounds = false
     }
 
+    let bottomSheet = BottomSheet(
+        titles: SortKind.allCases.map { $0.title }
+    ).then {
+        $0.backgroundColor = .white
+    }
+    var bottomSheetTopConstraint: NSLayoutConstraint?
+    let viewOverlay = UIView().then {
+        $0.backgroundColor = 0x323232.color ~ 50%
+        $0.alpha = 0
+    }
+
     init(reactor: ListReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -62,6 +87,7 @@ class ListViewController: BaseViewController, View {
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
+        setupBottomSheet()
     }
 
     func bind(reactor: ListReactor) {
@@ -77,6 +103,26 @@ class ListViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        buttonSort.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                guard let constraint = self.bottomSheetTopConstraint else { return }
+                let height = self.bottomSheet.bounds.height
+                UIView.animate(withDuration: 0.3) {
+                    constraint.constant = -height
+                    self.viewOverlay.alpha = 1
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: disposeBag)
+
+        bottomSheet.rx.itemSelected
+            .distinctUntilChanged()
+            .map { $0.row }
+            .map { Reactor.Action.selectSortIndex($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         tableView.rx.modelSelected(String.self)
             .subscribe(onNext: { item in
                 print(item)
@@ -84,7 +130,25 @@ class ListViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         reactor.state
+            .map { $0.sortTitle }
+            .distinctUntilChanged()
+            .do(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                guard let constraint = self.bottomSheetTopConstraint else { return }
+                UIView.animate(withDuration: 0.3) {
+                    constraint.constant = 0
+                    self.viewOverlay.alpha = 0
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .subscribe(onNext: { [weak self] title in
+                self?.buttonSort.setTitle(title, for: .normal)
+            })
+            .disposed(by: disposeBag)
+
+        reactor.state
             .map { $0.items }
+            .distinctUntilChanged()
             .bind(to: tableView.rx.items(Reusable.itemCell)) { i, item, cell in
                 print(i, item, cell)
             }
@@ -124,5 +188,17 @@ extension ListViewController {
             $0.trailing.equalToSuperview().inset(10)
         }
         tableView.tableHeaderView = viewHeader
+    }
+    private func setupBottomSheet() {
+        view.addSubview(viewOverlay)
+        viewOverlay.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        view.addSubview(bottomSheet)
+        bottomSheet.snp.makeConstraints {
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+        bottomSheetTopConstraint = bottomSheet.topAnchor.constraint(equalTo: view.bottomAnchor)
+        bottomSheetTopConstraint?.isActive = true
     }
 }
