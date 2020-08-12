@@ -14,6 +14,7 @@ import RxViewController
 import RxDataSources
 import ReusableKit
 import RxReusableKit
+import RxGesture
 import SwiftyColor
 import SnapKit
 import Then
@@ -32,7 +33,7 @@ enum SortKind: String, CaseIterable {
     }
 }
 
-class ListViewController: BaseViewController, View {
+class ListViewController: BaseViewController, ReactorKit.View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
     }
@@ -105,14 +106,7 @@ class ListViewController: BaseViewController, View {
 
         buttonSort.rx.tap
             .subscribe(onNext: { [weak self] in
-                guard let self = self else { return }
-                guard let constraint = self.bottomSheetTopConstraint else { return }
-                let height = self.bottomSheet.bounds.height
-                UIView.animate(withDuration: 0.3) {
-                    constraint.constant = -height
-                    self.viewOverlay.alpha = 1
-                    self.view.layoutIfNeeded()
-                }
+                self?.toggleBottomSheet(true)
             })
             .disposed(by: disposeBag)
 
@@ -129,17 +123,19 @@ class ListViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        viewOverlay.rx.tapGesture()
+            .when(.recognized)
+            .subscribe(onNext: { [weak self] _ in
+                self?.toggleBottomSheet(false)
+            })
+            .disposed(by: disposeBag)
+
         reactor.state
             .map { $0.sortTitle }
             .distinctUntilChanged()
+            .skip(1)
             .do(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                guard let constraint = self.bottomSheetTopConstraint else { return }
-                UIView.animate(withDuration: 0.3) {
-                    constraint.constant = 0
-                    self.viewOverlay.alpha = 0
-                    self.view.layoutIfNeeded()
-                }
+                self?.toggleBottomSheet(false)
             })
             .subscribe(onNext: { [weak self] title in
                 self?.buttonSort.setTitle(title, for: .normal)
@@ -200,5 +196,21 @@ extension ListViewController {
         }
         bottomSheetTopConstraint = bottomSheet.topAnchor.constraint(equalTo: view.bottomAnchor)
         bottomSheetTopConstraint?.isActive = true
+    }
+    private func toggleBottomSheet(_ isOpened: Bool) {
+        var alpha: CGFloat
+        var constant: CGFloat
+        if isOpened {
+            alpha = 1
+            constant = -bottomSheet.bounds.height
+        } else {
+            alpha = 0
+            constant = 0
+        }
+        UIView.animate(withDuration: 0.3) {
+            self.bottomSheetTopConstraint?.constant = constant
+            self.viewOverlay.alpha = alpha
+            self.view.layoutIfNeeded()
+        }
     }
 }
