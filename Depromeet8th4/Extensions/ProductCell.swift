@@ -11,27 +11,27 @@ import Then
 
 class ProductCell: UITableViewCell {
 
-    var productImageView = UIImageView().then {
+    let productImageView = UIImageView().then {
         $0.image = UIImage(named: "sampleImage")
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
     }
 
-    var productNameLabel = UILabel().then {
+    let productNameLabel = UILabel().then {
         $0.text = "테이블팬 C820 (3 Colors)"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var productSortLabel = UILabel().then {
+    let productSortLabel = UILabel().then {
         $0.text = "가전 | 플러스마이너스제로"
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var productSlider = ProductSlider().then {
+    let productSlider = ProductSlider().then {
         $0.tintColor = UIColor(named: "color_main")
         $0.minimumValue = 0
         $0.maximumValue = 100
@@ -40,33 +40,71 @@ class ProductCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var myImageView = UIImageView().then {
+    let myImageView = UIImageView().then {
         $0.image = UIImage(named: "icon_my_w24h24-1")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var joinLabel = UILabel().then {
+    let joinLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var timeImageView = UIImageView().then {
+    let timeImageView = UIImageView().then {
         $0.image = UIImage(named: "icon_time_w24h24")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var timeLabel = UILabel().then {
+    let timeLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var numberLabel = UILabel().then {
+    let numberLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var percentLabel = UILabel().then {
+    let percentLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .red
         $0.text = "35%"
         $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+    }
+
+    let chatView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let chatLabel = UILabel().then {
+        $0.text = "20"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        $0.textAlignment = .center
+        $0.textColor = .darkGray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let chatImageView = UIImageView().then {
+        $0.image = UIImage(named: "icon_chat_w24h24")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let favoriteView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let favoriteLabel = UILabel().then {
+        $0.text = "100"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        $0.textAlignment = .center
+        $0.textColor = .darkGray
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    let favoriteImageView = UIImageView().then {
+        $0.image = UIImage(named: "icon_favorite_w24h24")
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func awakeFromNib() {
@@ -76,8 +114,7 @@ class ProductCell: UITableViewCell {
         productImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
         productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-        productImageView.heightAnchor.constraint(equalToConstant: 222)
-
+        productImageView.heightAnchor.constraint(equalToConstant: 222).isActive = true
         addSubview(productNameLabel)
         productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 30).isActive = true
         productNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
@@ -135,6 +172,34 @@ class ProductCell: UITableViewCell {
         addSubview(percentLabel)
         percentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25).isActive = true
         percentLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor, constant: -10).isActive = true
+
+        addSubview(chatView)
+        chatView.topAnchor.constraint(equalTo: self.productImageView.topAnchor, constant: 10).isActive = true
+        chatView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        chatView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        chatView.trailingAnchor.constraint(equalTo: self.productImageView.trailingAnchor, constant: -20).isActive = true
+
+        addSubview(chatLabel)
+        chatLabel.centerYAnchor.constraint(equalTo: self.chatView.centerYAnchor).isActive = true
+        chatLabel.trailingAnchor.constraint(equalTo: chatView.trailingAnchor, constant: -10).isActive = true
+
+        addSubview(chatImageView)
+        chatImageView.centerYAnchor.constraint(equalTo: chatView.centerYAnchor).isActive = true
+        chatImageView.trailingAnchor.constraint(equalTo: chatLabel.leadingAnchor, constant: -5).isActive = true
+
+        addSubview(favoriteView)
+        favoriteView.topAnchor.constraint(equalTo: productImageView.topAnchor, constant: 10).isActive = true
+        favoriteView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        favoriteView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        favoriteView.trailingAnchor.constraint(equalTo: chatView.leadingAnchor, constant: -10).isActive = true
+
+        addSubview(favoriteLabel)
+        favoriteLabel.centerYAnchor.constraint(equalTo: favoriteView.centerYAnchor).isActive = true
+        favoriteLabel.trailingAnchor.constraint(equalTo: favoriteView.trailingAnchor, constant: -5).isActive = true
+
+        addSubview(favoriteImageView)
+        favoriteImageView.centerYAnchor.constraint(equalTo: favoriteView.centerYAnchor).isActive = true
+        favoriteImageView.trailingAnchor.constraint(equalTo: favoriteLabel.leadingAnchor, constant: -5).isActive = true
 
     }
 

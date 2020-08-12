@@ -21,7 +21,7 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         return cv
     }()
 
-    var customMenuBar = CustomMenuBar()
+    let customMenuBar = CustomMenuBar()
 
     func customMenuBar(scrollTo index: Int) {
         let indexPath = IndexPath(row: index, section: 0)

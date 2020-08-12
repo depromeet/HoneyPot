@@ -8,10 +8,11 @@
 
 import UIKit
 import Then
+import SnapKit
 
 class CustomCell: UICollectionViewCell {
 
-    var tabLabel = UILabel().then {
+    let tabLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = UIColor(named: "color_unselect")
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -32,8 +33,10 @@ class CustomCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addSubview(tabLabel)
-        tabLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        tabLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        tabLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+        }
     }
 
 }
