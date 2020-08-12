@@ -49,14 +49,13 @@ class BottomSheet: UIView {
         layer.masksToBounds = true
         addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalTo(safeAreaLayoutGuide)
+            $0.top.equalToSuperview().inset(15)
+            $0.leading.trailing.equalTo(safeAreaLayoutGuide)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(4)
         }
     }
     private func setupBindings() {
-        let titleStream = Observable.just(titles)
-
-        titleStream
+        Observable.just(titles)
             .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: BottomSheetItemCell.self)) { [weak self] index, title, cell in
                 cell.labelTitle.text = title
 
