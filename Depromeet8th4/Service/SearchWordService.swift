@@ -19,11 +19,12 @@ protocol SearchWordServiceType {
     func getWords() -> Observable<[String: Double]>
     func addWord(word: String) -> Observable<[String: Double]>
     func removeWord(word: String) -> Observable<[String: Double]>
+    func removeAllWords() -> Observable<[String: Double]>
 }
 
 final class SearchWordService: BaseService, SearchWordServiceType {
     @discardableResult
-    private func saveWords(_ words: [String: Double]) -> Observable<Void> {
+    private func saveWords(_ words: [String: Double]?) -> Observable<Void> {
         self.provider.userDefaultsService.set(value: words, forKey: .searchWords)
         return .just(Void())
     }
@@ -57,6 +58,13 @@ final class SearchWordService: BaseService, SearchWordServiceType {
                 words[word] = nil
                 return self.saveWords(words)
             })
+            .flatMap({ [weak self] in
+                return self?.getWords() ?? .empty()
+            })
+    }
+
+    func removeAllWords() -> Observable<[String: Double]> {
+        return saveWords(nil)
             .flatMap({ [weak self] in
                 return self?.getWords() ?? .empty()
             })
