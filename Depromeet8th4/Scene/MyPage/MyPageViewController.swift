@@ -76,9 +76,6 @@ class MyPageViewController: BaseViewController, View {
         $0.imageView?.contentMode = .center
         $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
-//        $0.backgroundColor = .red
-//        $0.titleLabel?.backgroundColor = .green
-//        $0.imageView?.backgroundColor = .blue
     }
     let buttonPurchase = VerticalButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_cart_w60h60"), for: .normal)
