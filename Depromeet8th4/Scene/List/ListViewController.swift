@@ -63,6 +63,8 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
         $0.clipsToBounds = false
+        $0.rowHeight = UITableView.automaticDimension
+        $0.estimatedRowHeight = 390
     }
 
     let bottomSheet = BottomSheet(
