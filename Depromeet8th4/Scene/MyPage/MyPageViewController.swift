@@ -135,8 +135,7 @@ class MyPageViewController: BaseViewController {
             .filter { $0 == .setting }
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                let reactor = SettingReactor(provider: self.provider)
-                let setting = SettingViewController(provider: self.provider, reactor: reactor)
+                let setting = SettingViewController(reactor: .init(provider: self.provider))
                 self.navigationController?.pushViewController(setting, animated: true)
             })
             .disposed(by: disposeBag)
