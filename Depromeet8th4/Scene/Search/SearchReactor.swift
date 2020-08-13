@@ -28,6 +28,7 @@ final class SearchReactor: Reactor {
         case inputSearchText(String)
         case addWord(String)
         case removeWord(String)
+        case removeAllWords
     }
     enum Mutation {
         case setSearchText(String)
@@ -56,6 +57,11 @@ final class SearchReactor: Reactor {
             )
         case .removeWord(let word):
             return provider.searchWordService.removeWord(word: word)
+                .flatMap({ [weak self] in
+                    return self?.convertWords(words: $0) ?? .empty()
+                })
+        case .removeAllWords:
+            return provider.searchWordService.removeAllWords()
                 .flatMap({ [weak self] in
                     return self?.convertWords(words: $0) ?? .empty()
                 })

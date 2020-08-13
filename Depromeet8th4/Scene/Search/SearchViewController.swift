@@ -221,12 +221,16 @@ extension SearchViewController {
 
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = tableView.dequeue(Reusable.searchHeader)
-        header?.labelTitle.text = dataSource.sectionModels[section].header
-        return header
-    }
-
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60
+        if let header = tableView.dequeue(Reusable.searchHeader) {
+            header.labelTitle.text = dataSource.sectionModels[section].header
+            if let reactor = reactor {
+                header.buttonDelete.rx.tap
+                    .map { Reactor.Action.removeAllWords }
+                    .bind(to: reactor.action)
+                    .disposed(by: header.disposeBag)
+            }
+            return header
+        }
+        return nil
     }
 }
