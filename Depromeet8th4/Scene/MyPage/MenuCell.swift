@@ -15,8 +15,8 @@ class MenuCell: BaseTableViewCell {
         $0.image = nil
     }
     let labelTitle = UILabel().then {
-        $0.textColor = .black
-        $0.font = .systemFont(ofSize: 16)
+        $0.textColor = 0x323232.color
+        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
     }
 
     override func initialize() {
