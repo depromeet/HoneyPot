@@ -69,6 +69,7 @@ class ItemCell: BaseTableViewCell {
         $0.textColor = Color.mainTitle
         $0.font = Font.mainTitle
         $0.text = "테이블팬 C820 (3 Colors)"
+        $0.numberOfLines = 2
     }
     let labelCategory = UILabel().then {
         $0.textColor = Color.categoryTitle
@@ -209,7 +210,7 @@ class ItemCell: BaseTableViewCell {
         viewContainer.addSubview(labelCount)
         labelCount.snp.makeConstraints {
             $0.leading.equalTo(imageViewCount.snp.trailing).offset(5)
-            $0.centerY.equalTo(imageViewCount)
+            $0.centerY.equalTo(imageViewCount).offset(1)
         }
         let imageViewTime = UIImageView(image: #imageLiteral(resourceName: "icon_clock_w18h18"))
         viewContainer.addSubview(imageViewTime)
@@ -222,11 +223,11 @@ class ItemCell: BaseTableViewCell {
         viewContainer.addSubview(labelTime)
         labelTime.snp.makeConstraints {
             $0.leading.equalTo(imageViewTime.snp.trailing).offset(5)
-            $0.centerY.equalTo(imageViewTime)
+            $0.centerY.equalTo(imageViewTime).offset(1)
         }
         viewContainer.addSubview(labelCurrency)
         labelCurrency.snp.makeConstraints {
-            $0.top.equalTo(imageViewItem.snp.bottom).offset(100)
+            $0.top.equalTo(labelCategory.snp.bottom).offset(32)
             $0.trailing.equalToSuperview().inset(Metric.trailingOffset)
         }
         viewContainer.addSubview(labelPrice)
