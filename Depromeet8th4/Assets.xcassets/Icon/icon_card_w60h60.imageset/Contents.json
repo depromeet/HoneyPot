@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icon_heart_w48h48.png",
+      "filename" : "icon_card_w60h60.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_heart_w48h48@2x.png",
+      "filename" : "icon_card_w60h60@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_heart_w48h48@3x.png",
+      "filename" : "icon_card_w60h60@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
