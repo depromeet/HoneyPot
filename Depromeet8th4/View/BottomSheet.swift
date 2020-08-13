@@ -51,7 +51,7 @@ class BottomSheet: UIView {
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview().inset(15)
             $0.leading.trailing.equalTo(safeAreaLayoutGuide)
-            $0.bottom.equalTo(safeAreaLayoutGuide).inset(4)
+            $0.bottom.equalTo(safeAreaLayoutGuide).inset(4).priority(999)
         }
     }
     private func setupBindings() {
