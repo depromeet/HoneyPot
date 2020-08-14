@@ -1,15 +1,15 @@
 //
-//  ResizableTableView.swift
-//  KiTPlayer
+//  ResizableTextView.swift
+//  Depromeet8th4
 //
-//  Created by Soso on 04/11/2019.
-//  Copyright © 2019 Muzlive. All rights reserved.
+//  Created by Soso on 2020/08/14.
+//  Copyright © 2020 Depromeet. All rights reserved.
 //
 
 import UIKit
 
-class ResizableTableView: UITableView {
-    var maxHeight: CGFloat = 300
+class ResizableTextView: UITextView {
+    var maxHeight: CGFloat = 67
 
     override var intrinsicContentSize: CGSize {
         self.layoutIfNeeded()

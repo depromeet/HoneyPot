@@ -8,6 +8,9 @@
 
 import UIKit
 import ReactorKit
+import RxSwift
+import RxCocoa
+import RxKeyboard
 
 class ItemViewController: BaseViewController, View {
     private enum Color {
@@ -47,6 +50,7 @@ class ItemViewController: BaseViewController, View {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
+        $0.keyboardDismissMode = .interactive
     }
 
     let viewHeader = UIView().then {
@@ -155,6 +159,33 @@ class ItemViewController: BaseViewController, View {
     }
     var constraintDetailHeight: NSLayoutConstraint!
 
+    let viewInput = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    let buttonComment = UIButton().then {
+        $0.setTitle("56개", for: .normal)
+        $0.setTitleColor(0xA5A5A5.color, for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_bubble_w24h24"), for: .normal)
+        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        $0.titleEdgeInsets = .init(top: 1, left: 2, bottom: 0, right: -2)
+        $0.adjustsImageWhenHighlighted = false
+    }
+    let textViewInput = ResizableTextView().then {
+        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
+        $0.textColor = Color.mainTitle
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+        $0.bounces = false
+    }
+    let buttonSend = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+    }
+
+    let viewBottom = UIView().then {
+        $0.backgroundColor = .white
+    }
+    var constraintBottomView: NSLayoutConstraint!
     let buttonShare = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_share_w48h50"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
@@ -208,6 +239,35 @@ class ItemViewController: BaseViewController, View {
             .distinctUntilChanged()
             .bind(to: viewBackground.rx.isHidden)
             .disposed(by: disposeBag)
+
+        textViewInput.rx.text
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                guard self.isViewLoaded else { return }
+                self.view.setNeedsLayout()
+            })
+            .disposed(by: disposeBag)
+
+        Driver.combineLatest(
+            RxKeyboard.instance.visibleHeight.skip(1),
+            RxKeyboard.instance.visibleHeight
+        )
+            .filter { $0.0 != .zero && $0.1 == .zero }
+            .drive(onNext: { [unowned self] height, _ in
+                let next = self.view.bounds.height - height
+                let current = self.tableView.convert(self.viewInput.frame, to: nil).maxY
+                let offset = current - next
+                let contentOffsetY = self.tableView.contentOffset.y
+                self.tableView.contentOffset = .init(x: 0, y: contentOffsetY + offset)
+            })
+            .disposed(by: disposeBag)
+
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [unowned self] height in
+                let constant = height - self.view.safeAreaInsets.bottom - self.viewBottom.bounds.height
+                self.constraintBottomView?.constant = -max(constant, 0)
+                self.view.layoutIfNeeded()
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -238,6 +298,7 @@ extension ItemViewController {
         let viewDeadline = setupItemDeadline(view: viewDiscount)
         let viewProfile = setupItemProfile(view: viewDeadline)
         setupItemDetail(view: viewProfile)
+        setupInput()
 
         let viewTableHeader = UIView().then {
             $0.backgroundColor = .clear
@@ -470,21 +531,62 @@ extension ItemViewController {
         viewHeader.addSubview(imageViewDetail)
         imageViewDetail.snp.makeConstraints {
             $0.top.equalTo(view.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
         constraintDetailHeight = imageViewDetail.heightAnchor.constraint(equalToConstant: 300)
         constraintDetailHeight.isActive = true
     }
-    private func setupBottomView() {
-        let viewBottom = UIView().then {
-            $0.backgroundColor = .white
+    private func setupInput() {
+        viewHeader.addSubview(viewInput)
+        viewInput.snp.makeConstraints {
+            $0.top.equalTo(imageViewDetail.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
+        viewInput.addSubview(buttonComment)
+        buttonComment.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(23)
+            $0.leading.equalToSuperview().inset(18)
+        }
+        let viewBackground = UIView().then {
+            $0.backgroundColor = 0xF8F8F8.color
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+        }
+        viewInput.addSubview(viewBackground)
+        viewBackground.snp.makeConstraints {
+            $0.top.equalTo(buttonComment.snp.bottom).offset(7)
+            $0.leading.trailing.equalToSuperview().inset(18).priority(999)
+            $0.bottom.equalToSuperview().inset(25)
+        }
+        viewBackground.addSubview(textViewInput)
+        textViewInput.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview().inset(0)
+            $0.leading.equalToSuperview().inset(12)
+            $0.trailing.equalToSuperview().inset(32).priority(999)
+        }
+        viewBackground.addSubview(buttonSend)
+        buttonSend.snp.makeConstraints {
+            $0.top.trailing.bottom.equalToSuperview()
+            $0.width.equalTo(32)
+        }
+        let viewSeparator = UIView().then {
+            $0.backgroundColor = 0xEEEEEE.color
+        }
+        viewInput.addSubview(viewSeparator)
+        viewSeparator.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+    }
+    private func setupBottomView() {
         view.addSubview(viewBottom)
         viewBottom.snp.makeConstraints {
             $0.top.equalTo(tableView.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaInsets)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(80)
         }
+        constraintBottomView = viewBottom.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        constraintBottomView.isActive = true
         viewBottom.addSubview(buttonShare)
         buttonShare.snp.makeConstraints {
             $0.top.equalToSuperview().inset(16)
