@@ -120,8 +120,10 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .disposed(by: disposeBag)
 
         tableView.rx.modelSelected(String.self)
-            .subscribe(onNext: { item in
-                print(item)
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let viewController = ItemViewController(reactor: .init(provider: self.provider, itemID: ""))
+                self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
 

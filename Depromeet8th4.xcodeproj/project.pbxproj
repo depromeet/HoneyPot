@@ -50,6 +50,8 @@
 		9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B535124DEB116005C3CA8 /* SearchCell.swift */; };
 		9C7CDB5824E555F000801F84 /* MyPageReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB5724E555F000801F84 /* MyPageReactor.swift */; };
 		9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB5924E5574F00801F84 /* Menu.swift */; };
+		9C7CDB5F24E56C4100801F84 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB5E24E56C4100801F84 /* ItemViewController.swift */; };
+		9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
 		9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
@@ -134,6 +136,8 @@
 		9C7B535124DEB116005C3CA8 /* SearchCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		9C7CDB5724E555F000801F84 /* MyPageReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageReactor.swift; sourceTree = "<group>"; };
 		9C7CDB5924E5574F00801F84 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		9C7CDB5E24E56C4100801F84 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReactor.swift; sourceTree = "<group>"; };
 		9C835DDA24DFF4DC000901FF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9C835DDC24DFFB9C000901FF /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
@@ -329,6 +333,7 @@
 				9CE4CDBF24D6A76900A8A25E /* Setting */,
 				9CE4CDB324D65B2600A8A25E /* Search */,
 				9C835DD924DFF4CB000901FF /* List */,
+				9C7CDB5B24E56AF700801F84 /* Item */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -361,6 +366,15 @@
 				9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		9C7CDB5B24E56AF700801F84 /* Item */ = {
+			isa = PBXGroup;
+			children = (
+				9C7CDB5E24E56C4100801F84 /* ItemViewController.swift */,
+				9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */,
+			);
+			path = Item;
 			sourceTree = "<group>";
 		};
 		9C835DD924DFF4CB000901FF /* List */ = {
@@ -585,6 +599,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */,
 				9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */,
 				B6D6EC5324DB3B8500E27C06 /* MainViewController.swift in Sources */,
 				B6D6EC5D24DB3FBE00E27C06 /* CustomCell.swift in Sources */,
@@ -610,6 +625,7 @@
 				9C7B535024DEA538005C3CA8 /* SearchWordService.swift in Sources */,
 				9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */,
 				9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */,
+				9C7CDB5F24E56C4100801F84 /* ItemViewController.swift in Sources */,
 				9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */,
 				9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */,
 				9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */,
