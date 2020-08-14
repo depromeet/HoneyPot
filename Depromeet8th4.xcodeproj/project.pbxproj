@@ -89,7 +89,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-
 		044B62E524D8449300088487 /* ProductImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCell.swift; sourceTree = "<group>"; };
 		044B62E624D8449300088487 /* ProductImageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductImageCell.xib; sourceTree = "<group>"; };
 		044B62EB24D846D600088487 /* ProductRelatedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductRelatedCell.swift; sourceTree = "<group>"; };
@@ -294,6 +293,7 @@
 				9C7AD84224C00F3600AAEBB0 /* Scene */,
 				9C60775C24C1533000E5CBEE /* Base */,
 				9CF363AA24D052D50008380C /* View */,
+				044B62EF24D8491600088487 /* Font */,
 				9C545BEA24BF4C3D00138C78 /* Assets.xcassets */,
 				9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */,
 				9C545BEF24BF4C3D00138C78 /* Info.plist */,
@@ -324,7 +324,6 @@
 			isa = PBXGroup;
 			children = (
 				044B62DF24D8425E00088487 /* DetailView */,
-				9C545BE524BF4C3C00138C78 /* MainViewController.swift */,
 				B6D6EC5024DB3B5900E27C06 /* Main */,
 				9CE4CDB224D6592E00A8A25E /* MyPage */,
 				9CE4CDBF24D6A76900A8A25E /* Setting */,
@@ -417,7 +416,6 @@
 		9CF363AA24D052D50008380C /* View */ = {
 			isa = PBXGroup;
 			children = (
-				044B62EF24D8491600088487 /* Font */,
 				9CF363AD24D0530A0008380C /* NavigationBar.swift */,
 				9C71F61724D42666009DD6D7 /* VerticalButton.swift */,
 				9C6475F824E2B5DE0067EA5F /* BottomSheet.swift */,
