@@ -33,7 +33,7 @@ class SearchHeader: BaseTableViewHeader {
         addSubview(viewContainer)
         viewContainer.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(safeAreaLayoutGuide)
-            $0.height.equalTo(51)
+            $0.height.equalTo(51).priority(999)
         }
         viewContainer.addSubview(labelTitle)
         labelTitle.snp.makeConstraints {
