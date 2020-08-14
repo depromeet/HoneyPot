@@ -108,7 +108,7 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         buttonAccount.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let myPageViewController = MyPageViewController(provider: self.provider)
+                let myPageViewController = MyPageViewController(reactor: .init(provider: self.provider))
                 self.navigationController?.pushViewController(myPageViewController, animated: true)
             })
             .disposed(by: disposeBag)

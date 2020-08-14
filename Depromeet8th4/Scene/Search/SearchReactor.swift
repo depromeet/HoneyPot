@@ -21,6 +21,7 @@ final class SearchReactor: Reactor {
     struct State {
         var searchText: String = ""
         var words: [SearchSection] = []
+        var shouldShowResults: Bool = false
     }
     enum Action {
         case refresh
@@ -31,6 +32,7 @@ final class SearchReactor: Reactor {
     enum Mutation {
         case setSearchText(String)
         case setWords([SearchSection])
+        case setShouldShowResults(Bool)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
@@ -43,12 +45,15 @@ final class SearchReactor: Reactor {
         case .inputSearchText(let text):
             return .just(Mutation.setSearchText(text))
         case .addWord(let word):
-            let add = provider.searchWordService.addWord(word: word)
+            let addWord = provider.searchWordService.addWord(word: word)
                 .flatMap({ [weak self] in
                     return self?.convertWords(words: $0) ?? .empty()
                 })
-            let clear = Observable.just(Mutation.setSearchText(""))
-            return Observable.concat([add, clear])
+            return Observable.concat(
+                addWord,
+                .just(Mutation.setShouldShowResults(true)),
+                .just(Mutation.setShouldShowResults(false))
+            )
         case .removeWord(let word):
             return provider.searchWordService.removeWord(word: word)
                 .flatMap({ [weak self] in
@@ -64,6 +69,8 @@ final class SearchReactor: Reactor {
             state.searchText = text
         case .setWords(let words):
             state.words = words
+        case .setShouldShowResults(let shouldShowResults):
+            state.shouldShowResults = shouldShowResults
         }
         return state
     }

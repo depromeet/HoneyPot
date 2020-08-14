@@ -7,42 +7,23 @@
 //
 
 import UIKit
+import ReactorKit
 import RxSwift
 import RxCocoa
 import SwiftyColor
 import SnapKit
 import Then
 
-class MyPageViewController: BaseViewController {
+class MyPageViewController: BaseViewController, View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
+        static let profileTitle = 0x323232.color
         static let buttonTitle = 0x323232.color
         static let separatorBackground = 0xECECEC.color
     }
-
-    private enum Menu {
-        case invite, notice, customer, setting
-
-        var title: String {
-            switch self {
-            case .invite: return "친구초대"
-            case .notice: return "공지사항"
-            case .customer: return "고객센터"
-            case .setting: return "환경설정"
-            }
-        }
-
-        var image: UIImage {
-            switch self {
-            case .invite: return #imageLiteral(resourceName: "icon_friend_w24h24")
-            case .notice: return #imageLiteral(resourceName: "icon_sound_w24h24")
-            case .customer: return #imageLiteral(resourceName: "icon_contact_w24h24")
-            case .setting: return #imageLiteral(resourceName: "icon_setting_w24h24")
-            }
-        }
+    private enum Font {
+        static let buttonTitle = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
     }
-
-    private let menus: Observable<[Menu]> = .just([.invite, .notice, .customer, .setting])
 
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack,
@@ -53,7 +34,7 @@ class MyPageViewController: BaseViewController {
 
     let tableView = UITableView().then {
         $0.register(MenuCell.self, forCellReuseIdentifier: "cell")
-        $0.rowHeight = 56
+        $0.rowHeight = 57
         $0.separatorInset = .zero
         $0.separatorColor = Color.separatorBackground
         $0.tableFooterView = UIView(frame: .zero)
@@ -72,43 +53,54 @@ class MyPageViewController: BaseViewController {
 
     let viewProfile = UIView().then {
         $0.layer.cornerRadius = 10
-        $0.backgroundColor = 0xEEEEEE.color
-    }
-    let imageViewProfile = UIImageView().then {
-        $0.contentMode = .scaleAspectFill
-        $0.image = #imageLiteral(resourceName: "image_default_profile_w60h54")
+        $0.backgroundColor = 0xF8F8F8.color
     }
     let labelUsername = UILabel().then {
-        $0.text = "노소영"
         $0.font = .systemFont(ofSize: 18, weight: .bold)
+        $0.text = "노은종"
+        $0.textColor = Color.profileTitle
+    }
+    let labelUserType = UILabel().then {
+        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
+        $0.text = "개인회원"
+        $0.textColor = Color.profileTitle
     }
     let buttonEdit = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_indicator_w24h24"), for: .normal)
     }
 
     let buttonPay = VerticalButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_card_w48h48"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_card_w60h60"), for: .normal)
         $0.setTitle("결제정보", for: .normal)
         $0.setTitleColor(Color.buttonTitle, for: .normal)
         $0.imageView?.contentMode = .center
-        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
     }
     let buttonPurchase = VerticalButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_cart_w48h48"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_cart_w60h60"), for: .normal)
         $0.setTitle("구매내역", for: .normal)
         $0.setTitleColor(Color.buttonTitle, for: .normal)
         $0.imageView?.contentMode = .center
-        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
     }
     let buttonLike = VerticalButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_heart_w48h48"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_heart_w60h60"), for: .normal)
         $0.setTitle("관심정보", for: .normal)
         $0.setTitleColor(Color.buttonTitle, for: .normal)
         $0.imageView?.contentMode = .center
-        $0.titleLabel?.font = .systemFont(ofSize: 16)
+        $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
+    }
+
+    init(reactor: MyPageReactor) {
+        super.init(provider: reactor.provider)
+        self.reactor = reactor
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func setupConstraints() {
@@ -118,36 +110,42 @@ class MyPageViewController: BaseViewController {
         setupInfo()
     }
 
-    override func setupBindings() {
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+
+        if let header = tableView.tableHeaderView {
+            header.frame.size.height = 216
+        }
+    }
+
+    func bind(reactor: MyPageReactor) {
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
             .disposed(by: disposeBag)
 
-        menus
-            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: MenuCell.self)) { _, menu, cell in
-                cell.imageViewIcon.image = menu.image
-                cell.labelTitle.text = menu.title
-            }.disposed(by: disposeBag)
-
         tableView.rx.modelSelected(Menu.self)
             .filter { $0 == .setting }
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                let reactor = SettingReactor(provider: self.provider)
-                let setting = SettingViewController(provider: self.provider, reactor: reactor)
+                let setting = SettingViewController(reactor: .init(provider: self.provider))
                 self.navigationController?.pushViewController(setting, animated: true)
             })
             .disposed(by: disposeBag)
-    }
 
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+        reactor.state
+            .map { $0.name }
+            .bind(to: labelUsername.rx.text)
+            .disposed(by: disposeBag)
 
-        if let header = tableView.tableHeaderView {
-            header.frame.size.height = 248
-        }
+        reactor.state
+            .map { $0.menus }
+            .distinctUntilChanged()
+            .bind(to: tableView.rx.items(cellIdentifier: "cell", cellType: MenuCell.self)) { _, menu, cell in
+                cell.imageViewIcon.image = menu.image
+                cell.labelTitle.text = menu.title
+            }.disposed(by: disposeBag)
     }
 }
 
@@ -179,14 +177,9 @@ extension MyPageViewController {
     private func setupProfile() {
         viewContainer.addSubview(viewProfile)
         viewProfile.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(13)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.trailing.equalTo(viewContainer.safeAreaLayoutGuide).inset(15).priority(999)
-            $0.height.equalTo(100)
-        }
-        viewProfile.addSubview(imageViewProfile)
-        imageViewProfile.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview().inset(22)
-            $0.width.equalTo(imageViewProfile.snp.height).priority(999)
+            $0.height.equalTo(48)
         }
         viewProfile.addSubview(buttonEdit)
         buttonEdit.snp.makeConstraints {
@@ -197,8 +190,12 @@ extension MyPageViewController {
         viewProfile.addSubview(labelUsername)
         labelUsername.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(imageViewProfile.snp.trailing).offset(14).priority(999)
-            $0.trailing.equalTo(buttonEdit.snp.leading).offset(-14)
+            $0.leading.equalToSuperview().inset(16).priority(999)
+        }
+        viewProfile.addSubview(labelUserType)
+        labelUserType.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(labelUsername.snp.trailing).offset(8)
         }
     }
     private func setupInfo() {
@@ -213,7 +210,7 @@ extension MyPageViewController {
         stackViewButtons.snp.makeConstraints {
             $0.top.equalTo(viewProfile.snp.bottom).offset(20)
             $0.leading.trailing.equalToSuperview().inset(15).priority(999)
-            $0.height.equalTo(87)
+            $0.height.equalTo(100)
         }
         let viewSeparator = UIView().then {
             $0.backgroundColor = 0xF8F9FA.color

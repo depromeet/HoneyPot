@@ -69,6 +69,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
         $0.rightView = buttonClear
         $0.rightViewMode = .always
         $0.autocorrectionType = .no
+        $0.returnKeyType = .done
     }
     let tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(Reusable.searchCell)
@@ -123,8 +124,21 @@ class SearchViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
-        textFieldSearch.rx.controlEvent(.editingDidEndOnExit)
+        let keyboardTap = textFieldSearch.rx.controlEvent(.editingDidEndOnExit)
             .withLatestFrom(textFieldSearch.rx.text.orEmpty)
+            .filter { !$0.isEmpty }
+            .map { String($0) }
+
+        let cellTap = tableView.rx.modelSelected(String.self)
+            .map { String($0) }
+            .share()
+
+        cellTap
+            .map { Reactor.Action.inputSearchText($0) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        Observable.of(keyboardTap, cellTap).merge()
             .map { Reactor.Action.addWord($0) }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
@@ -147,6 +161,21 @@ class SearchViewController: BaseViewController, ReactorKit.View {
 
         reactor.state.map { $0.words }
             .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        reactor.state.map { $0.shouldShowResults }
+            .distinctUntilChanged()
+            .filter { $0 }
+            .withLatestFrom(reactor.state)
+            .map { $0.searchText }
+            .subscribeOn(MainScheduler.instance)
+            .do(onNext: { [weak self] _ in self?.textFieldSearch.resignFirstResponder() })
+            .subscribe(onNext: { [weak self] keyword in
+                guard let self = self else { return }
+                let reactor = ListReactor(provider: self.provider, keyword: keyword)
+                let listViewController = ListViewController(reactor: reactor)
+                self.navigationController?.pushViewController(listViewController, animated: true)
+            })
             .disposed(by: disposeBag)
     }
 }

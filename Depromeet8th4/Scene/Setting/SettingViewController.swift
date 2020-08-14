@@ -31,8 +31,8 @@ class SettingViewController: BaseViewController, View {
         $0.borderStyle = .roundedRect
     }
 
-    init(provider: ServiceProviderType, reactor: SettingReactor) {
-        super.init(provider: provider)
+    init(reactor: SettingReactor) {
+        super.init(provider: reactor.provider)
         self.reactor = reactor
     }
 
