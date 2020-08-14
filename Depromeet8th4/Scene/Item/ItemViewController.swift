@@ -45,6 +45,11 @@ class ItemViewController: BaseViewController, View {
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
+    let labelName = UILabel().then {
+        $0.textColor = Color.mainTitle
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        $0.text = "테이블팬 C820 (3 Colors)"
+    }
 
     let tableView = UITableView().then {
         $0.contentInsetAdjustmentBehavior = .never
@@ -72,7 +77,7 @@ class ItemViewController: BaseViewController, View {
 
     let labelTitle = UILabel().then {
         $0.textColor = Color.mainTitle
-        $0.font = Font.mainTitle
+        $0.font = UIFont(name: "GodoB", size: 24)
         $0.text = "테이블팬 C820 (3 Colors)"
         $0.numberOfLines = 0
     }
@@ -234,10 +239,16 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
-        tableView.rx.contentOffset
+        let isHidden = tableView.rx.contentOffset
             .map { $0.y < 150 }
             .distinctUntilChanged()
+
+        isHidden
             .bind(to: viewBackground.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        isHidden
+            .bind(to: labelName.rx.isHidden)
             .disposed(by: disposeBag)
 
         textViewInput.rx.text
@@ -278,6 +289,12 @@ extension ItemViewController {
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
+        }
+        navigationBar.addSubview(labelName)
+        labelName.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(52)
+            $0.trailing.equalToSuperview().inset(9)
+            $0.centerY.equalToSuperview()
         }
         view.insertSubview(viewBackground, belowSubview: navigationBar)
         viewBackground.snp.makeConstraints {
@@ -343,7 +360,7 @@ extension ItemViewController {
         }
         viewInfo.addSubview(labelTitle)
         labelTitle.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(25)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.trailing.equalToSuperview().inset(18).priority(999)
         }
         let stackViewPrice = UIStackView().then {
@@ -354,7 +371,7 @@ extension ItemViewController {
         }
         viewInfo.addSubview(stackViewPrice)
         stackViewPrice.snp.makeConstraints {
-            $0.top.equalTo(labelTitle.snp.bottom).offset(10)
+            $0.top.equalTo(labelTitle.snp.bottom).offset(12)
             $0.leading.equalTo(labelTitle)
             $0.bottom.equalToSuperview().inset(21)
         }

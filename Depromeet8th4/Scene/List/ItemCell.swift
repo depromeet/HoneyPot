@@ -67,7 +67,7 @@ class ItemCell: BaseTableViewCell {
 
     let labelTitle = UILabel().then {
         $0.textColor = Color.mainTitle
-        $0.font = Font.mainTitle
+        $0.font = UIFont(name: "GodoB", size: 20)
         $0.text = "테이블팬 C820 (3 Colors)"
         $0.numberOfLines = 2
     }
