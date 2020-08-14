@@ -12,7 +12,6 @@
 		044B62ED24D846D600088487 /* ProductRelatedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B62EB24D846D600088487 /* ProductRelatedCell.swift */; };
 		044B62EE24D846D600088487 /* ProductRelatedCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044B62EC24D846D600088487 /* ProductRelatedCell.xib */; };
 		044B62F224D8494F00088487 /* GodoM.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F024D8494F00088487 /* GodoM.otf */; };
-		044B62F324D8494F00088487 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
 		044B62FB24D84F6E00088487 /* ProgressStatusAndPromoterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B62F924D84F6E00088487 /* ProgressStatusAndPromoterCell.swift */; };
 		044B62FC24D84F6E00088487 /* ProgressStatusAndPromoterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 044B62FA24D84F6E00088487 /* ProgressStatusAndPromoterCell.xib */; };
 		044B630024D8584100088487 /* ProductDetailImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044B62FE24D8584100088487 /* ProductDetailImageCell.swift */; };
@@ -53,6 +52,7 @@
 		9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB5924E5574F00801F84 /* Menu.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
+		9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
 		9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7A2FA24E16F550079C21F /* ListReactor.swift */; };
 		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
 		9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */; };
@@ -538,11 +538,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				044B62EE24D846D600088487 /* ProductRelatedCell.xib in Resources */,
+				9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */,
 				9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */,
 				044B62FC24D84F6E00088487 /* ProgressStatusAndPromoterCell.xib in Resources */,
 				044B62E824D8449300088487 /* ProductImageCell.xib in Resources */,
 				044B630124D8584100088487 /* ProductDetailImageCell.xib in Resources */,
-				044B62F324D8494F00088487 /* GodoB.otf in Resources */,
 				9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */,
 				044B631624DAF77600088487 /* DetailViewController.xib in Resources */,
 				044B62F224D8494F00088487 /* GodoM.otf in Resources */,
