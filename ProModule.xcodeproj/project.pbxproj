@@ -27,6 +27,7 @@
 		9CEE728A24AADD2300F649EC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728924AADD2300F649EC /* RxRelay */; };
 		9CEE728C24AADD2300F649EC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728B24AADD2300F649EC /* RxCocoa */; };
 		9CEE728E24AADD2300F649EC /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728D24AADD2300F649EC /* RxBlocking */; };
+		9CF439F024E6BD510029D6FA /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 9CF439EF24E6BD510029D6FA /* RxKeyboard */; };
 		9CFDA61A24B4166C00097BF0 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFDA61924B4166C00097BF0 /* RxGesture */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 				9CFDA61A24B4166C00097BF0 /* RxGesture in Frameworks */,
 				9C39B5B624AF27E20003D013 /* ReactorKit in Frameworks */,
 				9C7AD86024C0212A00AAEBB0 /* MoyaSugar in Frameworks */,
+				9CF439F024E6BD510029D6FA /* RxKeyboard in Frameworks */,
 				9CEE728224AADC8D00F649EC /* Then in Frameworks */,
 				9C7AD85B24C020FA00AAEBB0 /* Moya in Frameworks */,
 				9CEE728824AADD2300F649EC /* RxSwift in Frameworks */,
@@ -141,6 +143,7 @@
 				9C7AD85F24C0212A00AAEBB0 /* MoyaSugar */,
 				9CB156BB24CBEAAB0014BF96 /* Kingfisher */,
 				9C1D557324DADC0C0048BBDF /* URLNavigator */,
+				9CF439EF24E6BD510029D6FA /* RxKeyboard */,
 			);
 			productName = ProModule;
 			productReference = 9CEE726D24AADBAD00F649EC /* ProModule.framework */;
@@ -184,6 +187,7 @@
 				9C7AD85E24C0212A00AAEBB0 /* XCRemoteSwiftPackageReference "MoyaSugar" */,
 				9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */,
+				9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 			);
 			productRefGroup = 9CEE726E24AADBAD00F649EC /* Products */;
 			projectDirPath = "";
@@ -513,6 +517,14 @@
 				minimumVersion = 5.1.1;
 			};
 		};
+		9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxKeyboard";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9CFDA61824B4166C00097BF0 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture";
@@ -618,6 +630,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxBlocking;
+		};
+		9CF439EF24E6BD510029D6FA /* RxKeyboard */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */;
+			productName = RxKeyboard;
 		};
 		9CFDA61924B4166C00097BF0 /* RxGesture */ = {
 			isa = XCSwiftPackageProductDependency;
