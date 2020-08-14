@@ -155,6 +155,22 @@ class ItemViewController: BaseViewController, View {
     }
     var constraintDetailHeight: NSLayoutConstraint!
 
+    let buttonShare = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "image_share_w48h50"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+    }
+    let buttonLike = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "image_favorite_w48h50"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+    }
+    let buttonSubmit = UIButton().then {
+        $0.setTitle("참여하기", for: .normal)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_submit"), for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.setContentHuggingPriority(.init(1), for: .horizontal)
+        $0.adjustsImageWhenHighlighted = false
+    }
+
     init(reactor: ItemReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -167,6 +183,7 @@ class ItemViewController: BaseViewController, View {
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
+        setupBottomView()
     }
 
     override func viewWillLayoutSubviews() {
@@ -212,7 +229,7 @@ extension ItemViewController {
         view.insertSubview(tableView, at: 0)
         tableView.snp.makeConstraints {
             $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
 
         let viewBanner = setupItemBanner()
@@ -457,5 +474,40 @@ extension ItemViewController {
         }
         constraintDetailHeight = imageViewDetail.heightAnchor.constraint(equalToConstant: 300)
         constraintDetailHeight.isActive = true
+    }
+    private func setupBottomView() {
+        let viewBottom = UIView().then {
+            $0.backgroundColor = .white
+        }
+        view.addSubview(viewBottom)
+        viewBottom.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaInsets)
+            $0.height.equalTo(80)
+        }
+        viewBottom.addSubview(buttonShare)
+        buttonShare.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(Metric.leadingOffset)
+        }
+        viewBottom.addSubview(buttonLike)
+        buttonLike.snp.makeConstraints {
+            $0.leading.equalTo(buttonShare.snp.trailing).offset(10)
+            $0.centerY.equalTo(buttonShare)
+        }
+        viewBottom.addSubview(buttonSubmit)
+        buttonSubmit.snp.makeConstraints {
+            $0.leading.equalTo(buttonLike.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(Metric.trailingOffset)
+            $0.centerY.equalTo(buttonLike)
+        }
+        let viewSeparator = UIView().then {
+            $0.backgroundColor = 0xA5A5A5.color
+        }
+        viewBottom.addSubview(viewSeparator)
+        viewSeparator.snp.makeConstraints {
+            $0.top.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
     }
 }
