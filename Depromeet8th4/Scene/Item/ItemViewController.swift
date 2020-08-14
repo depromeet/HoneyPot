@@ -206,6 +206,13 @@ class ItemViewController: BaseViewController, View {
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
     }
+    let buttonSharePopUp = UIButton().then {
+        $0.setTitle("소문내고 더 할인받기", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_black_bubble"), for: .normal)
+        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
+        $0.contentEdgeInsets = .init(top: 7, left: 8, bottom: 12, right: 25)
+    }
 
     init(reactor: ItemReactor) {
         super.init(provider: reactor.provider)
@@ -237,6 +244,11 @@ class ItemViewController: BaseViewController, View {
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
+            .disposed(by: disposeBag)
+
+        buttonSharePopUp.rx.tap
+            .map { true }
+            .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
 
         let isHidden = tableView.rx.contentOffset
@@ -627,6 +639,11 @@ extension ItemViewController {
         viewSeparator.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
+        }
+        view.addSubview(buttonSharePopUp)
+        buttonSharePopUp.snp.makeConstraints {
+            $0.leading.equalTo(buttonShare)
+            $0.bottom.equalTo(buttonShare.snp.top).offset(-4)
         }
     }
 }
