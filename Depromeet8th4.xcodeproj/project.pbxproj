@@ -30,20 +30,13 @@
 		9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1D557524DADC510048BBDF /* NavigationMap.swift */; };
 		9C47BF3E24E6B851005238BE /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47BF3D24E6B851005238BE /* ResizableTextView.swift */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
-		9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
-		9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
-		9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
-		9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */; };
-		9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60775D24C1534600E5CBEE /* BaseViewController.swift */; };
 		9C6475F924E2B5DE0067EA5F /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475F824E2B5DE0067EA5F /* BottomSheet.swift */; };
 		9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */; };
-		9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61724D42666009DD6D7 /* VerticalButton.swift */; };
 		9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */; };
 		9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
 		9C7AD84924C011D500AAEBB0 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9C7AD86324C035E200AAEBB0 /* ServiceProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86124C035E200AAEBB0 /* ServiceProvider.swift */; };
-		9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
 		9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86524C0360800AAEBB0 /* NetworkService.swift */; };
 		9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86824C036FD00AAEBB0 /* ItemAPI.swift */; };
 		9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7B534924DE8E7A005C3CA8 /* SearchReactor.swift */; };
@@ -55,6 +48,14 @@
 		9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
+		9CC407E424E766EF009FC68F /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
+		9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60775D24C1534600E5CBEE /* BaseViewController.swift */; };
+		9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF363AD24D0530A0008380C /* NavigationBar.swift */; };
+		9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61724D42666009DD6D7 /* VerticalButton.swift */; };
+		9CC407E824E7672B009FC68F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */; };
+		9CC407E924E7676A009FC68F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
+		9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
+		9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
 		9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
 		9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7A2FA24E16F550079C21F /* ListReactor.swift */; };
 		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
@@ -63,7 +64,6 @@
 		9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBD24D6638900A8A25E /* AccountService.swift */; };
 		9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC024D6A77700A8A25E /* SettingViewController.swift */; };
 		9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC224D6A7AD00A8A25E /* SettingReactor.swift */; };
-		9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF363AD24D0530A0008380C /* NavigationBar.swift */; };
 		B6AB8EDD24DE6BC100EE3CB1 /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB8EDB24DE6BC100EE3CB1 /* SortCell.swift */; };
 		B6AB8EDE24DE6BC100EE3CB1 /* SortCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6AB8EDC24DE6BC100EE3CB1 /* SortCell.xib */; };
 		B6D6EC5324DB3B8500E27C06 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC5224DB3B8500E27C06 /* MainViewController.swift */; };
@@ -554,23 +554,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC407E924E7676A009FC68F /* Assets.xcassets in Resources */,
+				9CC407E824E7672B009FC68F /* LaunchScreen.storyboard in Resources */,
 				044B62EE24D846D600088487 /* ProductRelatedCell.xib in Resources */,
 				9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */,
-				9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */,
 				044B62FC24D84F6E00088487 /* ProgressStatusAndPromoterCell.xib in Resources */,
 				044B62E824D8449300088487 /* ProductImageCell.xib in Resources */,
 				044B630124D8584100088487 /* ProductDetailImageCell.xib in Resources */,
-				9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */,
 				044B631624DAF77600088487 /* DetailViewController.xib in Resources */,
 				044B62F224D8494F00088487 /* GodoM.otf in Resources */,
 				044B630D24D85DB300088487 /* CommentCell.xib in Resources */,
 				044B630624D8592300088487 /* CommentTopCell.xib in Resources */,
 				044B631224DAEFE400088487 /* FunctionCell.xib in Resources */,
 				B6D6EC5E24DB3FBE00E27C06 /* CustomCell.xib in Resources */,
-				9C545BEE24BF4C3D00138C78 /* LaunchScreen.storyboard in Resources */,
 				B6D6EC6C24DBF8CE00E27C06 /* ProductCell.xib in Resources */,
 				B6D6EC6224DB40EF00E27C06 /* PageCell.xib in Resources */,
-				9C545BEB24BF4C3D00138C78 /* Assets.xcassets in Resources */,
 				B6AB8EDE24DE6BC100EE3CB1 /* SortCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -602,6 +600,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */,
+				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
+				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
+				9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */,
+				9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */,
+				9CC407E424E766EF009FC68F /* BaseService.swift in Sources */,
 				9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */,
 				9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */,
 				B6D6EC5324DB3B8500E27C06 /* MainViewController.swift in Sources */,
@@ -613,21 +617,15 @@
 				9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */,
 				9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */,
 				044B630024D8584100088487 /* ProductDetailImageCell.swift in Sources */,
-				9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */,
 				044B631524DAF77600088487 /* DetailViewController.swift in Sources */,
 				044B62ED24D846D600088487 /* ProductRelatedCell.swift in Sources */,
-				9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */,
-				9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */,
 				044B62FB24D84F6E00088487 /* ProgressStatusAndPromoterCell.swift in Sources */,
 				9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */,
 				9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */,
-				9C7AD86424C035E200AAEBB0 /* BaseService.swift in Sources */,
 				9C6475F924E2B5DE0067EA5F /* BottomSheet.swift in Sources */,
 				B6D6EC6124DB40EF00E27C06 /* PageCell.swift in Sources */,
 				9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */,
 				9C7B535024DEA538005C3CA8 /* SearchWordService.swift in Sources */,
-				9C545BE224BF4C3C00138C78 /* AppDelegate.swift in Sources */,
-				9CF363AE24D0530A0008380C /* NavigationBar.swift in Sources */,
 				9C7CDB5F24E56C4100801F84 /* ItemViewController.swift in Sources */,
 				9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */,
 				9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */,
@@ -638,15 +636,9 @@
 				B6AB8EDD24DE6BC100EE3CB1 /* SortCell.swift in Sources */,
 				9C7AD86924C036FD00AAEBB0 /* ItemAPI.swift in Sources */,
 				044B631124DAEFE400088487 /* FunctionCell.swift in Sources */,
-				9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */,
-				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
-				9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */,
 				044B630C24D85DB300088487 /* CommentCell.swift in Sources */,
 				9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */,
 				9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */,
-				9C60775E24C1534600E5CBEE /* BaseViewController.swift in Sources */,
-				9C545BE424BF4C3C00138C78 /* SceneDelegate.swift in Sources */,
-				9C71F61824D42666009DD6D7 /* VerticalButton.swift in Sources */,
 				9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */,
 				9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */,
 				B6D6EC6B24DBF8CE00E27C06 /* ProductCell.swift in Sources */,
