@@ -186,6 +186,11 @@ class ItemViewController: BaseViewController, View {
         $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
     }
+    let labelInputPlaceholder = UILabel().then {
+        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
+        $0.text = "댓글을 남겨주세요"
+        $0.textColor = 0xA5A5A5.color
+    }
 
     let viewBottom = UIView().then {
         $0.backgroundColor = .white
@@ -269,6 +274,11 @@ class ItemViewController: BaseViewController, View {
                 guard self.isViewLoaded else { return }
                 self.view.setNeedsLayout()
             })
+            .disposed(by: disposeBag)
+
+        textViewInput.rx.text.orEmpty
+            .map { !$0.isEmpty }
+            .bind(to: labelInputPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
         Driver.combineLatest(
@@ -597,6 +607,11 @@ extension ItemViewController {
         buttonSend.snp.makeConstraints {
             $0.top.trailing.bottom.equalToSuperview()
             $0.width.equalTo(32)
+        }
+        viewBackground.addSubview(labelInputPlaceholder)
+        labelInputPlaceholder.snp.makeConstraints {
+            $0.leading.equalTo(textViewInput).inset(5)
+            $0.centerY.equalTo(textViewInput)
         }
         let viewSeparator = UIView().then {
             $0.backgroundColor = 0xEEEEEE.color
