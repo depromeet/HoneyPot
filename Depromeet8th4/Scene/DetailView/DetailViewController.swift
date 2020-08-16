@@ -15,12 +15,20 @@ class DetailViewController: UIViewController {
         registerXib()
     }
     func registerXib() {
-        tableView.register(ProductImageCell.self, forCellReuseIdentifier: "ProductImageCell")
-        tableView.register(ProductRelatedCell.self, forCellReuseIdentifier: "ProductRelatedCell")
-        tableView.register(ProgressStatusAndPromoterCell.self, forCellReuseIdentifier: "ProgressDetailImageCell")
-        tableView.register(CommentTopCell.self, forCellReuseIdentifier: "CommentTopCell")
-        tableView.register(CommentCell.self, forCellReuseIdentifier: "CommentCell")
-        tableView.register(FunctionCell.self, forCellReuseIdentifier: "FunctionCell")
+        let productImageCell = UINib(nibName: "ProductImageCell", bundle: nil)
+        let productRelatedCell = UINib(nibName: "ProductRelatedCell", bundle: nil)
+        let progressAndPromoterCell = UINib(nibName: "ProgressAndPromoterCell", bundle: nil)
+        let productDetailImageCell = UINib(nibName: "ProductDetailImageCell", bundle: nil)
+        let commentTopCell = UINib(nibName: "CommentTopCell", bundle: nil)
+        let commentCell = UINib(nibName: "CommentCell", bundle: nil)
+        let functionCell = UINib(nibName: "FunctionCell", bundle: nil)
+        tableView.register(productImageCell, forCellReuseIdentifier: "ProductImageCell")
+        tableView.register(productRelatedCell, forCellReuseIdentifier: "ProductRelatedCell")
+        tableView.register(progressAndPromoterCell, forCellReuseIdentifier: "ProgressAndPromoterCell")
+        tableView.register(productDetailImageCell, forCellReuseIdentifier: "ProductDetailImageCell")
+        tableView.register(commentTopCell, forCellReuseIdentifier: "CommentTopCell")
+        tableView.register(commentCell, forCellReuseIdentifier: "CommentCell")
+        tableView.register(functionCell, forCellReuseIdentifier: "FunctionCell")
     }
 }
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -38,28 +46,25 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell: ProductImageCell = ProductImageCell()
+            let cell: ProductImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductImageCell") as? ProductImageCell
             return cell
         case 1:
-            let cell: ProductRelatedCell = ProductRelatedCell()
+            let cell: ProductRelatedCell = tableView.dequeueReusableCell(withIdentifier: "ProductRelatedCell") as? ProductRelatedCell
             return cell
         case 2:
-            let cell: ProgressStatusAndPromoterCell = ProgressStatusAndPromoterCell()
+            let cell: ProgressStatusAndPromoterCell = tableView.dequeueReusableCell(withIdentifier: "ProgressStatusAndPromoterCell") as? ProgressStatusAndPromoterCell
             return cell
         case 3:
-            let cell: ProductDetailImageCell = ProductDetailImageCell()
+            let cell: ProductDetailImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailImageCell") as? ProductDetailImageCell
             return cell
         case 4:
-            let cell: CommentTopCell = CommentTopCell()
+            let cell: CommentTopCell = tableView.dequeueReusableCell(withIdentifier: "CommentTopCell") as? CommentTopCell
             return cell
         case 5:
-            let cell: CommentCell = CommentCell()
+            let cell: CommentCell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell
             return cell
         case 6:
-            let cell: FunctionCell = FunctionCell()
-            return cell
-        default:
-            let cell: UITableViewCell = UITableViewCell()
+            let cell: FunctionCell = tableView.dequeueReusableCell(withIdentifier: "FunctionCell") as? FunctionCell
             return cell
         }
     }
