@@ -36,20 +36,16 @@ enum SortKind: String, CaseIterable {
 class ListViewController: BaseViewController, ReactorKit.View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
-        static let navigationTitle = 0x323232.color
     }
     struct Reusable {
         static let itemCell = ReusableCell<ItemCell>()
     }
 
     lazy var navigationBar = NavigationBar(
+        title: "",
         leftView: buttonBack
     ).then {
         $0.backgroundColor = .clear
-    }
-    let labelTitle = UILabel().then {
-        $0.textColor = Color.navigationTitle
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
     }
 
     let buttonBack = UIButton().then {
@@ -145,7 +141,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .take(1)
             .map { $0.keyword }
-            .bind(to: labelTitle.rx.text)
+            .bind(to: navigationBar.labelTitle.rx.text)
             .disposed(by: disposeBag)
     }
 }
@@ -165,10 +161,6 @@ extension ListViewController {
         viewBackground.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(navigationBar)
-        }
-        navigationBar.addSubview(labelTitle)
-        labelTitle.snp.makeConstraints {
-            $0.center.equalToSuperview()
         }
     }
     private func setupTableView() {
