@@ -13,11 +13,4 @@ class ProductRelatedCell: UITableViewCell {
     @IBOutlet weak var originalPrice: UILabel!
     @IBOutlet weak var discountRate: UILabel!
     @IBOutlet weak var discountedPrice: UILabel!
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
 }
