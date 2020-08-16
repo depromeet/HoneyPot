@@ -62,7 +62,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
-        $0.clipsToBounds = false
         $0.rowHeight = UITableView.automaticDimension
         $0.estimatedRowHeight = 390
     }
@@ -161,7 +160,8 @@ extension ListViewController {
         view.insertSubview(tableView, at: 0)
         tableView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalToSuperview()
         }
         let viewHeader = UIView(frame: .init(x: 0, y: 0, width: 0, height: 30)).then {
             $0.backgroundColor = .clear
