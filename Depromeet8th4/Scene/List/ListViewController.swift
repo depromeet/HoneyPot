@@ -67,17 +67,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.estimatedRowHeight = 390
     }
 
-    let bottomSheet = BottomSheet(
-        titles: SortKind.allCases.map { $0.title }
-    ).then {
-        $0.backgroundColor = .white
-    }
-    var bottomSheetTopConstraint: NSLayoutConstraint?
-    let viewOverlay = UIView().then {
-        $0.backgroundColor = 0x323232.color ~ 50%
-        $0.alpha = 0
-    }
-
     init(reactor: ListReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -90,7 +79,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
-        setupBottomSheet()
     }
 
     func bind(reactor: ListReactor) {
@@ -108,15 +96,21 @@ class ListViewController: BaseViewController, ReactorKit.View {
 
         buttonSort.rx.tap
             .subscribe(onNext: { [weak self] in
-                self?.toggleBottomSheet(true)
-            })
-            .disposed(by: disposeBag)
+                guard let self = self else { return }
+                let modal = SortModalViewController(
+                    provider: self.provider,
+                    titles: reactor.currentState.sortList.map { $0.title },
+                    selectedIndex: reactor.currentState.sortIndex
+                )
+                self.presentPanModal(modal)
 
-        bottomSheet.rx.itemSelected
-            .distinctUntilChanged()
-            .map { $0.row }
-            .map { Reactor.Action.selectSortIndex($0) }
-            .bind(to: reactor.action)
+                modal.rx.itemSelected
+                    .distinctUntilChanged()
+                    .map { $0.row }
+                    .map { Reactor.Action.selectSortIndex($0) }
+                    .bind(to: reactor.action)
+                    .disposed(by: modal.disposeBag)
+            })
             .disposed(by: disposeBag)
 
         tableView.rx.modelSelected(String.self)
@@ -127,20 +121,10 @@ class ListViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
 
-        viewOverlay.rx.tapGesture()
-            .when(.recognized)
-            .subscribe(onNext: { [weak self] _ in
-                self?.toggleBottomSheet(false)
-            })
-            .disposed(by: disposeBag)
-
         reactor.state
             .map { $0.sortTitle }
             .distinctUntilChanged()
             .skip(1)
-            .do(onNext: { [weak self] _ in
-                self?.toggleBottomSheet(false)
-            })
             .subscribe(onNext: { [weak self] title in
                 self?.buttonSort.setTitle(title, for: .normal)
             })
@@ -188,33 +172,5 @@ extension ListViewController {
             $0.trailing.equalToSuperview().inset(10)
         }
         tableView.tableHeaderView = viewHeader
-    }
-    private func setupBottomSheet() {
-        view.addSubview(viewOverlay)
-        viewOverlay.snp.makeConstraints {
-            $0.edges.equalToSuperview()
-        }
-        view.addSubview(bottomSheet)
-        bottomSheet.snp.makeConstraints {
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-        }
-        bottomSheetTopConstraint = bottomSheet.topAnchor.constraint(equalTo: view.bottomAnchor)
-        bottomSheetTopConstraint?.isActive = true
-    }
-    private func toggleBottomSheet(_ isOpened: Bool) {
-        var alpha: CGFloat
-        var constant: CGFloat
-        if isOpened {
-            alpha = 1
-            constant = -bottomSheet.bounds.height
-        } else {
-            alpha = 0
-            constant = 0
-        }
-        UIView.animate(withDuration: 0.3) {
-            self.bottomSheetTopConstraint?.constant = constant
-            self.viewOverlay.alpha = alpha
-            self.view.layoutIfNeeded()
-        }
     }
 }

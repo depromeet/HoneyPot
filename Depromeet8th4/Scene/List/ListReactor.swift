@@ -12,7 +12,7 @@ import ReactorKit
 final class ListReactor: Reactor {
     let provider: ServiceProviderType
 
-    init(provider: ServiceProviderType, keyword: String) {
+    init(provider: ServiceProviderType, keyword: String = "") {
         self.provider = provider
         self.initialState = State(keyword: keyword)
     }
@@ -56,6 +56,7 @@ final class ListReactor: Reactor {
         case .setItems(let items):
             state.items = items
         case .setSortTitle(let index):
+            state.sortIndex = index
             state.sortTitle = state.sortList[index].title
         }
         return state

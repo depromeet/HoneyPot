@@ -30,7 +30,6 @@
 		9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1D557524DADC510048BBDF /* NavigationMap.swift */; };
 		9C47BF3E24E6B851005238BE /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47BF3D24E6B851005238BE /* ResizableTextView.swift */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
-		9C6475F924E2B5DE0067EA5F /* BottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475F824E2B5DE0067EA5F /* BottomSheet.swift */; };
 		9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */; };
 		9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */; };
 		9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */; };
@@ -48,6 +47,8 @@
 		9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
+		9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */; };
+		9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */; };
 		9CC407E424E766EF009FC68F /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
 		9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60775D24C1534600E5CBEE /* BaseViewController.swift */; };
 		9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF363AD24D0530A0008380C /* NavigationBar.swift */; };
@@ -123,7 +124,6 @@
 		9C545BED24BF4C3D00138C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C545BEF24BF4C3D00138C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C60775D24C1534600E5CBEE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		9C6475F824E2B5DE0067EA5F /* BottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheet.swift; sourceTree = "<group>"; };
 		9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
@@ -142,6 +142,8 @@
 		9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReactor.swift; sourceTree = "<group>"; };
 		9C835DDA24DFF4DC000901FF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9C835DDC24DFFB9C000901FF /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
+		9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetItemCell.swift; sourceTree = "<group>"; };
 		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
 		9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 				9CE4CDB324D65B2600A8A25E /* Search */,
 				9C835DD924DFF4CB000901FF /* List */,
 				9C7CDB5B24E56AF700801F84 /* Item */,
+				9CA2CBC424E8C8DD00AE5322 /* Modal */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -389,6 +392,15 @@
 			path = List;
 			sourceTree = "<group>";
 		};
+		9CA2CBC424E8C8DD00AE5322 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */,
+				9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
 		9CE4CDB224D6592E00A8A25E /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -434,7 +446,6 @@
 			children = (
 				9CF363AD24D0530A0008380C /* NavigationBar.swift */,
 				9C71F61724D42666009DD6D7 /* VerticalButton.swift */,
-				9C6475F824E2B5DE0067EA5F /* BottomSheet.swift */,
 				9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */,
 				9C47BF3D24E6B851005238BE /* ResizableTextView.swift */,
 			);
@@ -603,6 +614,7 @@
 				9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */,
 				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
 				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
+				9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */,
 				9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */,
 				9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */,
 				9CC407E424E766EF009FC68F /* BaseService.swift in Sources */,
@@ -616,13 +628,13 @@
 				9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */,
 				9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */,
 				9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */,
+				9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */,
 				044B630024D8584100088487 /* ProductDetailImageCell.swift in Sources */,
 				044B631524DAF77600088487 /* DetailViewController.swift in Sources */,
 				044B62ED24D846D600088487 /* ProductRelatedCell.swift in Sources */,
 				044B62FB24D84F6E00088487 /* ProgressStatusAndPromoterCell.swift in Sources */,
 				9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */,
 				9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */,
-				9C6475F924E2B5DE0067EA5F /* BottomSheet.swift in Sources */,
 				B6D6EC6124DB40EF00E27C06 /* PageCell.swift in Sources */,
 				9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */,
 				9C7B535024DEA538005C3CA8 /* SearchWordService.swift in Sources */,
