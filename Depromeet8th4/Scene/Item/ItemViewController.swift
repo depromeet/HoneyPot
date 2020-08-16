@@ -264,7 +264,7 @@ class ItemViewController: BaseViewController, View {
         super.viewWillLayoutSubviews()
 
         if let headerView = tableView.tableHeaderView {
-            headerView.frame.size.height = viewHeader.bounds.height + 100
+            headerView.frame.size.height = viewHeader.bounds.height
             tableView.tableHeaderView = headerView
             tableView.layoutIfNeeded()
         }
