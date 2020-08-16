@@ -183,7 +183,8 @@ class ItemViewController: BaseViewController, View {
         $0.bounces = false
     }
     let buttonSend = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_write_selected_w16h16"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .disabled)
         $0.adjustsImageWhenHighlighted = false
     }
     let labelInputPlaceholder = UILabel().then {
@@ -274,6 +275,13 @@ class ItemViewController: BaseViewController, View {
                 guard self.isViewLoaded else { return }
                 self.view.setNeedsLayout()
             })
+            .disposed(by: disposeBag)
+
+        textViewInput.rx.text.orEmpty
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .map { !$0.isEmpty }
+            .distinctUntilChanged()
+            .bind(to: buttonSend.rx.isEnabled)
             .disposed(by: disposeBag)
 
         textViewInput.rx.text.orEmpty
@@ -605,8 +613,8 @@ extension ItemViewController {
         }
         viewBackground.addSubview(buttonSend)
         buttonSend.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview()
-            $0.width.equalTo(32)
+            $0.top.trailing.equalToSuperview()
+            $0.width.height.equalTo(32)
         }
         viewBackground.addSubview(labelInputPlaceholder)
         labelInputPlaceholder.snp.makeConstraints {
