@@ -46,25 +46,28 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell: ProductImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductImageCell") as? ProductImageCell
+            let cell: ProductImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductImageCell") as! ProductImageCell
             return cell
         case 1:
-            let cell: ProductRelatedCell = tableView.dequeueReusableCell(withIdentifier: "ProductRelatedCell") as? ProductRelatedCell
+            let cell: ProductRelatedCell = tableView.dequeueReusableCell(withIdentifier: "ProductRelatedCell") as! ProductRelatedCell
             return cell
         case 2:
-            let cell: ProgressStatusAndPromoterCell = tableView.dequeueReusableCell(withIdentifier: "ProgressStatusAndPromoterCell") as? ProgressStatusAndPromoterCell
+            let cell: ProgressStatusAndPromoterCell = tableView.dequeueReusableCell(withIdentifier: "ProgressStatusAndPromoterCell") as! ProgressStatusAndPromoterCell
             return cell
         case 3:
-            let cell: ProductDetailImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailImageCell") as? ProductDetailImageCell
+            let cell: ProductDetailImageCell = tableView.dequeueReusableCell(withIdentifier: "ProductDetailImageCell") as! ProductDetailImageCell
             return cell
         case 4:
-            let cell: CommentTopCell = tableView.dequeueReusableCell(withIdentifier: "CommentTopCell") as? CommentTopCell
+            let cell: CommentTopCell = tableView.dequeueReusableCell(withIdentifier: "CommentTopCell") as! CommentTopCell
             return cell
         case 5:
-            let cell: CommentCell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as? CommentCell
+            let cell: CommentCell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
             return cell
         case 6:
-            let cell: FunctionCell = tableView.dequeueReusableCell(withIdentifier: "FunctionCell") as? FunctionCell
+            let cell: FunctionCell = tableView.dequeueReusableCell(withIdentifier: "FunctionCell") as! FunctionCell
+            return cell
+        default:
+            let cell: UITableViewCell = UITableViewCell()
             return cell
         }
     }
