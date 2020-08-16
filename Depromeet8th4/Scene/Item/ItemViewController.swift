@@ -14,29 +14,60 @@ import RxKeyboard
 
 class ItemViewController: BaseViewController, View {
     private enum Color {
-        static let navigationBackground = 0xFFD136.color
-        static let mainTitle = 0x323232.color
-        static let priceFocusedTitle = 0xEB5757.color
-        static let likeCommentTitle = 0x7B7B7B.color
+        static let red1 = 0xEB5757.color
+        static let yellow1 = 0xFFD136.color
+        static let black1 = 0x323232.color
+        static let black2 = 0x464646.color
+        static let lightGray1 = 0xA5A5A5.color
+        static let lightGray2 = 0xF8F8F8.color
+        static let lightGray3 = 0x8C8C8C.color
     }
     private enum Font {
-        static let mainTitle = UIFont.systemFont(ofSize: 24, weight: .bold)
-        static let likeCommentTitle = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)
-        static let categoryTitle = UIFont.systemFont(ofSize: 14)
-        static let focusedTitle = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
-        static let normalTitle = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
-        static let priceBigTitle = UIFont(name: "AppleSDGothicNeo-Bold", size: 24)!
-        static let priceSmallTitle = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
+        static let godoB24 = UIFont(name: "GodoB", size: 24)!
+        static let godoB16 = UIFont(name: "GodoB", size: 16)!
+        static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
+        static let sdR12 = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
+        static let sdB24 = UIFont(name: "AppleSDGothicNeo-Bold", size: 24)!
+        static let sdB16 = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)!
+        static let sdB12 = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
     }
     private enum Metric {
         static let leadingOffset: CGFloat = 18
         static let trailingOffset: CGFloat = 18
     }
-
-    let viewBackground = UIView().then {
-        $0.backgroundColor = Color.navigationBackground
+    private enum Style {
+        static let paragraph = NSMutableParagraphStyle().then {
+            $0.lineHeightMultiple = 1.11
+        }
+        static let itemText: [NSAttributedString.Key: Any] = [
+            .kern: -0.72,
+            .font: Font.godoB24,
+            .foregroundColor: Color.black1,
+            .paragraphStyle: paragraph
+        ]
+        static let priceOriginalText: [NSAttributedString.Key: Any] = [
+            .kern: -0.4,
+            .font: Font.sdR14,
+            .foregroundColor: Color.lightGray1,
+            .strikethroughStyle: NSUnderlineStyle.single.rawValue
+        ]
+        static let countNormalText: [NSAttributedString.Key: Any] = [
+            .kern: -0.3,
+            .font: Font.sdR12,
+            .foregroundColor: Color.lightGray3
+        ]
+        static let countFocusText: [NSAttributedString.Key: Any] = [
+            .kern: -0.3,
+            .font: Font.sdB12,
+            .foregroundColor: Color.lightGray3
+        ]
     }
 
+    let viewBackground = UIView().then {
+        $0.backgroundColor = Color.yellow1
+    }
+
+    // MARK: - Navigation
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack
     ).then {
@@ -45,9 +76,9 @@ class ItemViewController: BaseViewController, View {
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
-    let labelName = UILabel().then {
-        $0.textColor = Color.mainTitle
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+    let labelTitle = UILabel().then {
+        $0.textColor = Color.black1
+        $0.font = Font.sdB16
         $0.text = "테이블팬 C820 (3 Colors)"
     }
 
@@ -61,123 +92,115 @@ class ItemViewController: BaseViewController, View {
     let viewHeader = UIView().then {
         $0.backgroundColor = .clear
     }
+
+    // MARK: - Banner
     let imageViewItem = UIImageView().then {
         $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     let buttonCategory = UIButton().then {
-        $0.isUserInteractionEnabled = false
         $0.setTitle("가전", for: .normal)
-        $0.setTitleColor(0x464646.color, for: .normal)
+        $0.setTitleColor(Color.black2, for: .normal)
+        $0.titleLabel?.font = Font.sdR14
         $0.backgroundColor = UIColor.white.withAlphaComponent(80)
         $0.contentEdgeInsets = .init(top: 5, left: 10, bottom: 3, right: 10)
-        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
+        $0.isUserInteractionEnabled = false
     }
 
-    let labelTitle = UILabel().then {
-        $0.textColor = Color.mainTitle
-        $0.font = UIFont(name: "GodoB", size: 24)
-        $0.text = "테이블팬 C820 (3 Colors)"
+    // MARK: - Title & Price
+    let labelItem = UILabel().then {
+        let attributedString = NSAttributedString(string: "테이블팬 C820 (3 Colors)", attributes: Style.itemText)
+        $0.attributedText = attributedString
         $0.numberOfLines = 0
     }
     let labelPriceOriginal = UILabel().then {
-        let attributedText = NSAttributedString(string: "50,000", attributes: [
-                .font: Font.priceSmallTitle,
-                .foregroundColor: 0xA5A5A5.color,
-                .strikethroughStyle: NSUnderlineStyle.single.rawValue
-            ])
+        let attributedText = NSAttributedString(string: "50,000", attributes: Style.priceOriginalText)
         $0.attributedText = attributedText
+    }
+    let labelPricePercent = UILabel().then {
+        $0.font = Font.sdB24
+        $0.textColor = Color.red1
+        $0.text = "35%"
     }
     let labelPriceDiscount = UILabel().then {
-        let first = NSAttributedString(string: "35% ", attributes: [
-                .font: Font.priceBigTitle,
-                .foregroundColor: Color.priceFocusedTitle
-            ])
-        let second = NSAttributedString(string: "32,500", attributes: [
-                .font: Font.priceBigTitle,
-                .foregroundColor: Color.mainTitle
-            ])
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(first)
-        attributedText.append(second)
-        $0.attributedText = attributedText
+        $0.font = Font.sdB24
+        $0.textColor = Color.black1
+        $0.text = "32,500"
     }
     let labelCurrency = UILabel().then {
-        let attributedText = NSAttributedString(string: " 원", attributes: [
-                .font: Font.priceSmallTitle,
-                .foregroundColor: Color.mainTitle
-            ])
-        $0.attributedText = attributedText
+        $0.font = Font.sdR14
+        $0.textColor = Color.black1
+        $0.text = "원"
     }
 
+    // MARK: - Progress
     let buttonDiscountUntil = UIButton().then {
-        $0.isUserInteractionEnabled = false
         $0.setImage(#imageLiteral(resourceName: "icon_logo_w24h21"), for: .normal)
         $0.setTitle("40% 할인까지 24명!", for: .normal)
-        $0.setTitleColor(Color.mainTitle, for: .normal)
-        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        $0.setTitleColor(Color.black1, for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
+        $0.titleLabel?.font = Font.sdB16
+        $0.isUserInteractionEnabled = false
     }
     let buttonDiscountInfo = UIButton().then {
         $0.setTitle("할인안내", for: .normal)
-        $0.setTitleColor(0x464646.color, for: .normal)
-        $0.backgroundColor = 0xF8F8F8.color
+        $0.setTitleColor(Color.black2, for: .normal)
+        $0.backgroundColor = Color.lightGray2
         $0.contentEdgeInsets = .init(top: 5, left: 10, bottom: 3, right: 10)
-        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
+        $0.titleLabel?.font = Font.sdR12
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
     }
     var constraintProgressTrailing: NSLayoutConstraint!
 
-    let labelCount = UILabel().then {
-        let first = NSAttributedString(string: "426명 ", attributes: [
-                .font: Font.focusedTitle,
-                .foregroundColor: Color.likeCommentTitle
-            ])
-        let second = NSAttributedString(string: "참여중", attributes: [
-                .font: Font.normalTitle,
-                .foregroundColor: Color.likeCommentTitle
-            ])
+    // MARK: - Count & Time
+    let buttonCount = UIButton().then {
+        let first = NSAttributedString(string: "426명", attributes: Style.countFocusText)
+        let second = NSAttributedString(string: " 참여중", attributes: Style.countNormalText)
         let attributedText = NSMutableAttributedString()
         attributedText.append(first)
         attributedText.append(second)
-        $0.attributedText = attributedText
+        $0.setAttributedTitle(attributedText, for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_people_w18h18"), for: .normal)
+        $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
+        $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
+        $0.isUserInteractionEnabled = false
     }
-    let labelTime = UILabel().then {
-        let first = NSAttributedString(string: "4일 21시간 ", attributes: [
-                .font: Font.focusedTitle,
-                .foregroundColor: Color.likeCommentTitle
-            ])
-        let second = NSAttributedString(string: "남음", attributes: [
-                .font: Font.normalTitle,
-                .foregroundColor: Color.likeCommentTitle
-            ])
+    let buttonTime = UIButton().then {
+        let first = NSAttributedString(string: "4일 21시간", attributes: Style.countFocusText)
+        let second = NSAttributedString(string: " 남음", attributes: Style.countNormalText)
         let attributedText = NSMutableAttributedString()
         attributedText.append(first)
         attributedText.append(second)
-        $0.attributedText = attributedText
+        $0.setAttributedTitle(attributedText, for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_clock_w18h18"), for: .normal)
+        $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
+        $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
+        $0.isUserInteractionEnabled = false
     }
 
+    // MARK: - Detail
     let imageViewDetail = UIImageView().then {
         $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     var constraintDetailHeight: NSLayoutConstraint!
 
+    // MARK: - Input
     let viewInput = UIView().then {
         $0.backgroundColor = .clear
     }
     let buttonComment = UIButton().then {
-        $0.setTitle("56개", for: .normal)
-        $0.setTitleColor(0xA5A5A5.color, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w24h24"), for: .normal)
-        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        $0.setTitle("56개", for: .normal)
+        $0.setTitleColor(Color.lightGray1, for: .normal)
+        $0.titleLabel?.font = Font.sdB16
         $0.titleEdgeInsets = .init(top: 1, left: 2, bottom: 0, right: -2)
         $0.adjustsImageWhenHighlighted = false
     }
     let textViewInput = ResizableTextView().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
-        $0.textColor = Color.mainTitle
+        $0.font = Font.sdR14
+        $0.textColor = Color.black1
         $0.backgroundColor = .clear
         $0.showsVerticalScrollIndicator = false
         $0.bounces = false
@@ -188,11 +211,12 @@ class ItemViewController: BaseViewController, View {
         $0.adjustsImageWhenHighlighted = false
     }
     let labelInputPlaceholder = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
+        $0.font = Font.sdR14
+        $0.textColor = Color.lightGray1
         $0.text = "댓글을 남겨주세요"
-        $0.textColor = 0xA5A5A5.color
     }
 
+    // MARK: - Bottom
     let viewBottom = UIView().then {
         $0.backgroundColor = .white
     }
@@ -208,7 +232,7 @@ class ItemViewController: BaseViewController, View {
     let buttonSubmit = UIButton().then {
         $0.setTitle("참여하기", for: .normal)
         $0.setBackgroundImage(#imageLiteral(resourceName: "image_submit"), for: .normal)
-        $0.titleLabel?.font = UIFont(name: "GodoB", size: 16)
+        $0.titleLabel?.font = Font.godoB16
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
     }
@@ -216,10 +240,11 @@ class ItemViewController: BaseViewController, View {
         $0.setTitle("소문내고 더 할인받기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.setBackgroundImage(#imageLiteral(resourceName: "image_black_bubble"), for: .normal)
-        $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
         $0.contentEdgeInsets = .init(top: 7, left: 8, bottom: 12, right: 25)
+        $0.titleLabel?.font = Font.sdR12
     }
 
+    // MARK: - Life Cycle
     init(reactor: ItemReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -239,7 +264,7 @@ class ItemViewController: BaseViewController, View {
         super.viewWillLayoutSubviews()
 
         if let headerView = tableView.tableHeaderView {
-            headerView.frame.size.height = viewHeader.bounds.height
+            headerView.frame.size.height = viewHeader.bounds.height + 100
             tableView.tableHeaderView = headerView
             tableView.layoutIfNeeded()
         }
@@ -266,7 +291,7 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         isHidden
-            .bind(to: labelName.rx.isHidden)
+            .bind(to: labelTitle.rx.isHidden)
             .disposed(by: disposeBag)
 
         textViewInput.rx.text
@@ -286,6 +311,7 @@ class ItemViewController: BaseViewController, View {
 
         textViewInput.rx.text.orEmpty
             .map { !$0.isEmpty }
+            .distinctUntilChanged()
             .bind(to: labelInputPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
@@ -320,8 +346,8 @@ extension ItemViewController {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
         }
-        navigationBar.addSubview(labelName)
-        labelName.snp.makeConstraints {
+        navigationBar.addSubview(labelTitle)
+        labelTitle.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(52)
             $0.trailing.equalToSuperview().inset(9)
             $0.centerY.equalToSuperview()
@@ -388,34 +414,39 @@ extension ItemViewController {
             $0.top.equalTo(imageViewItem.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
-        viewInfo.addSubview(labelTitle)
-        labelTitle.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(24)
+        viewInfo.addSubview(labelItem)
+        labelItem.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(23)
             $0.leading.trailing.equalToSuperview().inset(18).priority(999)
         }
         let stackViewPrice = UIStackView().then {
             $0.axis = .vertical
             $0.distribution = .equalSpacing
             $0.alignment = .leading
-            $0.spacing = 1
+            $0.spacing = 3
         }
         viewInfo.addSubview(stackViewPrice)
         stackViewPrice.snp.makeConstraints {
-            $0.top.equalTo(labelTitle.snp.bottom).offset(12)
-            $0.leading.equalTo(labelTitle)
+            $0.top.equalTo(labelItem.snp.bottom).offset(9)
+            $0.leading.equalTo(labelItem)
             $0.bottom.equalToSuperview().inset(21)
         }
         let viewPrice = UIView().then {
             $0.backgroundColor = .clear
         }
+        viewPrice.addSubview(labelPricePercent)
+        labelPricePercent.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+        }
         viewPrice.addSubview(labelPriceDiscount)
         labelPriceDiscount.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(labelPricePercent.snp.trailing).offset(11)
         }
         viewPrice.addSubview(labelCurrency)
         labelCurrency.snp.makeConstraints {
             $0.top.trailing.bottom.equalToSuperview()
-            $0.leading.equalTo(labelPriceDiscount.snp.trailing)
+            $0.leading.equalTo(labelPriceDiscount.snp.trailing).offset(2)
         }
         stackViewPrice.addArrangedSubview(labelPriceOriginal)
         stackViewPrice.addArrangedSubview(viewPrice)
@@ -480,30 +511,16 @@ extension ItemViewController {
             $0.top.equalTo(view.snp.bottom)
             $0.leading.trailing.equalToSuperview()
         }
-        let imageViewCount = UIImageView(image: #imageLiteral(resourceName: "icon_people_w18h18"))
-        viewDeadline.addSubview(imageViewCount)
-        imageViewCount.snp.makeConstraints {
+        viewDeadline.addSubview(buttonCount)
+        buttonCount.snp.makeConstraints {
             $0.top.equalToSuperview().inset(13)
             $0.leading.equalToSuperview().inset(Metric.leadingOffset)
             $0.bottom.equalToSuperview().inset(2)
-            $0.width.height.equalTo(18)
         }
-        viewDeadline.addSubview(labelCount)
-        labelCount.snp.makeConstraints {
-            $0.leading.equalTo(imageViewCount.snp.trailing).offset(5)
-            $0.centerY.equalTo(imageViewCount).offset(1)
-        }
-        let imageViewTime = UIImageView(image: #imageLiteral(resourceName: "icon_clock_w18h18"))
-        viewDeadline.addSubview(imageViewTime)
-        imageViewTime.snp.makeConstraints {
-            $0.leading.equalTo(labelCount.snp.trailing).offset(8)
-            $0.centerY.equalTo(imageViewCount)
-            $0.width.height.equalTo(18)
-        }
-        viewDeadline.addSubview(labelTime)
-        labelTime.snp.makeConstraints {
-            $0.leading.equalTo(imageViewTime.snp.trailing).offset(5)
-            $0.centerY.equalTo(imageViewTime).offset(1)
+        viewDeadline.addSubview(buttonTime)
+        buttonTime.snp.makeConstraints {
+            $0.leading.equalTo(buttonCount.snp.trailing).offset(8)
+            $0.top.bottom.equalTo(buttonCount)
         }
 
         return viewDeadline
@@ -518,7 +535,7 @@ extension ItemViewController {
             $0.leading.trailing.equalToSuperview()
         }
         let viewBackground = UIView().then {
-            $0.backgroundColor = 0xF8F8F8.color
+            $0.backgroundColor = Color.lightGray2
             $0.layer.cornerRadius = 5
             $0.layer.masksToBounds = true
         }
@@ -545,8 +562,8 @@ extension ItemViewController {
         }
         let labelTop = UILabel().then {
             $0.text = "디프만컴파니"
-            $0.textColor = 0x464646.color
-            $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+            $0.textColor = Color.black2
+            $0.font = Font.sdB16
         }
         viewText.addSubview(labelTop)
         labelTop.snp.makeConstraints {
@@ -554,12 +571,12 @@ extension ItemViewController {
         }
         let labelBottom = UILabel().then {
             $0.text = "467개의 후기"
-            $0.textColor = 0x464646.color
-            $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
+            $0.textColor = Color.black2
+            $0.font = Font.sdR12
         }
         viewText.addSubview(labelBottom)
         labelBottom.snp.makeConstraints {
-            $0.top.equalTo(labelTop.snp.bottom)
+            $0.top.equalTo(labelTop.snp.bottom).offset(2)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         let buttonEdit = UIButton().then {
@@ -591,11 +608,11 @@ extension ItemViewController {
         }
         viewInput.addSubview(buttonComment)
         buttonComment.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(23)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().inset(18)
         }
         let viewBackground = UIView().then {
-            $0.backgroundColor = 0xF8F8F8.color
+            $0.backgroundColor = Color.lightGray2
             $0.layer.cornerRadius = 10
             $0.layer.masksToBounds = true
         }
@@ -607,7 +624,8 @@ extension ItemViewController {
         }
         viewBackground.addSubview(textViewInput)
         textViewInput.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(0)
+            $0.top.equalToSuperview().inset(1)
+            $0.bottom.equalToSuperview()
             $0.leading.equalToSuperview().inset(12)
             $0.trailing.equalToSuperview().inset(32).priority(999)
         }
@@ -666,7 +684,7 @@ extension ItemViewController {
         view.addSubview(buttonSharePopUp)
         buttonSharePopUp.snp.makeConstraints {
             $0.leading.equalTo(buttonShare)
-            $0.bottom.equalTo(buttonShare.snp.top).offset(-4)
+            $0.bottom.equalTo(buttonShare.snp.top).offset(-2)
         }
     }
 }
