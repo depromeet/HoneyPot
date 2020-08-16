@@ -47,7 +47,7 @@ class ItemViewController: BaseViewController, View {
     }
     let labelName = UILabel().then {
         $0.textColor = Color.mainTitle
-        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 20)
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
         $0.text = "테이블팬 C820 (3 Colors)"
     }
 
@@ -207,7 +207,7 @@ class ItemViewController: BaseViewController, View {
     let buttonSubmit = UIButton().then {
         $0.setTitle("참여하기", for: .normal)
         $0.setBackgroundImage(#imageLiteral(resourceName: "image_submit"), for: .normal)
-        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .bold)
+        $0.titleLabel?.font = UIFont(name: "GodoB", size: 16)
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
     }
@@ -648,7 +648,7 @@ extension ItemViewController {
             $0.centerY.equalTo(buttonLike)
         }
         let viewSeparator = UIView().then {
-            $0.backgroundColor = 0xA5A5A5.color
+            $0.backgroundColor = 0xCACACA.color
         }
         viewBottom.addSubview(viewSeparator)
         viewSeparator.snp.makeConstraints {
