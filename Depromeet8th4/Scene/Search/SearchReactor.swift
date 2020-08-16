@@ -87,7 +87,8 @@ final class SearchReactor: Reactor {
                 let items = dictionary
                     .sorted(by: { $0.value > $1.value })
                     .reduce(into: [String](), { $0.append($1.key) })
-                let section = SearchSection(header: "최근검색어", items: items)
+                    .prefix(8)
+                let section = SearchSection(header: "최근검색어", items: Array(items))
                 return Mutation.setWords([section])
             })
     }
