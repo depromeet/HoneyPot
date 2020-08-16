@@ -29,8 +29,8 @@ class NavigationBar: UIView {
         $0.contentMode = .scaleAspectFit
     }
     let labelTitle = UILabel().then {
-        $0.textColor = .black
-        $0.font = .systemFont(ofSize: 18, weight: .bold)
+        $0.textColor = 0x323232.color
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
     }
     let stackViewRight = UIStackView().then {
         $0.axis = .horizontal
