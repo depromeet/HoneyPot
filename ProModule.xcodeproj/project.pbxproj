@@ -17,6 +17,7 @@
 		9C7AD85B24C020FA00AAEBB0 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 9C7AD85A24C020FA00AAEBB0 /* Moya */; };
 		9C7AD85D24C020FA00AAEBB0 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 9C7AD85C24C020FA00AAEBB0 /* RxMoya */; };
 		9C7AD86024C0212A00AAEBB0 /* MoyaSugar in Frameworks */ = {isa = PBXBuildFile; productRef = 9C7AD85F24C0212A00AAEBB0 /* MoyaSugar */; };
+		9CA2CBC324E8C81D00AE5322 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 9CA2CBC224E8C81D00AE5322 /* PanModal */; };
 		9CB156BC24CBEAAB0014BF96 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9CB156BB24CBEAAB0014BF96 /* Kingfisher */; };
 		9CB525A524B05D15005CEFEA /* RxViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 9CB525A424B05D15005CEFEA /* RxViewController */; };
 		9CEE727224AADBAD00F649EC /* ProModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEE727024AADBAD00F649EC /* ProModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -50,6 +51,7 @@
 				9CB525A524B05D15005CEFEA /* RxViewController in Frameworks */,
 				9CEE727A24AADBEC00F649EC /* SnapKit in Frameworks */,
 				9CFDA61A24B4166C00097BF0 /* RxGesture in Frameworks */,
+				9CA2CBC324E8C81D00AE5322 /* PanModal in Frameworks */,
 				9C39B5B624AF27E20003D013 /* ReactorKit in Frameworks */,
 				9C7AD86024C0212A00AAEBB0 /* MoyaSugar in Frameworks */,
 				9CF439F024E6BD510029D6FA /* RxKeyboard in Frameworks */,
@@ -144,6 +146,7 @@
 				9CB156BB24CBEAAB0014BF96 /* Kingfisher */,
 				9C1D557324DADC0C0048BBDF /* URLNavigator */,
 				9CF439EF24E6BD510029D6FA /* RxKeyboard */,
+				9CA2CBC224E8C81D00AE5322 /* PanModal */,
 			);
 			productName = ProModule;
 			productReference = 9CEE726D24AADBAD00F649EC /* ProModule.framework */;
@@ -188,6 +191,7 @@
 				9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */,
 				9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */,
+				9CA2CBC124E8C81D00AE5322 /* XCRemoteSwiftPackageReference "PanModal" */,
 			);
 			productRefGroup = 9CEE726E24AADBAD00F649EC /* Products */;
 			projectDirPath = "";
@@ -469,6 +473,14 @@
 				minimumVersion = 1.3.3;
 			};
 		};
+		9CA2CBC124E8C81D00AE5322 /* XCRemoteSwiftPackageReference "PanModal" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/slackhq/PanModal";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.7;
+			};
+		};
 		9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher";
@@ -585,6 +597,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C7AD85E24C0212A00AAEBB0 /* XCRemoteSwiftPackageReference "MoyaSugar" */;
 			productName = MoyaSugar;
+		};
+		9CA2CBC224E8C81D00AE5322 /* PanModal */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CA2CBC124E8C81D00AE5322 /* XCRemoteSwiftPackageReference "PanModal" */;
+			productName = PanModal;
 		};
 		9CB156BB24CBEAAB0014BF96 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
