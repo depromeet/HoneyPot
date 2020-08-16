@@ -17,6 +17,7 @@ import Then
 class MyPageViewController: BaseViewController, View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
+        static let navigationTitle = 0x323232.color
         static let profileTitle = 0x323232.color
         static let buttonTitle = 0x323232.color
         static let separatorBackground = 0xECECEC.color
@@ -30,6 +31,11 @@ class MyPageViewController: BaseViewController, View {
         rightViews: [buttonAlert]
     ).then {
         $0.backgroundColor = .clear
+    }
+    let labelTitle = UILabel().then {
+        $0.textColor = Color.navigationTitle
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        $0.text = "마이 페이지"
     }
 
     let tableView = UITableView().then {
@@ -164,6 +170,10 @@ extension MyPageViewController {
         viewBackground.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(navigationBar)
+        }
+        navigationBar.addSubview(labelTitle)
+        labelTitle.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     private func setupTableView() {
