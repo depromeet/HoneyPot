@@ -128,7 +128,7 @@
 		9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		9C545BEA24BF4C3D00138C78 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C545BED24BF4C3D00138C78 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		9C545BEF24BF4C3D00138C78 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C545BEF24BF4C3D00138C78 /* Info-Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		9C60775D24C1534600E5CBEE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 				044B62EF24D8491600088487 /* Font */,
 				9C545BEA24BF4C3D00138C78 /* Assets.xcassets */,
 				9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */,
-				9C545BEF24BF4C3D00138C78 /* Info.plist */,
+				9C545BEF24BF4C3D00138C78 /* Info-Development.plist */,
 			);
 			path = HoneyPot;
 			sourceTree = "<group>";
@@ -529,9 +529,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9C545BDD24BF4C3C00138C78 /* HoneyPot */ = {
+		9C545BDD24BF4C3C00138C78 /* Development */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "HoneyPot" */;
+			buildConfigurationList = 9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "Development" */;
 			buildPhases = (
 				9C545BDA24BF4C3C00138C78 /* Sources */,
 				9C545BDB24BF4C3C00138C78 /* Frameworks */,
@@ -543,7 +543,7 @@
 			);
 			dependencies = (
 			);
-			name = HoneyPot;
+			name = Development;
 			packageProductDependencies = (
 			);
 			productName = Depromeet8th4;
@@ -580,7 +580,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C545BDD24BF4C3C00138C78 /* HoneyPot */,
+				9C545BDD24BF4C3C00138C78 /* Development */,
 			);
 		};
 /* End PBXProject section */
@@ -827,14 +827,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = HoneyPot/Info.plist;
+				INFOPLIST_FILE = "HoneyPot/Info-Development.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.Depromeet8th4;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.HoneyPot;
 				PRODUCT_NAME = HoneyPot;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -847,14 +847,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = HoneyPot/Info.plist;
+				INFOPLIST_FILE = "HoneyPot/Info-Development.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.Depromeet8th4;
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.HoneyPot;
 				PRODUCT_NAME = HoneyPot;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -873,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "HoneyPot" */ = {
+		9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "Development" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C545BF324BF4C3D00138C78 /* Debug */,
