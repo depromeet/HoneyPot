@@ -13,4 +13,11 @@ class ProductRelatedCell: UITableViewCell {
     @IBOutlet weak var originalPrice: UILabel!
     @IBOutlet weak var discountRate: UILabel!
     @IBOutlet weak var discountedPrice: UILabel!
+    @IBOutlet weak var priceBarView: UIView!
+    override func awakeFromNib() {
+        setupPriceBarView()
+    }
+    func setupPriceBarView() {
+        priceBarView.backgroundColor = 0xA5A5A5.color
+    }
 }

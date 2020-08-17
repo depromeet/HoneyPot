@@ -11,11 +11,13 @@ import UIKit
 class ProductImageCell: UITableViewCell {
     @IBOutlet var photoView: UIImageView!
     @IBOutlet weak var categoryLabel: UILabel!
-    override class func awakeFromNib() {
+    @IBOutlet weak var categoryView: UIView!
+    override func awakeFromNib() {
         super.awakeFromNib()
+        setupCategoryView()
     }
-    func setupCategoryLabelUI() {
-        categoryLabel.layer.cornerRadius = 3
-        categoryLabel.clipsToBounds = true
+    func setupCategoryView() {
+        categoryView.layer.cornerRadius = 5
+        categoryView.backgroundColor = 0xFFFFFF.color
     }
 }

@@ -62,6 +62,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 5:
             let cell: CommentCell = tableView.dequeueReusableCell(withIdentifier: "CommentCell") as! CommentCell
+            cell.delegate = self
             return cell
         case 6:
             let cell: FunctionCell = tableView.dequeueReusableCell(withIdentifier: "FunctionCell") as! FunctionCell
@@ -69,6 +70,26 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             let cell: UITableViewCell = UITableViewCell()
             return cell
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.section {
+        case 0:
+            return 375.0
+        case 1:
+            return 131.0
+        case 2:
+            return 200.0
+        case 3:
+            return 265.0
+        case 4:
+            return 113.0
+        case 5:
+            return 102.0
+        case 6:
+            return 113.0
+        default:
+            return 0.0
         }
     }
 }
