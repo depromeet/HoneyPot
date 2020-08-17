@@ -167,8 +167,8 @@
 		B6D6EC5F24DB40EF00E27C06 /* PageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCell.swift; sourceTree = "<group>"; };
 		B6D6EC6024DB40EF00E27C06 /* PageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageCell.xib; sourceTree = "<group>"; };
 		B6D6EC6424DB41E000E27C06 /* NSObject + reusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject + reusableIdentifier.swift"; sourceTree = "<group>"; };
-		B6D6EC6924DBF8CE00E27C06 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductCell.swift; path = Depromeet8th4/Extensions/ProductCell.swift; sourceTree = SOURCE_ROOT; };
-		B6D6EC6A24DBF8CE00E27C06 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductCell.xib; path = Depromeet8th4/Extensions/ProductCell.xib; sourceTree = SOURCE_ROOT; };
+		B6D6EC6924DBF8CE00E27C06 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ProductCell.swift; path = HoneyPot/Scene/Main/Cells/ProductCell.swift; sourceTree = SOURCE_ROOT; };
+		B6D6EC6A24DBF8CE00E27C06 /* ProductCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ProductCell.xib; path = HoneyPot/Scene/Main/Cells/ProductCell.xib; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,7 +298,7 @@
 		9C545BD524BF4C3C00138C78 = {
 			isa = PBXGroup;
 			children = (
-				9C545BE024BF4C3C00138C78 /* Depromeet8th4 */,
+				9C545BE024BF4C3C00138C78 /* HoneyPot */,
 				9C545BDF24BF4C3C00138C78 /* Products */,
 				9C7AD84624C011D500AAEBB0 /* Frameworks */,
 			);
@@ -312,7 +312,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9C545BE024BF4C3C00138C78 /* Depromeet8th4 */ = {
+		9C545BE024BF4C3C00138C78 /* HoneyPot */ = {
 			isa = PBXGroup;
 			children = (
 				B6D6EC6324DB41CF00E27C06 /* Extensions */,
@@ -329,7 +329,7 @@
 				9C545BEC24BF4C3D00138C78 /* LaunchScreen.storyboard */,
 				9C545BEF24BF4C3D00138C78 /* Info.plist */,
 			);
-			path = Depromeet8th4;
+			path = HoneyPot;
 			sourceTree = "<group>";
 		};
 		9C60775C24C1533000E5CBEE /* Base */ = {
@@ -529,9 +529,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9C545BDD24BF4C3C00138C78 /* Depromeet8th4 */ = {
+		9C545BDD24BF4C3C00138C78 /* HoneyPot */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "Depromeet8th4" */;
+			buildConfigurationList = 9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "HoneyPot" */;
 			buildPhases = (
 				9C545BDA24BF4C3C00138C78 /* Sources */,
 				9C545BDB24BF4C3C00138C78 /* Frameworks */,
@@ -543,7 +543,7 @@
 			);
 			dependencies = (
 			);
-			name = Depromeet8th4;
+			name = HoneyPot;
 			packageProductDependencies = (
 			);
 			productName = Depromeet8th4;
@@ -565,7 +565,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9C545BD924BF4C3C00138C78 /* Build configuration list for PBXProject "Depromeet8th4" */;
+			buildConfigurationList = 9C545BD924BF4C3C00138C78 /* Build configuration list for PBXProject "HoneyPot" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -580,7 +580,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9C545BDD24BF4C3C00138C78 /* Depromeet8th4 */,
+				9C545BDD24BF4C3C00138C78 /* HoneyPot */,
 			);
 		};
 /* End PBXProject section */
@@ -827,7 +827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Depromeet8th4/Info.plist;
+				INFOPLIST_FILE = HoneyPot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -847,7 +847,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = Depromeet8th4/Info.plist;
+				INFOPLIST_FILE = HoneyPot/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -864,7 +864,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9C545BD924BF4C3C00138C78 /* Build configuration list for PBXProject "Depromeet8th4" */ = {
+		9C545BD924BF4C3C00138C78 /* Build configuration list for PBXProject "HoneyPot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C545BF024BF4C3D00138C78 /* Debug */,
@@ -873,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "Depromeet8th4" */ = {
+		9C545BF224BF4C3D00138C78 /* Build configuration list for PBXNativeTarget "HoneyPot" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9C545BF324BF4C3D00138C78 /* Debug */,

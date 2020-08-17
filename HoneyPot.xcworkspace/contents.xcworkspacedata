@@ -5,6 +5,6 @@
       location = "group:ProModule.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:Depromeet8th4.xcodeproj">
+      location = "container:/Users/Soso/dev/HoneyPot/HoneyPot.xcodeproj">
    </FileRef>
 </Workspace>
