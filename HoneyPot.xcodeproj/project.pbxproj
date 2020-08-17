@@ -1055,7 +1055,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.HoneyPot;
 				PRODUCT_NAME = HoneyPot;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1075,7 +1075,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.depromeet.HoneyPot;
 				PRODUCT_NAME = HoneyPot;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -1096,7 +1096,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.soso.HoneyPot;
 				PRODUCT_NAME = "꿀단지";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1117,7 +1117,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.soso.HoneyPot;
 				PRODUCT_NAME = "꿀단지";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
