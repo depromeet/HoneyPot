@@ -282,6 +282,20 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
 
+        let discounts: [DiscountEntity] = [
+            .init(step: 1, numberOfPeople: 100, discountPercent: 25),
+            .init(step: 2, numberOfPeople: 300, discountPercent: 35),
+            .init(step: 3, numberOfPeople: 500, discountPercent: 45)
+        ]
+
+        buttonDiscountInfo.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let modal = DiscountModalViewController(provider: self.provider, discounts: discounts)
+                self.present(modal, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+
         let isHidden = tableView.rx.contentOffset
             .map { $0.y < 150 }
             .distinctUntilChanged()

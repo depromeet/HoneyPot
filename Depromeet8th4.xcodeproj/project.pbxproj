@@ -28,6 +28,9 @@
 		9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D59CE24DEE1AC007779CD /* BaseTableViewHeader.swift */; };
 		9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D59D124DEE8E2007779CD /* SearchSection.swift */; };
 		9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1D557524DADC510048BBDF /* NavigationMap.swift */; };
+		9C26539224EA21B9009E5D5E /* DiscountModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26539124EA21B9009E5D5E /* DiscountModalViewController.swift */; };
+		9C26539524EA2218009E5D5E /* DiscountEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26539424EA2218009E5D5E /* DiscountEntity.swift */; };
+		9C26539724EA2431009E5D5E /* DiscountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C26539624EA2431009E5D5E /* DiscountCell.swift */; };
 		9C47BF3E24E6B851005238BE /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47BF3D24E6B851005238BE /* ResizableTextView.swift */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */; };
@@ -115,6 +118,9 @@
 		9C0D59CE24DEE1AC007779CD /* BaseTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewHeader.swift; sourceTree = "<group>"; };
 		9C0D59D124DEE8E2007779CD /* SearchSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSection.swift; sourceTree = "<group>"; };
 		9C1D557524DADC510048BBDF /* NavigationMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationMap.swift; sourceTree = "<group>"; };
+		9C26539124EA21B9009E5D5E /* DiscountModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountModalViewController.swift; sourceTree = "<group>"; };
+		9C26539424EA2218009E5D5E /* DiscountEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountEntity.swift; sourceTree = "<group>"; };
+		9C26539624EA2431009E5D5E /* DiscountCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountCell.swift; sourceTree = "<group>"; };
 		9C47BF3D24E6B851005238BE /* ResizableTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTextView.swift; sourceTree = "<group>"; };
 		9C4DB81724D19C2800254C79 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		9C545BDE24BF4C3C00138C78 /* HoneyPot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyPot.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -281,6 +287,14 @@
 			path = "Section6 - FunctionCell";
 			sourceTree = "<group>";
 		};
+		9C26539324EA21FF009E5D5E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9C26539424EA2218009E5D5E /* DiscountEntity.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		9C545BD524BF4C3C00138C78 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +320,7 @@
 				9CE4CDBA24D6628400A8A25E /* Types */,
 				9C7AD86724C036FD00AAEBB0 /* API */,
 				9C7AD84C24C0177B00AAEBB0 /* Service */,
+				9C26539324EA21FF009E5D5E /* Model */,
 				9C7AD84224C00F3600AAEBB0 /* Scene */,
 				9C60775C24C1533000E5CBEE /* Base */,
 				9CF363AA24D052D50008380C /* View */,
@@ -405,6 +420,8 @@
 			children = (
 				9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */,
 				9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */,
+				9C26539124EA21B9009E5D5E /* DiscountModalViewController.swift */,
+				9C26539624EA2431009E5D5E /* DiscountCell.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -635,6 +652,7 @@
 				044B62E724D8449300088487 /* ProductImageCell.swift in Sources */,
 				9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */,
 				9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */,
+				9C26539724EA2431009E5D5E /* DiscountCell.swift in Sources */,
 				9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */,
 				9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */,
 				044B630024D8584100088487 /* ProductDetailImageCell.swift in Sources */,
@@ -658,11 +676,13 @@
 				044B631124DAEFE400088487 /* FunctionCell.swift in Sources */,
 				044B630C24D85DB300088487 /* CommentCell.swift in Sources */,
 				9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */,
+				9C26539224EA21B9009E5D5E /* DiscountModalViewController.swift in Sources */,
 				9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */,
 				9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */,
 				9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */,
 				B6D6EC6B24DBF8CE00E27C06 /* ProductCell.swift in Sources */,
 				9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */,
+				9C26539524EA2218009E5D5E /* DiscountEntity.swift in Sources */,
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
 				9C0D59CD24DEE159007779CD /* SearchHeader.swift in Sources */,
 				9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */,
