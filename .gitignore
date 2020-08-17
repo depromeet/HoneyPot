@@ -36,4 +36,5 @@ xcuserdata/
 #
 Pods/
 
-
+# Release
+Info-Release.plist
