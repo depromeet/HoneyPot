@@ -243,6 +243,10 @@ class ItemViewController: BaseViewController, View {
         $0.contentEdgeInsets = .init(top: 7, left: 8, bottom: 12, right: 25)
         $0.titleLabel?.font = Font.sdR12
     }
+    let buttonScrollToTop = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "image_floating_top_w38h38"), for: .normal)
+        $0.adjustsImageWhenHighlighted = false
+    }
 
     // MARK: - Life Cycle
     init(reactor: ItemReactor) {
@@ -282,6 +286,12 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
 
+        buttonScrollToTop.rx.tap
+            .subscribe(onNext: { [weak self] in
+                self?.tableView.setContentOffset(.zero, animated: true)
+            })
+            .disposed(by: disposeBag)
+
         let discounts: [DiscountEntity] = [
             .init(step: 1, numberOfPeople: 100, discountPercent: 25),
             .init(step: 2, numberOfPeople: 300, discountPercent: 35),
@@ -306,6 +316,10 @@ class ItemViewController: BaseViewController, View {
 
         isHidden
             .bind(to: labelTitle.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        isHidden
+            .bind(to: buttonScrollToTop.rx.isHidden)
             .disposed(by: disposeBag)
 
         textViewInput.rx.text
@@ -699,6 +713,11 @@ extension ItemViewController {
         buttonSharePopUp.snp.makeConstraints {
             $0.leading.equalTo(buttonShare)
             $0.bottom.equalTo(buttonShare.snp.top).offset(-2)
+        }
+        view.addSubview(buttonScrollToTop)
+        buttonScrollToTop.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.bottom.equalTo(viewBottom.snp.top).offset(-20)
         }
     }
 }
