@@ -16,4 +16,17 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var thumbsUpCount: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    weak var delegate: UIViewController?
+
+    @IBAction func tappedMoreButton(_ sender: UIButton) {
+        presentActionSheet()
+    }
+
+    func presentActionSheet() {
+        let actionSheet: UIAlertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
+        actionSheet.addAction(UIAlertAction(title: "수정", style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "대댓글 쓰기", style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
+        delegate!.present(actionSheet, animated: true, completion: nil)
+    }
 }

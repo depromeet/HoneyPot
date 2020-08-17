@@ -17,10 +17,7 @@ class FunctionCell: UITableViewCell {
         setupButtonUI()
     }
     func setupButtonUI() {
-        participateButton.layer.cornerRadius = 2
-        shareButton.layer.borderWidth = 1.0
-        shareButton.layer.borderColor = UIColor.gray.cgColor
-        likeButton.layer.borderWidth = 1.0
-        likeButton.layer.borderColor = UIColor.gray.cgColor
+        participateButton.layer.cornerRadius = 5
+        participateButton.backgroundColor = 0xFFC500.color
     }
 }

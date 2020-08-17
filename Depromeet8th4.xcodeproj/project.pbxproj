@@ -177,12 +177,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		043C4F9324E970F70026870C /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				044B631324DAF77600088487 /* DetailViewController.swift */,
+				044B631424DAF77600088487 /* DetailViewController.xib */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
 		044B62DF24D8425E00088487 /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				043C4F9324E970F70026870C /* VC */,
 				044B62E424D8447200088487 /* CustomCell */,
-				044B631324DAF77600088487 /* DetailViewController.swift */,
-				044B631424DAF77600088487 /* DetailViewController.xib */,
 			);
 			path = DetailView;
 			sourceTree = "<group>";
