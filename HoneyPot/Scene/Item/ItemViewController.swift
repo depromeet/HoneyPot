@@ -21,6 +21,7 @@ class ItemViewController: BaseViewController, View {
         static let lightGray1 = 0xA5A5A5.color
         static let lightGray2 = 0xF8F8F8.color
         static let lightGray3 = 0x8C8C8C.color
+        static let lightGray4 = 0xCACACA.color
     }
     private enum Font {
         static let godoB24 = UIFont(name: "GodoB", size: 24)!
@@ -212,8 +213,8 @@ class ItemViewController: BaseViewController, View {
     }
     let labelInputPlaceholder = UILabel().then {
         $0.font = Font.sdR14
-        $0.textColor = Color.lightGray1
-        $0.text = "댓글을 남겨주세요"
+        $0.textColor = Color.lightGray4
+        $0.text = "댓글 달기"
     }
 
     // MARK: - Bottom
