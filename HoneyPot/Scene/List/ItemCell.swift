@@ -169,14 +169,17 @@ class ItemCell: BaseTableViewCell {
             $0.leading.trailing.equalToSuperview().inset(Metric.leadingOffset)
             $0.height.equalTo(imageViewItem.snp.width).multipliedBy(10.5 / 16.0)
         }
-        viewContainer.addSubview(buttonComment)
-        buttonComment.snp.makeConstraints {
-            $0.top.trailing.equalTo(imageViewItem).inset(15)
+        let stackViewButton = UIStackView().then {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+            $0.alignment = .fill
+            $0.spacing = 5
         }
-        viewContainer.addSubview(buttonLike)
-        buttonLike.snp.makeConstraints {
-            $0.top.equalTo(imageViewItem).inset(15)
-            $0.trailing.equalTo(buttonComment.snp.leading).offset(-5)
+        stackViewButton.addArrangedSubview(buttonLike)
+        stackViewButton.addArrangedSubview(buttonComment)
+        viewContainer.addSubview(stackViewButton)
+        stackViewButton.snp.makeConstraints {
+            $0.top.trailing.equalTo(imageViewItem).inset(15)
         }
     }
     private func setupItem() {
