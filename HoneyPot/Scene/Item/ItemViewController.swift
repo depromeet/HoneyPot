@@ -198,11 +198,16 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonComment = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w24h24"), for: .normal)
-        $0.setTitle("56개", for: .normal)
+        $0.setTitle("56", for: .normal)
         $0.setTitleColor(Color.lightGray1, for: .normal)
         $0.titleLabel?.font = Font.sdB16
         $0.titleEdgeInsets = .init(top: 1, left: 2, bottom: 0, right: -2)
         $0.adjustsImageWhenHighlighted = false
+    }
+    let buttonViewAll = UIButton(type: .system).then {
+        $0.setTitle("댓글 전체보기", for: .normal)
+        $0.setTitleColor(Color.lightGray1, for: .normal)
+        $0.titleLabel?.font = Font.sdR14
     }
     let textViewInput = ResizableTextView().then {
         $0.font = Font.sdR14
@@ -220,6 +225,9 @@ class ItemViewController: BaseViewController, View {
         $0.font = Font.sdR14
         $0.textColor = Color.lightGray4
         $0.text = "댓글 달기"
+    }
+    let buttonRedirect = UIButton().then {
+        $0.backgroundColor = .clear
     }
 
     // MARK: - Bottom
@@ -653,6 +661,11 @@ extension ItemViewController {
             $0.top.equalToSuperview().inset(24)
             $0.leading.equalToSuperview().inset(18)
         }
+        viewInput.addSubview(buttonViewAll)
+        buttonViewAll.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(18)
+            $0.centerY.equalTo(buttonComment)
+        }
         let viewBackground = UIView().then {
             $0.backgroundColor = Color.lightGray2
             $0.layer.cornerRadius = 10
@@ -688,6 +701,10 @@ extension ItemViewController {
         viewSeparator.snp.makeConstraints {
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(1)
+        }
+        viewInput.addSubview(buttonRedirect)
+        buttonRedirect.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
     }
     private func setupBottomView() {
