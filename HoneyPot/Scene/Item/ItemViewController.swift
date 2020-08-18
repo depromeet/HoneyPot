@@ -482,25 +482,21 @@ extension ItemViewController {
             $0.leading.equalTo(labelItem)
             $0.bottom.equalToSuperview().inset(16)
         }
-        let viewPrice = UIView().then {
-            $0.backgroundColor = .clear
+        let stackViewDiscount = UIStackView().then {
+            $0.axis = .horizontal
+            $0.distribution = .equalSpacing
+            $0.alignment = .leading
+            $0.spacing = 11
         }
-        viewPrice.addSubview(labelPricePercent)
-        labelPricePercent.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
-        }
-        viewPrice.addSubview(labelPriceDiscount)
-        labelPriceDiscount.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview()
-            $0.leading.equalTo(labelPricePercent.snp.trailing).offset(11)
-        }
-        viewPrice.addSubview(labelCurrency)
+        stackViewDiscount.addArrangedSubview(labelPricePercent)
+        stackViewDiscount.addArrangedSubview(labelPriceDiscount)
+        viewInfo.addSubview(labelCurrency)
         labelCurrency.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview()
-            $0.leading.equalTo(labelPriceDiscount.snp.trailing).offset(2)
+            $0.leading.equalTo(stackViewPrice.snp.trailing).offset(2)
+            $0.bottom.equalTo(stackViewPrice).inset(6)
         }
         stackViewPrice.addArrangedSubview(labelPriceOriginal)
-        stackViewPrice.addArrangedSubview(viewPrice)
+        stackViewPrice.addArrangedSubview(stackViewDiscount)
         let viewSeparator = UIView().then {
             $0.backgroundColor = 0xEEEEEE.color
         }
