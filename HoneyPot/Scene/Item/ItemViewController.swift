@@ -30,6 +30,7 @@ class ItemViewController: BaseViewController, View {
         static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
         static let sdR12 = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
         static let sdB24 = UIFont(name: "AppleSDGothicNeo-Bold", size: 24)!
+        static let sdB18 = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)!
         static let sdB16 = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)!
         static let sdB12 = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
     }
@@ -39,7 +40,7 @@ class ItemViewController: BaseViewController, View {
     }
     private enum Style {
         static let paragraph = NSMutableParagraphStyle().then {
-            $0.lineHeightMultiple = 1.11
+            $0.lineSpacing = 4
         }
         static let itemText: [NSAttributedString.Key: Any] = [
             .kern: -0.72,
@@ -146,7 +147,7 @@ class ItemViewController: BaseViewController, View {
         $0.setTitle("40% 할인까지 24명!", for: .normal)
         $0.setTitleColor(Color.black1, for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
-        $0.titleLabel?.font = Font.sdB16
+        $0.titleLabel?.font = Font.sdB18
         $0.isUserInteractionEnabled = false
     }
     let buttonDiscountInfo = UIButton().then {
@@ -466,7 +467,7 @@ extension ItemViewController {
         }
         viewInfo.addSubview(labelItem)
         labelItem.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(23)
+            $0.top.equalToSuperview().inset(24)
             $0.leading.trailing.equalToSuperview().inset(18).priority(999)
         }
         let stackViewPrice = UIStackView().then {
@@ -477,9 +478,9 @@ extension ItemViewController {
         }
         viewInfo.addSubview(stackViewPrice)
         stackViewPrice.snp.makeConstraints {
-            $0.top.equalTo(labelItem.snp.bottom).offset(9)
+            $0.top.equalTo(labelItem.snp.bottom).offset(8)
             $0.leading.equalTo(labelItem)
-            $0.bottom.equalToSuperview().inset(21)
+            $0.bottom.equalToSuperview().inset(16)
         }
         let viewPrice = UIView().then {
             $0.backgroundColor = .clear
@@ -522,12 +523,12 @@ extension ItemViewController {
         }
         viewDiscount.addSubview(buttonDiscountUntil)
         buttonDiscountUntil.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(19)
             $0.leading.equalToSuperview().inset(17)
         }
         viewDiscount.addSubview(buttonDiscountInfo)
         buttonDiscountInfo.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(20)
+            $0.top.equalToSuperview().inset(17)
             $0.trailing.equalToSuperview().inset(18)
         }
 
@@ -536,7 +537,7 @@ extension ItemViewController {
         }
         viewDiscount.addSubview(viewProgressBackground)
         viewProgressBackground.snp.makeConstraints {
-            $0.top.equalTo(buttonDiscountUntil.snp.bottom).offset(15)
+            $0.top.equalTo(buttonDiscountUntil.snp.bottom).offset(10)
             $0.leading.trailing.equalToSuperview().inset(Metric.leadingOffset).priority(999)
             $0.height.equalTo(4)
             $0.bottom.equalToSuperview()
@@ -563,9 +564,9 @@ extension ItemViewController {
         }
         viewDeadline.addSubview(buttonCount)
         buttonCount.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(13)
+            $0.top.equalToSuperview().inset(11)
             $0.leading.equalToSuperview().inset(Metric.leadingOffset)
-            $0.bottom.equalToSuperview().inset(2)
+            $0.bottom.equalToSuperview()
         }
         viewDeadline.addSubview(buttonTime)
         buttonTime.snp.makeConstraints {
