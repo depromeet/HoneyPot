@@ -11,6 +11,7 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import ReusableKit
 
 class ItemViewController: BaseViewController, View {
     private enum Color {
@@ -63,6 +64,9 @@ class ItemViewController: BaseViewController, View {
             .foregroundColor: Color.lightGray3
         ]
     }
+    struct Reusable {
+        static let commentCell = ReusableCell<ItemCommentCell>()
+    }
 
     let viewBackground = UIView().then {
         $0.backgroundColor = Color.yellow1
@@ -84,6 +88,7 @@ class ItemViewController: BaseViewController, View {
     }
 
     let tableView = UITableView().then {
+        $0.register(Reusable.commentCell)
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
@@ -364,6 +369,14 @@ class ItemViewController: BaseViewController, View {
                 self.constraintBottomView?.constant = -max(constant, 0)
                 self.view.layoutIfNeeded()
             }).disposed(by: disposeBag)
+
+        Observable
+            .just(["1", "2", "3"])
+            .bind(to: tableView.rx.items(Reusable.commentCell)) { index, data, cell in
+                print(index, data, cell)
+            }
+            .disposed(by: disposeBag)
+
     }
 }
 
