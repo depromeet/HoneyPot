@@ -50,6 +50,10 @@
 		9C7CDB6124E56CBF00801F84 /* ItemReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */; };
 		9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDA24DFF4DC000901FF /* ListViewController.swift */; };
 		9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C835DDC24DFFB9C000901FF /* ItemCell.swift */; };
+		9C87E60424EAB20E00686274 /* ItemCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87E60224EAB20E00686274 /* ItemCommentCell.swift */; };
+		9C87E60524EAB20E00686274 /* ItemCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87E60224EAB20E00686274 /* ItemCommentCell.swift */; };
+		9C87E60624EAB20E00686274 /* ItemSubCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */; };
+		9C87E60724EAB20E00686274 /* ItemSubCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */; };
 		9C9040FE24EA93E1000E21A3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
 		9C9040FF24EA93E1000E21A3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9C90410024EA93E1000E21A3 /* VerticalButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61724D42666009DD6D7 /* VerticalButton.swift */; };
@@ -231,6 +235,8 @@
 		9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemReactor.swift; sourceTree = "<group>"; };
 		9C835DDA24DFF4DC000901FF /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		9C835DDC24DFFB9C000901FF /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
+		9C87E60224EAB20E00686274 /* ItemCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCommentCell.swift; sourceTree = "<group>"; };
+		9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSubCommentCell.swift; sourceTree = "<group>"; };
 		9C90414D24EA93E1000E21A3 /* 꿀단지.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "꿀단지.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C90414E24EA93E2000E21A3 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "/Users/Soso/dev/HoneyPot/HoneyPot/Info-Release.plist"; sourceTree = "<absolute>"; };
 		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
@@ -496,6 +502,8 @@
 			children = (
 				9C7CDB5E24E56C4100801F84 /* ItemViewController.swift */,
 				9C7CDB6024E56CBF00801F84 /* ItemReactor.swift */,
+				9C87E60224EAB20E00686274 /* ItemCommentCell.swift */,
+				9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -758,6 +766,7 @@
 				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
 				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
 				9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */,
+				9C87E60424EAB20E00686274 /* ItemCommentCell.swift in Sources */,
 				9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */,
 				9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */,
 				9CC407E424E766EF009FC68F /* BaseService.swift in Sources */,
@@ -784,6 +793,7 @@
 				9C7B535024DEA538005C3CA8 /* SearchWordService.swift in Sources */,
 				9C7CDB5F24E56C4100801F84 /* ItemViewController.swift in Sources */,
 				9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */,
+				9C87E60624EAB20E00686274 /* ItemSubCommentCell.swift in Sources */,
 				9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */,
 				9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */,
 				9C7CDB5824E555F000801F84 /* MyPageReactor.swift in Sources */,
@@ -819,6 +829,7 @@
 				9C9040FF24EA93E1000E21A3 /* AppDelegate.swift in Sources */,
 				9C90410024EA93E1000E21A3 /* VerticalButton.swift in Sources */,
 				9C90410124EA93E1000E21A3 /* SortModalViewController.swift in Sources */,
+				9C87E60524EAB20E00686274 /* ItemCommentCell.swift in Sources */,
 				9C90410224EA93E1000E21A3 /* NavigationBar.swift in Sources */,
 				9C90410324EA93E1000E21A3 /* BaseViewController.swift in Sources */,
 				9C90410424EA93E1000E21A3 /* BaseService.swift in Sources */,
@@ -845,6 +856,7 @@
 				9C90411924EA93E1000E21A3 /* SearchWordService.swift in Sources */,
 				9C90411A24EA93E1000E21A3 /* ItemViewController.swift in Sources */,
 				9C90411B24EA93E1000E21A3 /* BaseTableViewHeader.swift in Sources */,
+				9C87E60724EAB20E00686274 /* ItemSubCommentCell.swift in Sources */,
 				9C90411C24EA93E1000E21A3 /* SearchSection.swift in Sources */,
 				9C90411D24EA93E1000E21A3 /* MyPageViewController.swift in Sources */,
 				9C90411E24EA93E1000E21A3 /* MyPageReactor.swift in Sources */,
