@@ -57,14 +57,13 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.setTitleColor(0x323232.color, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 14)
         $0.semanticContentAttribute = .forceRightToLeft
+        $0.titleEdgeInsets = .init(top: 0, left: 4, bottom: 0, right: -4)
     }
     let tableView = UITableView().then {
         $0.register(Reusable.itemCell)
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
-        $0.rowHeight = UITableView.automaticDimension
-        $0.estimatedRowHeight = 390
     }
 
     init(reactor: ListReactor) {
