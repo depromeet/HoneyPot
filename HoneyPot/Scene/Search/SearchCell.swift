@@ -34,7 +34,7 @@ class SearchCell: BaseTableViewCell {
         addSubview(labelTitle)
         labelTitle.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
-            $0.trailing.equalTo(buttonClose).offset(10)
+            $0.trailing.equalTo(buttonClose.snp.leading).offset(-5)
             $0.centerY.equalToSuperview()
         }
     }
