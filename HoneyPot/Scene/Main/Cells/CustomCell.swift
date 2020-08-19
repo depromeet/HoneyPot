@@ -11,7 +11,7 @@ import Then
 
 class CustomCell: UICollectionViewCell {
 
-    var tabLabel = UILabel().then {
+    let tabLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = UIColor(named: "color_unselect")
         $0.translatesAutoresizingMaskIntoConstraints = false

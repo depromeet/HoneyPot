@@ -11,27 +11,29 @@ import Then
 
 class ProductCell: UITableViewCell {
 
-    var productImageView = UIImageView().then {
+    let productImageView = UIImageView().then {
         $0.image = nil
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.contentMode = .scaleAspectFill
+        $0.backgroundColor = UIColor(named: "color_unselect")
+        $0.layer.cornerRadius = 5
     }
 
-    var productNameLabel = UILabel().then {
+    let productNameLabel = UILabel().then {
         $0.text = "테이블팬 C820 (3 Colors)"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var productSortLabel = UILabel().then {
+    let productSortLabel = UILabel().then {
         $0.text = "가전 | 플러스마이너스제로"
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var productSlider = ProductSlider().then {
+    let productSlider = ProductSlider().then {
         $0.tintColor = UIColor(named: "color_main")
         $0.minimumValue = 0
         $0.maximumValue = 100
@@ -40,33 +42,76 @@ class ProductCell: UITableViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var myImageView = UIImageView().then {
+    let myImageView = UIImageView().then {
         $0.image = UIImage(named: "icon_my_w24h24-1")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var joinLabel = UILabel().then {
+    let joinLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var timeImageView = UIImageView().then {
+    let timeImageView = UIImageView().then {
         $0.image = UIImage(named: "icon_time_w24h24")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var timeLabel = UILabel().then {
+    let timeLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var numberLabel = UILabel().then {
+    let numberLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var percentLabel = UILabel().then {
+    let percentLabel = UILabel().then {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.textColor = .red
         $0.text = "35%"
         $0.font = UIFont.systemFont(ofSize: 25, weight: .bold)
+    }
+    
+    let leaveLabel = UILabel().then {
+        $0.textColor = UIColor(named: "color_unselect")
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .light)
+        $0.text = "40% 할인까지 24명!"
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let commentView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let commentImageView = UIImageView().then {
+        $0.image = UIImage(named: "icon_bubble_light_w16h16")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let commentLabel = UILabel().then {
+        $0.text = "100"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.textColor = UIColor(named: "color_unselect")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let favoriteView = UIView().then {
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 5
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let favoriteImageView = UIImageView().then {
+        $0.image = UIImage(named: "icon_heart_w16h16")
+        $0.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    let favoriteLabel = UILabel().then {
+        $0.text = "100"
+        $0.font = UIFont.systemFont(ofSize: 12, weight: .bold)
+        $0.textColor = UIColor(named: "color_unselect")
+        $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     override func awakeFromNib() {
@@ -130,12 +175,43 @@ class ProductCell: UITableViewCell {
 
         addSubview(numberLabel)
         numberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-        numberLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25).isActive = true
+        numberLabel.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 8).isActive = true
 
         addSubview(percentLabel)
-        percentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -25).isActive = true
+        percentLabel.centerYAnchor.constraint(equalTo: numberLabel.centerYAnchor).isActive = true
         percentLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor, constant: -10).isActive = true
+        
+        addSubview(leaveLabel)
+        leaveLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        leaveLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 10).isActive = true
 
+        addSubview(commentView)
+        commentView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        commentView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        commentView.trailingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: -20).isActive = true
+        commentView.topAnchor.constraint(equalTo: productImageView.topAnchor, constant: 20).isActive = true
+        
+        addSubview(commentLabel)
+        commentLabel.centerYAnchor.constraint(equalTo: commentView.centerYAnchor).isActive = true
+        commentLabel.trailingAnchor.constraint(equalTo: commentView.trailingAnchor, constant: -5).isActive = true
+        
+        addSubview(commentImageView)
+        commentImageView.centerYAnchor.constraint(equalTo: commentView.centerYAnchor).isActive = true
+        commentImageView.trailingAnchor.constraint(equalTo: commentLabel.leadingAnchor, constant: -2).isActive = true
+        
+        addSubview(favoriteView)
+        favoriteView.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        favoriteView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        favoriteView.centerYAnchor.constraint(equalTo: commentView.centerYAnchor).isActive = true
+        favoriteView.trailingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: -10).isActive = true
+        
+        addSubview(favoriteLabel)
+        favoriteLabel.centerYAnchor.constraint(equalTo: favoriteView.centerYAnchor).isActive = true
+        favoriteLabel.trailingAnchor.constraint(equalTo: favoriteView.trailingAnchor, constant: -5).isActive = true
+        
+        addSubview(favoriteImageView)
+        favoriteImageView.centerYAnchor.constraint(equalTo: favoriteView.centerYAnchor).isActive = true
+        favoriteImageView.trailingAnchor.constraint(equalTo: favoriteLabel.leadingAnchor, constant: -2).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
