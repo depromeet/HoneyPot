@@ -17,6 +17,12 @@ class CommentViewController: BaseViewController, View {
 
     private enum Color {
         static let yellow1 = 0xFFD136.color
+        static let black1 = 0x323232.color
+        static let lightGray2 = 0xF8F8F8.color
+        static let lightGray4 = 0xCACACA.color
+    }
+    private enum Font {
+        static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
     }
     struct Reusable {
         static let commentCell = ReusableCell<ItemCommentCell>()
@@ -41,6 +47,28 @@ class CommentViewController: BaseViewController, View {
         $0.keyboardDismissMode = .interactive
     }
 
+    let viewInput = UIView().then {
+        $0.backgroundColor = .clear
+    }
+    let textViewInput = ResizableTextView().then {
+        $0.font = Font.sdR14
+        $0.textColor = Color.black1
+        $0.backgroundColor = .clear
+        $0.showsVerticalScrollIndicator = false
+        $0.bounces = false
+    }
+    let buttonSend = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_write_selected_w16h16"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .disabled)
+        $0.adjustsImageWhenHighlighted = false
+    }
+    let labelInputPlaceholder = UILabel().then {
+        $0.font = Font.sdR14
+        $0.textColor = Color.lightGray4
+        $0.text = "댓글 달기"
+    }
+    var constraintInputBottom: NSLayoutConstraint!
+
     init(reactor: CommentReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -52,6 +80,7 @@ class CommentViewController: BaseViewController, View {
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
+        setupInputView()
     }
 
     func bind(reactor: CommentReactor) {
@@ -59,6 +88,19 @@ class CommentViewController: BaseViewController, View {
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
             })
+            .disposed(by: disposeBag)
+
+        textViewInput.rx.text.orEmpty
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .map { !$0.isEmpty }
+            .distinctUntilChanged()
+            .bind(to: buttonSend.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        textViewInput.rx.text.orEmpty
+            .map { !$0.isEmpty }
+            .distinctUntilChanged()
+            .bind(to: labelInputPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
         Observable
@@ -71,6 +113,14 @@ class CommentViewController: BaseViewController, View {
                     })
                     .disposed(by: cell.disposeBag)
             }
+            .disposed(by: disposeBag)
+
+        RxKeyboard.instance.visibleHeight
+            .drive(onNext: { [unowned self] height in
+                let constant = height - self.view.safeAreaInsets.bottom
+                self.constraintInputBottom?.constant = -max(constant, 0)
+                self.view.layoutIfNeeded()
+            })
             .disposed(by: disposeBag)
     }
 
@@ -108,7 +158,49 @@ extension CommentViewController {
         tableView.snp.makeConstraints {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    private func setupInputView() {
+        view.addSubview(viewInput)
+        viewInput.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+        constraintInputBottom = viewInput.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        constraintInputBottom.isActive = true
+        let viewBackground = UIView().then {
+            $0.backgroundColor = Color.lightGray2
+            $0.layer.cornerRadius = 10
+            $0.layer.masksToBounds = true
+        }
+        viewInput.addSubview(viewBackground)
+        viewBackground.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview().inset(18).priority(999)
+        }
+        viewBackground.addSubview(textViewInput)
+        textViewInput.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(1)
             $0.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().inset(12)
+            $0.trailing.equalToSuperview().inset(32).priority(999)
+        }
+        viewBackground.addSubview(buttonSend)
+        buttonSend.snp.makeConstraints {
+            $0.top.trailing.equalToSuperview()
+            $0.width.height.equalTo(32)
+        }
+        viewBackground.addSubview(labelInputPlaceholder)
+        labelInputPlaceholder.snp.makeConstraints {
+            $0.leading.equalTo(textViewInput).inset(5)
+            $0.centerY.equalTo(textViewInput)
+        }
+        let viewSeparator = UIView().then {
+            $0.backgroundColor = 0xCACACA.color
+        }
+        viewInput.addSubview(viewSeparator)
+        viewSeparator.snp.makeConstraints {
+            $0.leading.trailing.top.equalToSuperview()
+            $0.height.equalTo(1)
         }
     }
 }
