@@ -367,6 +367,15 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        buttonRedirect.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let id = reactor.currentState.itemID
+                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
+                self.navigationController?.pushViewController(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+
         Driver.combineLatest(
             RxKeyboard.instance.visibleHeight.skip(1),
             RxKeyboard.instance.visibleHeight
