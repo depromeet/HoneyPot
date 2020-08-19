@@ -31,6 +31,7 @@ class NavigationBar: UIView {
     let labelTitle = UILabel().then {
         $0.textColor = 0x323232.color
         $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
+        $0.textAlignment = .center
     }
     let stackViewRight = UIStackView().then {
         $0.axis = .horizontal
@@ -71,7 +72,8 @@ class NavigationBar: UIView {
             labelTitle.text = title
             addSubview(labelTitle)
             labelTitle.snp.makeConstraints {
-                $0.center.equalToSuperview()
+                $0.leading.trailing.equalToSuperview().inset(49)
+                $0.centerY.equalToSuperview()
             }
         }
     }
