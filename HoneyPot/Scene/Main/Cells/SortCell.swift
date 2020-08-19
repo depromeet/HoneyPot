@@ -11,12 +11,12 @@ import Then
 
 class SortCell: UITableViewCell {
 
-    var sortButton = UIButton().then {
+    let sortButton = UIButton().then {
         $0.setImage(UIImage(named: "icon_expand_w24h24"), for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    var sortLabel = UILabel().then {
+    let sortLabel = UILabel().then {
         $0.text = "최신순"
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textAlignment = .left

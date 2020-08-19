@@ -21,7 +21,7 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         return cv
     }()
 
-    var customMenuBar = CustomMenuBar()
+    let customMenuBar = CustomMenuBar()
 
     private enum Color {
         static let navigationBackground = 0xFFD136.color

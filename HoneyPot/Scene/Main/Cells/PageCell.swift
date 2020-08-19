@@ -11,7 +11,7 @@ import Then
 
 class PageCell: UICollectionViewCell {
 
-    var productTableView = UITableView().then {
+    let productTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
