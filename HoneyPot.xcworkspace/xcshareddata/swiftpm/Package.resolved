@@ -155,6 +155,15 @@
         }
       },
       {
+        "package": "RxKingfisher",
+        "repositoryURL": "https://github.com/yanniks/RxKingfisher",
+        "state": {
+          "branch": null,
+          "revision": "27548d2102b5a04373a98c954089cd8291fcdc7f",
+          "version": null
+        }
+      },
+      {
         "package": "RxSwift",
         "repositoryURL": "https://github.com/ReactiveX/RxSwift",
         "state": {
