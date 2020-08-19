@@ -12,10 +12,13 @@ import URLNavigator
 struct NavigationMap {
     static func initialize(navigator: NavigatorType, viewController: UIViewController, provider: ServiceProviderType) {
         guard let navigationController = viewController as? UINavigationController else { return }
-        navigator.register("honeypot://item/<id>") { (url, values, _) in
-            print(navigationController)
-            print(url, values)
-            return nil
+        navigator.register("honeypot://item/<id>") { (_, values, _) in
+            guard let id = values["id"] as? String else { return nil }
+            if let topViewController = navigationController.topViewController as? ItemViewController,
+                topViewController.reactor?.currentState.itemID == id {
+                return nil
+            }
+            return ItemViewController(reactor: .init(provider: provider, itemID: id))
         }
     }
 }
