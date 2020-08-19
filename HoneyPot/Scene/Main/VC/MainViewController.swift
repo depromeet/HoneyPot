@@ -79,7 +79,7 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         customMenuBar.topAnchor.constraint(equalTo: self.navigationBar.bottomAnchor).isActive = true
-        customMenuBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        customMenuBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
 
     func setupPageCollectionView() {
