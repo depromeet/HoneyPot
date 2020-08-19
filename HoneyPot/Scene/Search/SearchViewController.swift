@@ -21,9 +21,13 @@ import Then
 class SearchViewController: BaseViewController, ReactorKit.View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
+        static let placeholderText = 0xA5A5A5.color
     }
     private enum Metric {
         static let textFieldViewFrame = CGRect(x: 0, y: 0, width: 80, height: 0)
+    }
+    private enum Font {
+        static let textFieldText = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
     }
     struct Reusable {
         static let searchCell = ReusableCell<SearchCell>()
@@ -54,7 +58,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
     }
     let imageViewSearch = UIImageView().then {
         $0.contentMode = .center
-        $0.image = #imageLiteral(resourceName: "icon_search_w24h24")
+        $0.image = #imageLiteral(resourceName: "icon_search_light_w24h24")
     }
     let buttonClear = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_close_hexagon_w24h24"), for: .normal)
@@ -62,14 +66,19 @@ class SearchViewController: BaseViewController, ReactorKit.View {
     lazy var textFieldSearch = UITextField().then {
         $0.layer.cornerRadius = 8
         $0.backgroundColor = .white
-        $0.placeholder = "검색어를 입력해주세요"
-        $0.font = .systemFont(ofSize: 14)
+        $0.font = Font.textFieldText
         $0.leftView = imageViewSearch
         $0.leftViewMode = .always
         $0.rightView = buttonClear
         $0.rightViewMode = .always
         $0.autocorrectionType = .no
         $0.returnKeyType = .done
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: Font.textFieldText,
+            .foregroundColor: Color.placeholderText
+        ]
+        let attributedString = NSAttributedString(string: "검색어를 입력해주세요", attributes: attributes)
+        $0.attributedPlaceholder = attributedString
     }
     let tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(Reusable.searchCell)
