@@ -40,6 +40,12 @@ class SettingViewController: BaseViewController, View {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        textFieldUserID.becomeFirstResponder()
+    }
+
     override func setupConstraints() {
         setupNavigationBar()
         setupTextField()
