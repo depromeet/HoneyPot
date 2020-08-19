@@ -17,19 +17,19 @@ class DiscountModalViewController: BaseViewController {
     var discounts: [DiscountEntity]
 
     let labelTitle = UILabel().then {
-        $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
+        $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
         $0.textColor = 0x464646.color
         $0.text = "할인혜택 안내"
     }
     let buttonClose = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_close_w8h8"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_close_w24h24"), for: .normal)
     }
 
     let tableView = ResizableTableView().then {
         $0.register(DiscountCell.self, forCellReuseIdentifier: "cell")
         $0.separatorColor = 0xCCCCCC.color
         $0.separatorStyle = .none
-        $0.rowHeight = 34
+        $0.rowHeight = 31
         $0.bounces = false
         $0.maxHeight = 0
     }
@@ -91,18 +91,18 @@ extension DiscountModalViewController {
         view.addSubview(viewBackground)
         viewBackground.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.width.equalTo(245)
+            $0.width.equalTo(339)
         }
         viewBackground.addSubview(labelTitle)
         labelTitle.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(12)
-            $0.leading.equalToSuperview().inset(16)
+            $0.top.equalToSuperview().inset(16)
+            $0.leading.equalToSuperview().inset(20)
         }
         viewBackground.addSubview(buttonClose)
         buttonClose.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
-            $0.width.equalTo(40)
-            $0.height.equalTo(38)
+            $0.top.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(8)
+            $0.width.height.equalTo(48)
         }
         let viewSeparator = UIView().then {
             $0.backgroundColor = 0xEEEEEE.color
@@ -115,9 +115,9 @@ extension DiscountModalViewController {
         }
         viewBackground.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(viewSeparator.snp.bottom).offset(9)
+            $0.top.equalTo(viewSeparator.snp.bottom).offset(11)
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalToSuperview().inset(9)
+            $0.bottom.equalToSuperview().inset(18)
         }
     }
 }
