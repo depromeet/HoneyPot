@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct DiscountEntity {
+struct DiscountEntity: Decodable {
     let step: Int
     let numberOfPeople: Int
     let discountPercent: Int

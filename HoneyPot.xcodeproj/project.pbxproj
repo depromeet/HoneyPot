@@ -37,6 +37,16 @@
 		9C697D3124ED23C100ABCC7C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3024ED23C100ABCC7C /* Logger.swift */; };
 		9C697D3824ED3AF000ABCC7C /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3724ED3AF000ABCC7C /* UserEntity.swift */; };
 		9C697D3C24ED402300ABCC7C /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3724ED3AF000ABCC7C /* UserEntity.swift */; };
+		9C697D3E24ED405400ABCC7C /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3D24ED405300ABCC7C /* PostEntity.swift */; };
+		9C697D3F24ED405400ABCC7C /* PostEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3D24ED405300ABCC7C /* PostEntity.swift */; };
+		9C697D4124ED411100ABCC7C /* PostDescriptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4024ED411100ABCC7C /* PostDescriptionEntity.swift */; };
+		9C697D4224ED411100ABCC7C /* PostDescriptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4024ED411100ABCC7C /* PostDescriptionEntity.swift */; };
+		9C697D4424ED415300ABCC7C /* SellerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4324ED415300ABCC7C /* SellerEntity.swift */; };
+		9C697D4524ED415300ABCC7C /* SellerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4324ED415300ABCC7C /* SellerEntity.swift */; };
+		9C697D4724ED41F100ABCC7C /* CommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4624ED41F100ABCC7C /* CommentEntity.swift */; };
+		9C697D4824ED41F100ABCC7C /* CommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4624ED41F100ABCC7C /* CommentEntity.swift */; };
+		9C697D4D24ED501E00ABCC7C /* AuthorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4C24ED501E00ABCC7C /* AuthorEntity.swift */; };
+		9C697D4E24ED501E00ABCC7C /* AuthorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D4C24ED501E00ABCC7C /* AuthorEntity.swift */; };
 		9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */; };
 		9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
@@ -228,6 +238,11 @@
 		9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		9C697D3024ED23C100ABCC7C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9C697D3724ED3AF000ABCC7C /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		9C697D3D24ED405300ABCC7C /* PostEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostEntity.swift; sourceTree = "<group>"; };
+		9C697D4024ED411100ABCC7C /* PostDescriptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDescriptionEntity.swift; sourceTree = "<group>"; };
+		9C697D4324ED415300ABCC7C /* SellerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SellerEntity.swift; sourceTree = "<group>"; };
+		9C697D4624ED41F100ABCC7C /* CommentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEntity.swift; sourceTree = "<group>"; };
+		9C697D4C24ED501E00ABCC7C /* AuthorEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorEntity.swift; sourceTree = "<group>"; };
 		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -402,7 +417,12 @@
 			isa = PBXGroup;
 			children = (
 				9C697D3724ED3AF000ABCC7C /* UserEntity.swift */,
+				9C697D3D24ED405300ABCC7C /* PostEntity.swift */,
+				9C697D4024ED411100ABCC7C /* PostDescriptionEntity.swift */,
 				9C26539424EA2218009E5D5E /* DiscountEntity.swift */,
+				9C697D4324ED415300ABCC7C /* SellerEntity.swift */,
+				9C697D4624ED41F100ABCC7C /* CommentEntity.swift */,
+				9C697D4C24ED501E00ABCC7C /* AuthorEntity.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -814,12 +834,15 @@
 				9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */,
 				9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */,
 				B6D6EC6124DB40EF00E27C06 /* PageCell.swift in Sources */,
+				9C697D4424ED415300ABCC7C /* SellerEntity.swift in Sources */,
 				9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */,
 				9C7B535024DEA538005C3CA8 /* SearchWordService.swift in Sources */,
+				9C697D3E24ED405400ABCC7C /* PostEntity.swift in Sources */,
 				9C7CDB5F24E56C4100801F84 /* ItemViewController.swift in Sources */,
 				9C0D59CF24DEE1AC007779CD /* BaseTableViewHeader.swift in Sources */,
 				9C87E60624EAB20E00686274 /* ItemSubCommentCell.swift in Sources */,
 				9C0D59D224DEE8E2007779CD /* SearchSection.swift in Sources */,
+				9C697D4124ED411100ABCC7C /* PostDescriptionEntity.swift in Sources */,
 				9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */,
 				9C7CDB5824E555F000801F84 /* MyPageReactor.swift in Sources */,
 				9C47BF3E24E6B851005238BE /* ResizableTextView.swift in Sources */,
@@ -833,6 +856,7 @@
 				9C26539224EA21B9009E5D5E /* DiscountModalViewController.swift in Sources */,
 				9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */,
 				9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */,
+				9C697D4D24ED501E00ABCC7C /* AuthorEntity.swift in Sources */,
 				9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */,
 				B6D6EC6B24DBF8CE00E27C06 /* ProductCell.swift in Sources */,
 				9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */,
@@ -845,6 +869,7 @@
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 				044B630524D8592300088487 /* CommentTopCell.swift in Sources */,
 				9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */,
+				9C697D4724ED41F100ABCC7C /* CommentEntity.swift in Sources */,
 				9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -862,6 +887,7 @@
 				9C90410324EA93E1000E21A3 /* BaseViewController.swift in Sources */,
 				9CD03D1F24ECC6A60049EB93 /* CommentReactor.swift in Sources */,
 				9C90410424EA93E1000E21A3 /* BaseService.swift in Sources */,
+				9C697D4824ED41F100ABCC7C /* CommentEntity.swift in Sources */,
 				9C90410524EA93E1000E21A3 /* ItemReactor.swift in Sources */,
 				9C90410624EA93E1000E21A3 /* UserDefaultsKey.swift in Sources */,
 				9C90410724EA93E1000E21A3 /* MainViewController.swift in Sources */,
@@ -881,7 +907,9 @@
 				9C90411524EA93E1000E21A3 /* ListViewController.swift in Sources */,
 				9C90411624EA93E1000E21A3 /* Menu.swift in Sources */,
 				9C90411724EA93E1000E21A3 /* PageCell.swift in Sources */,
+				9C697D4E24ED501E00ABCC7C /* AuthorEntity.swift in Sources */,
 				9C90411824EA93E1000E21A3 /* SettingViewController.swift in Sources */,
+				9C697D4524ED415300ABCC7C /* SellerEntity.swift in Sources */,
 				9C90411924EA93E1000E21A3 /* SearchWordService.swift in Sources */,
 				9C90411A24EA93E1000E21A3 /* ItemViewController.swift in Sources */,
 				9C90411B24EA93E1000E21A3 /* BaseTableViewHeader.swift in Sources */,
@@ -900,6 +928,7 @@
 				9C90412624EA93E1000E21A3 /* DiscountModalViewController.swift in Sources */,
 				9C90412724EA93E1000E21A3 /* SearchViewController.swift in Sources */,
 				9C90412824EA93E1000E21A3 /* UserDefaultsService.swift in Sources */,
+				9C697D4224ED411100ABCC7C /* PostDescriptionEntity.swift in Sources */,
 				9C90412924EA93E1000E21A3 /* AccountService.swift in Sources */,
 				9C90412A24EA93E1000E21A3 /* ProductCell.swift in Sources */,
 				9C90412B24EA93E1000E21A3 /* NavigationMap.swift in Sources */,
@@ -911,6 +940,7 @@
 				9C90413024EA93E1000E21A3 /* SearchReactor.swift in Sources */,
 				9C90413124EA93E1000E21A3 /* NetworkService.swift in Sources */,
 				9C90413224EA93E1000E21A3 /* CommentTopCell.swift in Sources */,
+				9C697D3F24ED405400ABCC7C /* PostEntity.swift in Sources */,
 				9C90413324EA93E1000E21A3 /* SearchCell.swift in Sources */,
 				9CA7FA7824EF99CA004BA440 /* Logger.swift in Sources */,
 			);
