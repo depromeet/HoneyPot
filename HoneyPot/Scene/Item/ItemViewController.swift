@@ -358,6 +358,15 @@ class ItemViewController: BaseViewController, View {
             .bind(to: labelInputPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [weak self] _ in
+                guard let self = self else { return }
+                let id = reactor.currentState.itemID
+                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
+                self.navigationController?.pushViewController(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+
         Driver.combineLatest(
             RxKeyboard.instance.visibleHeight.skip(1),
             RxKeyboard.instance.visibleHeight
@@ -383,9 +392,24 @@ class ItemViewController: BaseViewController, View {
             .just(["1", "2", "3"])
             .bind(to: tableView.rx.items(Reusable.commentCell)) { index, data, cell in
                 print(index, data, cell)
+                cell.buttonMore.rx.tap
+                    .subscribe(onNext: { [weak self] in
+                        self?.presentCommentActionSheet()
+                    })
+                    .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
+    }
 
+    private func presentCommentActionSheet() {
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let actionEdit = UIAlertAction(title: "수정", style: .default, handler: nil)
+        let actionDelete = UIAlertAction(title: "삭제하기", style: .destructive, handler: nil)
+        let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        actionSheet.addAction(actionEdit)
+        actionSheet.addAction(actionDelete)
+        actionSheet.addAction(actionCancel)
+        present(actionSheet, animated: true, completion: nil)
     }
 }
 
