@@ -21,10 +21,10 @@ class CustomCell: UICollectionViewCell {
         didSet {
             if isSelected {
                 self.tabLabel.textColor = UIColor(named: "color_select")
-                self.tabLabel.font = UIFont.systemFont(ofSize: 17, weight: .bold)
+                self.tabLabel.font = UIFont.systemFont(ofSize: 16, weight: .bold)
             } else {
                 self.tabLabel.textColor = UIColor(named: "color_unselect")
-                self.tabLabel.font = UIFont.systemFont(ofSize: 17, weight: .light)
+                self.tabLabel.font = UIFont.systemFont(ofSize: 16, weight: .light)
             }
         }
     }

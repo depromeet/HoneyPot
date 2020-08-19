@@ -18,7 +18,7 @@ class SortCell: UITableViewCell {
 
     let sortLabel = UILabel().then {
         $0.text = "최신순"
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 14)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -28,7 +28,7 @@ class SortCell: UITableViewCell {
 
         addSubview(sortButton)
         sortButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        sortButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        sortButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -17.1).isActive = true
 
         addSubview(sortLabel)
         sortLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true

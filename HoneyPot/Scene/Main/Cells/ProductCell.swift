@@ -21,14 +21,14 @@ class ProductCell: UITableViewCell {
 
     let productNameLabel = UILabel().then {
         $0.text = "테이블팬 C820 (3 Colors)"
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.font = UIFont(name: "GodoB", size: 20)!
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
     let productSortLabel = UILabel().then {
         $0.text = "가전 | 플러스마이너스제로"
-        $0.font = UIFont.systemFont(ofSize: 15)
+        $0.font = UIFont.systemFont(ofSize: 16)
         $0.textAlignment = .left
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -48,6 +48,7 @@ class ProductCell: UITableViewCell {
     }
 
     let joinLabel = UILabel().then {
+        $0.textColor = UIColor(red: 0.55, green: 0.55, blue: 0.55, alpha: 1)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -57,6 +58,7 @@ class ProductCell: UITableViewCell {
     }
 
     let timeLabel = UILabel().then {
+        $0.textColor = UIColor(red: 0.55, green: 0.55, blue: 0.55, alpha: 1)
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -124,11 +126,11 @@ class ProductCell: UITableViewCell {
         productImageView.heightAnchor.constraint(equalToConstant: 222).isActive = true
 
         addSubview(productNameLabel)
-        productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 30).isActive = true
+        productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 17).isActive = true
         productNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
 
         addSubview(productSortLabel)
-        productSortLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 10).isActive = true
+        productSortLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 8).isActive = true
         productSortLabel.leadingAnchor.constraint(lessThanOrEqualTo: self.leadingAnchor, constant: 18).isActive = true
 
         addSubview(productSlider)
@@ -137,7 +139,7 @@ class ProductCell: UITableViewCell {
         productSlider.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
 
         addSubview(myImageView)
-        myImageView.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 10).isActive = true
+        myImageView.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 11).isActive = true
         myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
 
         let join1 = NSAttributedString(string: "426명 ", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)])
@@ -148,11 +150,11 @@ class ProductCell: UITableViewCell {
         joinLabel.attributedText = joinAttrString
 
         addSubview(joinLabel)
-        joinLabel.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 10).isActive = true
-        joinLabel.leadingAnchor.constraint(equalTo: myImageView.trailingAnchor, constant: 10).isActive = true
+        joinLabel.centerYAnchor.constraint(equalTo: myImageView.centerYAnchor).isActive = true
+        joinLabel.leadingAnchor.constraint(equalTo: myImageView.trailingAnchor, constant: 5).isActive = true
 
         addSubview(timeImageView)
-        timeImageView.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 10).isActive = true
+        timeImageView.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 4).isActive = true
         timeImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
 
         let time1 = NSAttributedString(string: "4일 21시간 ", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)])
@@ -163,8 +165,8 @@ class ProductCell: UITableViewCell {
         timeLabel.attributedText = timeAttrString
 
         addSubview(timeLabel)
-        timeLabel.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 10).isActive = true
-        timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 10).isActive = true
+        timeLabel.centerYAnchor.constraint(equalTo: timeImageView.centerYAnchor).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: timeImageView.trailingAnchor, constant: 5).isActive = true
 
         let num1 = NSAttributedString(string: "32,500", attributes: [.font: UIFont.systemFont(ofSize: 25, weight: .bold)])
         let num2 = NSAttributedString(string: " 원", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .light)])
@@ -183,13 +185,13 @@ class ProductCell: UITableViewCell {
         
         addSubview(leaveLabel)
         leaveLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-        leaveLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 10).isActive = true
+        leaveLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 3).isActive = true
 
         addSubview(commentView)
-        commentView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        commentView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        commentView.trailingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: -20).isActive = true
-        commentView.topAnchor.constraint(equalTo: productImageView.topAnchor, constant: 20).isActive = true
+        commentView.widthAnchor.constraint(equalToConstant: 51).isActive = true
+        commentView.heightAnchor.constraint(equalToConstant: 26).isActive = true
+        commentView.trailingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: -15).isActive = true
+        commentView.topAnchor.constraint(equalTo: productImageView.topAnchor, constant: 15).isActive = true
         
         addSubview(commentLabel)
         commentLabel.centerYAnchor.constraint(equalTo: commentView.centerYAnchor).isActive = true
@@ -200,10 +202,10 @@ class ProductCell: UITableViewCell {
         commentImageView.trailingAnchor.constraint(equalTo: commentLabel.leadingAnchor, constant: -2).isActive = true
         
         addSubview(favoriteView)
-        favoriteView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        favoriteView.heightAnchor.constraint(equalToConstant: 25).isActive = true
+        favoriteView.widthAnchor.constraint(equalToConstant: 51).isActive = true
+        favoriteView.heightAnchor.constraint(equalToConstant: 26).isActive = true
         favoriteView.centerYAnchor.constraint(equalTo: commentView.centerYAnchor).isActive = true
-        favoriteView.trailingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: -10).isActive = true
+        favoriteView.trailingAnchor.constraint(equalTo: commentView.leadingAnchor, constant: -5).isActive = true
         
         addSubview(favoriteLabel)
         favoriteLabel.centerYAnchor.constraint(equalTo: favoriteView.centerYAnchor).isActive = true

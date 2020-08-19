@@ -62,9 +62,9 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
-            return 40
+            return 37
         } else {
-            return 400
+            return 377
         }
     }
 
