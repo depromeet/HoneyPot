@@ -1,5 +1,5 @@
 //
-//  ItemAPI.swift
+//  HoneyPotAPI.swift
 //  Depromeet8th4
 //
 //  Created by Soso on 2020/07/16.
@@ -10,26 +10,31 @@ import Foundation
 import Moya
 import MoyaSugar
 
-enum ItemAPI {
-    case fetchItems(String)
+enum HoneyPotAPI {
+    case user
+    case post(Int)
 }
 
-extension ItemAPI: SugarTargetType {
+extension HoneyPotAPI: SugarTargetType {
     var baseURL: URL {
-        let string = "https://www.google.com"
+        let string = "http://15.165.44.203:31923/api"
         return URL(string: string)!
     }
 
     var route: Route {
         switch self {
-        case .fetchItems(let text):
-            return .get(text)
+        case .user:
+            return .get("/users/info")
+        case .post(let id):
+            return .get("/posts/\(id)")
         }
     }
 
     var parameters: Parameters? {
         switch self {
-        case .fetchItems:
+        case .user:
+            return nil
+        case .post:
             return nil
         }
     }
