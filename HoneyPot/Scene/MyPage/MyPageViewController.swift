@@ -120,6 +120,11 @@ class MyPageViewController: BaseViewController, View {
     }
 
     func bind(reactor: MyPageReactor) {
+        rx.viewWillAppear
+            .map { _ in Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)

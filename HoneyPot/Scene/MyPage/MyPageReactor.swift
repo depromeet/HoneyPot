@@ -26,27 +26,25 @@ final class MyPageReactor: Reactor {
         case refresh
     }
     enum Mutation {
-        case setName(String)
+        case setUser(UserEntity)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return requestUserInfo()
-                .map(Mutation.setName)
+            return provider.networkService.request(.user)
+                .map(UserEntity.self)
+                .asObservable()
+                .map { Mutation.setUser($0) }
         }
     }
 
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setName(let name):
-            state.name = name
+        case .setUser(let user):
+            state.name = user.name
         }
         return state
-    }
-
-    private func requestUserInfo() -> Observable<String> {
-        return .just("노은종")
     }
 }
