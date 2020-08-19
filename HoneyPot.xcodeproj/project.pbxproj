@@ -35,6 +35,8 @@
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */; };
 		9C697D3124ED23C100ABCC7C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3024ED23C100ABCC7C /* Logger.swift */; };
+		9C697D3824ED3AF000ABCC7C /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3724ED3AF000ABCC7C /* UserEntity.swift */; };
+		9C697D3C24ED402300ABCC7C /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3724ED3AF000ABCC7C /* UserEntity.swift */; };
 		9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */; };
 		9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
@@ -225,6 +227,7 @@
 		9C60775D24C1534600E5CBEE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
 		9C697D3024ED23C100ABCC7C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		9C697D3724ED3AF000ABCC7C /* UserEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
 		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -398,6 +401,7 @@
 		9C26539324EA21FF009E5D5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9C697D3724ED3AF000ABCC7C /* UserEntity.swift */,
 				9C26539424EA2218009E5D5E /* DiscountEntity.swift */,
 			);
 			path = Model;
@@ -825,6 +829,7 @@
 				044B631124DAEFE400088487 /* FunctionCell.swift in Sources */,
 				044B630C24D85DB300088487 /* CommentCell.swift in Sources */,
 				9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */,
+				9C697D3824ED3AF000ABCC7C /* UserEntity.swift in Sources */,
 				9C26539224EA21B9009E5D5E /* DiscountModalViewController.swift in Sources */,
 				9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */,
 				9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */,
@@ -890,6 +895,7 @@
 				9C90412224EA93E1000E21A3 /* HoneyPotAPI.swift in Sources */,
 				9C90412324EA93E1000E21A3 /* FunctionCell.swift in Sources */,
 				9C90412424EA93E1000E21A3 /* CommentCell.swift in Sources */,
+				9C697D3C24ED402300ABCC7C /* UserEntity.swift in Sources */,
 				9C90412524EA93E1000E21A3 /* ResizableTableView.swift in Sources */,
 				9C90412624EA93E1000E21A3 /* DiscountModalViewController.swift in Sources */,
 				9C90412724EA93E1000E21A3 /* SearchViewController.swift in Sources */,
