@@ -136,6 +136,10 @@
 		9CC407E924E7676A009FC68F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
 		9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
+		9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */; };
+		9CD03D1E24ECC2930049EB93 /* CommentReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */; };
+		9CD03D1F24ECC6A60049EB93 /* CommentReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */; };
+		9CD03D2024ECC6A90049EB93 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */; };
 		9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
 		9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7A2FA24E16F550079C21F /* ListReactor.swift */; };
 		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
@@ -241,6 +245,8 @@
 		9C90414E24EA93E2000E21A3 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "/Users/Soso/dev/HoneyPot/HoneyPot/Info-Release.plist"; sourceTree = "<absolute>"; };
 		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
 		9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetItemCell.swift; sourceTree = "<group>"; };
+		9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReactor.swift; sourceTree = "<group>"; };
 		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
 		9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
@@ -462,6 +468,7 @@
 				9CE4CDB324D65B2600A8A25E /* Search */,
 				9C835DD924DFF4CB000901FF /* List */,
 				9C7CDB5B24E56AF700801F84 /* Item */,
+				9CD03D1A24ECC2590049EB93 /* Comment */,
 				9CA2CBC424E8C8DD00AE5322 /* Modal */,
 			);
 			path = Scene;
@@ -527,6 +534,15 @@
 				9C26539624EA2431009E5D5E /* DiscountCell.swift */,
 			);
 			path = Modal;
+			sourceTree = "<group>";
+		};
+		9CD03D1A24ECC2590049EB93 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */,
+				9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		9CE4CDB224D6592E00A8A25E /* MyPage */ = {
@@ -763,6 +779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */,
+				9CD03D1E24ECC2930049EB93 /* CommentReactor.swift in Sources */,
 				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
 				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
 				9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */,
@@ -818,6 +835,7 @@
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 				044B630524D8592300088487 /* CommentTopCell.swift in Sources */,
 				9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */,
+				9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,6 +850,7 @@
 				9C87E60524EAB20E00686274 /* ItemCommentCell.swift in Sources */,
 				9C90410224EA93E1000E21A3 /* NavigationBar.swift in Sources */,
 				9C90410324EA93E1000E21A3 /* BaseViewController.swift in Sources */,
+				9CD03D1F24ECC6A60049EB93 /* CommentReactor.swift in Sources */,
 				9C90410424EA93E1000E21A3 /* BaseService.swift in Sources */,
 				9C90410524EA93E1000E21A3 /* ItemReactor.swift in Sources */,
 				9C90410624EA93E1000E21A3 /* UserDefaultsKey.swift in Sources */,
@@ -876,6 +895,7 @@
 				9C90412C24EA93E1000E21A3 /* DiscountEntity.swift in Sources */,
 				9C90412D24EA93E1000E21A3 /* BaseTableViewCell.swift in Sources */,
 				9C90412E24EA93E1000E21A3 /* SearchHeader.swift in Sources */,
+				9CD03D2024ECC6A90049EB93 /* CommentViewController.swift in Sources */,
 				9C90412F24EA93E1000E21A3 /* ListReactor.swift in Sources */,
 				9C90413024EA93E1000E21A3 /* SearchReactor.swift in Sources */,
 				9C90413124EA93E1000E21A3 /* NetworkService.swift in Sources */,
