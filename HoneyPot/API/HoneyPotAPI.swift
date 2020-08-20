@@ -14,6 +14,7 @@ enum HoneyPotAPI {
     case user
     case post(Int)
     case postLike(Int)
+    case commentRemove(Int)
     case commentLike(Int)
 }
 
@@ -31,6 +32,8 @@ extension HoneyPotAPI: SugarTargetType {
             return .get("/posts/\(id)")
         case .postLike(let id):
             return .post("/posts/\(id)/like")
+        case .commentRemove(let id):
+            return .delete("/comments/\(id)")
         case .commentLike(let id):
             return .post("/comments/\(id)/like")
         }
@@ -43,6 +46,8 @@ extension HoneyPotAPI: SugarTargetType {
         case .post:
             return nil
         case .postLike:
+            return nil
+        case .commentRemove:
             return nil
         case .commentLike:
             return nil
