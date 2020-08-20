@@ -162,6 +162,10 @@
 		9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBD24D6638900A8A25E /* AccountService.swift */; };
 		9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC024D6A77700A8A25E /* SettingViewController.swift */; };
 		9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC224D6A7AD00A8A25E /* SettingReactor.swift */; };
+		9CF665FC24EE104A00DD2CB8 /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */; };
+		9CF665FD24EE104A00DD2CB8 /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */; };
+		9CF665FF24EE110A00DD2CB8 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FE24EE110A00DD2CB8 /* Pageable.swift */; };
+		9CF6660024EE110A00DD2CB8 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FE24EE110A00DD2CB8 /* Pageable.swift */; };
 		B6AB8EDD24DE6BC100EE3CB1 /* SortCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AB8EDB24DE6BC100EE3CB1 /* SortCell.swift */; };
 		B6AB8EDE24DE6BC100EE3CB1 /* SortCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6AB8EDC24DE6BC100EE3CB1 /* SortCell.xib */; };
 		B6D6EC5324DB3B8500E27C06 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6D6EC5224DB3B8500E27C06 /* MainViewController.swift */; };
@@ -276,6 +280,8 @@
 		9CE4CDC024D6A77700A8A25E /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		9CE4CDC224D6A7AD00A8A25E /* SettingReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingReactor.swift; sourceTree = "<group>"; };
 		9CF363AD24D0530A0008380C /* NavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
+		9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemEntity.swift; sourceTree = "<group>"; };
+		9CF665FE24EE110A00DD2CB8 /* Pageable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pageable.swift; sourceTree = "<group>"; };
 		B6AB8EDB24DE6BC100EE3CB1 /* SortCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortCell.swift; sourceTree = "<group>"; };
 		B6AB8EDC24DE6BC100EE3CB1 /* SortCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SortCell.xib; sourceTree = "<group>"; };
 		B6D6EC5224DB3B8500E27C06 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -416,7 +422,9 @@
 		9C26539324EA21FF009E5D5E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				9CF665FE24EE110A00DD2CB8 /* Pageable.swift */,
 				9C697D3724ED3AF000ABCC7C /* UserEntity.swift */,
+				9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */,
 				9C697D3D24ED405300ABCC7C /* PostEntity.swift */,
 				9C697D4024ED411100ABCC7C /* PostDescriptionEntity.swift */,
 				9C26539424EA2218009E5D5E /* DiscountEntity.swift */,
@@ -830,6 +838,7 @@
 				044B630024D8584100088487 /* ProductDetailImageCell.swift in Sources */,
 				044B631524DAF77600088487 /* DetailViewController.swift in Sources */,
 				044B62ED24D846D600088487 /* ProductRelatedCell.swift in Sources */,
+				9CF665FF24EE110A00DD2CB8 /* Pageable.swift in Sources */,
 				044B62FB24D84F6E00088487 /* ProgressStatusAndPromoterCell.swift in Sources */,
 				9C835DDB24DFF4DC000901FF /* ListViewController.swift in Sources */,
 				9C7CDB5A24E5574F00801F84 /* Menu.swift in Sources */,
@@ -869,6 +878,7 @@
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 				044B630524D8592300088487 /* CommentTopCell.swift in Sources */,
 				9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */,
+				9CF665FC24EE104A00DD2CB8 /* ItemEntity.swift in Sources */,
 				9C697D4724ED41F100ABCC7C /* CommentEntity.swift in Sources */,
 				9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */,
 			);
@@ -920,11 +930,13 @@
 				9C90411F24EA93E1000E21A3 /* ResizableTextView.swift in Sources */,
 				9C90412024EA93E1000E21A3 /* NSObject + reusableIdentifier.swift in Sources */,
 				9C90412124EA93E1000E21A3 /* SortCell.swift in Sources */,
+				9CF665FD24EE104A00DD2CB8 /* ItemEntity.swift in Sources */,
 				9C90412224EA93E1000E21A3 /* HoneyPotAPI.swift in Sources */,
 				9C90412324EA93E1000E21A3 /* FunctionCell.swift in Sources */,
 				9C90412424EA93E1000E21A3 /* CommentCell.swift in Sources */,
 				9C697D3C24ED402300ABCC7C /* UserEntity.swift in Sources */,
 				9C90412524EA93E1000E21A3 /* ResizableTableView.swift in Sources */,
+				9CF6660024EE110A00DD2CB8 /* Pageable.swift in Sources */,
 				9C90412624EA93E1000E21A3 /* DiscountModalViewController.swift in Sources */,
 				9C90412724EA93E1000E21A3 /* SearchViewController.swift in Sources */,
 				9C90412824EA93E1000E21A3 /* UserDefaultsService.swift in Sources */,
