@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
-               BuildableName = "&#x1101;&#x116e;&#x11af;&#x1103;&#x1161;&#x11ab;&#x110c;&#x1175;.app"
+               BuildableName = "HoneyPot.app"
                BlueprintName = "Release"
                ReferencedContainer = "container:HoneyPot.xcodeproj">
             </BuildableReference>
@@ -45,7 +45,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
-            BuildableName = "&#x1101;&#x116e;&#x11af;&#x1103;&#x1161;&#x11ab;&#x110c;&#x1175;.app"
+            BuildableName = "HoneyPot.app"
             BlueprintName = "Release"
             ReferencedContainer = "container:HoneyPot.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
-            BuildableName = "&#x1101;&#x116e;&#x11af;&#x1103;&#x1161;&#x11ab;&#x110c;&#x1175;.app"
+            BuildableName = "HoneyPot.app"
             BlueprintName = "Release"
             ReferencedContainer = "container:HoneyPot.xcodeproj">
          </BuildableReference>
