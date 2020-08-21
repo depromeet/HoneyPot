@@ -34,6 +34,7 @@
 		9C47BF3E24E6B851005238BE /* ResizableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C47BF3D24E6B851005238BE /* ResizableTextView.swift */; };
 		9C4DB81824D19C2800254C79 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4DB81724D19C2800254C79 /* MyPageViewController.swift */; };
 		9C6475FB24E2B6360067EA5F /* ResizableTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */; };
+		9C697D3124ED23C100ABCC7C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3024ED23C100ABCC7C /* Logger.swift */; };
 		9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */; };
 		9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */; };
 		9C7AD84824C011D500AAEBB0 /* ProModule.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; };
@@ -128,6 +129,7 @@
 		9C90414824EA93E1000E21A3 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */; };
 		9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */; };
+		9CA7FA7824EF99CA004BA440 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C697D3024ED23C100ABCC7C /* Logger.swift */; };
 		9CC407E424E766EF009FC68F /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7AD86224C035E200AAEBB0 /* BaseService.swift */; };
 		9CC407E524E76704009FC68F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C60775D24C1534600E5CBEE /* BaseViewController.swift */; };
 		9CC407E624E76709009FC68F /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF363AD24D0530A0008380C /* NavigationBar.swift */; };
@@ -222,6 +224,7 @@
 		9C545BEF24BF4C3D00138C78 /* Info-Development.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-Development.plist"; sourceTree = "<group>"; };
 		9C60775D24C1534600E5CBEE /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizableTableView.swift; sourceTree = "<group>"; };
+		9C697D3024ED23C100ABCC7C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9C71F61724D42666009DD6D7 /* VerticalButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalButton.swift; sourceTree = "<group>"; };
 		9C71F61C24D42EFB009DD6D7 /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		9C71F61E24D42FFD009DD6D7 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
@@ -492,6 +495,7 @@
 				9CE4CDBD24D6638900A8A25E /* AccountService.swift */,
 				9C7B534F24DEA538005C3CA8 /* SearchWordService.swift */,
 				9C1D557524DADC510048BBDF /* NavigationMap.swift */,
+				9C697D3024ED23C100ABCC7C /* Logger.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -832,6 +836,7 @@
 				9C0D59CD24DEE159007779CD /* SearchHeader.swift in Sources */,
 				9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */,
 				9C7B534A24DE8E7A005C3CA8 /* SearchReactor.swift in Sources */,
+				9C697D3124ED23C100ABCC7C /* Logger.swift in Sources */,
 				9C7AD86624C0360800AAEBB0 /* NetworkService.swift in Sources */,
 				044B630524D8592300088487 /* CommentTopCell.swift in Sources */,
 				9C7B535224DEB116005C3CA8 /* SearchCell.swift in Sources */,
@@ -901,6 +906,7 @@
 				9C90413124EA93E1000E21A3 /* NetworkService.swift in Sources */,
 				9C90413224EA93E1000E21A3 /* CommentTopCell.swift in Sources */,
 				9C90413324EA93E1000E21A3 /* SearchCell.swift in Sources */,
+				9CA7FA7824EF99CA004BA440 /* Logger.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
