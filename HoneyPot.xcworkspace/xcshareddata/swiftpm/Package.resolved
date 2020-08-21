@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "CocoaLumberjack",
+        "repositoryURL": "https://github.com/CocoaLumberjack/CocoaLumberjack",
+        "state": {
+          "branch": null,
+          "revision": "24deac32cdf5040297ab957dfd938b1a30d4b49e",
+          "version": "3.6.2"
+        }
+      },
+      {
         "package": "Immutable",
         "repositoryURL": "https://github.com/devxoul/Immutable.git",
         "state": {
