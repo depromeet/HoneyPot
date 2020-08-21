@@ -199,7 +199,8 @@ extension CommentViewController {
         }
         viewInput.addSubview(viewSeparator)
         viewSeparator.snp.makeConstraints {
-            $0.leading.trailing.top.equalToSuperview()
+            $0.top.equalToSuperview().offset(-1)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
     }
