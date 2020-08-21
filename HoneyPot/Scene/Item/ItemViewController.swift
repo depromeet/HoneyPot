@@ -32,6 +32,7 @@ class ItemViewController: BaseViewController, View {
         static let sdB24 = UIFont(name: "AppleSDGothicNeo-Bold", size: 24)!
         static let sdB18 = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)!
         static let sdB16 = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)!
+        static let sdB14 = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)!
         static let sdB12 = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
     }
     private enum Metric {
@@ -56,12 +57,12 @@ class ItemViewController: BaseViewController, View {
         ]
         static let countNormalText: [NSAttributedString.Key: Any] = [
             .kern: -0.3,
-            .font: Font.sdR12,
+            .font: Font.sdR14,
             .foregroundColor: Color.lightGray3
         ]
         static let countFocusText: [NSAttributedString.Key: Any] = [
             .kern: -0.3,
-            .font: Font.sdB12,
+            .font: Font.sdB14,
             .foregroundColor: Color.lightGray3
         ]
     }
