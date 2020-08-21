@@ -29,5 +29,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let navigator = Navigator()
         NavigationMap.initialize(navigator: navigator, viewController: navigationController, provider: provider)
         self.navigator = navigator
+
+        if let url = connectionOptions.urlContexts.first?.url {
+            if navigator.push(url) != nil {
+                return
+            }
+        }
+    }
+
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        if let url = URLContexts.first?.url {
+            if navigator?.push(url) != nil {
+                return
+            }
+        }
     }
 }
