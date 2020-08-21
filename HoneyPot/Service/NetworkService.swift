@@ -18,9 +18,10 @@ protocol NetworkServiceType {
         onSuccess: @escaping ((T) -> Void),
         onError: ((Error) -> Void)?
     )
-    func request(
-        _ target: HoneyPotAPI
-    ) -> Single<Response>
+    func request<T: Decodable>(
+        _ target: HoneyPotAPI,
+        type: T.Type
+    ) -> Single<T>
 }
 
 class NetworkService: BaseService, NetworkServiceType {
@@ -58,9 +59,10 @@ class NetworkService: BaseService, NetworkServiceType {
             .disposed(by: disposeBag)
     }
 
-    func request(
-        _ target: HoneyPotAPI
-    ) -> Single<Response> {
+    func request<T: Decodable>(
+        _ target: HoneyPotAPI,
+        type: T.Type
+    ) -> Single<T> {
         let file: StaticString = #file
         let function: StaticString = #function
         let line: UInt = #line
@@ -94,5 +96,20 @@ class NetworkService: BaseService, NetworkServiceType {
                     log.debug(message, file: file, function: function, line: line)
                 }
             )
+            .map(T.self)
+            .do(
+                onError: { error in
+                    if let error = (error as? MoyaError) {
+                        let code = error.errorCode
+                        var message: String
+                        if let description = error.errorDescription {
+                            message = "FAILURE: \(requestString) (\(code)) (\(description))"
+                        } else {
+                            message = "FAILURE: \(requestString) (\(code))"
+                        }
+                        log.warning(message, file: file, function: function, line: line)
+                    }
+            }
+        )
     }
 }
