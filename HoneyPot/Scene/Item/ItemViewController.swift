@@ -292,6 +292,17 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        buttonShare.rx.tap
+            .withLatestFrom(reactor.state.map { $0.itemID })
+            .compactMap { $0 }
+            .map { "honeypot://item/\($0)" }
+            .map { ([$0], nil) }
+            .map(UIActivityViewController.init)
+            .subscribe(onNext: { [weak self] activity in
+                self?.present(activity, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+
         buttonSharePopUp.rx.tap
             .map { true }
             .bind(to: buttonSharePopUp.rx.isHidden)
