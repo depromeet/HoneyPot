@@ -32,8 +32,7 @@ final class MyPageReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return provider.networkService.request(.user)
-                .map(UserEntity.self)
+            return provider.networkService.request(.user, type: UserEntity.self)
                 .asObservable()
                 .map { Mutation.setUser($0) }
         }

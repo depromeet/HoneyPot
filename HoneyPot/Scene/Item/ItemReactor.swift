@@ -53,21 +53,18 @@ final class ItemReactor: Reactor {
         switch action {
         case .refresh:
             return provider.networkService
-                .request(.post(currentState.itemID))
-                .map(PostEntity.self)
+                .request(.post(currentState.itemID), type: PostEntity.self)
                 .asObservable()
                 .map { Mutation.setItem($0) }
         case .likePost:
             return provider.networkService
-                .request(.postLike(currentState.itemID))
-                .map(Bool.self)
+                .request(.postLike(currentState.itemID), type: Bool.self)
                 .asObservable()
                 .map { Mutation.setLike($0) }
         case .likeComment(let id):
             guard var comment = currentState.comments?.first(where: { $0.commentId == id }) else { return .empty() }
             return provider.networkService
-                .request(.commentLike(id))
-                .map(Bool.self)
+                .request(.commentLike(id), type: Bool.self)
                 .asObservable()
                 .map({ isLiked in
                     comment.liked = isLiked
