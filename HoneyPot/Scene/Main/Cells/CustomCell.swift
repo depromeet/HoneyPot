@@ -10,13 +10,13 @@ import UIKit
 import Then
 
 class CustomCell: UICollectionViewCell {
-    
+
     let tabLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = UIColor(named: "color_unselect")
         $0.translatesAutoresizingMaskIntoConstraints = false
     }
-    
+
     override var isSelected: Bool {
         didSet {
             if isSelected {
@@ -28,12 +28,12 @@ class CustomCell: UICollectionViewCell {
             }
         }
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         self.addSubview(tabLabel)
         tabLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         tabLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
-    
+
 }
