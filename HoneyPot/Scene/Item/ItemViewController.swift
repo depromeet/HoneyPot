@@ -356,7 +356,7 @@ class ItemViewController: BaseViewController, View {
 
         let isHidden = tableView.rx.contentOffset
             .map { $0.y < 150 }
-            .distinctUntilChanged().share()
+            .distinctUntilChanged()
 
         isHidden
             .bind(to: viewBackground.rx.isHidden)
@@ -419,6 +419,12 @@ class ItemViewController: BaseViewController, View {
                 self?.view.layoutIfNeeded()
             })
             .bind(to: labelItem.rx.attributedText)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.title }
+            .distinctUntilChanged()
+            .bind(to: navigationBar.labelTitle.rx.text)
             .disposed(by: disposeBag)
 
         reactor.state
