@@ -505,11 +505,11 @@ class ItemViewController: BaseViewController, View {
     private func setupComments(reactor: ItemReactor) {
         reactor.state
             .map { $0.comments ?? [] }
-            .bind(to: tableView.rx.items(Reusable.commentCell)) { _, comment, cell in
+            .bind(to: tableView.rx.items(Reusable.commentCell)) { [weak self] _, comment, cell in
                 cell.setData(comment: comment)
                 cell.buttonReply.isEnabled = false
                 cell.buttonMore.rx.tap
-                    .subscribe(onNext: { [weak self] in
+                    .subscribe(onNext: {
                         self?.presentCommentActionSheet()
                     })
                     .disposed(by: cell.disposeBag)

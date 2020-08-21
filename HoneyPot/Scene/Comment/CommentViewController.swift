@@ -105,10 +105,10 @@ class CommentViewController: BaseViewController, View {
 
         Observable
             .just(["1", "2", "3", "4", "5", "6", "7", "8"])
-            .bind(to: tableView.rx.items(Reusable.subCommentCell)) { index, data, cell in
+            .bind(to: tableView.rx.items(Reusable.subCommentCell)) {  [weak self] index, data, cell in
                 print(index, data, cell)
                 cell.buttonMore.rx.tap
-                    .subscribe(onNext: { [weak self] in
+                    .subscribe(onNext: {
                         self?.presentCommentActionSheet()
                     })
                     .disposed(by: cell.disposeBag)
