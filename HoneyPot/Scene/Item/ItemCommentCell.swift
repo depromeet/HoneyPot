@@ -48,12 +48,10 @@ class ItemCommentCell: BaseTableViewCell {
     }
 
     let labelUsername = UILabel().then {
-        $0.text = "여정수"
         $0.textColor = Color.mainText
         $0.font = Font.usernameText
     }
     let labelTime = UILabel().then {
-        $0.text = "10분 전"
         $0.textColor = Color.subText
         $0.font = Font.extraText
     }
@@ -62,13 +60,10 @@ class ItemCommentCell: BaseTableViewCell {
     }
 
     let labelContent = UILabel().then {
-        let attributedString = NSAttributedString(string: "요즘 너무 더워서 이런 선풍기 하나 있으면 너무 좋더라구요", attributes: Style.contentText)
-        $0.attributedText = attributedString
         $0.numberOfLines = 0
     }
 
     let buttonLike = UIButton().then {
-        $0.setTitle("14", for: .normal)
         $0.setTitleColor(Color.subText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_like_normal_w16h16"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_like_selected_w16h16"), for: .selected)
@@ -78,13 +73,13 @@ class ItemCommentCell: BaseTableViewCell {
         $0.adjustsImageWhenHighlighted = false
     }
     let buttonComment = UIButton().then {
-        $0.setTitle("5", for: .normal)
         $0.setTitleColor(Color.subText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_light_w16h16"), for: .normal)
         $0.titleLabel?.font = Font.extraText
         $0.titleEdgeInsets = .init(top: 1, left: 3, bottom: 0, right: -3)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 3)
         $0.adjustsImageWhenHighlighted = false
+        $0.isUserInteractionEnabled = false
     }
     let buttonReply = UIButton().then {
         $0.setTitle("대댓글 달기", for: .normal)
@@ -145,9 +140,43 @@ class ItemCommentCell: BaseTableViewCell {
         setupAction()
     }
 
-    func setContentText(text: String) {
-        let attributedString = NSAttributedString(string: text, attributes: Style.contentText)
+    func setData(comment: CommentEntity) {
+        labelUsername.text = comment.author.name
+        labelTime.text = formattedDate(dateString: comment.createdDate)
+        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
         labelContent.attributedText = attributedString
+        buttonLike.isSelected = comment.liked
+        buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
+        buttonComment.setTitle("\(comment.numberOfSubComments)", for: .normal)
+    }
+
+    private func formattedDate(dateString: String) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = formatter.date(from: dateString) else { return nil }
+        let interval = Int(round(abs(date.timeIntervalSinceNow)))
+        let minute = 60
+        let hour = minute * 60
+        let day = hour * 24
+
+        let numberOfDaysLeft = interval / day
+        let numberOfHoursLeft = interval % day / hour
+        let numberOfMinutesLeft = interval % day % hour / minute
+
+        if numberOfDaysLeft > 7 {
+            let calendar = Calendar(identifier: .gregorian)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+            return "\(month).\(day)"
+        } else if numberOfDaysLeft > 0 {
+            return "\(numberOfDaysLeft)일 전"
+        } else if numberOfHoursLeft > 0 {
+            return "\(numberOfHoursLeft)시간 전"
+        } else if numberOfMinutesLeft > 0 {
+            return "\(numberOfMinutesLeft)분 전"
+        } else {
+            return "방금 전"
+        }
     }
 }
 

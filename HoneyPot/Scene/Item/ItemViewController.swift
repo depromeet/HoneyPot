@@ -11,6 +11,7 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import RxKingfisher
 import ReusableKit
 
 class ItemViewController: BaseViewController, View {
@@ -98,10 +99,10 @@ class ItemViewController: BaseViewController, View {
 
     // MARK: - Banner
     let imageViewItem = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
         $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     let buttonCategory = UIButton().then {
-        $0.setTitle("가전", for: .normal)
         $0.setTitleColor(Color.black2, for: .normal)
         $0.titleLabel?.font = Font.sdR14
         $0.backgroundColor = UIColor.white.withAlphaComponent(80)
@@ -113,34 +114,27 @@ class ItemViewController: BaseViewController, View {
 
     // MARK: - Title & Price
     let labelItem = UILabel().then {
-        let attributedString = NSAttributedString(string: "테이블팬 C820 (3 Colors)", attributes: Style.itemText)
-        $0.attributedText = attributedString
         $0.numberOfLines = 0
     }
     let labelPriceOriginal = UILabel().then {
-        let attributedText = NSAttributedString(string: "50,000", attributes: Style.priceOriginalText)
-        $0.attributedText = attributedText
+        $0.numberOfLines = 1
     }
     let labelPricePercent = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.red1
-        $0.text = "35%"
     }
     let labelPriceDiscount = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.black1
-        $0.text = "32,500"
     }
     let labelCurrency = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.black1
-        $0.text = "원"
     }
 
     // MARK: - Progress
     let buttonDiscountUntil = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_logo_w24h21"), for: .normal)
-        $0.setTitle("40% 할인까지 24명!", for: .normal)
         $0.setTitleColor(Color.black1, for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
         $0.titleLabel?.font = Font.sdB18
@@ -155,36 +149,38 @@ class ItemViewController: BaseViewController, View {
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
     }
+    let viewProgressBackground = UIView().then {
+        $0.backgroundColor = 0xEAEAEA.color
+    }
     var constraintProgressTrailing: NSLayoutConstraint!
 
     // MARK: - Count & Time
     let buttonCount = UIButton().then {
-        let first = NSAttributedString(string: "426명", attributes: Style.countFocusText)
-        let second = NSAttributedString(string: " 참여중", attributes: Style.countNormalText)
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(first)
-        attributedText.append(second)
-        $0.setAttributedTitle(attributedText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_people_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
     let buttonTime = UIButton().then {
-        let first = NSAttributedString(string: "4일 21시간", attributes: Style.countFocusText)
-        let second = NSAttributedString(string: " 남음", attributes: Style.countNormalText)
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(first)
-        attributedText.append(second)
-        $0.setAttributedTitle(attributedText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_clock_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
 
+    // MARK: - Seller
+    let labelSeller = UILabel().then {
+        $0.textColor = Color.black2
+        $0.font = Font.sdB16
+    }
+    let labelReview = UILabel().then {
+        $0.textColor = Color.black2
+        $0.font = Font.sdR12
+    }
+
     // MARK: - Detail
     let imageViewDetail = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
         $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
     }
     var constraintDetailHeight: NSLayoutConstraint!
@@ -238,6 +234,7 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonLike = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_favorite_w48h50"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "image_favorite_selected_w48h50"), for: .selected)
         $0.adjustsImageWhenHighlighted = false
     }
     let buttonSubmit = UIButton().then {
@@ -294,6 +291,17 @@ class ItemViewController: BaseViewController, View {
     }
 
     func bind(reactor: ItemReactor) {
+        setupAction(reactor: reactor)
+        setupState(reactor: reactor)
+    }
+
+    private func setupAction(reactor: ItemReactor) {
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -316,20 +324,21 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
 
+        buttonLike.rx.tap
+            .map { Reactor.Action.likePost }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         buttonScrollToTop.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.tableView.setContentOffset(.zero, animated: true)
             })
             .disposed(by: disposeBag)
 
-        let discounts: [DiscountEntity] = [
-            .init(step: 1, numberOfPeople: 100, discountPercent: 25),
-            .init(step: 2, numberOfPeople: 300, discountPercent: 35),
-            .init(step: 3, numberOfPeople: 500, discountPercent: 45)
-        ]
-
         buttonDiscountInfo.rx.tap
-            .subscribe(onNext: { [weak self] in
+            .withLatestFrom(reactor.state)
+            .compactMap { $0.discounts }
+            .subscribe(onNext: { [weak self] discounts in
                 guard let self = self else { return }
                 let modal = DiscountModalViewController(provider: self.provider, discounts: discounts)
                 self.present(modal, animated: true, completion: nil)
@@ -347,7 +356,7 @@ class ItemViewController: BaseViewController, View {
 
         let isHidden = tableView.rx.contentOffset
             .map { $0.y < 150 }
-            .distinctUntilChanged()
+            .distinctUntilChanged().share()
 
         isHidden
             .bind(to: viewBackground.rx.isHidden)
@@ -361,27 +370,6 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonScrollToTop.rx.isHidden)
             .disposed(by: disposeBag)
 
-        textViewInput.rx.text
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                guard self.isViewLoaded else { return }
-                self.view.setNeedsLayout()
-            })
-            .disposed(by: disposeBag)
-
-        textViewInput.rx.text.orEmpty
-            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
-            .map { !$0.isEmpty }
-            .distinctUntilChanged()
-            .bind(to: buttonSend.rx.isEnabled)
-            .disposed(by: disposeBag)
-
-        textViewInput.rx.text.orEmpty
-            .map { !$0.isEmpty }
-            .distinctUntilChanged()
-            .bind(to: labelInputPlaceholder.rx.isHidden)
-            .disposed(by: disposeBag)
-
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
@@ -390,36 +378,138 @@ class ItemViewController: BaseViewController, View {
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    private func setupState(reactor: ItemReactor) {
+        setupURLsAndDescription(reactor: reactor)
+        setupPrice(reactor: reactor)
+        setupInfoAndSeller(reactor: reactor)
+        setupComments(reactor: reactor)
+    }
 
-        Driver.combineLatest(
-            RxKeyboard.instance.visibleHeight.skip(1),
-            RxKeyboard.instance.visibleHeight
-        )
-            .filter { $0.0 != .zero && $0.1 == .zero }
-            .drive(onNext: { [unowned self] height, _ in
-                let next = self.view.bounds.height - height
-                let current = self.tableView.convert(self.viewInput.frame, to: nil).maxY
-                let offset = current - next
-                let contentOffsetY = self.tableView.contentOffset.y
-                self.tableView.contentOffset = .init(x: 0, y: contentOffsetY + offset)
-            })
+    private func setupURLsAndDescription(reactor: ItemReactor) {
+        reactor.state
+            .compactMap { $0.bannerURL }
+            .distinctUntilChanged()
+            .compactMap(URL.init)
+            .bind(to: imageViewItem.kf.rx.image())
             .disposed(by: disposeBag)
 
-        RxKeyboard.instance.visibleHeight
-            .drive(onNext: { [unowned self] height in
-                let constant = height - self.view.safeAreaInsets.bottom - self.viewBottom.bounds.height
-                self.constraintBottomView?.constant = -max(constant, 0)
-                self.view.layoutIfNeeded()
-            }).disposed(by: disposeBag)
+//        reactor.state
+//            .compactMap { $0.contentURL }
+//            .distinctUntilChanged()
+//            .compactMap(URL.init)
+//            .bind(to: imageViewDetail.kf.rx.image())
+//            .disposed(by: disposeBag)
+//            .flatMap({ imageViewDetail.kf.rx.setImage(with: $0) })
+//            .subscribe(onNext: { [weak self] image in
+//                guard let self = self else { return }
+//                let size = image.size
+//                let ratio = size.height / size.width
+//                let constant = ratio * self.imageViewDetail.bounds.width
+//                self.constraintDetailHeight.constant = constant
+//            })
+//            .disposed(by: disposeBag)
 
-        Observable
-            .just(["1", "2", "3"])
-            .bind(to: tableView.rx.items(Reusable.commentCell)) { index, data, cell in
-                print(index, data, cell)
+        reactor.state
+            .map { $0.title }
+            .distinctUntilChanged()
+            .map { [weak self] in self?.attributedStringFor(title: $0) }
+            .do(onNext: { [weak self] _ in
+                self?.view.setNeedsLayout()
+                self?.view.layoutIfNeeded()
+            })
+            .bind(to: labelItem.rx.attributedText)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.category }
+            .distinctUntilChanged()
+            .bind(to: buttonCategory.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+    }
+    private func setupPrice(reactor: ItemReactor) {
+        reactor.state
+            .map { $0.priceOriginal }
+            .distinctUntilChanged()
+            .map { [weak self] price in self?.attributedStringFor(price: price) }
+            .bind(to: labelPriceOriginal.rx.attributedText)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.pricePercent }
+            .distinctUntilChanged()
+            .bind(to: labelPricePercent.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.priceDiscount }
+            .distinctUntilChanged()
+            .bind(to: labelPriceDiscount.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.discountUntil }
+            .distinctUntilChanged()
+            .bind(to: buttonDiscountUntil.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
+        let viewProgressBackground = self.viewProgressBackground
+        reactor.state
+            .map { $0.percent }
+            .distinctUntilChanged()
+            .map { CGFloat(1 - $0) * viewProgressBackground.bounds.width }
+            .subscribe(onNext: { [weak self] constant in
+                self?.constraintProgressTrailing.constant = constant
+            })
+            .disposed(by: disposeBag)
+    }
+    private func setupInfoAndSeller(reactor: ItemReactor) {
+        reactor.state
+            .map { $0.participants }
+            .distinctUntilChanged()
+            .map { [weak self] in self?.attributedStringFor(number: $0) }
+            .bind(to: buttonCount.rx.attributedTitle(for: .normal))
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.deadline }
+            .distinctUntilChanged()
+            .map { [weak self] in self?.attributedStringFor(time: $0) }
+            .bind(to: buttonTime.rx.attributedTitle(for: .normal))
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.sellerName }
+            .distinctUntilChanged()
+            .bind(to: labelSeller.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.numberOfReview }
+            .distinctUntilChanged()
+            .bind(to: labelReview.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isLiked }
+            .distinctUntilChanged()
+            .bind(to: buttonLike.rx.isSelected)
+            .disposed(by: disposeBag)
+    }
+    private func setupComments(reactor: ItemReactor) {
+        reactor.state
+            .map { $0.comments ?? [] }
+            .bind(to: tableView.rx.items(Reusable.commentCell)) { _, comment, cell in
+                cell.setData(comment: comment)
+                cell.buttonReply.isEnabled = false
                 cell.buttonMore.rx.tap
                     .subscribe(onNext: { [weak self] in
                         self?.presentCommentActionSheet()
                     })
+                    .disposed(by: cell.disposeBag)
+                cell.buttonLike.rx.tap
+                    .map { Reactor.Action.likeComment(comment.commentId) }
+                    .bind(to: reactor.action)
                     .disposed(by: cell.disposeBag)
             }
             .disposed(by: disposeBag)
@@ -434,6 +524,38 @@ class ItemViewController: BaseViewController, View {
         actionSheet.addAction(actionDelete)
         actionSheet.addAction(actionCancel)
         present(actionSheet, animated: true, completion: nil)
+    }
+    private func attributedStringFor(title: String?) -> NSAttributedString? {
+        guard let title = title else { return nil }
+        let attributedText = NSAttributedString(string: title, attributes: Style.itemText)
+        return attributedText
+    }
+    private func attributedStringFor(price: String?) -> NSAttributedString? {
+        guard let price = price else { return nil }
+        let attributedText = NSAttributedString(string: price, attributes: Style.priceOriginalText)
+        return attributedText
+    }
+    private func attributedStringFor(number: Int?) -> NSAttributedString? {
+        guard let number = number else { return nil }
+        if number == 0 {
+            return NSAttributedString(string: "1등으로 참여하기", attributes: Style.countFocusText)
+        } else {
+            let first = NSAttributedString(string: "\(number)명", attributes: Style.countFocusText)
+            let second = NSAttributedString(string: " 참여중", attributes: Style.countNormalText)
+            let attributedText = NSMutableAttributedString()
+            attributedText.append(first)
+            attributedText.append(second)
+            return attributedText
+        }
+    }
+    private func attributedStringFor(time: String?) -> NSAttributedString? {
+        guard let time = time else { return nil }
+        let first = NSAttributedString(string: time, attributes: Style.countFocusText)
+        let second = NSAttributedString(string: " 남음", attributes: Style.countNormalText)
+        let attributedText = NSMutableAttributedString()
+        attributedText.append(first)
+        attributedText.append(second)
+        return attributedText
     }
 }
 
@@ -569,10 +691,6 @@ extension ItemViewController {
             $0.top.equalToSuperview().inset(17)
             $0.trailing.equalToSuperview().inset(18)
         }
-
-        let viewProgressBackground = UIView().then {
-            $0.backgroundColor = 0xEAEAEA.color
-        }
         viewDiscount.addSubview(viewProgressBackground)
         viewProgressBackground.snp.makeConstraints {
             $0.top.equalTo(buttonDiscountUntil.snp.bottom).offset(10)
@@ -649,23 +767,13 @@ extension ItemViewController {
             $0.leading.equalTo(imageViewThumbnail.snp.trailing).offset(8)
             $0.centerY.equalToSuperview().offset(2)
         }
-        let labelTop = UILabel().then {
-            $0.text = "디프만컴파니"
-            $0.textColor = Color.black2
-            $0.font = Font.sdB16
-        }
-        viewText.addSubview(labelTop)
-        labelTop.snp.makeConstraints {
+        viewText.addSubview(labelSeller)
+        labelSeller.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
         }
-        let labelBottom = UILabel().then {
-            $0.text = "467개의 후기"
-            $0.textColor = Color.black2
-            $0.font = Font.sdR12
-        }
-        viewText.addSubview(labelBottom)
-        labelBottom.snp.makeConstraints {
-            $0.top.equalTo(labelTop.snp.bottom).offset(2)
+        viewText.addSubview(labelReview)
+        labelReview.snp.makeConstraints {
+            $0.top.equalTo(labelSeller.snp.bottom).offset(2)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         let buttonEdit = UIButton().then {
