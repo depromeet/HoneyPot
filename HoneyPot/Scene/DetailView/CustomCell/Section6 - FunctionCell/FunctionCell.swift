@@ -20,4 +20,8 @@ class FunctionCell: UITableViewCell {
         participateButton.layer.cornerRadius = 5
         participateButton.backgroundColor = 0xFFC500.color
     }
+    
+    @IBAction func tappedLikeButton(_ sender: UIButton) {
+        print(#function)
+    }
 }

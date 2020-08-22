@@ -8,8 +8,9 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
@@ -17,30 +18,35 @@ class DetailViewController: UIViewController {
         registerXib()
         setupNavigationBar()
     }
+
     func registerXib() {
         let productImageCell = UINib(nibName: "ProductImageCell", bundle: nil)
         let productRelatedCell = UINib(nibName: "ProductRelatedCell", bundle: nil)
-        let progressAndPromoterCell = UINib(nibName: "ProgressAndPromoterCell", bundle: nil)
+        let progressStatusAndPromoterCell = UINib(nibName: "ProgressStatusAndPromoterCell", bundle: nil)
         let productDetailImageCell = UINib(nibName: "ProductDetailImageCell", bundle: nil)
         let commentTopCell = UINib(nibName: "CommentTopCell", bundle: nil)
         let commentCell = UINib(nibName: "CommentCell", bundle: nil)
         let functionCell = UINib(nibName: "FunctionCell", bundle: nil)
+
         tableView.register(productImageCell, forCellReuseIdentifier: "ProductImageCell")
         tableView.register(productRelatedCell, forCellReuseIdentifier: "ProductRelatedCell")
-        tableView.register(progressAndPromoterCell, forCellReuseIdentifier: "ProgressAndPromoterCell")
+        tableView.register(progressStatusAndPromoterCell, forCellReuseIdentifier: "ProgressStatusAndPromoterCell")
         tableView.register(productDetailImageCell, forCellReuseIdentifier: "ProductDetailImageCell")
         tableView.register(commentTopCell, forCellReuseIdentifier: "CommentTopCell")
         tableView.register(commentCell, forCellReuseIdentifier: "CommentCell")
         tableView.register(functionCell, forCellReuseIdentifier: "FunctionCell")
     }
+
     func setupNavigationBar() {
         self.navigationController?.navigationBar.backgroundColor = .systemBackground
     }
 }
+
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 7
     }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 5:
@@ -49,6 +55,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
         }
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -78,6 +85,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:

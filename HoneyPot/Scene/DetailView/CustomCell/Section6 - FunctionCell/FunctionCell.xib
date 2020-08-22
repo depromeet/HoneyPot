@@ -37,6 +37,9 @@
                         <state key="normal" image="image_share_w48h50">
                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="medium"/>
                         </state>
+                        <connections>
+                            <action selector="tappedShareBtn:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="QVn-hr-bFv"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pxd-iZ-lAv">
                         <rect key="frame" x="76" y="16" width="48" height="50"/>
