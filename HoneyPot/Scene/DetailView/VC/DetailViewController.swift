@@ -12,7 +12,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
         registerXib()
+        setupNavigationBar()
     }
     func registerXib() {
         let productImageCell = UINib(nibName: "ProductImageCell", bundle: nil)
@@ -29,6 +32,9 @@ class DetailViewController: UIViewController {
         tableView.register(commentTopCell, forCellReuseIdentifier: "CommentTopCell")
         tableView.register(commentCell, forCellReuseIdentifier: "CommentCell")
         tableView.register(functionCell, forCellReuseIdentifier: "FunctionCell")
+    }
+    func setupNavigationBar() {
+        self.navigationController?.navigationBar.backgroundColor = .systemBackground
     }
 }
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
@@ -81,7 +87,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
         case 2:
             return 200.0
         case 3:
-            return 265.0
+            return 283.0
         case 4:
             return 113.0
         case 5:

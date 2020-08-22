@@ -25,6 +25,7 @@ class CommentCell: UITableViewCell {
     func presentActionSheet() {
         let actionSheet: UIAlertController = UIAlertController(title: "", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "수정", style: .default, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "삭제하기", style: .destructive, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "대댓글 쓰기", style: .default, handler: nil))
         actionSheet.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         delegate!.present(actionSheet, animated: true, completion: nil)

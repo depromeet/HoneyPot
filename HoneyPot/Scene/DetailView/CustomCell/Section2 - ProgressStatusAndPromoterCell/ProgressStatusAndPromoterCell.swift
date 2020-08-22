@@ -14,4 +14,12 @@ class ProgressStatusAndPromoterCell: UITableViewCell {
     @IBOutlet weak var insufficientPersonCount: UILabel!
     @IBOutlet weak var discountGuideButton: UIButton!
     @IBOutlet weak var progressView: UIProgressView!
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        setupDiscountGuideButton()
+    }
+    func setupDiscountGuideButton() {
+        discountGuideButton.backgroundColor = 0xF8F8F8.color
+        discountGuideButton.layer.cornerRadius = 5
+    }
 }
