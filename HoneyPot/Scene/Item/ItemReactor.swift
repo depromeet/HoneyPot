@@ -103,7 +103,14 @@ final class ItemReactor: Reactor {
                 state.pricePercent = nil
                 state.priceDiscount = priceOriginal
             }
-            if let next = description.nextDiscount {
+            if description.isClosed,
+                let date = description.deadlineDate {
+                let next = date.addingTimeInterval(60*60*24)
+                let calendar = Calendar(identifier: .gregorian)
+                let month = calendar.component(.month, from: next)
+                let day = calendar.component(.day, from: next)
+                state.discountUntil = "\(month)월 \(day)일 출고 예정"
+            } else if let next = description.nextDiscount {
                 let percent = next.discountPercent
                 let number = next.numberOfPeople - description.participants
                 state.discountUntil = "\(percent)% 할인까지 \(number)명!"
