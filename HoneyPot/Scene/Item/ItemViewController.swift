@@ -639,7 +639,7 @@ extension ItemViewController {
         viewBackground.addSubview(viewText)
         viewText.snp.makeConstraints {
             $0.leading.equalTo(imageViewThumbnail.snp.trailing).offset(8)
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(2)
         }
         let labelTop = UILabel().then {
             $0.text = "디프만컴파니"
