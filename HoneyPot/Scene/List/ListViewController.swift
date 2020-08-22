@@ -42,7 +42,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
     }
 
     lazy var navigationBar = NavigationBar(
-        title: "",
         leftView: buttonBack
     ).then {
         $0.backgroundColor = .clear

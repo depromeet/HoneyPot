@@ -68,13 +68,11 @@ class NavigationBar: UIView {
                 $0.width.equalTo(rightView.snp.height)
             }
         }
-        if let title = title {
-            labelTitle.text = title
-            addSubview(labelTitle)
-            labelTitle.snp.makeConstraints {
-                $0.leading.trailing.equalToSuperview().inset(49)
-                $0.centerY.equalToSuperview()
-            }
+        labelTitle.text = title
+        addSubview(labelTitle)
+        labelTitle.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(49)
+            $0.centerY.equalToSuperview()
         }
     }
 }
