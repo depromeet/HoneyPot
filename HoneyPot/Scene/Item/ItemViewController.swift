@@ -242,10 +242,18 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonSubmit = UIButton().then {
         $0.setTitle("참여하기", for: .normal)
-        $0.setBackgroundImage(#imageLiteral(resourceName: "image_submit"), for: .normal)
+        $0.setTitle("참여중", for: .selected)
+        $0.setTitle("마감된 상품입니다", for: .disabled)
+        $0.setTitle("마감된 상품입니다", for: [.disabled, .selected])
+        $0.setTitleColor(0xFFC500.color, for: .selected)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_yellow"), for: .normal)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_bordered_yellow"), for: .selected)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: .disabled)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: [.disabled, .selected])
         $0.titleLabel?.font = Font.godoB16
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
+        $0.adjustsImageWhenDisabled = false
     }
     let buttonSharePopUp = UIButton().then {
         $0.setTitle("소문내고 더 할인받기", for: .normal)
