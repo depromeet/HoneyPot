@@ -109,12 +109,12 @@ final class ItemReactor: Reactor {
                 state.percent = max(min(current, 1), 0)
             }
             state.participants = description.participants
-            state.deadline = formattedDate(dateString: description.deadline)
+            state.deadline = formattedDate(date: description.deadlineDate)
             let seller = post.seller
             state.sellerName = seller.name
             state.numberOfReview = "\(seller.numberOfReview)개의 후기"
             state.isLiked = true
-            state.isClosed = true
+            state.isClosed = description.isClosed
             state.isParticipating = false
         case .setLike(let isLiked):
             state.isLiked = isLiked
@@ -134,10 +134,8 @@ final class ItemReactor: Reactor {
         formatter.numberStyle = .decimal
         return formatter.string(from: .init(value: 50000))
     }
-    private func formattedDate(dateString: String) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        guard let date = formatter.date(from: dateString) else { return nil }
+    private func formattedDate(date: Date?) -> String? {
+        guard let date = date else { return nil }
         let interval = Int(round(date.timeIntervalSinceNow))
         let minute = 60
         let hour = minute * 60
