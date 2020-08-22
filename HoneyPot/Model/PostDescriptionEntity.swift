@@ -19,4 +19,18 @@ struct PostDescriptionEntity: Decodable {
     let participants: Int
     let numberOfGoal: Int
     let deadline: String
+
+    var deadlineDate: Date? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return formatter.date(from: deadline)
+    }
+    var isClosed: Bool {
+        let current = Date()
+        if let date = deadlineDate {
+            return current > date
+        } else {
+            return false
+        }
+    }
 }
