@@ -32,6 +32,7 @@ class ItemViewController: BaseViewController, View {
         static let sdB24 = UIFont(name: "AppleSDGothicNeo-Bold", size: 24)!
         static let sdB18 = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)!
         static let sdB16 = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)!
+        static let sdB14 = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)!
         static let sdB12 = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
     }
     private enum Metric {
@@ -56,12 +57,12 @@ class ItemViewController: BaseViewController, View {
         ]
         static let countNormalText: [NSAttributedString.Key: Any] = [
             .kern: -0.3,
-            .font: Font.sdR12,
+            .font: Font.sdR14,
             .foregroundColor: Color.lightGray3
         ]
         static let countFocusText: [NSAttributedString.Key: Any] = [
             .kern: -0.3,
-            .font: Font.sdB12,
+            .font: Font.sdB14,
             .foregroundColor: Color.lightGray3
         ]
     }
@@ -81,11 +82,6 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
-    }
-    let labelTitle = UILabel().then {
-        $0.textColor = Color.black1
-        $0.font = Font.sdB16
-        $0.text = "테이블팬 C820 (3 Colors)"
     }
 
     let tableView = UITableView().then {
@@ -246,10 +242,18 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonSubmit = UIButton().then {
         $0.setTitle("참여하기", for: .normal)
-        $0.setBackgroundImage(#imageLiteral(resourceName: "image_submit"), for: .normal)
+        $0.setTitle("참여중", for: .selected)
+        $0.setTitle("마감된 상품입니다", for: .disabled)
+        $0.setTitle("마감된 상품입니다", for: [.disabled, .selected])
+        $0.setTitleColor(0xFFC500.color, for: .selected)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_yellow"), for: .normal)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_bordered_yellow"), for: .selected)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: .disabled)
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: [.disabled, .selected])
         $0.titleLabel?.font = Font.godoB16
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
+        $0.adjustsImageWhenDisabled = false
     }
     let buttonSharePopUp = UIButton().then {
         $0.setTitle("소문내고 더 할인받기", for: .normal)
@@ -296,6 +300,17 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        buttonShare.rx.tap
+            .withLatestFrom(reactor.state.map { $0.itemID })
+            .compactMap { $0 }
+            .map { "honeypot://item/\($0)" }
+            .map { ([$0], nil) }
+            .map(UIActivityViewController.init)
+            .subscribe(onNext: { [weak self] activity in
+                self?.present(activity, animated: true, completion: nil)
+            })
+            .disposed(by: disposeBag)
+
         buttonSharePopUp.rx.tap
             .map { true }
             .bind(to: buttonSharePopUp.rx.isHidden)
@@ -321,6 +336,15 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
+        buttonRedirect.rx.tap
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else { return }
+                let id = reactor.currentState.itemID
+                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
+                self.navigationController?.pushViewController(viewController, animated: true)
+            })
+            .disposed(by: disposeBag)
+
         let isHidden = tableView.rx.contentOffset
             .map { $0.y < 150 }
             .distinctUntilChanged()
@@ -330,7 +354,7 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         isHidden
-            .bind(to: labelTitle.rx.isHidden)
+            .bind(to: navigationBar.labelTitle.rx.isHidden)
             .disposed(by: disposeBag)
 
         isHidden
@@ -360,15 +384,6 @@ class ItemViewController: BaseViewController, View {
 
         tableView.rx.itemSelected
             .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                let id = reactor.currentState.itemID
-                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
-                self.navigationController?.pushViewController(viewController, animated: true)
-            })
-            .disposed(by: disposeBag)
-
-        buttonRedirect.rx.tap
-            .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
                 let id = reactor.currentState.itemID
                 let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
@@ -429,12 +444,6 @@ extension ItemViewController {
         navigationBar.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
-        }
-        navigationBar.addSubview(labelTitle)
-        labelTitle.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(52)
-            $0.trailing.equalToSuperview().inset(9)
-            $0.centerY.equalToSuperview()
         }
         view.insertSubview(viewBackground, belowSubview: navigationBar)
         viewBackground.snp.makeConstraints {
@@ -638,7 +647,7 @@ extension ItemViewController {
         viewBackground.addSubview(viewText)
         viewText.snp.makeConstraints {
             $0.leading.equalTo(imageViewThumbnail.snp.trailing).offset(8)
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(2)
         }
         let labelTop = UILabel().then {
             $0.text = "디프만컴파니"
@@ -767,7 +776,8 @@ extension ItemViewController {
         }
         viewBottom.addSubview(viewSeparator)
         viewSeparator.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.equalToSuperview().offset(-1)
+            $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
         view.addSubview(buttonSharePopUp)

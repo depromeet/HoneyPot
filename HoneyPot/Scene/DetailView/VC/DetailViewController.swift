@@ -36,7 +36,6 @@ class DetailViewController: BaseViewController {
         tableView.register(commentCell, forCellReuseIdentifier: "CommentCell")
         tableView.register(functionCell, forCellReuseIdentifier: "FunctionCell")
     }
-
     func setupNavigationBar() {
         self.navigationController?.navigationBar.backgroundColor = .systemBackground
     }

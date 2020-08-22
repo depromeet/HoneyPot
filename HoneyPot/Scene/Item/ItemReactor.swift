@@ -12,7 +12,7 @@ import ReactorKit
 final class ItemReactor: Reactor {
     let provider: ServiceProviderType
 
-    init(provider: ServiceProviderType, itemID: String) {
+    init(provider: ServiceProviderType, itemID: Int) {
         self.provider = provider
         self.initialState = State(itemID: itemID)
     }
@@ -20,7 +20,7 @@ final class ItemReactor: Reactor {
     var initialState: State
 
     struct State {
-        let itemID: String
+        let itemID: Int
     }
     enum Action {
     }

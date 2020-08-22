@@ -42,7 +42,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
     }
 
     lazy var navigationBar = NavigationBar(
-        title: "",
         leftView: buttonBack
     ).then {
         $0.backgroundColor = .clear
@@ -115,7 +114,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         tableView.rx.modelSelected(String.self)
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                let viewController = ItemViewController(reactor: .init(provider: self.provider, itemID: ""))
+                let viewController = ItemViewController(reactor: .init(provider: self.provider, itemID: 1))
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
