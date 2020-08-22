@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "image_submit.png",
+      "filename" : "image_background_yellow.png",
       "idiom" : "universal",
       "resizing" : {
         "cap-insets" : {
@@ -17,7 +17,7 @@
       "scale" : "1x"
     },
     {
-      "filename" : "image_submit@2x.png",
+      "filename" : "image_background_yellow@2x.png",
       "idiom" : "universal",
       "resizing" : {
         "cap-insets" : {
@@ -33,7 +33,7 @@
       "scale" : "2x"
     },
     {
-      "filename" : "image_submit@3x.png",
+      "filename" : "image_background_yellow@3x.png",
       "idiom" : "universal",
       "resizing" : {
         "cap-insets" : {
