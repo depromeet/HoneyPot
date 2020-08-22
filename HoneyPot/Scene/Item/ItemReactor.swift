@@ -36,6 +36,7 @@ final class ItemReactor: Reactor {
         var sellerName: String?
         var numberOfReview: String?
         var comments: [CommentEntity]?
+        var commentText: String?
         var isLiked: Bool = false
         var isClosed: Bool = false
         var isParticipating: Bool = false
@@ -82,6 +83,11 @@ final class ItemReactor: Reactor {
             state.bannerURL = post.bannerUrl
             state.contentURL = post.contentUrl
             state.comments = post.comments
+            if post.comments.isEmpty {
+                state.commentText = "가장 먼저 댓글을 남겨보세요"
+            } else {
+                state.commentText = "\(post.comments.count)"
+            }
             let description = post.description
             state.title = description.title
             state.category = description.category

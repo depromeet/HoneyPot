@@ -191,7 +191,6 @@ class ItemViewController: BaseViewController, View {
     }
     let buttonComment = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w24h24"), for: .normal)
-        $0.setTitle("56", for: .normal)
         $0.setTitleColor(Color.lightGray1, for: .normal)
         $0.titleLabel?.font = Font.sdB16
         $0.titleEdgeInsets = .init(top: 1, left: 2, bottom: 0, right: -2)
@@ -213,6 +212,7 @@ class ItemViewController: BaseViewController, View {
         $0.setImage(#imageLiteral(resourceName: "icon_write_selected_w16h16"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .disabled)
         $0.adjustsImageWhenHighlighted = false
+        $0.isEnabled = false
     }
     let labelInputPlaceholder = UILabel().then {
         $0.font = Font.sdR14
@@ -514,6 +514,12 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
     }
     private func setupComments(reactor: ItemReactor) {
+        reactor.state
+            .map { $0.commentText }
+            .distinctUntilChanged()
+            .bind(to: buttonComment.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
         reactor.state
             .map { $0.comments ?? [] }
             .bind(to: tableView.rx.items(Reusable.commentCell)) { [weak self] _, comment, cell in
