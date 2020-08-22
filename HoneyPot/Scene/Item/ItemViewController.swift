@@ -500,6 +500,18 @@ class ItemViewController: BaseViewController, View {
             .distinctUntilChanged()
             .bind(to: buttonLike.rx.isSelected)
             .disposed(by: disposeBag)
+
+        reactor.state
+            .map { !$0.isClosed }
+            .distinctUntilChanged()
+            .bind(to: buttonSubmit.rx.isEnabled)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isParticipating }
+            .distinctUntilChanged()
+            .bind(to: buttonSubmit.rx.isSelected)
+            .disposed(by: disposeBag)
     }
     private func setupComments(reactor: ItemReactor) {
         reactor.state
