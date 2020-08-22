@@ -394,21 +394,20 @@ class ItemViewController: BaseViewController, View {
             .bind(to: imageViewItem.kf.rx.image())
             .disposed(by: disposeBag)
 
-//        reactor.state
-//            .compactMap { $0.contentURL }
-//            .distinctUntilChanged()
-//            .compactMap(URL.init)
-//            .bind(to: imageViewDetail.kf.rx.image())
-//            .disposed(by: disposeBag)
-//            .flatMap({ imageViewDetail.kf.rx.setImage(with: $0) })
-//            .subscribe(onNext: { [weak self] image in
-//                guard let self = self else { return }
-//                let size = image.size
-//                let ratio = size.height / size.width
-//                let constant = ratio * self.imageViewDetail.bounds.width
-//                self.constraintDetailHeight.constant = constant
-//            })
-//            .disposed(by: disposeBag)
+        let imageViewDetail = self.imageViewDetail
+        reactor.state
+            .compactMap { $0.contentURL }
+            .distinctUntilChanged()
+            .compactMap(URL.init)
+            .flatMap({ imageViewDetail.kf.rx.setImage(with: $0) })
+            .subscribe(onNext: { [weak self] image in
+                guard let self = self else { return }
+                let size = image.size
+                let ratio = size.height / size.width
+                let constant = ratio * self.imageViewDetail.bounds.width
+                self.constraintDetailHeight.constant = constant
+            })
+            .disposed(by: disposeBag)
 
         reactor.state
             .map { $0.title }
