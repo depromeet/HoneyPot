@@ -37,6 +37,8 @@ final class ItemReactor: Reactor {
         var numberOfReview: String?
         var comments: [CommentEntity]?
         var isLiked: Bool = false
+        var isClosed: Bool = false
+        var isParticipating: Bool = false
     }
     enum Action {
         case refresh
@@ -111,6 +113,9 @@ final class ItemReactor: Reactor {
             let seller = post.seller
             state.sellerName = seller.name
             state.numberOfReview = "\(seller.numberOfReview)개의 후기"
+            state.isLiked = true
+            state.isClosed = true
+            state.isParticipating = false
         case .setLike(let isLiked):
             state.isLiked = isLiked
         case .setComment(let comment):
