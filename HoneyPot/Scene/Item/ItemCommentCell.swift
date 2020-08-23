@@ -37,14 +37,13 @@ class ItemCommentCell: BaseTableViewCell {
         $0.backgroundColor = .clear
     }
     let viewBottom = UIView().then {
-        $0.backgroundColor = .red
+        $0.backgroundColor = .clear
         $0.isHidden = true
     }
 
-    let labelBottom = UILabel().then {
-        $0.text = "이전 대댓글 2개 더 보기"
-        $0.textColor = Color.mainText
-        $0.font = Font.extraText
+    let buttonBottom = UIButton().then {
+        $0.setTitleColor(Color.mainText, for: .normal)
+        $0.titleLabel?.font = Font.extraText
     }
 
     let labelUsername = UILabel().then {
@@ -118,8 +117,8 @@ class ItemCommentCell: BaseTableViewCell {
             $0.top.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }
-        viewBottom.addSubview(labelBottom)
-        labelBottom.snp.makeConstraints {
+        viewBottom.addSubview(buttonBottom)
+        buttonBottom.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview().offset(1)
         }
@@ -140,7 +139,7 @@ class ItemCommentCell: BaseTableViewCell {
         setupAction()
     }
 
-    func setData(comment: CommentEntity) {
+    func setData(comment: CommentEntity, shouldShowBottom: Bool = false) {
         labelUsername.text = comment.author.name
         labelTime.text = formattedDate(dateString: comment.createdDate)
         let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
@@ -148,6 +147,13 @@ class ItemCommentCell: BaseTableViewCell {
         buttonLike.isSelected = comment.liked
         buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
         buttonComment.setTitle("\(comment.numberOfSubComments)", for: .normal)
+        viewBottom.isHidden = !shouldShowBottom && comment.numberOfSubComments != 0
+        let number = comment.numberOfSubComments - comment.comments.count
+        if number == 0 {
+            buttonBottom.setTitle("대댓글 접기", for: .normal)
+        } else {
+            buttonBottom.setTitle("이전 대댓글 \(number)개 더 보기", for: .normal)
+        }
     }
 
     private func formattedDate(dateString: String) -> String? {
