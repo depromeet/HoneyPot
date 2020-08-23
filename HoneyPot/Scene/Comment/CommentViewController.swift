@@ -11,6 +11,7 @@ import ReactorKit
 import RxSwift
 import RxCocoa
 import RxKeyboard
+import RxDataSources
 import ReusableKit
 
 class CommentViewController: BaseViewController, View {
@@ -69,6 +70,15 @@ class CommentViewController: BaseViewController, View {
     }
     var constraintInputBottom: NSLayoutConstraint!
 
+    let refreshControl = UIRefreshControl().then {
+        $0.backgroundColor = .clear
+    }
+    let activityIndicator = UIActivityIndicatorView(
+        frame: .init(x: 0, y: 0, width: 0, height: 100)
+    ).then {
+        $0.hidesWhenStopped = true
+    }
+
     init(reactor: CommentReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
@@ -84,6 +94,11 @@ class CommentViewController: BaseViewController, View {
     }
 
     func bind(reactor: CommentReactor) {
+        bindView(reactor: reactor)
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
+    }
+    private func bindView(reactor: CommentReactor) {
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -103,24 +118,42 @@ class CommentViewController: BaseViewController, View {
             .bind(to: labelInputPlaceholder.rx.isHidden)
             .disposed(by: disposeBag)
 
-        Observable
-            .just(["1", "2", "3", "4", "5", "6", "7", "8"])
-            .bind(to: tableView.rx.items(Reusable.subCommentCell)) {  [weak self] index, data, cell in
-                print(index, data, cell)
-                cell.buttonMore.rx.tap
-                    .subscribe(onNext: {
-                        self?.presentCommentActionSheet()
-                    })
-                    .disposed(by: cell.disposeBag)
-            }
-            .disposed(by: disposeBag)
-
         RxKeyboard.instance.visibleHeight
             .drive(onNext: { [unowned self] height in
                 let constant = height - self.view.safeAreaInsets.bottom
                 self.constraintInputBottom?.constant = -max(constant, 0)
                 self.view.layoutIfNeeded()
             })
+            .disposed(by: disposeBag)
+    }
+    private func bindAction(reactor: CommentReactor) {
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        refreshControl.rx.controlEvent(.valueChanged)
+            .map { Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        let tableView = self.tableView
+
+        tableView.rx.contentOffset
+            .skip(1)
+            .map { $0.y >= tableView.contentSize.height - tableView.bounds.height }
+            .distinctUntilChanged()
+            .map { _ in Reactor.Action.load }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    private func bindState(reactor: CommentReactor) {
+        reactor.state
+            .map { $0.isRefreshing }
+            .distinctUntilChanged()
+            .filter { !$0 }
+            .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
     }
 
@@ -159,6 +192,8 @@ extension CommentViewController {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
+        tableView.refreshControl = refreshControl
+        tableView.tableFooterView = activityIndicator
     }
     private func setupInputView() {
         view.addSubview(viewInput)
