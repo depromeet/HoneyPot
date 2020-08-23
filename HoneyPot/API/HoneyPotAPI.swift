@@ -15,6 +15,7 @@ enum HoneyPotAPI {
     case posts(String, String, String)
     case post(Int)
     case postLike(Int)
+    case comments(Int, Int)
     case commentAdd(Int, Int?, String, String)
     case commentRemove(Int)
     case commentLike(Int)
@@ -36,6 +37,8 @@ extension HoneyPotAPI: SugarTargetType {
             return .get("/posts/\(id)")
         case .postLike(let id):
             return .post("/posts/\(id)/like")
+        case .comments(let id, _):
+            return .get("/posts/\(id)/comments/detail")
         case .commentAdd:
             return .post("/comments")
         case .commentRemove(let id):
@@ -60,6 +63,12 @@ extension HoneyPotAPI: SugarTargetType {
             return nil
         case .postLike:
             return nil
+        case .comments(_, let index):
+            let values: [String: Any] = [
+                "page": index,
+                "size": 10
+            ]
+            return .init(encoding: URLEncoding(), values: values)
         case .commentAdd(let postID, let commentID, let userID, let content):
             var values: [String: Any] = [
                 "postId": postID,

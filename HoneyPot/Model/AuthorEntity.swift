@@ -9,6 +9,6 @@
 import Foundation
 
 struct AuthorEntity: Decodable {
-    let userId: Int
+    let userId: String
     let name: String
 }

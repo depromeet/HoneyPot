@@ -15,6 +15,7 @@ struct CommentEntity: Decodable {
     let numberOfWish: Int
     let numberOfSubComments: Int
     let createdDate: String
+    let comments: [CommentEntity]
     var liked: Bool
 }
 
