@@ -37,12 +37,10 @@ class ItemSubCommentCell: BaseTableViewCell {
     }
 
     let labelUsername = UILabel().then {
-        $0.text = "노은종"
         $0.textColor = Color.mainText
         $0.font = Font.usernameText
     }
     let labelTime = UILabel().then {
-        $0.text = "10분 전"
         $0.textColor = Color.subText
         $0.font = Font.extraText
     }
@@ -51,13 +49,10 @@ class ItemSubCommentCell: BaseTableViewCell {
     }
 
     let labelContent = UILabel().then {
-        let attributedString = NSAttributedString(string: "선풍기는 시원하고 시원한건 아이스크림 아이스크림 메로나", attributes: Style.contentText)
-        $0.attributedText = attributedString
         $0.numberOfLines = 0
     }
 
     let buttonLike = UIButton().then {
-        $0.setTitle("1", for: .normal)
         $0.setTitleColor(Color.subText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_like_normal_w16h16"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_like_selected_w16h16"), for: .selected)
@@ -93,9 +88,42 @@ class ItemSubCommentCell: BaseTableViewCell {
         setupAction()
     }
 
-    func setContentText(text: String) {
-        let attributedString = NSAttributedString(string: text, attributes: Style.contentText)
+    func setData(comment: CommentEntity) {
+        labelUsername.text = comment.author.name
+        labelTime.text = formattedDate(dateString: comment.createdDate)
+        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
         labelContent.attributedText = attributedString
+        buttonLike.isSelected = comment.liked
+        buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
+    }
+
+    private func formattedDate(dateString: String) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        guard let date = formatter.date(from: dateString) else { return nil }
+        let interval = Int(round(abs(date.timeIntervalSinceNow)))
+        let minute = 60
+        let hour = minute * 60
+        let day = hour * 24
+
+        let numberOfDaysLeft = interval / day
+        let numberOfHoursLeft = interval % day / hour
+        let numberOfMinutesLeft = interval % day % hour / minute
+
+        if numberOfDaysLeft > 7 {
+            let calendar = Calendar(identifier: .gregorian)
+            let month = calendar.component(.month, from: date)
+            let day = calendar.component(.day, from: date)
+            return "\(month).\(day)"
+        } else if numberOfDaysLeft > 0 {
+            return "\(numberOfDaysLeft)일 전"
+        } else if numberOfHoursLeft > 0 {
+            return "\(numberOfHoursLeft)시간 전"
+        } else if numberOfMinutesLeft > 0 {
+            return "\(numberOfMinutesLeft)분 전"
+        } else {
+            return "방금 전"
+        }
     }
 }
 
