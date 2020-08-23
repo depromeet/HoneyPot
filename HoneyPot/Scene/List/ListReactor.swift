@@ -12,9 +12,13 @@ import ReactorKit
 final class ListReactor: Reactor {
     let provider: ServiceProviderType
 
-    init(provider: ServiceProviderType, keyword: String = "") {
+    init(
+        provider: ServiceProviderType,
+        keyword: String = "",
+        category: String = ""
+    ) {
         self.provider = provider
-        self.initialState = State(keyword: keyword)
+        self.initialState = State(keyword: keyword, category: category)
     }
 
     // MARK: - Reactor
@@ -22,6 +26,7 @@ final class ListReactor: Reactor {
 
     struct State {
         let keyword: String
+        var category: String
         let sortList: [SortKind] = SortKind.allCases
         var sortIndex: Int = 0
         var sortTitle: String = SortKind.suggestion.title

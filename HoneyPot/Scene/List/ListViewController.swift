@@ -20,7 +20,11 @@ import SnapKit
 import Then
 
 enum SortKind: String, CaseIterable {
-    case suggestion, popular, recent, closing, cheap
+    case suggestion = "RECOMMEND"
+    case popular = "LIKE"
+    case recent = "NEW"
+    case closing = "CLOSE"
+    case cheap = "PRICE"
 
     var title: String {
         switch self {
