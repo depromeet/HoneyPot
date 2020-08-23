@@ -56,6 +56,9 @@ class ItemCell: BaseTableViewCell {
     let viewContainer = UIView().then {
         $0.backgroundColor = .clear
     }
+    let viewProgressBackground = UIView().then {
+        $0.backgroundColor = 0xEAEAEA.color
+    }
 
     let imageViewItem = UIImageView().then {
         $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
@@ -67,7 +70,6 @@ class ItemCell: BaseTableViewCell {
     let buttonLike = UIButton().then {
         $0.isUserInteractionEnabled = false
         $0.setImage(#imageLiteral(resourceName: "icon_heart_w16h16"), for: .normal)
-        $0.setTitle("302", for: .normal)
         $0.setTitleColor(Color.likeCommentTitle, for: .normal)
         $0.titleLabel?.font = Font.sdB12
         $0.backgroundColor = .white
@@ -79,7 +81,6 @@ class ItemCell: BaseTableViewCell {
     let buttonComment = UIButton().then {
         $0.isUserInteractionEnabled = false
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w16h16"), for: .normal)
-        $0.setTitle("13", for: .normal)
         $0.setTitleColor(Color.likeCommentTitle, for: .normal)
         $0.titleLabel?.font = Font.sdB12
         $0.backgroundColor = .white
@@ -90,36 +91,21 @@ class ItemCell: BaseTableViewCell {
     }
 
     let labelTitle = UILabel().then {
-        let attributedString = NSAttributedString(string: "테이블팬 C820 (3 Colors)", attributes: Style.itemText)
-        $0.attributedText = attributedString
         $0.numberOfLines = 2
     }
     let labelCategory = UILabel().then {
         $0.textColor = Color.categoryTitle
         $0.font = Font.sdR16
-        $0.text = "가전  I  플러스마이너스제로"
     }
     var constraintProgressTrailing: NSLayoutConstraint!
 
     let buttonCount = UIButton().then {
-        let first = NSAttributedString(string: "426명", attributes: Style.countFocusText)
-        let second = NSAttributedString(string: " 참여중", attributes: Style.countNormalText)
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(first)
-        attributedText.append(second)
-        $0.setAttributedTitle(attributedText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_people_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 0, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
     let buttonTime = UIButton().then {
-        let first = NSAttributedString(string: "4일 21시간", attributes: Style.countFocusText)
-        let second = NSAttributedString(string: " 남음", attributes: Style.countNormalText)
-        let attributedText = NSMutableAttributedString()
-        attributedText.append(first)
-        attributedText.append(second)
-        $0.setAttributedTitle(attributedText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_clock_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 0, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
@@ -128,12 +114,10 @@ class ItemCell: BaseTableViewCell {
     let labelPricePercent = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.priceFocusedTitle
-        $0.text = "35%"
     }
     let labelPriceDiscount = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.mainTitle
-        $0.text = "32,500"
     }
     let labelCurrency = UILabel().then {
         $0.font = Font.sdR14
@@ -143,7 +127,6 @@ class ItemCell: BaseTableViewCell {
     let labelOverview = UILabel().then {
         $0.textColor = Color.likeCommentTitle
         $0.font = Font.sdR12
-        $0.text = "40% 할인까지 24명!"
     }
 
     override func initialize() {
@@ -163,6 +146,95 @@ class ItemCell: BaseTableViewCell {
         setupInfo()
     }
 
+    func setData(item: ItemEntity) {
+        layoutIfNeeded()
+
+        imageViewItem.kf.setImage(with: URL(string: item.thumbnail))
+        buttonLike.setTitle("\(item.numberOfWish)", for: .normal)
+        buttonComment.setTitle("\(item.numberOfComment)", for: .normal)
+        buttonLike.isHidden = item.numberOfWish == 0
+        buttonComment.isHidden = item.numberOfComment == 0
+
+        let attributedString = NSAttributedString(string: item.title, attributes: Style.itemText)
+        labelTitle.attributedText = attributedString
+        labelCategory.text = "\(item.category)  I  \(item.sellerName)"
+
+        let ratio = CGFloat(item.participants) / CGFloat(item.numberOfGoal)
+        let constant = (1 - ratio) * viewProgressBackground.bounds.width
+        constraintProgressTrailing.constant = constant
+
+        buttonCount.setAttributedTitle(attributedStringFor(number: item.participants), for: .normal)
+        buttonTime.setAttributedTitle(attributedStringFor(time: formattedDate(date: item.deadlineDate)), for: .normal)
+        buttonTime.isHidden = item.isClosed
+
+        var price = item.price
+        if let now = item.nowDiscount {
+            price -= price * now.discountPercent / 100
+            labelPricePercent.text = "\(now.discountPercent)%"
+        } else {
+            labelPricePercent.text = nil
+        }
+        labelPriceDiscount.text = formattedPrice(price: price)
+
+        if let next = item.nextDiscount {
+            let percent = next.discountPercent
+            let number = next.numberOfPeople - item.participants
+            labelOverview.text = "\(percent)% 할인까지 \(number)명!"
+        } else {
+            labelOverview.text = nil
+        }
+    }
+
+    private func attributedStringFor(number: Int?) -> NSAttributedString? {
+        guard let number = number else { return nil }
+        if number == 0 {
+            return NSAttributedString(string: "1등으로 참여하기", attributes: Style.countFocusText)
+        } else {
+            let first = NSAttributedString(string: "\(number)명", attributes: Style.countFocusText)
+            let second = NSAttributedString(string: " 참여중", attributes: Style.countNormalText)
+            let attributedText = NSMutableAttributedString()
+            attributedText.append(first)
+            attributedText.append(second)
+            return attributedText
+        }
+    }
+    private func attributedStringFor(time: String?) -> NSAttributedString? {
+        guard let time = time else { return nil }
+        let first = NSAttributedString(string: time, attributes: Style.countFocusText)
+        let second = NSAttributedString(string: " 남음", attributes: Style.countNormalText)
+        let attributedText = NSMutableAttributedString()
+        attributedText.append(first)
+        attributedText.append(second)
+        return attributedText
+    }
+    private func formattedPrice(price: Int) -> String? {
+        let formatter = NumberFormatter()
+        formatter.decimalSeparator = ","
+        formatter.numberStyle = .decimal
+        return formatter.string(from: .init(value: price))
+    }
+    private func formattedDate(date: Date?) -> String? {
+        guard let date = date else { return nil }
+        let interval = Int(round(date.timeIntervalSinceNow))
+        let minute = 60
+        let hour = minute * 60
+        let day = hour * 24
+
+        let numberOfDaysLeft = interval / day
+        let numberOfHoursLeft = interval % day / hour
+        let numberOfMinutesLeft = interval % day % hour / minute
+
+        if numberOfDaysLeft > 0 {
+            return "\(numberOfDaysLeft)일 \(numberOfHoursLeft)시간"
+        } else if numberOfHoursLeft > 0 {
+            return "\(numberOfHoursLeft)시간 \(numberOfMinutesLeft)분"
+        } else {
+            return "\(numberOfMinutesLeft)분"
+        }
+    }
+}
+
+extension ItemCell {
     private func setupImageView() {
         viewContainer.addSubview(imageViewItem)
         imageViewItem.snp.makeConstraints {
@@ -196,9 +268,6 @@ class ItemCell: BaseTableViewCell {
         }
     }
     private func setupProgress() {
-        let viewProgressBackground = UIView().then {
-            $0.backgroundColor = 0xEAEAEA.color
-        }
         viewContainer.addSubview(viewProgressBackground)
         viewProgressBackground.snp.makeConstraints {
             $0.top.equalTo(labelCategory.snp.bottom).offset(10)
@@ -218,7 +287,7 @@ class ItemCell: BaseTableViewCell {
     private func setupInfo() {
         viewContainer.addSubview(buttonCount)
         buttonCount.snp.makeConstraints {
-            $0.top.equalTo(labelCategory.snp.bottom).offset(25)
+            $0.top.equalTo(labelCategory.snp.bottom).offset(25).priority(999)
             $0.leading.equalToSuperview().inset(Metric.leadingOffset)
             $0.height.equalTo(18)
         }

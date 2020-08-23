@@ -80,6 +80,11 @@ class ListViewController: BaseViewController, ReactorKit.View {
     }
 
     func bind(reactor: ListReactor) {
+        setupAction(reactor: reactor)
+        setupState(reactor: reactor)
+    }
+
+    private func setupAction(reactor: ListReactor) {
         rx.viewWillAppear
             .take(1)
             .map { _ in Reactor.Action.refresh }
@@ -118,7 +123,8 @@ class ListViewController: BaseViewController, ReactorKit.View {
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
-
+    }
+    private func setupState(reactor: ListReactor) {
         reactor.state
             .map { $0.sortTitle }
             .distinctUntilChanged()
@@ -131,8 +137,8 @@ class ListViewController: BaseViewController, ReactorKit.View {
         reactor.state
             .map { $0.items }
             .distinctUntilChanged()
-            .bind(to: tableView.rx.items(Reusable.itemCell)) { i, item, cell in
-                print(i, item, cell)
+            .bind(to: tableView.rx.items(Reusable.itemCell)) { _, item, cell in
+                cell.setData(item: item)
             }
             .disposed(by: disposeBag)
 
