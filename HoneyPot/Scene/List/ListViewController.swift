@@ -93,11 +93,11 @@ class ListViewController: BaseViewController, ReactorKit.View {
     }
 
     func bind(reactor: ListReactor) {
-        setupAction(reactor: reactor)
-        setupState(reactor: reactor)
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
     }
 
-    private func setupAction(reactor: ListReactor) {
+    private func bindAction(reactor: ListReactor) {
         rx.viewWillAppear
             .take(1)
             .map { _ in Reactor.Action.refresh }
@@ -153,7 +153,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
     }
-    private func setupState(reactor: ListReactor) {
+    private func bindState(reactor: ListReactor) {
         reactor.state
             .map { $0.sortTitle }
             .distinctUntilChanged()
