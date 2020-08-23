@@ -31,26 +31,34 @@ final class ListReactor: Reactor {
         var sortIndex: Int = 0
         var sortTitle: String = SortKind.suggestion.title
         var items: [ItemEntity] = []
+        var isRefreshing = false
+        var isLoading = false
     }
     enum Action {
         case refresh
+        case load
         case selectSortIndex(Int)
     }
     enum Mutation {
         case setItems([ItemEntity])
+        case appendItems([ItemEntity])
         case setSortTitle(Int)
+        case setRefreshing(Bool)
+        case setLoading(Bool)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return requestItems()
-                .map { Mutation.setItems($0) }
+            return refresh()
+        case .load:
+            guard !currentState.isLoading else { return .empty() }
+            return load()
         case .selectSortIndex(let index):
+            let sort = currentState.sortList[index].rawValue
             return Observable.concat(
                 .just(Mutation.setSortTitle(index)),
-                requestItems()
-                    .map { Mutation.setItems($0) }
+                refresh(sort: sort)
             )
         }
     }
@@ -60,13 +68,41 @@ final class ListReactor: Reactor {
         switch mutation {
         case .setItems(let items):
             state.items = items
+        case .appendItems(let items):
+            state.items += items
         case .setSortTitle(let index):
             state.sortIndex = index
             state.sortTitle = state.sortList[index].title
+        case .setRefreshing(let isRefreshing):
+            state.isRefreshing = isRefreshing
+        case .setLoading(let isLoading):
+            state.isLoading = isLoading
         }
         return state
     }
 
+    private func refresh(
+        category: String? = nil,
+        sort: String? = nil
+    ) -> Observable<Mutation> {
+        return Observable.concat(
+            .just(Mutation.setRefreshing(true)),
+            requestItems().map({ Mutation.setItems($0) })
+                .observeOn(MainScheduler.asyncInstance),
+            .just(Mutation.setRefreshing(false))
+        )
+    }
+    private func load(
+        category: String? = nil,
+        sort: String? = nil
+    ) -> Observable<Mutation> {
+        return Observable.concat(
+            .just(Mutation.setLoading(true)),
+            requestItems().map({ Mutation.appendItems($0) })
+                .observeOn(MainScheduler.asyncInstance),
+            .just(Mutation.setLoading(false))
+        )
+    }
     private func requestItems() -> Observable<[ItemEntity]> {
         return .just([
             ItemEntity(
