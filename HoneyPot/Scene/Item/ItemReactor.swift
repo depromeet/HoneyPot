@@ -14,7 +14,8 @@ final class ItemReactor: Reactor {
 
     init(provider: ServiceProviderType, itemID: Int) {
         self.provider = provider
-        self.initialState = State(itemID: itemID)
+        let hasClosed = provider.flagService.value(forKey: .hasClosedSharePopup)
+        self.initialState = State(itemID: itemID, isSharePopUpHidden: hasClosed)
     }
     // MARK: - Reactor
     var initialState: State
@@ -40,16 +41,19 @@ final class ItemReactor: Reactor {
         var isLiked: Bool = false
         var isClosed: Bool = false
         var isParticipating: Bool = false
+        var isSharePopUpHidden: Bool
     }
     enum Action {
         case refresh
         case likePost
         case likeComment(Int)
+        case toggleSharePopUp
     }
     enum Mutation {
         case setItem(PostEntity)
         case setLike(Bool)
         case setComment(CommentEntity)
+        case setSharePopUpHidden(Bool)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
@@ -73,6 +77,9 @@ final class ItemReactor: Reactor {
                     comment.liked = isLiked
                     return Mutation.setComment(comment)
                 })
+        case .toggleSharePopUp:
+            provider.flagService.set(value: true, forKey: .hasClosedSharePopup)
+            return .just(Mutation.setSharePopUpHidden(true))
         }
     }
 
@@ -137,6 +144,8 @@ final class ItemReactor: Reactor {
                 comments[index] = comment
                 state.comments = comments
             }
+        case .setSharePopUpHidden(let isHidden):
+            state.isSharePopUpHidden = isHidden
         }
         return state
     }

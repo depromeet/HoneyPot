@@ -320,8 +320,8 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         buttonSharePopUp.rx.tap
-            .map { true }
-            .bind(to: buttonSharePopUp.rx.isHidden)
+            .map { Reactor.Action.toggleSharePopUp }
+            .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
         buttonLike.rx.tap
@@ -511,6 +511,11 @@ class ItemViewController: BaseViewController, View {
             .map { $0.isParticipating }
             .distinctUntilChanged()
             .bind(to: buttonSubmit.rx.isSelected)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isSharePopUpHidden }
+            .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
     }
     private func setupComments(reactor: ItemReactor) {
