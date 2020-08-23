@@ -291,17 +291,12 @@ class ItemViewController: BaseViewController, View {
     }
 
     func bind(reactor: ItemReactor) {
-        setupAction(reactor: reactor)
-        setupState(reactor: reactor)
+        bindView(reactor: reactor)
+        bindAction(reactor: reactor)
+        bindState(reactor: reactor)
     }
 
-    private func setupAction(reactor: ItemReactor) {
-        rx.viewWillAppear
-            .take(1)
-            .map { _ in Reactor.Action.refresh }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-
+    private func bindView(reactor: ItemReactor) {
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -317,16 +312,6 @@ class ItemViewController: BaseViewController, View {
             .subscribe(onNext: { [weak self] activity in
                 self?.present(activity, animated: true, completion: nil)
             })
-            .disposed(by: disposeBag)
-
-        buttonSharePopUp.rx.tap
-            .map { Reactor.Action.toggleSharePopUp }
-            .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-
-        buttonLike.rx.tap
-            .map { Reactor.Action.likePost }
-            .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
         buttonScrollToTop.rx.tap
@@ -379,14 +364,30 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
     }
-    private func setupState(reactor: ItemReactor) {
-        setupURLsAndDescription(reactor: reactor)
-        setupPrice(reactor: reactor)
-        setupInfoAndSeller(reactor: reactor)
-        setupComments(reactor: reactor)
-    }
+    private func bindAction(reactor: ItemReactor) {
+        rx.viewWillAppear
+            .take(1)
+            .map { _ in Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
 
-    private func setupURLsAndDescription(reactor: ItemReactor) {
+        buttonSharePopUp.rx.tap
+            .map { Reactor.Action.toggleSharePopUp }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        buttonLike.rx.tap
+            .map { Reactor.Action.likePost }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+    }
+    private func bindState(reactor: ItemReactor) {
+        bindURLsAndDescription(reactor: reactor)
+        bindPrice(reactor: reactor)
+        bindInfoAndSeller(reactor: reactor)
+        bindComments(reactor: reactor)
+    }
+    private func bindURLsAndDescription(reactor: ItemReactor) {
         reactor.state
             .compactMap { $0.bannerURL }
             .distinctUntilChanged()
@@ -432,7 +433,7 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonCategory.rx.title(for: .normal))
             .disposed(by: disposeBag)
     }
-    private func setupPrice(reactor: ItemReactor) {
+    private func bindPrice(reactor: ItemReactor) {
         reactor.state
             .map { $0.priceOriginal }
             .distinctUntilChanged()
@@ -468,7 +469,7 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
     }
-    private func setupInfoAndSeller(reactor: ItemReactor) {
+    private func bindInfoAndSeller(reactor: ItemReactor) {
         reactor.state
             .map { $0.participants }
             .distinctUntilChanged()
@@ -518,7 +519,7 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
     }
-    private func setupComments(reactor: ItemReactor) {
+    private func bindComments(reactor: ItemReactor) {
         reactor.state
             .map { $0.commentText }
             .distinctUntilChanged()
