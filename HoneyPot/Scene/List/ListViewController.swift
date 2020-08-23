@@ -67,6 +67,15 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.contentInsetAdjustmentBehavior = .never
         $0.backgroundColor = .systemBackground
         $0.separatorStyle = .none
+        $0.estimatedRowHeight = 380
+    }
+    let refreshControl = UIRefreshControl().then {
+        $0.backgroundColor = .clear
+    }
+    let activityIndicator = UIActivityIndicatorView(
+        frame: .init(x: 0, y: 0, width: 0, height: 100)
+    ).then {
+        $0.hidesWhenStopped = true
     }
 
     init(reactor: ListReactor) {
@@ -120,10 +129,26 @@ class ListViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
 
-        tableView.rx.modelSelected(String.self)
-            .subscribe(onNext: { [weak self] _ in
+        refreshControl.rx.controlEvent(.valueChanged)
+            .map { Reactor.Action.refresh }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        let tableView = self.tableView
+
+        tableView.rx.contentOffset
+            .skip(1)
+            .map { $0.y >= tableView.contentSize.height - tableView.bounds.height }
+            .distinctUntilChanged()
+            .map { _ in Reactor.Action.load }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        tableView.rx.modelSelected(ItemEntity.self)
+            .map { $0.id }
+            .subscribe(onNext: { [weak self] id in
                 guard let self = self else { return }
-                let viewController = ItemViewController(reactor: .init(provider: self.provider, itemID: 1))
+                let viewController = ItemViewController(reactor: .init(provider: self.provider, itemID: id))
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
@@ -144,6 +169,19 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .bind(to: tableView.rx.items(Reusable.itemCell)) { _, item, cell in
                 cell.setData(item: item)
             }
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isRefreshing }
+            .distinctUntilChanged()
+            .filter { !$0 }
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isLoading }
+            .distinctUntilChanged()
+            .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
 
         reactor.state
@@ -186,6 +224,8 @@ extension ListViewController {
             $0.top.equalToSuperview().offset(6)
             $0.trailing.equalToSuperview().inset(10)
         }
+        tableView.refreshControl = refreshControl
         tableView.tableHeaderView = viewHeader
+        tableView.tableFooterView = activityIndicator
     }
 }
