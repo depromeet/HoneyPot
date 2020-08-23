@@ -154,7 +154,7 @@ final class ItemReactor: Reactor {
         let formatter = NumberFormatter()
         formatter.decimalSeparator = ","
         formatter.numberStyle = .decimal
-        return formatter.string(from: .init(value: 50000))
+        return formatter.string(from: .init(value: price))
     }
     private func formattedDate(date: Date?) -> String? {
         guard let date = date else { return nil }
