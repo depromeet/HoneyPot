@@ -30,6 +30,7 @@ final class ListReactor: Reactor {
         let sortList: [SortKind] = SortKind.allCases
         var sortIndex: Int = 0
         var sortTitle: String = SortKind.suggestion.title
+        var pageIndex: Int = 0
         var items: [ItemEntity] = []
         var isRefreshing = false
         var isLoading = false
@@ -45,15 +46,24 @@ final class ListReactor: Reactor {
         case setSortTitle(Int)
         case setRefreshing(Bool)
         case setLoading(Bool)
+        case setPageIndex(Int)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
-            return refresh()
+            let sort = currentState.sortList[currentState.sortIndex].rawValue
+            return Observable.concat(
+                refresh(sort: sort),
+                .just(Mutation.setPageIndex(0))
+            )
         case .load:
             guard !currentState.isLoading else { return .empty() }
-            return load()
+            let index = currentState.pageIndex + 1
+            return Observable.concat(
+                load(index: index),
+                .just(Mutation.setPageIndex(index))
+            )
         case .selectSortIndex(let index):
             let sort = currentState.sortList[index].rawValue
             return Observable.concat(
@@ -77,49 +87,46 @@ final class ListReactor: Reactor {
             state.isRefreshing = isRefreshing
         case .setLoading(let isLoading):
             state.isLoading = isLoading
+        case .setPageIndex(let index):
+            state.pageIndex = index
         }
         return state
     }
 
     private func refresh(
-        category: String? = nil,
-        sort: String? = nil
+        category: String = "",
+        sort: String = ""
     ) -> Observable<Mutation> {
         return Observable.concat(
             .just(Mutation.setRefreshing(true)),
-            requestItems().map({ Mutation.setItems($0) })
+            requestItems(category: category, sort: sort)
+                .map({ Mutation.setItems($0) })
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setRefreshing(false))
         )
     }
     private func load(
-        category: String? = nil,
-        sort: String? = nil
+        index: Int
     ) -> Observable<Mutation> {
+        let category = currentState.category
+        let sort = currentState.sortList[currentState.sortIndex].rawValue
         return Observable.concat(
             .just(Mutation.setLoading(true)),
-            requestItems().map({ Mutation.appendItems($0) })
+            requestItems(category: category, sort: sort, index: index)
+                .map({ Mutation.appendItems($0) })
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setLoading(false))
         )
     }
-    private func requestItems() -> Observable<[ItemEntity]> {
-        return .just([
-            ItemEntity(
-                id: 1,
-                thumbnail: "",
-                numberOfWish: 302,
-                numberOfComment: 13,
-                title: "테이블팬 C820 (3 Colors)",
-                category: "가전",
-                sellerName: "플러스마이너스제로",
-                price: 50000,
-                nowDiscount: .init(step: 1, numberOfPeople: 100, discountPercent: 35),
-                nextDiscount: .init(step: 2, numberOfPeople: 200, discountPercent: 40),
-                participants: 130,
-                numberOfGoal: 300,
-                deadline: "2020-09-10 23:59:59")
-            ]
-        )
+    private func requestItems(
+        category: String,
+        sort: String,
+        index: Int = 0
+    ) -> Observable<[ItemEntity]> {
+        let keyword = currentState.keyword
+        return provider.networkService
+            .request(.posts(keyword, category, sort, index), type: PageableList<ItemEntity>.self)
+            .map { $0.content }
+            .asObservable()
     }
 }
