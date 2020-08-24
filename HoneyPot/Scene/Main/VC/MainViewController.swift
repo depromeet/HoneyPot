@@ -100,16 +100,16 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         buttonSearch.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let searchViewController = SearchViewController(reactor: .init(provider: self.provider))
-                self.navigationController?.pushViewController(searchViewController, animated: true)
+                let viewController = SearchViewController(reactor: .init(provider: self.provider))
+                self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
 
         buttonAccount.rx.tap
             .subscribe(onNext: { [weak self] in
                 guard let self = self else { return }
-                let myPageViewController = MyPageViewController(reactor: .init(provider: self.provider))
-                self.navigationController?.pushViewController(myPageViewController, animated: true)
+                let viewController = MyPageViewController(reactor: .init(provider: self.provider))
+                self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
     }

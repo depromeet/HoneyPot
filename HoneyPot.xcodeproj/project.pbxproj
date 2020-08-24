@@ -167,6 +167,7 @@
 		9CE4CDBE24D6638900A8A25E /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBD24D6638900A8A25E /* AccountService.swift */; };
 		9CE4CDC124D6A77700A8A25E /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC024D6A77700A8A25E /* SettingViewController.swift */; };
 		9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDC224D6A7AD00A8A25E /* SettingReactor.swift */; };
+		9CE4D1EC24F3EAA900C00239 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1CDD124F39BAF003241A8 /* UITableView+.swift */; };
 		9CF665FC24EE104A00DD2CB8 /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */; };
 		9CF665FD24EE104A00DD2CB8 /* ItemEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FB24EE104A00DD2CB8 /* ItemEntity.swift */; };
 		9CF665FF24EE110A00DD2CB8 /* Pageable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CF665FE24EE110A00DD2CB8 /* Pageable.swift */; };
@@ -905,6 +906,7 @@
 				9C9040FE24EA93E1000E21A3 /* SceneDelegate.swift in Sources */,
 				9C9040FF24EA93E1000E21A3 /* AppDelegate.swift in Sources */,
 				9C90410024EA93E1000E21A3 /* VerticalButton.swift in Sources */,
+				9CE4D1EC24F3EAA900C00239 /* UITableView+.swift in Sources */,
 				9C90410124EA93E1000E21A3 /* SortModalViewController.swift in Sources */,
 				9C87E60524EAB20E00686274 /* ItemCommentCell.swift in Sources */,
 				9C90410224EA93E1000E21A3 /* NavigationBar.swift in Sources */,
