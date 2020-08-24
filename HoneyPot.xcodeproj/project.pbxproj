@@ -139,6 +139,8 @@
 		9C90414524EA93E1000E21A3 /* PageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6D6EC6024DB40EF00E27C06 /* PageCell.xib */; };
 		9C90414624EA93E1000E21A3 /* SortCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B6AB8EDC24DE6BC100EE3CB1 /* SortCell.xib */; };
 		9C90414824EA93E1000E21A3 /* ProModule.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9C7AD84724C011D500AAEBB0 /* ProModule.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9C9BC6B224F27F57007F3C26 /* CommentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BC6B124F27F57007F3C26 /* CommentSection.swift */; };
+		9C9BC6B324F27F5C007F3C26 /* CommentSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9BC6B124F27F57007F3C26 /* CommentSection.swift */; };
 		9CA2AD2E24F2587700351BDA /* FlagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2AD2D24F2587700351BDA /* FlagService.swift */; };
 		9CA2AD2F24F2587700351BDA /* FlagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2AD2D24F2587700351BDA /* FlagService.swift */; };
 		9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */; };
@@ -270,6 +272,7 @@
 		9C87E60324EAB20E00686274 /* ItemSubCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemSubCommentCell.swift; sourceTree = "<group>"; };
 		9C90414D24EA93E1000E21A3 /* HoneyPot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HoneyPot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C90414E24EA93E2000E21A3 /* Info-Release.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Release.plist"; path = "/Users/Soso/dev/HoneyPot/HoneyPot/Info-Release.plist"; sourceTree = "<absolute>"; };
+		9C9BC6B124F27F57007F3C26 /* CommentSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentSection.swift; sourceTree = "<group>"; };
 		9CA2AD2D24F2587700351BDA /* FlagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagService.swift; sourceTree = "<group>"; };
 		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
 		9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetItemCell.swift; sourceTree = "<group>"; };
@@ -581,6 +584,7 @@
 			children = (
 				9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */,
 				9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */,
+				9C9BC6B124F27F57007F3C26 /* CommentSection.swift */,
 			);
 			path = Comment;
 			sourceTree = "<group>";
@@ -836,6 +840,7 @@
 				044B62E724D8449300088487 /* ProductImageCell.swift in Sources */,
 				9CE4CDC324D6A7AD00A8A25E /* SettingReactor.swift in Sources */,
 				9C835DDD24DFFB9C000901FF /* ItemCell.swift in Sources */,
+				9C9BC6B224F27F57007F3C26 /* CommentSection.swift in Sources */,
 				9C26539724EA2431009E5D5E /* DiscountCell.swift in Sources */,
 				9C71F61D24D42EFB009DD6D7 /* MenuCell.swift in Sources */,
 				9CA2CBC824E905DD00AE5322 /* BottomSheetItemCell.swift in Sources */,
@@ -911,6 +916,7 @@
 				9C90410A24EA93E1000E21A3 /* ServiceProvider.swift in Sources */,
 				9C90410B24EA93E1000E21A3 /* ProductImageCell.swift in Sources */,
 				9C90410C24EA93E1000E21A3 /* SettingReactor.swift in Sources */,
+				9C9BC6B324F27F5C007F3C26 /* CommentSection.swift in Sources */,
 				9C90410D24EA93E1000E21A3 /* ItemCell.swift in Sources */,
 				9C90410E24EA93E1000E21A3 /* DiscountCell.swift in Sources */,
 				9C90410F24EA93E1000E21A3 /* MenuCell.swift in Sources */,
