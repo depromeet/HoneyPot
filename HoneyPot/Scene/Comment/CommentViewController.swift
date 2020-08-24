@@ -123,6 +123,10 @@ class CommentViewController: BaseViewController, View {
                     .map { Reactor.Action.likeComment(indexPath) }
                     .bind(to: reactor.action)
                     .disposed(by: cell.disposeBag)
+                cell.buttonBottom.rx.tap
+                    .map { Reactor.Action.toggleComment(indexPath) }
+                    .bind(to: reactor.action)
+                    .disposed(by: cell.disposeBag)
                 return cell
             case .subcomment(let comment):
                 let cell = tableView.dequeue(Reusable.subCommentCell, for: indexPath)
