@@ -15,6 +15,7 @@ import RxDataSources
 import ReusableKit
 
 class CommentViewController: BaseViewController, View {
+    var isTyping: Bool
 
     private enum Color {
         static let yellow1 = 0xFFD136.color
@@ -33,6 +34,7 @@ class CommentViewController: BaseViewController, View {
     }
 
     lazy var navigationBar = NavigationBar(
+        title: "댓글 전체보기",
         leftView: buttonBack
     ).then {
         $0.backgroundColor = .clear
@@ -92,7 +94,8 @@ class CommentViewController: BaseViewController, View {
         $0.hidesWhenStopped = true
     }
 
-    init(reactor: CommentReactor) {
+    init(reactor: CommentReactor, isTyping: Bool) {
+        self.isTyping = isTyping
         super.init(provider: reactor.provider)
         self.reactor = reactor
     }
@@ -148,6 +151,14 @@ class CommentViewController: BaseViewController, View {
         setupTableView()
         setupInputView()
         setupSelected()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        if isTyping {
+            textViewInput.becomeFirstResponder()
+        }
     }
 
     func bind(reactor: CommentReactor) {
