@@ -61,7 +61,7 @@ class ItemCell: BaseTableViewCell {
     }
 
     let imageViewItem = UIImageView().then {
-        $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        $0.backgroundColor = 0xEEEEEE.color
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
