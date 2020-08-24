@@ -111,6 +111,8 @@ class CommentViewController: BaseViewController, View {
                 cell.setData(comment: comment, isExpandable: true)
                 cell.buttonReply.rx.tap
                     .map { Reactor.Action.selectIndexPath(indexPath) }
+                    .debug()
+                    .do(onNext: { _ in self.textViewInput.becomeFirstResponder() })
                     .bind(to: reactor.action)
                     .disposed(by: cell.disposeBag)
                 cell.buttonMore.rx.tap
