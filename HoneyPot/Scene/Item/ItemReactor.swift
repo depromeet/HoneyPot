@@ -40,6 +40,7 @@ final class ItemReactor: Reactor {
         var numberOfReview: String?
         var comments: [CommentEntity]?
         var commentText: String?
+        var isButtonViewAllHidden: Bool = true
         var isLiked: Bool = false
         var isClosed: Bool = false
         var isParticipating: Bool = false
@@ -95,8 +96,10 @@ final class ItemReactor: Reactor {
             state.comments = post.comments
             if post.commentsCnt == 0 {
                 state.commentText = "가장 먼저 댓글을 남겨보세요"
+                state.isButtonViewAllHidden = true
             } else {
                 state.commentText = "\(post.commentsCnt)"
+                state.isButtonViewAllHidden = false
             }
             let description = post.description
             state.title = description.title

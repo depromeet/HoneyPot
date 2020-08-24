@@ -334,11 +334,17 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
 
-        buttonRedirect.rx.tap
-            .subscribe(onNext: { [weak self] in
+        Observable.of(
+            buttonViewAll.rx.tap.map({ false }),
+            buttonRedirect.rx.tap.map({ true }),
+            tableView.rx.itemSelected.map({ _ in false })
+        ).merge()
+            .subscribe(onNext: { [weak self] isTyping in
                 guard let self = self else { return }
                 let id = reactor.currentState.itemID
-                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
+                let viewController = CommentViewController(
+                    reactor: .init(provider: self.provider, itemID: id),
+                    isTyping: isTyping)
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
@@ -357,15 +363,6 @@ class ItemViewController: BaseViewController, View {
 
         isHidden
             .bind(to: buttonScrollToTop.rx.isHidden)
-            .disposed(by: disposeBag)
-
-        tableView.rx.itemSelected
-            .subscribe(onNext: { [weak self] _ in
-                guard let self = self else { return }
-                let id = reactor.currentState.itemID
-                let viewController = CommentViewController(reactor: .init(provider: self.provider, itemID: id))
-                self.navigationController?.pushViewController(viewController, animated: true)
-            })
             .disposed(by: disposeBag)
     }
     private func bindAction(reactor: ItemReactor) {
@@ -547,6 +544,12 @@ class ItemViewController: BaseViewController, View {
             .map { $0.commentText }
             .distinctUntilChanged()
             .bind(to: buttonComment.rx.title(for: .normal))
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.isButtonViewAllHidden }
+            .distinctUntilChanged()
+            .bind(to: buttonViewAll.rx.isHidden)
             .disposed(by: disposeBag)
 
         reactor.state
@@ -902,7 +905,7 @@ extension ItemViewController {
         }
         viewInput.addSubview(buttonRedirect)
         buttonRedirect.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(viewBackground)
         }
     }
     private func setupBottomView() {
