@@ -12,6 +12,9 @@ struct PostEntity: Decodable {
     let postId: Int
     let bannerUrl: String
     let contentUrl: String
+    let commentsCnt: Int
+    let wished: Bool
+    let participated: Bool
     let description: PostDescriptionEntity
     let seller: SellerEntity
     let comments: [CommentEntity]
