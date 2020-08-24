@@ -456,6 +456,18 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonDiscountUntil.rx.title(for: .normal))
             .disposed(by: disposeBag)
 
+        reactor.state
+            .map { !$0.isDiscounted }
+            .distinctUntilChanged()
+            .bind(to: labelPriceOriginal.rx.isHidden)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { !$0.isDiscounted }
+            .distinctUntilChanged()
+            .bind(to: labelPricePercent.rx.isHidden)
+            .disposed(by: disposeBag)
+
         let viewProgressBackground = self.viewProgressBackground
         reactor.state
             .map { $0.percent }
