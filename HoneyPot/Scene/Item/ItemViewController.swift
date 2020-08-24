@@ -362,7 +362,6 @@ class ItemViewController: BaseViewController, View {
     }
     private func bindAction(reactor: ItemReactor) {
         rx.viewWillAppear
-            .take(1)
             .map { _ in Reactor.Action.refresh }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
