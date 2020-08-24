@@ -12,7 +12,7 @@ import MoyaSugar
 
 enum HoneyPotAPI {
     case user
-    case posts(String, String, String)
+    case posts(String, String, String, Int)
     case post(Int)
     case postLike(Int)
     case comments(Int, Int)
@@ -52,11 +52,13 @@ extension HoneyPotAPI: SugarTargetType {
         switch self {
         case .user:
             return nil
-        case .posts(let keyword, let category, let sort):
+        case .posts(let keyword, let category, let sort, let index):
             let values: [String: Any] = [
                 "keyword": keyword,
                 "category": category,
-                "sortOption": sort
+                "sortOption": sort,
+                "page": index,
+                "size": 10
             ]
             return .init(encoding: URLEncoding(), values: values)
         case .post:
