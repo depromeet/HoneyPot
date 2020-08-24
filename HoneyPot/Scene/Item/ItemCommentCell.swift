@@ -139,6 +139,18 @@ class ItemCommentCell: BaseTableViewCell {
         setupAction()
     }
 
+    func setData(comment: Comment, isExpandable: Bool = false) {
+        labelUsername.text = comment.author.name
+        labelTime.text = comment.dateText
+        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
+        labelContent.attributedText = attributedString
+        buttonLike.isSelected = comment.isLiked
+        buttonLike.setTitle("\(comment.likeCount)", for: .normal)
+        buttonComment.setTitle("\(comment.subcommentCount)", for: .normal)
+        viewBottom.isHidden = !(isExpandable && comment.canExpand)
+        buttonBottom.setTitle(comment.expandText, for: .normal)
+    }
+
     func setData(comment: CommentEntity, shouldShowBottom: Bool = false) {
         labelUsername.text = comment.author.name
         labelTime.text = formattedDate(dateString: comment.createdDate)
@@ -147,7 +159,7 @@ class ItemCommentCell: BaseTableViewCell {
         buttonLike.isSelected = comment.liked
         buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
         buttonComment.setTitle("\(comment.numberOfSubComments)", for: .normal)
-        viewBottom.isHidden = !shouldShowBottom && comment.numberOfSubComments != 0
+        viewBottom.isHidden = !shouldShowBottom || comment.numberOfSubComments != 0
         let number = comment.numberOfSubComments - comment.comments.count
         if number == 0 {
             buttonBottom.setTitle("대댓글 접기", for: .normal)

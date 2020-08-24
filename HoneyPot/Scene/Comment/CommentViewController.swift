@@ -19,11 +19,13 @@ class CommentViewController: BaseViewController, View {
     private enum Color {
         static let yellow1 = 0xFFD136.color
         static let black1 = 0x323232.color
+        static let lightGray1 = 0xA5A5A5.color
         static let lightGray2 = 0xF8F8F8.color
         static let lightGray4 = 0xCACACA.color
     }
     private enum Font {
         static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
+        static let sdR12 = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
     }
     struct Reusable {
         static let commentCell = ReusableCell<ItemCommentCell>()
@@ -49,7 +51,7 @@ class CommentViewController: BaseViewController, View {
     }
 
     let viewInput = UIView().then {
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .systemBackground
     }
     let textViewInput = ResizableTextView().then {
         $0.font = Font.sdR14
@@ -69,6 +71,17 @@ class CommentViewController: BaseViewController, View {
         $0.text = "댓글 달기"
     }
     var constraintInputBottom: NSLayoutConstraint!
+    let viewReply = UIView().then {
+        $0.backgroundColor = Color.lightGray2
+    }
+    let labelReply = UILabel().then {
+        $0.textColor = Color.lightGray1
+        $0.font = Font.sdR12
+    }
+    let buttonReplyClose = UIButton().then {
+        $0.setImage(#imageLiteral(resourceName: "icon_close_w10h10"), for: .normal)
+    }
+    var constraintReplyBottom: NSLayoutConstraint!
 
     let refreshControl = UIRefreshControl().then {
         $0.backgroundColor = .clear
@@ -86,11 +99,49 @@ class CommentViewController: BaseViewController, View {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    lazy var dataSource = RxTableViewSectionedReloadDataSource
+        <CommentSection>(configureCell: { [weak self] _, tableView, indexPath, sectionItem in
+            guard let self = self,
+                let reactor = self.reactor
+                else { return .init() }
+            let userID = self.provider.accountService.userID
+            switch sectionItem {
+            case .comment(let comment):
+                let cell = tableView.dequeue(Reusable.commentCell, for: indexPath)
+                cell.setData(comment: comment, isExpandable: true)
+                cell.buttonReply.rx.tap
+                    .map { Reactor.Action.selectIndexPath(indexPath) }
+                    .bind(to: reactor.action)
+                    .disposed(by: cell.disposeBag)
+                cell.buttonMore.rx.tap
+                    .map { (indexPath, comment.author.userId == userID) }
+                    .subscribe(onNext: self.presentCommentActionSheet)
+                    .disposed(by: cell.disposeBag)
+                cell.buttonLike.rx.tap
+                    .map { Reactor.Action.likeComment(indexPath) }
+                    .bind(to: reactor.action)
+                    .disposed(by: cell.disposeBag)
+                return cell
+            case .subcomment(let comment):
+                let cell = tableView.dequeue(Reusable.subCommentCell, for: indexPath)
+                cell.setData(comment: comment)
+                cell.buttonMore.rx.tap
+                    .map { (indexPath, comment.author.userId == userID) }
+                    .subscribe(onNext: self.presentCommentActionSheet)
+                    .disposed(by: cell.disposeBag)
+                cell.buttonLike.rx.tap
+                    .map { Reactor.Action.likeComment(indexPath) }
+                    .bind(to: reactor.action)
+                    .disposed(by: cell.disposeBag)
+                return cell
+            }
+        })
 
     override func setupConstraints() {
         setupNavigationBar()
         setupTableView()
         setupInputView()
+        setupSelected()
     }
 
     func bind(reactor: CommentReactor) {
@@ -138,6 +189,20 @@ class CommentViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
+        let textViewInput = self.textViewInput
+        buttonSend.rx.tap
+            .withLatestFrom(textViewInput.rx.text.orEmpty)
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .map { Reactor.Action.addComment($0) }
+            .do(onNext: { _ in textViewInput.text = nil  })
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        buttonReplyClose.rx.tap
+            .map { Reactor.Action.selectIndexPath(nil) }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
         let tableView = self.tableView
 
         tableView.rx.contentOffset
@@ -155,15 +220,57 @@ class CommentViewController: BaseViewController, View {
             .filter { !$0 }
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.comments }
+            .distinctUntilChanged()
+            .bind(to: tableView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .compactMap { $0.selectedText }
+            .distinctUntilChanged()
+            .bind(to: labelReply.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.selectedIndexPath == nil }
+            .distinctUntilChanged()
+            .map { $0 ? "댓글 달기" : "답글 달기" }
+            .bind(to: labelInputPlaceholder.rx.text)
+            .disposed(by: disposeBag)
+
+        reactor.state
+            .map { $0.selectedIndexPath != nil }
+            .distinctUntilChanged()
+            .subscribe(onNext: { [weak self] selected in
+                guard let self = self else { return }
+                UIView.animate(withDuration: 0.2) {
+                    if selected {
+                        self.constraintReplyBottom.constant = 0
+                    } else {
+                        self.constraintReplyBottom.constant = 45
+                    }
+                    self.view.layoutIfNeeded()
+                }
+            })
+            .disposed(by: disposeBag)
     }
 
-    private func presentCommentActionSheet() {
+    private func presentCommentActionSheet(indexPath: IndexPath, isOwner: Bool) {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let actionEdit = UIAlertAction(title: "수정", style: .default, handler: nil)
-        let actionDelete = UIAlertAction(title: "삭제하기", style: .destructive, handler: nil)
+        if isOwner {
+            let actionEdit = UIAlertAction(title: "수정", style: .default, handler: nil)
+            let actionDelete = UIAlertAction(title: "삭제하기", style: .destructive, handler: { [weak self] action in
+                self?.reactor?.action.onNext(.deleteComment(indexPath))
+            })
+            actionSheet.addAction(actionEdit)
+            actionSheet.addAction(actionDelete)
+        } else {
+            let actionReport = UIAlertAction(title: "신고", style: .default, handler: nil)
+            actionSheet.addAction(actionReport)
+        }
         let actionCancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        actionSheet.addAction(actionEdit)
-        actionSheet.addAction(actionDelete)
         actionSheet.addAction(actionCancel)
         present(actionSheet, animated: true, completion: nil)
     }
@@ -192,7 +299,7 @@ extension CommentViewController {
             $0.top.equalTo(navigationBar.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
         }
-        tableView.refreshControl = refreshControl
+//        tableView.refreshControl = refreshControl
         tableView.tableFooterView = activityIndicator
     }
     private func setupInputView() {
@@ -235,6 +342,37 @@ extension CommentViewController {
         viewInput.addSubview(viewSeparator)
         viewSeparator.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-1)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(1)
+        }
+    }
+    private func setupSelected() {
+        view.insertSubview(viewReply, belowSubview: viewInput)
+        viewReply.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(45)
+        }
+        constraintReplyBottom = viewReply.bottomAnchor.constraint(equalTo: viewInput.topAnchor)
+        constraintReplyBottom.isActive = true
+        constraintReplyBottom.constant = 45
+        viewReply.addSubview(labelReply)
+        labelReply.snp.makeConstraints {
+            $0.leading.equalToSuperview().inset(18)
+            $0.centerY.equalToSuperview()
+        }
+        viewReply.addSubview(buttonReplyClose)
+        buttonReplyClose.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(labelReply.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().inset(4)
+            $0.width.equalTo(buttonReplyClose.snp.height)
+        }
+        let viewSeparator = UIView().then {
+            $0.backgroundColor = 0xCACACA.color
+        }
+        viewReply.addSubview(viewSeparator)
+        viewSeparator.snp.makeConstraints {
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(1)
         }

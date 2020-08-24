@@ -88,6 +88,15 @@ class ItemSubCommentCell: BaseTableViewCell {
         setupAction()
     }
 
+    func setData(comment: Comment) {
+        labelUsername.text = comment.author.name
+        labelTime.text = comment.dateText
+        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
+        labelContent.attributedText = attributedString
+        buttonLike.isSelected = comment.isLiked
+        buttonLike.setTitle("\(comment.likeCount)", for: .normal)
+    }
+
     func setData(comment: CommentEntity) {
         labelUsername.text = comment.author.name
         labelTime.text = formattedDate(dateString: comment.createdDate)
