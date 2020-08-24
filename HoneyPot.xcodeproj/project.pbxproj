@@ -160,6 +160,7 @@
 		9CD03D2024ECC6A90049EB93 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */; };
 		9CD0A28624E6D66400CCCBB0 /* GodoB.otf in Resources */ = {isa = PBXBuildFile; fileRef = 044B62F124D8494F00088487 /* GodoB.otf */; };
 		9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD7A2FA24E16F550079C21F /* ListReactor.swift */; };
+		9CE1CDD224F39BAF003241A8 /* UITableView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE1CDD124F39BAF003241A8 /* UITableView+.swift */; };
 		9CE4CDB524D65B6F00A8A25E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */; };
 		9CE4CDB924D6623600A8A25E /* UserDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */; };
 		9CE4CDBC24D6629800A8A25E /* UserDefaultsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */; };
@@ -279,6 +280,7 @@
 		9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReactor.swift; sourceTree = "<group>"; };
 		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
+		9CE1CDD124F39BAF003241A8 /* UITableView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+.swift"; sourceTree = "<group>"; };
 		9CE4CDB424D65B6F00A8A25E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		9CE4CDB824D6623600A8A25E /* UserDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsService.swift; sourceTree = "<group>"; };
 		9CE4CDBB24D6629800A8A25E /* UserDefaultsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsKey.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 			isa = PBXGroup;
 			children = (
 				B6D6EC6424DB41E000E27C06 /* NSObject + reusableIdentifier.swift */,
+				9CE1CDD124F39BAF003241A8 /* UITableView+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -825,6 +828,7 @@
 				9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */,
 				9CD03D1E24ECC2930049EB93 /* CommentReactor.swift in Sources */,
 				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
+				9CE1CDD224F39BAF003241A8 /* UITableView+.swift in Sources */,
 				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
 				9CA2CBC624E8C90500AE5322 /* SortModalViewController.swift in Sources */,
 				9C87E60424EAB20E00686274 /* ItemCommentCell.swift in Sources */,
