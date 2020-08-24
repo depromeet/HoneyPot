@@ -31,6 +31,7 @@ final class CommentReactor: Reactor {
     enum Action {
         case refresh
         case load
+        case toggleComment(IndexPath)
         case addComment(String)
         case likeComment(IndexPath)
         case deleteComment(IndexPath)
@@ -41,6 +42,7 @@ final class CommentReactor: Reactor {
         case addComment(Int?, Comment)
         case updateComment(IndexPath, Comment)
         case deleteComment(IndexPath)
+        case updateSection(Int, Comment)
         case setSelectedIndexPath(IndexPath?)
         case setRefreshing(Bool)
         case setLoading(Bool)
@@ -60,6 +62,8 @@ final class CommentReactor: Reactor {
                 load(index: index),
                 .just(Mutation.setPageIndex(0))
             )
+        case .toggleComment(let indexPath):
+            return toggleComment(indexPath: indexPath)
         case .addComment(let text):
             var commentID: Int?
             if let indexPath = currentState.selectedIndexPath {
@@ -113,13 +117,7 @@ final class CommentReactor: Reactor {
         case .addComment(let id, let comment):
             addComment(state: &state, id: id, comment: comment)
         case .updateComment(let indexPath, let comment):
-            let section = indexPath.section
-            let row = indexPath.row
-            if row == 0 {
-                state.comments[section].items[row] = .comment(comment)
-            } else {
-                state.comments[section].items[row] = .subcomment(comment)
-            }
+            updateComment(state: &state, indexPath: indexPath, comment: comment)
         case .deleteComment(let indexPath):
             let section = indexPath.section
             let row = indexPath.row
@@ -130,6 +128,8 @@ final class CommentReactor: Reactor {
                 state.comments[section].items[0].item.comments.remove(at: row - 1)
                 state.comments[section].items[0].item.subcommentCount -= 1
             }
+        case .updateSection(let section, let comment):
+            updateSection(state: &state, section: section, comment: comment)
         case .setSelectedIndexPath(let indexPath):
             state.selectedIndexPath = indexPath
             state.selectedText = selectedText(for: indexPath)
@@ -143,6 +143,31 @@ final class CommentReactor: Reactor {
         return state
     }
 
+    private func toggleComment(indexPath: IndexPath)  -> Observable<Mutation> {
+        let section = indexPath.section
+        let row = indexPath.row
+        var comment = currentState.comments[section].items[row].item
+        let commentID = comment.commentID
+        if comment.isExpanded {
+            if comment.subcommentCount == comment.comments.count {
+                comment.isExpanded = false
+            } else {
+                return provider.networkService
+                    .request(.subcomments(commentID), type: [CommentEntity].self)
+                    .map { $0.map(Comment.init) }
+                    .map({ comments in
+                        comment.subcommentCount = comments.count
+                        comment.comments = comments
+                        return comment
+                    })
+                    .map { Mutation.updateSection(indexPath.section, $0) }
+                    .asObservable()
+            }
+        } else {
+            comment.isExpanded = true
+        }
+        return .just(Mutation.updateSection(indexPath.section, comment))
+    }
     private func addComment(state: inout State, id: Int?, comment: Comment) {
         if let id = id, let index = state.comments.firstIndex(where: { $0.id == id }) {
             state.comments[index].items.insert(.subcomment(comment), at: 1)
@@ -155,6 +180,25 @@ final class CommentReactor: Reactor {
             state.comments.insert(data, at: 0)
         }
         state.selectedIndexPath = nil
+    }
+    private func updateComment(state: inout State, indexPath: IndexPath, comment: Comment) {
+        let section = indexPath.section
+        let row = indexPath.row
+        if row == 0 {
+            state.comments[section].items[row] = .comment(comment)
+        } else {
+            state.comments[section].items[row] = .subcomment(comment)
+        }
+    }
+    private func updateSection(state: inout State, section: Int, comment: Comment) {
+        state.comments[section].items[0].item = comment
+        if comment.isExpanded {
+            let items = [.comment(comment)] + comment.comments.map(CommentSectionItem.subcomment)
+            state.comments[section].items = items
+        } else {
+            let items = [CommentSectionItem.comment(comment)]
+            state.comments[section].items = items
+        }
     }
     private func selectedText(for indexPath: IndexPath?) -> String? {
         if let indexPath = indexPath {
