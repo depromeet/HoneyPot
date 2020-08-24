@@ -9,7 +9,7 @@
 import Foundation
 
 struct SellerEntity: Decodable {
-    let sellerId: Int
+    let sellerId: String
     let name: String
     let numberOfReview: Int
 }

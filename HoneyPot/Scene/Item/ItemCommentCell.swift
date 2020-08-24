@@ -159,6 +159,7 @@ class ItemCommentCell: BaseTableViewCell {
     private func formattedDate(dateString: String) -> String? {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
         guard let date = formatter.date(from: dateString) else { return nil }
         let interval = Int(round(abs(date.timeIntervalSinceNow)))
         let minute = 60
