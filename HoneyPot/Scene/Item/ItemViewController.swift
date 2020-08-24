@@ -100,7 +100,7 @@ class ItemViewController: BaseViewController, View {
     // MARK: - Banner
     let imageViewItem = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        $0.backgroundColor = 0xEEEEEE.color
     }
     let buttonCategory = UIButton().then {
         $0.setTitleColor(Color.black2, for: .normal)
@@ -181,7 +181,7 @@ class ItemViewController: BaseViewController, View {
     // MARK: - Detail
     let imageViewDetail = UIImageView().then {
         $0.contentMode = .scaleAspectFill
-        $0.backgroundColor = UIColor.lightGray.withAlphaComponent(0.5)
+        $0.backgroundColor = 0xEEEEEE.color
     }
     var constraintDetailHeight: NSLayoutConstraint!
 
