@@ -72,11 +72,11 @@ extension HoneyPotAPI: SugarTargetType {
         case .commentAdd(let postID, let commentID, let userID, let content):
             var values: [String: Any] = [
                 "postId": postID,
-                "userID": userID,
+                "userId": userID,
                 "content": content
             ]
             if let commentID = commentID {
-                values["commentID"] = commentID
+                values["commentId"] = commentID
             }
             return .init(encoding: JSONEncoding(), values: values)
         case .commentRemove:
