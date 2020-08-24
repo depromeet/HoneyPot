@@ -24,6 +24,7 @@ final class ItemReactor: Reactor {
         let itemID: Int
         var bannerURL: String?
         var contentURL: String?
+        var sellerURL: String?
         var title: String?
         var category: String?
         var priceOriginal: String?
@@ -90,11 +91,12 @@ final class ItemReactor: Reactor {
         case .setItem(let post):
             state.bannerURL = post.bannerUrl
             state.contentURL = post.contentUrl
+            state.isLiked = post.wished
             state.comments = post.comments
-            if post.comments.isEmpty {
+            if post.commentsCnt == 0 {
                 state.commentText = "가장 먼저 댓글을 남겨보세요"
             } else {
-                state.commentText = "\(post.comments.count)"
+                state.commentText = "\(post.commentsCnt)"
             }
             let description = post.description
             state.title = description.title
@@ -136,9 +138,9 @@ final class ItemReactor: Reactor {
             let seller = post.seller
             state.sellerName = seller.name
             state.numberOfReview = "\(seller.numberOfReview)개의 후기"
-            state.isLiked = true
             state.isClosed = description.isClosed
-            state.isParticipating = false
+            state.isParticipating = post.participated
+            state.sellerURL = seller.thumbnail
         case .setLike(let isLiked):
             state.isLiked = isLiked
         case .setComment(let comment):

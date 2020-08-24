@@ -12,4 +12,5 @@ struct SellerEntity: Decodable {
     let sellerId: String
     let name: String
     let numberOfReview: Int
+    let thumbnail: String
 }

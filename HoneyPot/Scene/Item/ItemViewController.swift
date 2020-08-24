@@ -177,6 +177,13 @@ class ItemViewController: BaseViewController, View {
         $0.textColor = Color.black2
         $0.font = Font.sdR12
     }
+    let imageViewThumbnail = UIImageView().then {
+        $0.contentMode = .scaleAspectFill
+        let layer = CALayer()
+        layer.contents = #imageLiteral(resourceName: "image_thumbnail_w40h36").cgImage
+        layer.frame = .init(x: 0, y: 2, width: 40, height: 36)
+        $0.layer.mask = layer
+    }
 
     // MARK: - Detail
     let imageViewDetail = UIImageView().then {
@@ -235,6 +242,7 @@ class ItemViewController: BaseViewController, View {
     let buttonLike = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_favorite_w48h50"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "image_favorite_selected_w48h50"), for: .selected)
+        $0.setImage(#imageLiteral(resourceName: "image_favorite_selected_w48h50"), for: [.selected, .highlighted])
         $0.adjustsImageWhenHighlighted = false
     }
     let buttonSubmit = UIButton().then {
@@ -478,6 +486,13 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
     }
     private func bindInfoAndSeller(reactor: ItemReactor) {
+        reactor.state
+            .compactMap { $0.sellerURL }
+            .distinctUntilChanged()
+            .compactMap(URL.init)
+            .bind(to: imageViewThumbnail.kf.rx.image())
+            .disposed(by: disposeBag)
+
         reactor.state
             .map { $0.participants }
             .distinctUntilChanged()
@@ -789,12 +804,11 @@ extension ItemViewController {
             $0.leading.trailing.equalToSuperview().inset(18).priority(999)
             $0.height.equalTo(66)
         }
-        let imageViewThumbnail = UIImageView(image: #imageLiteral(resourceName: "image_thumbnail_w40h36"))
         viewBackground.addSubview(imageViewThumbnail)
         imageViewThumbnail.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(16)
             $0.centerY.equalToSuperview()
-            $0.width.equalTo(40)
+            $0.width.height.equalTo(40)
         }
         let viewText = UIView().then {
             $0.backgroundColor = .clear
@@ -802,7 +816,7 @@ extension ItemViewController {
         viewBackground.addSubview(viewText)
         viewText.snp.makeConstraints {
             $0.leading.equalTo(imageViewThumbnail.snp.trailing).offset(8)
-            $0.centerY.equalToSuperview().offset(2)
+            $0.centerY.equalToSuperview().offset(1)
         }
         viewText.addSubview(labelSeller)
         labelSeller.snp.makeConstraints {
