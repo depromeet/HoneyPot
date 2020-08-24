@@ -29,6 +29,7 @@ final class ItemReactor: Reactor {
         var priceOriginal: String?
         var pricePercent: String?
         var priceDiscount: String?
+        var isDiscounted: Bool = true
         var discountUntil: String?
         var discounts: [DiscountEntity]?
         var percent: Double = 0
@@ -106,9 +107,11 @@ final class ItemReactor: Reactor {
                 let ratio = (Double(percent) / 100.0)
                 let price = Double(description.price) * (1 - ratio)
                 state.priceDiscount = formattedPrice(price: Int(price))
+                state.isDiscounted = true
             } else {
                 state.pricePercent = nil
                 state.priceDiscount = priceOriginal
+                state.isDiscounted = false
             }
             if description.isClosed,
                 let date = description.deadlineDate {
