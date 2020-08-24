@@ -65,7 +65,7 @@ final class CommentReactor: Reactor {
             if let indexPath = currentState.selectedIndexPath {
                 let section = indexPath.section
                 let row = indexPath.row
-                commentID = currentState.comments[section].items[row].item.commentId
+                commentID = currentState.comments[section].items[row].item.commentID
             }
             let id = currentState.itemID
             let userID = provider.accountService.userID
@@ -78,7 +78,7 @@ final class CommentReactor: Reactor {
             let section = indexPath.section
             let row = indexPath.row
             var comment = currentState.comments[section].items[row].item
-            let id = comment.commentId
+            let id = comment.commentID
             return provider.networkService
                 .request(.commentLike(id), type: Bool.self)
                 .map({ isLiked -> Comment in
@@ -95,7 +95,7 @@ final class CommentReactor: Reactor {
         case .deleteComment(let indexPath):
             let section = indexPath.section
             let row = indexPath.row
-            let id = currentState.comments[section].items[row].item.commentId
+            let id = currentState.comments[section].items[row].item.commentID
             return provider.networkService
                 .request(.commentRemove(id), type: Bool.self)
                 .map { _ in Mutation.deleteComment(indexPath) }
@@ -150,7 +150,7 @@ final class CommentReactor: Reactor {
             state.comments[index].items[0].item.subcommentCount += 1
         } else {
             let data = CommentSection(
-                id: comment.commentId,
+                id: comment.commentID,
                 items: [.comment(comment)])
             state.comments.insert(data, at: 0)
         }
@@ -197,7 +197,7 @@ final class CommentReactor: Reactor {
                 return response.content
                     .map(Comment.init)
                     .map({
-                        ($0.commentId, [CommentSectionItem.comment($0)] + $0.comments.map(CommentSectionItem.subcomment))
+                        ($0.commentID, [CommentSectionItem.comment($0)] + $0.comments.map(CommentSectionItem.subcomment))
                     })
                     .map(CommentSection.init)
             }).asObservable()

@@ -26,7 +26,7 @@ extension CommentEntity: Equatable {
 }
 
 struct Comment {
-    let commentId: Int
+    let commentID: Int
     let comment: String
     let author: AuthorEntity
     var likeCount: Int
@@ -81,7 +81,7 @@ struct Comment {
 
 extension Comment {
     init(entity: CommentEntity) {
-        commentId = entity.commentId
+        commentID = entity.commentId
         comment = entity.comment
         author = entity.author
         likeCount = entity.numberOfWish
@@ -98,7 +98,7 @@ extension Comment {
 
 extension Comment: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.commentId == rhs.commentId
+        return lhs.commentID == rhs.commentID
             && lhs.isLiked == rhs.isLiked
     }
 }
