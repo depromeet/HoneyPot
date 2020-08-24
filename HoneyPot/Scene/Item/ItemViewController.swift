@@ -283,11 +283,7 @@ class ItemViewController: BaseViewController, View {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        if let headerView = tableView.tableHeaderView {
-            headerView.frame.size.height = viewHeader.bounds.height
-            tableView.tableHeaderView = headerView
-            tableView.layoutIfNeeded()
-        }
+        tableView.layoutTableHeaderView()
     }
 
     func bind(reactor: ItemReactor) {
@@ -407,6 +403,7 @@ class ItemViewController: BaseViewController, View {
                 let ratio = size.height / size.width
                 let constant = ratio * self.imageViewDetail.bounds.width
                 self.constraintDetailHeight.constant = constant
+                self.tableView.layoutTableHeaderView()
             })
             .disposed(by: disposeBag)
 
@@ -622,7 +619,7 @@ extension ItemViewController {
         }
         viewTableHeader.addSubview(viewHeader)
         viewHeader.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.top.leading.trailing.bottom.equalToSuperview()
         }
 
         tableView.tableHeaderView = viewTableHeader
