@@ -150,53 +150,6 @@ class ItemCommentCell: BaseTableViewCell {
         viewBottom.isHidden = !(isExpandable && comment.canExpand)
         buttonBottom.setTitle(comment.expandText, for: .normal)
     }
-
-    func setData(comment: CommentEntity, shouldShowBottom: Bool = false) {
-        labelUsername.text = comment.author.name
-        labelTime.text = formattedDate(dateString: comment.createdDate)
-        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
-        labelContent.attributedText = attributedString
-        buttonLike.isSelected = comment.liked
-        buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
-        buttonComment.setTitle("\(comment.numberOfSubComments)", for: .normal)
-        viewBottom.isHidden = !shouldShowBottom || comment.numberOfSubComments != 0
-        let number = comment.numberOfSubComments - comment.comments.count
-        if number == 0 {
-            buttonBottom.setTitle("대댓글 접기", for: .normal)
-        } else {
-            buttonBottom.setTitle("이전 대댓글 \(number)개 더 보기", for: .normal)
-        }
-    }
-
-    private func formattedDate(dateString: String) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        guard let date = formatter.date(from: dateString) else { return nil }
-        let interval = Int(round(abs(date.timeIntervalSinceNow)))
-        let minute = 60
-        let hour = minute * 60
-        let day = hour * 24
-
-        let numberOfDaysLeft = interval / day
-        let numberOfHoursLeft = interval % day / hour
-        let numberOfMinutesLeft = interval % day % hour / minute
-
-        if numberOfDaysLeft > 7 {
-            let calendar = Calendar(identifier: .gregorian)
-            let month = calendar.component(.month, from: date)
-            let day = calendar.component(.day, from: date)
-            return "\(month).\(day)"
-        } else if numberOfDaysLeft > 0 {
-            return "\(numberOfDaysLeft)일 전"
-        } else if numberOfHoursLeft > 0 {
-            return "\(numberOfHoursLeft)시간 전"
-        } else if numberOfMinutesLeft > 0 {
-            return "\(numberOfMinutesLeft)분 전"
-        } else {
-            return "방금 전"
-        }
-    }
 }
 
 extension ItemCommentCell {
