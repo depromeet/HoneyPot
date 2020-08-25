@@ -107,6 +107,9 @@ final class ItemReactor: Reactor {
             state.isLiked = isLiked
         case .setParticipate(let isParticipating):
             state.isParticipating = isParticipating
+            if isParticipating, let participants = state.participants {
+                state.participants = participants + 1
+            }
         case .setComment(let comment):
             if let index = state.comments.firstIndex(where: { $0.commentID == comment.commentID }) {
                 state.comments[index] = comment
