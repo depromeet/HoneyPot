@@ -80,6 +80,11 @@ final class ItemReactor: Reactor {
                 .asObservable()
                 .map({ isLiked in
                     comment.isLiked = isLiked
+                    if isLiked {
+                        comment.likeCount += 1
+                    } else {
+                        comment.likeCount = max(comment.likeCount-1, 0)
+                    }
                     return Mutation.setComment(comment)
                 })
         case .participate:
@@ -103,7 +108,7 @@ final class ItemReactor: Reactor {
         case .setParticipate(let isParticipating):
             state.isParticipating = isParticipating
         case .setComment(let comment):
-            if let index = state.comments.firstIndex(of: comment) {
+            if let index = state.comments.firstIndex(where: { $0.commentID == comment.commentID }) {
                 state.comments[index] = comment
             }
         case .setSharePopUpHidden(let isHidden):
