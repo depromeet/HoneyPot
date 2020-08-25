@@ -38,7 +38,7 @@ final class ItemReactor: Reactor {
         var deadline: String?
         var sellerName: String?
         var numberOfReview: String?
-        var comments: [CommentEntity]?
+        var comments: [Comment] = []
         var commentText: String?
         var isButtonViewAllHidden: Bool = true
         var isLiked: Bool = false
@@ -57,7 +57,7 @@ final class ItemReactor: Reactor {
         case setItem(PostEntity)
         case setLike(Bool)
         case setParticipate(Bool)
-        case setComment(CommentEntity)
+        case setComment(Comment)
         case setSharePopUpHidden(Bool)
     }
 
@@ -74,12 +74,12 @@ final class ItemReactor: Reactor {
                 .asObservable()
                 .map { Mutation.setLike($0) }
         case .likeComment(let id):
-            guard var comment = currentState.comments?.first(where: { $0.commentId == id }) else { return .empty() }
+            guard var comment = currentState.comments.first(where: { $0.commentID == id }) else { return .empty() }
             return provider.networkService
                 .request(.commentLike(id), type: Bool.self)
                 .asObservable()
                 .map({ isLiked in
-                    comment.liked = isLiked
+                    comment.isLiked = isLiked
                     return Mutation.setComment(comment)
                 })
         case .participate:
@@ -103,10 +103,8 @@ final class ItemReactor: Reactor {
         case .setParticipate(let isParticipating):
             state.isParticipating = isParticipating
         case .setComment(let comment):
-            if var comments = state.comments,
-                let index = comments.firstIndex(of: comment) {
-                comments[index] = comment
-                state.comments = comments
+            if let index = state.comments.firstIndex(of: comment) {
+                state.comments[index] = comment
             }
         case .setSharePopUpHidden(let isHidden):
             state.isSharePopUpHidden = isHidden
@@ -118,7 +116,7 @@ final class ItemReactor: Reactor {
         state.bannerURL = post.bannerUrl
         state.contentURL = post.contentUrl
         state.isLiked = post.wished
-        state.comments = post.comments
+        state.comments = post.comments.map(Comment.init)
         if post.commentsCnt == 0 {
             state.commentText = "가장 먼저 댓글을 남겨보세요"
             state.isButtonViewAllHidden = true

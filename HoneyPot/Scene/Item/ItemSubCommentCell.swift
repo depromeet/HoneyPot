@@ -96,45 +96,6 @@ class ItemSubCommentCell: BaseTableViewCell {
         buttonLike.isSelected = comment.isLiked
         buttonLike.setTitle("\(comment.likeCount)", for: .normal)
     }
-
-    func setData(comment: CommentEntity) {
-        labelUsername.text = comment.author.name
-        labelTime.text = formattedDate(dateString: comment.createdDate)
-        let attributedString = NSAttributedString(string: comment.comment, attributes: Style.contentText)
-        labelContent.attributedText = attributedString
-        buttonLike.isSelected = comment.liked
-        buttonLike.setTitle("\(comment.numberOfWish)", for: .normal)
-    }
-
-    private func formattedDate(dateString: String) -> String? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
-        guard let date = formatter.date(from: dateString) else { return nil }
-        let interval = Int(round(abs(date.timeIntervalSinceNow)))
-        let minute = 60
-        let hour = minute * 60
-        let day = hour * 24
-
-        let numberOfDaysLeft = interval / day
-        let numberOfHoursLeft = interval % day / hour
-        let numberOfMinutesLeft = interval % day % hour / minute
-
-        if numberOfDaysLeft > 7 {
-            let calendar = Calendar(identifier: .gregorian)
-            let month = calendar.component(.month, from: date)
-            let day = calendar.component(.day, from: date)
-            return "\(month).\(day)"
-        } else if numberOfDaysLeft > 0 {
-            return "\(numberOfDaysLeft)일 전"
-        } else if numberOfHoursLeft > 0 {
-            return "\(numberOfHoursLeft)시간 전"
-        } else if numberOfMinutesLeft > 0 {
-            return "\(numberOfMinutesLeft)분 전"
-        } else {
-            return "방금 전"
-        }
-    }
 }
 
 extension ItemSubCommentCell {

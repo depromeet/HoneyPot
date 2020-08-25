@@ -557,13 +557,13 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         reactor.state
-            .map { $0.comments ?? [] }
+            .map { $0.comments }
             .bind(to: tableView.rx.items(Reusable.commentCell)) { _, comment, cell in
                 cell.setData(comment: comment)
                 cell.buttonReply.isHidden = true
                 cell.buttonMore.isHidden = true
                 cell.buttonLike.rx.tap
-                    .map { Reactor.Action.likeComment(comment.commentId) }
+                    .map { Reactor.Action.likeComment(comment.commentID) }
                     .bind(to: reactor.action)
                     .disposed(by: cell.disposeBag)
             }
