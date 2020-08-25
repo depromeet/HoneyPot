@@ -50,11 +50,13 @@ final class ItemReactor: Reactor {
         case refresh
         case likePost
         case likeComment(Int)
+        case participate
         case toggleSharePopUp
     }
     enum Mutation {
         case setItem(PostEntity)
         case setLike(Bool)
+        case setParticipate(Bool)
         case setComment(CommentEntity)
         case setSharePopUpHidden(Bool)
     }
@@ -80,6 +82,11 @@ final class ItemReactor: Reactor {
                     comment.liked = isLiked
                     return Mutation.setComment(comment)
                 })
+        case .participate:
+            return provider.networkService
+                .request(.participate(currentState.itemID), type: Bool.self)
+                .asObservable()
+                .map { Mutation.setParticipate($0) }
         case .toggleSharePopUp:
             provider.flagService.set(value: true, forKey: .hasClosedSharePopup)
             return .just(Mutation.setSharePopUpHidden(true))
@@ -90,62 +97,11 @@ final class ItemReactor: Reactor {
         var state = state
         switch mutation {
         case .setItem(let post):
-            state.bannerURL = post.bannerUrl
-            state.contentURL = post.contentUrl
-            state.isLiked = post.wished
-            state.comments = post.comments
-            if post.commentsCnt == 0 {
-                state.commentText = "가장 먼저 댓글을 남겨보세요"
-                state.isButtonViewAllHidden = true
-            } else {
-                state.commentText = "\(post.commentsCnt)"
-                state.isButtonViewAllHidden = false
-            }
-            let description = post.description
-            state.title = description.title
-            state.category = description.category
-            state.discounts = description.discounts
-            let priceOriginal = formattedPrice(price: description.price)
-            state.priceOriginal = priceOriginal
-            if let percent = description.nowDiscount?.discountPercent {
-                state.pricePercent = "\(percent)%"
-                let ratio = (Double(percent) / 100.0)
-                let price = Double(description.price) * (1 - ratio)
-                state.priceDiscount = formattedPrice(price: Int(price))
-                state.isDiscounted = true
-            } else {
-                state.pricePercent = nil
-                state.priceDiscount = priceOriginal
-                state.isDiscounted = false
-            }
-            if description.isClosed,
-                let date = description.deadlineDate {
-                let next = date.addingTimeInterval(60*60*24)
-                let calendar = Calendar(identifier: .gregorian)
-                let month = calendar.component(.month, from: next)
-                let day = calendar.component(.day, from: next)
-                state.discountUntil = "\(month)월 \(day)일 출고 예정"
-            } else if let next = description.nextDiscount {
-                let percent = next.discountPercent
-                let number = next.numberOfPeople - description.participants
-                state.discountUntil = "\(percent)% 할인까지 \(number)명!"
-            } else {
-                state.discountUntil = nil
-            }
-            if let total =  description.discounts.last?.numberOfPeople {
-                let current = Double(description.participants) / Double(total)
-                state.percent = max(min(current, 1), 0)
-            }
-            state.participants = description.participants
-            state.deadline = formattedDate(date: description.deadlineDate)
-            let seller = post.seller
-            state.sellerName = seller.name
-            state.numberOfReview = "\(seller.numberOfReview)개의 후기"
-            state.isClosed = description.isClosed
-            state.isParticipating = post.participated
-            state.sellerURL = seller.thumbnail
+            setItem(state: &state, post: post)
         case .setLike(let isLiked):
             state.isLiked = isLiked
+        case .setParticipate(let isParticipating):
+            state.isParticipating = isParticipating
         case .setComment(let comment):
             if var comments = state.comments,
                 let index = comments.firstIndex(of: comment) {
@@ -158,6 +114,62 @@ final class ItemReactor: Reactor {
         return state
     }
 
+    private func setItem(state: inout State, post: PostEntity) {
+        state.bannerURL = post.bannerUrl
+        state.contentURL = post.contentUrl
+        state.isLiked = post.wished
+        state.comments = post.comments
+        if post.commentsCnt == 0 {
+            state.commentText = "가장 먼저 댓글을 남겨보세요"
+            state.isButtonViewAllHidden = true
+        } else {
+            state.commentText = "\(post.commentsCnt)"
+            state.isButtonViewAllHidden = false
+        }
+        let description = post.description
+        state.title = description.title
+        state.category = description.category
+        state.discounts = description.discounts
+        let priceOriginal = formattedPrice(price: description.price)
+        state.priceOriginal = priceOriginal
+        if let percent = description.nowDiscount?.discountPercent {
+            state.pricePercent = "\(percent)%"
+            let ratio = (Double(percent) / 100.0)
+            let price = Double(description.price) * (1 - ratio)
+            state.priceDiscount = formattedPrice(price: Int(price))
+            state.isDiscounted = true
+        } else {
+            state.pricePercent = nil
+            state.priceDiscount = priceOriginal
+            state.isDiscounted = false
+        }
+        if description.isClosed,
+            let date = description.deadlineDate {
+            let next = date.addingTimeInterval(60*60*24)
+            let calendar = Calendar(identifier: .gregorian)
+            let month = calendar.component(.month, from: next)
+            let day = calendar.component(.day, from: next)
+            state.discountUntil = "\(month)월 \(day)일 출고 예정"
+        } else if let next = description.nextDiscount {
+            let percent = next.discountPercent
+            let number = next.numberOfPeople - description.participants
+            state.discountUntil = "\(percent)% 할인까지 \(number)명!"
+        } else {
+            state.discountUntil = nil
+        }
+        if let total =  description.discounts.last?.numberOfPeople {
+            let current = Double(description.participants) / Double(total)
+            state.percent = max(min(current, 1), 0)
+        }
+        state.participants = description.participants
+        state.deadline = formattedDate(date: description.deadlineDate)
+        let seller = post.seller
+        state.sellerName = seller.name
+        state.numberOfReview = "\(seller.numberOfReview)개의 후기"
+        state.isClosed = description.isClosed
+        state.isParticipating = post.participated
+        state.sellerURL = seller.thumbnail
+    }
     private func formattedPrice(price: Int) -> String? {
         let formatter = NumberFormatter()
         formatter.decimalSeparator = ","
