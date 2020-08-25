@@ -114,20 +114,20 @@ class CommentViewController: BaseViewController, View {
                 cell.setData(comment: comment, isExpandable: true)
                 cell.buttonReply.rx.tap
                     .map { Reactor.Action.selectIndexPath(indexPath) }
-                    .do(onNext: { _ in self.textViewInput.becomeFirstResponder() })
+                    .do(onNext: { [weak self] _ in
+                        self?.textViewInput.becomeFirstResponder()
+                    })
                     .bind(to: reactor.action)
                     .disposed(by: cell.disposeBag)
                 cell.buttonReply.rx.tap
-                    .map { Reactor.Action.selectIndexPath(indexPath) }
                     .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { [weak self] _ in
-                        guard let self = self else { return }
-                        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
-                    })
+                    .subscribe(onNext: { [weak self] in self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true) })
                     .disposed(by: cell.disposeBag)
                 cell.buttonMore.rx.tap
                     .map { (indexPath, comment.author.userId == userID) }
-                    .subscribe(onNext: self.presentCommentActionSheet)
+                    .subscribe(onNext: { [weak self] indexPath, isOwner in
+                        self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
+                    })
                     .disposed(by: cell.disposeBag)
                 cell.buttonLike.rx.tap
                     .map { Reactor.Action.likeComment(indexPath) }
@@ -143,7 +143,9 @@ class CommentViewController: BaseViewController, View {
                 cell.setData(comment: comment)
                 cell.buttonMore.rx.tap
                     .map { (indexPath, comment.author.userId == userID) }
-                    .subscribe(onNext: self.presentCommentActionSheet)
+                    .subscribe(onNext: { [weak self] indexPath, isOwner in
+                        self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
+                    })
                     .disposed(by: cell.disposeBag)
                 cell.buttonLike.rx.tap
                     .map { Reactor.Action.likeComment(indexPath) }
