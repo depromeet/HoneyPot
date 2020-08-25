@@ -89,7 +89,7 @@ class CommentViewController: BaseViewController, View {
         $0.backgroundColor = .clear
     }
     let activityIndicator = UIActivityIndicatorView(
-        frame: .init(x: 0, y: 0, width: 0, height: 100)
+        frame: .init(x: 0, y: 0, width: 0, height: 0)
     ).then {
         $0.hidesWhenStopped = true
     }
@@ -116,6 +116,14 @@ class CommentViewController: BaseViewController, View {
                     .map { Reactor.Action.selectIndexPath(indexPath) }
                     .do(onNext: { _ in self.textViewInput.becomeFirstResponder() })
                     .bind(to: reactor.action)
+                    .disposed(by: cell.disposeBag)
+                cell.buttonReply.rx.tap
+                    .map { Reactor.Action.selectIndexPath(indexPath) }
+                    .observeOn(MainScheduler.instance)
+                    .subscribe(onNext: { [weak self] _ in
+                        guard let self = self else { return }
+                        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    })
                     .disposed(by: cell.disposeBag)
                 cell.buttonMore.rx.tap
                     .map { (indexPath, comment.author.userId == userID) }
@@ -321,7 +329,6 @@ extension CommentViewController {
     private func setupInputView() {
         view.addSubview(viewInput)
         viewInput.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
         constraintInputBottom = viewInput.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
@@ -365,6 +372,7 @@ extension CommentViewController {
     private func setupSelected() {
         view.insertSubview(viewReply, belowSubview: viewInput)
         viewReply.snp.makeConstraints {
+            $0.top.equalTo(tableView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(45)
         }
