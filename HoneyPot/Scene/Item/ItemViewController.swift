@@ -249,12 +249,11 @@ class ItemViewController: BaseViewController, View {
         $0.setTitle("참여하기", for: .normal)
         $0.setTitle("참여중", for: .selected)
         $0.setTitle("마감된 상품입니다", for: .disabled)
-        $0.setTitle("마감된 상품입니다", for: [.disabled, .selected])
-        $0.setTitleColor(0xFFC500.color, for: .selected)
+        $0.setTitle("참여중", for: [.disabled, .selected])
+        $0.setTitleColor(0xFFC500.color, for: [.disabled, .selected])
         $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_yellow"), for: .normal)
-        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_bordered_yellow"), for: .selected)
         $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: .disabled)
-        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_gray"), for: [.disabled, .selected])
+        $0.setBackgroundImage(#imageLiteral(resourceName: "image_background_bordered_yellow"), for: [.disabled, .selected])
         $0.titleLabel?.font = Font.godoB16
         $0.setContentHuggingPriority(.init(1), for: .horizontal)
         $0.adjustsImageWhenHighlighted = false
@@ -378,6 +377,11 @@ class ItemViewController: BaseViewController, View {
 
         buttonLike.rx.tap
             .map { Reactor.Action.likePost }
+            .bind(to: reactor.action)
+            .disposed(by: disposeBag)
+
+        buttonSubmit.rx.tap
+            .map { Reactor.Action.participate }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
@@ -523,7 +527,7 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         reactor.state
-            .map { !$0.isClosed }
+            .map { !($0.isClosed || $0.isParticipating) }
             .distinctUntilChanged()
             .bind(to: buttonSubmit.rx.isEnabled)
             .disposed(by: disposeBag)
@@ -554,14 +558,10 @@ class ItemViewController: BaseViewController, View {
 
         reactor.state
             .map { $0.comments ?? [] }
-            .bind(to: tableView.rx.items(Reusable.commentCell)) { [weak self] _, comment, cell in
+            .bind(to: tableView.rx.items(Reusable.commentCell)) { _, comment, cell in
                 cell.setData(comment: comment)
-                cell.buttonReply.isEnabled = false
-                cell.buttonMore.rx.tap
-                    .subscribe(onNext: {
-                        self?.presentCommentActionSheet()
-                    })
-                    .disposed(by: cell.disposeBag)
+                cell.buttonReply.isHidden = true
+                cell.buttonMore.isHidden = true
                 cell.buttonLike.rx.tap
                     .map { Reactor.Action.likeComment(comment.commentId) }
                     .bind(to: reactor.action)
