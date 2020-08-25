@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "image_logo_w79h22.png",
+      "filename" : "image_logo_w79h24.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "image_logo_w79h22@2x.png",
+      "filename" : "image_logo_w79h24@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "image_logo_w79h22@3x.png",
+      "filename" : "image_logo_w79h24@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

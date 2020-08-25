@@ -25,7 +25,7 @@ class NavigationBar: UIView {
     }
 
     let imageViewLogo = UIImageView().then {
-        $0.image = #imageLiteral(resourceName: "image_logo_w79h22")
+        $0.image = #imageLiteral(resourceName: "image_logo_w79h24")
         $0.contentMode = .scaleAspectFit
     }
     let labelTitle = UILabel().then {
