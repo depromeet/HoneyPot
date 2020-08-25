@@ -135,6 +135,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
 
         let keyboardTap = textFieldSearch.rx.controlEvent(.editingDidEndOnExit)
             .withLatestFrom(textFieldSearch.rx.text.orEmpty)
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }
             .map { String($0) }
 
