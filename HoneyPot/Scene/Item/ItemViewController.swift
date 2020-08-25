@@ -134,7 +134,7 @@ class ItemViewController: BaseViewController, View {
 
     // MARK: - Progress
     let buttonDiscountUntil = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_logo_w24h21"), for: .normal)
+        $0.setImage(#imageLiteral(resourceName: "icon_logo_w24h22"), for: .normal)
         $0.setTitleColor(Color.black1, for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
         $0.titleLabel?.font = Font.sdB18
