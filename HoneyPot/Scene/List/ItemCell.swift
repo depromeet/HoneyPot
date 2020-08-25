@@ -59,6 +59,9 @@ class ItemCell: BaseTableViewCell {
     let viewProgressBackground = UIView().then {
         $0.backgroundColor = 0xEAEAEA.color
     }
+    let viewProgress = UIView().then {
+        $0.backgroundColor = 0xFFC500.color
+    }
 
     let imageViewItem = UIImageView().then {
         $0.backgroundColor = 0xEEEEEE.color
@@ -97,7 +100,6 @@ class ItemCell: BaseTableViewCell {
         $0.textColor = Color.categoryTitle
         $0.font = Font.sdR16
     }
-    var constraintProgressTrailing: NSLayoutConstraint!
 
     let buttonCount = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_people_w18h18"), for: .normal)
@@ -160,8 +162,10 @@ class ItemCell: BaseTableViewCell {
         labelCategory.text = "\(item.category)  I  \(item.sellerName)"
 
         let ratio = CGFloat(item.participants) / CGFloat(item.numberOfGoal)
-        let constant = (1 - ratio) * viewProgressBackground.bounds.width
-        constraintProgressTrailing.constant = constant
+        viewProgress.snp.remakeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.width.equalTo(viewProgressBackground).multipliedBy(ratio)
+        }
 
         buttonCount.setAttributedTitle(attributedStringFor(number: item.participants), for: .normal)
         buttonTime.setAttributedTitle(attributedStringFor(time: formattedDate(date: item.deadlineDate)), for: .normal)
@@ -274,15 +278,7 @@ extension ItemCell {
             $0.leading.trailing.equalToSuperview().inset(Metric.leadingOffset)
             $0.height.equalTo(4)
         }
-        let viewProgress = UIView().then {
-            $0.backgroundColor = 0xFFC500.color
-        }
         viewProgressBackground.addSubview(viewProgress)
-        viewProgress.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
-        }
-        constraintProgressTrailing = viewProgressBackground.trailingAnchor.constraint(equalTo: viewProgress.trailingAnchor, constant: 100)
-        constraintProgressTrailing.isActive = true
     }
     private func setupInfo() {
         viewContainer.addSubview(buttonCount)
