@@ -67,11 +67,11 @@ class DiscountModalViewController: BaseViewController {
                 cell.labelCount.text = textNumber
                 switch discount.step {
                 case 1:
-                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step1_w20h17")
+                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step1_w24h24")
                 case 2:
-                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step2_w20h17")
+                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step2_w24h24")
                 case 3:
-                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step3_w20h17")
+                    cell.imageViewStep.image = #imageLiteral(resourceName: "icon_discount_step3_w24h24")
                 default:
                     cell.imageViewStep.image = nil
                 }
