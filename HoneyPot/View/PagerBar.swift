@@ -33,7 +33,7 @@ class PagerBar: UIView {
             guard currentIndex < stackView.arrangedSubviews.count else { return }
             let view = stackView.arrangedSubviews[currentIndex]
 
-            let rect = view.frame.insetBy(dx: -stackView.spacing - 5, dy: 0)
+            let rect = view.frame.insetBy(dx: -stackView.spacing - 20, dy: 0)
             scrollView.scrollRectToVisible(rect, animated: true)
 
             var frame = stackView.convert(view.frame, to: scrollView)
