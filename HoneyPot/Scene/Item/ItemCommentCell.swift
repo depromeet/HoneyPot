@@ -44,6 +44,7 @@ class ItemCommentCell: BaseTableViewCell {
     let buttonBottom = UIButton().then {
         $0.setTitleColor(Color.mainText, for: .normal)
         $0.titleLabel?.font = Font.extraText
+        $0.contentHorizontalAlignment = .leading
     }
 
     let labelUsername = UILabel().then {
@@ -119,7 +120,7 @@ class ItemCommentCell: BaseTableViewCell {
         }
         viewBottom.addSubview(buttonBottom)
         buttonBottom.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(18)
+            $0.leading.trailing.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview().offset(1)
         }
         stackView.addArrangedSubview(viewBottom)
