@@ -152,7 +152,7 @@ final class ListReactor: Reactor {
     ) -> Observable<([ItemEntity], Bool)> {
         let keyword = currentState.keyword
         return provider.networkService
-            .request(.posts(keyword, category, sort, index), type: PageableList<ItemEntity>.self)
+            .request(.posts(keyword, category, sort, index), type: PageableList<ItemEntity>.self, #file, #function, #line)
             .map { ($0.content, $0.last) }
             .asObservable()
     }

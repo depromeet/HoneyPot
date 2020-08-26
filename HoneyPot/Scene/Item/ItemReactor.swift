@@ -65,18 +65,18 @@ final class ItemReactor: Reactor {
         switch action {
         case .refresh:
             return provider.networkService
-                .request(.post(currentState.itemID), type: PostEntity.self)
+                .request(.post(currentState.itemID), type: PostEntity.self, #file, #function, #line)
                 .asObservable()
                 .map { Mutation.setItem($0) }
         case .likePost:
             return provider.networkService
-                .request(.postLike(currentState.itemID), type: Bool.self)
+                .request(.postLike(currentState.itemID), type: Bool.self, #file, #function, #line)
                 .asObservable()
                 .map { Mutation.setLike($0) }
         case .likeComment(let id):
             guard var comment = currentState.comments.first(where: { $0.commentID == id }) else { return .empty() }
             return provider.networkService
-                .request(.commentLike(id), type: Bool.self)
+                .request(.commentLike(id), type: Bool.self, #file, #function, #line)
                 .asObservable()
                 .map({ isLiked in
                     comment.isLiked = isLiked
@@ -89,7 +89,7 @@ final class ItemReactor: Reactor {
                 })
         case .participate:
             return provider.networkService
-                .request(.participate(currentState.itemID), type: Bool.self)
+                .request(.participate(currentState.itemID), type: Bool.self, #file, #function, #line)
                 .asObservable()
                 .map { Mutation.setParticipate($0) }
         case .toggleSharePopUp:

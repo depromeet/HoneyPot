@@ -20,7 +20,10 @@ protocol NetworkServiceType {
     )
     func request<T: Decodable>(
         _ target: HoneyPotAPI,
-        type: T.Type
+        type: T.Type,
+        _ file: StaticString,
+        _ function: StaticString,
+        _ line: UInt
     ) -> Single<T>
 }
 
@@ -61,11 +64,11 @@ class NetworkService: BaseService, NetworkServiceType {
 
     func request<T: Decodable>(
         _ target: HoneyPotAPI,
-        type: T.Type
+        type: T.Type,
+        _ file: StaticString,
+        _ function: StaticString,
+        _ line: UInt
     ) -> Single<T> {
-        let file: StaticString = #file
-        let function: StaticString = #function
-        let line: UInt = #line
         let requestString = "\(target.method.rawValue) \(target.path)"
         return networkProvider.rx.request(target)
             .filterSuccessfulStatusCodes()
