@@ -1,4 +1,4 @@
-name: CI
+name: Build
 
 on: [pull_request]
 
@@ -9,13 +9,13 @@ jobs:
       matrix:
         destination: ["platform=iOS Simulator,name=iPhone 11 Pro,OS=latest"]
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: iOS - ${{ matrix.destination }}
         run: xcodebuild -workspace "HoneyPot.xcworkspace" -scheme "Development" -destination "${{ matrix.destination }}"
   swiftlint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: GitHub Action for SwiftLint
         uses: norio-nomura/action-swiftlint@3.0.1
         with:
