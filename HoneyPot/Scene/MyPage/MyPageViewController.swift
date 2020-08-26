@@ -200,7 +200,7 @@ extension MyPageViewController {
         }
         viewProfile.addSubview(labelUserType)
         labelUserType.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
+            $0.centerY.equalToSuperview().offset(1)
             $0.leading.equalTo(labelUsername.snp.trailing).offset(8)
         }
     }
