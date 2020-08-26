@@ -130,6 +130,7 @@ class ItemViewController: BaseViewController, View {
     let labelCurrency = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.black1
+        $0.text = "원"
     }
 
     // MARK: - Progress
