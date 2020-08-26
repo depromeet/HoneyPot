@@ -161,7 +161,8 @@ class ItemCell: BaseTableViewCell {
         labelTitle.attributedText = attributedString
         labelCategory.text = "\(item.category)  I  \(item.sellerName)"
 
-        let ratio = CGFloat(item.participants) / CGFloat(item.numberOfGoal)
+        var ratio = CGFloat(item.participants) / CGFloat(item.numberOfGoal)
+        ratio = min(max(ratio, 0), 1)
         viewProgress.snp.remakeConstraints {
             $0.top.leading.bottom.equalToSuperview()
             $0.width.equalTo(viewProgressBackground).multipliedBy(ratio)
