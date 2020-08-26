@@ -65,12 +65,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
     }
     lazy var textFieldSearch = UITextField().then {
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = .white
         $0.font = Font.textFieldText
-        $0.leftView = imageViewSearch
-        $0.leftViewMode = .always
-        $0.rightView = buttonClear
-        $0.rightViewMode = .always
         $0.autocorrectionType = .no
         $0.returnKeyType = .done
         let attributes: [NSAttributedString.Key: Any] = [
@@ -197,18 +192,33 @@ extension SearchViewController {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
         }
-        navigationBar.addSubview(textFieldSearch)
-        textFieldSearch.snp.makeConstraints {
+        let viewTextFieldBackground = UIView().then {
+            $0.backgroundColor = .white
+            $0.layer.cornerRadius = 8
+        }
+        navigationBar.addSubview(viewTextFieldBackground)
+        viewTextFieldBackground.snp.makeConstraints {
             $0.leading.equalToSuperview().inset(53)
             $0.trailing.equalToSuperview().inset(18)
             $0.centerY.equalToSuperview()
             $0.height.equalTo(30)
         }
+        viewTextFieldBackground.addSubview(imageViewSearch)
         imageViewSearch.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
             $0.width.equalTo(40)
         }
+        viewTextFieldBackground.addSubview(buttonClear)
         buttonClear.snp.makeConstraints {
+            $0.top.trailing.bottom.equalToSuperview()
             $0.width.equalTo(40)
+        }
+        viewTextFieldBackground.addSubview(textFieldSearch)
+        textFieldSearch.snp.makeConstraints {
+            $0.top.equalToSuperview().inset(1)
+            $0.bottom.equalToSuperview()
+            $0.leading.equalTo(imageViewSearch.snp.trailing)
+            $0.trailing.equalTo(buttonClear.snp.leading)
         }
         let viewBackground = UIView().then {
             $0.backgroundColor = Color.navigationBackground
