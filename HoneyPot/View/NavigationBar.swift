@@ -57,15 +57,17 @@ class NavigationBar: UIView {
                 $0.centerY.equalToSuperview()
             }
         }
-        addSubview(stackViewRight)
-        stackViewRight.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(4)
-            $0.trailing.equalToSuperview().inset(12)
-        }
-        for rightView in rightViews {
-            stackViewRight.addArrangedSubview(rightView)
-            rightView.snp.makeConstraints {
-                $0.width.equalTo(rightView.snp.height)
+        if !rightViews.isEmpty {
+            addSubview(stackViewRight)
+            stackViewRight.snp.makeConstraints {
+                $0.top.bottom.equalToSuperview().inset(4)
+                $0.trailing.equalToSuperview().inset(12)
+            }
+            for rightView in rightViews {
+                stackViewRight.addArrangedSubview(rightView)
+                rightView.snp.makeConstraints {
+                    $0.width.equalTo(rightView.snp.height)
+                }
             }
         }
         labelTitle.text = title
