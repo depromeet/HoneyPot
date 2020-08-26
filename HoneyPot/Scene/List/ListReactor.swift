@@ -32,8 +32,9 @@ final class ListReactor: Reactor {
         var sortTitle: String = SortKind.suggestion.title
         var pageIndex: Int = 0
         var items: [ItemEntity] = []
-        var isRefreshing = false
-        var isLoading = false
+        var isRefreshing: Bool = false
+        var isLoading: Bool = false
+        var isLast: Bool = false
     }
     enum Action {
         case refresh
@@ -47,6 +48,7 @@ final class ListReactor: Reactor {
         case setRefreshing(Bool)
         case setLoading(Bool)
         case setPageIndex(Int)
+        case setLast(Bool)
     }
 
     func mutate(action: Action) -> Observable<Mutation> {
@@ -55,10 +57,11 @@ final class ListReactor: Reactor {
             let sort = currentState.sortList[currentState.sortIndex].rawValue
             return Observable.concat(
                 refresh(sort: sort),
-                .just(Mutation.setPageIndex(0))
+                .just(Mutation.setPageIndex(0)),
+                .just(Mutation.setLast(false))
             )
         case .load:
-            guard !currentState.isLoading else { return .empty() }
+            guard !currentState.isLoading && !currentState.isLast else { return .empty() }
             let index = currentState.pageIndex + 1
             return Observable.concat(
                 load(index: index),
@@ -89,6 +92,8 @@ final class ListReactor: Reactor {
             state.isLoading = isLoading
         case .setPageIndex(let index):
             state.pageIndex = index
+        case .setLast(let isLast):
+            state.isLast = isLast
         }
         return state
     }
@@ -100,7 +105,12 @@ final class ListReactor: Reactor {
         return Observable.concat(
             .just(Mutation.setRefreshing(true)),
             requestItems(category: category, sort: sort)
-                .map({ Mutation.setItems($0) })
+                .flatMap({ items, isLast -> Observable<Mutation> in
+                    return Observable.concat(
+                        .just(Mutation.setItems(items)),
+                        .just(Mutation.setLast(isLast))
+                    )
+                })
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setRefreshing(false))
         )
@@ -113,7 +123,12 @@ final class ListReactor: Reactor {
         return Observable.concat(
             .just(Mutation.setLoading(true)),
             requestItems(category: category, sort: sort, index: index)
-                .map({ Mutation.appendItems($0) })
+                .flatMap({ items, isLast -> Observable<Mutation> in
+                    return Observable.concat(
+                        .just(Mutation.appendItems(items)),
+                        .just(Mutation.setLast(isLast))
+                    )
+                })
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setLoading(false))
         )
@@ -122,11 +137,11 @@ final class ListReactor: Reactor {
         category: String,
         sort: String,
         index: Int = 0
-    ) -> Observable<[ItemEntity]> {
+    ) -> Observable<([ItemEntity], Bool)> {
         let keyword = currentState.keyword
         return provider.networkService
             .request(.posts(keyword, category, sort, index), type: PageableList<ItemEntity>.self)
-            .map { $0.content }
+            .map { ($0.content, $0.last) }
             .asObservable()
     }
 }
