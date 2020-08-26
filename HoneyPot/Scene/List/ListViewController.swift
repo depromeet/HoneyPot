@@ -38,22 +38,10 @@ enum SortKind: String, CaseIterable {
 }
 
 class ListViewController: BaseViewController, ReactorKit.View {
-    private enum Color {
-        static let navigationBackground = 0xFFD136.color
-    }
     struct Reusable {
         static let itemCell = ReusableCell<ItemCell>()
     }
 
-    lazy var navigationBar = NavigationBar(
-        leftView: buttonBack
-    ).then {
-        $0.backgroundColor = .clear
-    }
-
-    let buttonBack = UIButton().then {
-        $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
-    }
     let buttonSort = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_arrow_down_w24h24"), for: .normal)
         $0.setTitle("추천순", for: .normal)
@@ -88,7 +76,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
     }
 
     override func setupConstraints() {
-        setupNavigationBar()
         setupTableView()
     }
 
@@ -102,12 +89,6 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .take(1)
             .map { _ in Reactor.Action.refresh }
             .bind(to: reactor.action)
-            .disposed(by: disposeBag)
-
-        buttonBack.rx.tap
-            .subscribe(onNext: { [weak self] in
-                self?.navigationController?.popViewController(animated: true)
-            })
             .disposed(by: disposeBag)
 
         buttonSort.rx.tap
@@ -184,36 +165,14 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .distinctUntilChanged()
             .bind(to: activityIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
-
-        reactor.state
-            .take(1)
-            .map { $0.keyword }
-            .bind(to: navigationBar.labelTitle.rx.text)
-            .disposed(by: disposeBag)
     }
 }
 
 extension ListViewController {
-    private func setupNavigationBar() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(navigationBar)
-        navigationBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
-        }
-        let viewBackground = UIView().then {
-            $0.backgroundColor = Color.navigationBackground
-        }
-        view.insertSubview(viewBackground, belowSubview: navigationBar)
-        viewBackground.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(navigationBar)
-        }
-    }
     private func setupTableView() {
         view.insertSubview(tableView, at: 0)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(navigationBar.snp.bottom)
+            $0.top.equalToSuperview()
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalToSuperview()
         }

@@ -39,11 +39,13 @@ final class ListReactor: Reactor {
     enum Action {
         case refresh
         case load
+        case selectCategory(String)
         case selectSortIndex(Int)
     }
     enum Mutation {
         case setItems([ItemEntity])
         case appendItems([ItemEntity])
+        case setCategory(String)
         case setSortTitle(Int)
         case setRefreshing(Bool)
         case setLoading(Bool)
@@ -54,9 +56,10 @@ final class ListReactor: Reactor {
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
+            let category = currentState.category
             let sort = currentState.sortList[currentState.sortIndex].rawValue
             return Observable.concat(
-                refresh(sort: sort),
+                refresh(category: category, sort: sort),
                 .just(Mutation.setPageIndex(0)),
                 .just(Mutation.setLast(false))
             )
@@ -67,11 +70,18 @@ final class ListReactor: Reactor {
                 load(index: index),
                 .just(Mutation.setPageIndex(index))
             )
+        case .selectCategory(let category):
+            let sort = currentState.sortList[currentState.sortIndex].rawValue
+            return Observable.concat(
+                .just(Mutation.setCategory(category)),
+                refresh(category: category, sort: sort)
+            )
         case .selectSortIndex(let index):
+            let category = currentState.category
             let sort = currentState.sortList[index].rawValue
             return Observable.concat(
                 .just(Mutation.setSortTitle(index)),
-                refresh(sort: sort)
+                refresh(category: category, sort: sort)
             )
         }
     }
@@ -83,6 +93,8 @@ final class ListReactor: Reactor {
             state.items = items
         case .appendItems(let items):
             state.items += items
+        case .setCategory(let category):
+            state.category = category
         case .setSortTitle(let index):
             state.sortIndex = index
             state.sortTitle = state.sortList[index].title

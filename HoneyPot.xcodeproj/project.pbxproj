@@ -154,6 +154,12 @@
 		9CC407E924E7676A009FC68F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C545BEA24BF4C3D00138C78 /* Assets.xcassets */; };
 		9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE124BF4C3C00138C78 /* AppDelegate.swift */; };
 		9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C545BE324BF4C3C00138C78 /* SceneDelegate.swift */; };
+		9CC579E224F52FA50053B2E9 /* PagerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E124F52FA50053B2E9 /* PagerBar.swift */; };
+		9CC579E324F52FA50053B2E9 /* PagerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E124F52FA50053B2E9 /* PagerBar.swift */; };
+		9CC579E624F52FD60053B2E9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E524F52FD60053B2E9 /* HomeViewController.swift */; };
+		9CC579E724F52FD60053B2E9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E524F52FD60053B2E9 /* HomeViewController.swift */; };
+		9CC579EA24F53F8E0053B2E9 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E924F53F8E0053B2E9 /* ResultViewController.swift */; };
+		9CC579EB24F53F8E0053B2E9 /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC579E924F53F8E0053B2E9 /* ResultViewController.swift */; };
 		9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */; };
 		9CD03D1E24ECC2930049EB93 /* CommentReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */; };
 		9CD03D1F24ECC6A60049EB93 /* CommentReactor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */; };
@@ -278,6 +284,9 @@
 		9CA2AD2D24F2587700351BDA /* FlagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlagService.swift; sourceTree = "<group>"; };
 		9CA2CBC524E8C90500AE5322 /* SortModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortModalViewController.swift; sourceTree = "<group>"; };
 		9CA2CBC724E905DD00AE5322 /* BottomSheetItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomSheetItemCell.swift; sourceTree = "<group>"; };
+		9CC579E124F52FA50053B2E9 /* PagerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagerBar.swift; sourceTree = "<group>"; };
+		9CC579E524F52FD60053B2E9 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9CC579E924F53F8E0053B2E9 /* ResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		9CD03D1B24ECC27A0049EB93 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		9CD03D1D24ECC2930049EB93 /* CommentReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentReactor.swift; sourceTree = "<group>"; };
 		9CD7A2FA24E16F550079C21F /* ListReactor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListReactor.swift; sourceTree = "<group>"; };
@@ -507,9 +516,11 @@
 			children = (
 				044B62DF24D8425E00088487 /* DetailView */,
 				B6D6EC5024DB3B5900E27C06 /* Main */,
+				9CC579E424F52FC70053B2E9 /* Home */,
 				9CE4CDB224D6592E00A8A25E /* MyPage */,
 				9CE4CDBF24D6A76900A8A25E /* Setting */,
 				9CE4CDB324D65B2600A8A25E /* Search */,
+				9CC579E824F53F750053B2E9 /* Result */,
 				9C835DD924DFF4CB000901FF /* List */,
 				9C7CDB5B24E56AF700801F84 /* Item */,
 				9CD03D1A24ECC2590049EB93 /* Comment */,
@@ -582,6 +593,22 @@
 			path = Modal;
 			sourceTree = "<group>";
 		};
+		9CC579E424F52FC70053B2E9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				9CC579E524F52FD60053B2E9 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		9CC579E824F53F750053B2E9 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				9CC579E924F53F8E0053B2E9 /* ResultViewController.swift */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
 		9CD03D1A24ECC2590049EB93 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
@@ -636,6 +663,7 @@
 			isa = PBXGroup;
 			children = (
 				9CF363AD24D0530A0008380C /* NavigationBar.swift */,
+				9CC579E124F52FA50053B2E9 /* PagerBar.swift */,
 				9C71F61724D42666009DD6D7 /* VerticalButton.swift */,
 				9C6475FA24E2B6350067EA5F /* ResizableTableView.swift */,
 				9C47BF3D24E6B851005238BE /* ResizableTextView.swift */,
@@ -828,6 +856,7 @@
 			files = (
 				9CC407EB24E767AE009FC68F /* SceneDelegate.swift in Sources */,
 				9CD03D1E24ECC2930049EB93 /* CommentReactor.swift in Sources */,
+				9CC579EA24F53F8E0053B2E9 /* ResultViewController.swift in Sources */,
 				9CC407EA24E7678A009FC68F /* AppDelegate.swift in Sources */,
 				9CE1CDD224F39BAF003241A8 /* UITableView+.swift in Sources */,
 				9CC407E724E76713009FC68F /* VerticalButton.swift in Sources */,
@@ -885,6 +914,7 @@
 				9C1D557624DADC510048BBDF /* NavigationMap.swift in Sources */,
 				9C26539524EA2218009E5D5E /* DiscountEntity.swift in Sources */,
 				9C71F61F24D42FFD009DD6D7 /* BaseTableViewCell.swift in Sources */,
+				9CC579E624F52FD60053B2E9 /* HomeViewController.swift in Sources */,
 				9C0D59CD24DEE159007779CD /* SearchHeader.swift in Sources */,
 				9CD7A2FB24E16F550079C21F /* ListReactor.swift in Sources */,
 				9CA2AD2E24F2587700351BDA /* FlagService.swift in Sources */,
@@ -896,6 +926,7 @@
 				9CF665FC24EE104A00DD2CB8 /* ItemEntity.swift in Sources */,
 				9C697D4724ED41F100ABCC7C /* CommentEntity.swift in Sources */,
 				9CD03D1C24ECC27A0049EB93 /* CommentViewController.swift in Sources */,
+				9CC579E224F52FA50053B2E9 /* PagerBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -905,6 +936,7 @@
 			files = (
 				9C9040FE24EA93E1000E21A3 /* SceneDelegate.swift in Sources */,
 				9C9040FF24EA93E1000E21A3 /* AppDelegate.swift in Sources */,
+				9CC579EB24F53F8E0053B2E9 /* ResultViewController.swift in Sources */,
 				9C90410024EA93E1000E21A3 /* VerticalButton.swift in Sources */,
 				9CE4D1EC24F3EAA900C00239 /* UITableView+.swift in Sources */,
 				9C90410124EA93E1000E21A3 /* SortModalViewController.swift in Sources */,
@@ -962,6 +994,7 @@
 				9C90412A24EA93E1000E21A3 /* ProductCell.swift in Sources */,
 				9C90412B24EA93E1000E21A3 /* NavigationMap.swift in Sources */,
 				9C90412C24EA93E1000E21A3 /* DiscountEntity.swift in Sources */,
+				9CC579E724F52FD60053B2E9 /* HomeViewController.swift in Sources */,
 				9C90412D24EA93E1000E21A3 /* BaseTableViewCell.swift in Sources */,
 				9C90412E24EA93E1000E21A3 /* SearchHeader.swift in Sources */,
 				9CA2AD2F24F2587700351BDA /* FlagService.swift in Sources */,
@@ -973,6 +1006,7 @@
 				9C697D3F24ED405400ABCC7C /* PostEntity.swift in Sources */,
 				9C90413324EA93E1000E21A3 /* SearchCell.swift in Sources */,
 				9CA7FA7824EF99CA004BA440 /* Logger.swift in Sources */,
+				9CC579E324F52FA50053B2E9 /* PagerBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
