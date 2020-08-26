@@ -77,7 +77,7 @@ final class CommentReactor: Reactor {
             let id = currentState.itemID
             let userID = provider.accountService.userID
             return provider.networkService
-                .request(.commentAdd(id, commentID, userID, text), type: CommentEntity.self)
+                .request(.commentAdd(id, commentID, userID, text), type: CommentEntity.self, #file, #function, #line)
                 .map(Comment.init)
                 .map { Mutation.addComment(commentID, $0) }
                 .asObservable()
@@ -87,7 +87,7 @@ final class CommentReactor: Reactor {
             var comment = currentState.comments[section].items[row].item
             let id = comment.commentID
             return provider.networkService
-                .request(.commentLike(id), type: Bool.self)
+                .request(.commentLike(id), type: Bool.self, #file, #function, #line)
                 .map({ isLiked -> Comment in
                     comment.isLiked = isLiked
                     if isLiked {
@@ -104,7 +104,7 @@ final class CommentReactor: Reactor {
             let row = indexPath.row
             let id = currentState.comments[section].items[row].item.commentID
             return provider.networkService
-                .request(.commentRemove(id), type: Bool.self)
+                .request(.commentRemove(id), type: Bool.self, #file, #function, #line)
                 .map { _ in Mutation.deleteComment(indexPath) }
                 .asObservable()
         case .selectIndexPath(let indexPath):
@@ -150,7 +150,7 @@ final class CommentReactor: Reactor {
                 comment.isExpanded = false
             } else {
                 return provider.networkService
-                    .request(.subcomments(commentID), type: [CommentEntity].self)
+                    .request(.subcomments(commentID), type: [CommentEntity].self, #file, #function, #line)
                     .map { $0.map(Comment.init) }
                     .map({ comments in
                         comment.subcommentCount = comments.count
@@ -255,7 +255,7 @@ final class CommentReactor: Reactor {
     ) -> Observable<([CommentSection], Bool)> {
         let id = currentState.itemID
         return provider.networkService
-            .request(.comments(id, index), type: PageableList<CommentEntity>.self)
+            .request(.comments(id, index), type: PageableList<CommentEntity>.self, #file, #function, #line)
             .map({ response -> ([CommentSection], Bool) in
                 let isLast = response.last
                 let items = response.content
