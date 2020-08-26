@@ -73,7 +73,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.backgroundColor = .clear
     }
     let activityIndicator = UIActivityIndicatorView(
-        frame: .init(x: 0, y: 0, width: 0, height: 100)
+        frame: .init(x: 0, y: 0, width: 0, height: 30)
     ).then {
         $0.hidesWhenStopped = true
     }
@@ -140,6 +140,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .skip(1)
             .map { $0.y >= tableView.contentSize.height - tableView.bounds.height }
             .distinctUntilChanged()
+            .filter { $0 }
             .map { _ in Reactor.Action.load }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)

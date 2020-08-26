@@ -235,6 +235,7 @@ class CommentViewController: BaseViewController, View {
             .skip(1)
             .map { $0.y >= tableView.contentSize.height - tableView.bounds.height }
             .distinctUntilChanged()
+            .filter { $0 }
             .map { _ in Reactor.Action.load }
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
