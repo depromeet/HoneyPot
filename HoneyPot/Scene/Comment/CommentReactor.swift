@@ -55,7 +55,8 @@ final class CommentReactor: Reactor {
         case .refresh:
             return Observable.concat(
                 refresh(),
-                .just(Mutation.setPageIndex(0))
+                .just(Mutation.setPageIndex(0)),
+                .just(Mutation.setLast(false))
             )
         case .load:
             guard !currentState.isLoading && !currentState.isLast else { return .empty() }
