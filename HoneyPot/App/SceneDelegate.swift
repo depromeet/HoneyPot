@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         let provider = ServiceProvider()
-        let mainViewController = MainViewController(provider: provider)
+        let mainViewController = HomeViewController(provider: provider)
         let navigationController = UINavigationController(rootViewController: mainViewController)
         navigationController.navigationBar.isHidden = true
         window.rootViewController = navigationController

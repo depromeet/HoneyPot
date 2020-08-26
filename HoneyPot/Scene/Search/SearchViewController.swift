@@ -182,8 +182,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
             .do(onNext: { [weak self] _ in self?.textFieldSearch.resignFirstResponder() })
             .subscribe(onNext: { [weak self] keyword in
                 guard let self = self else { return }
-                let reactor = ListReactor(provider: self.provider, keyword: keyword)
-                let listViewController = ListViewController(reactor: reactor)
+                let listViewController = ResultViewController(provider: self.provider, keyword: keyword)
                 self.navigationController?.pushViewController(listViewController, animated: true)
             })
             .disposed(by: disposeBag)
