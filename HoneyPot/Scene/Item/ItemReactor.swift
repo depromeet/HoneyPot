@@ -160,6 +160,8 @@ final class ItemReactor: Reactor {
             let percent = next.discountPercent
             let number = next.numberOfPeople - description.participants
             state.discountUntil = "\(percent)% 할인까지 \(number)명!"
+        } else if description.participants >= description.numberOfGoal {
+            state.discountUntil = "최고 할인율 달성!"
         } else {
             state.discountUntil = nil
         }

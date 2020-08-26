@@ -185,6 +185,8 @@ class ItemCell: BaseTableViewCell {
             let percent = next.discountPercent
             let number = next.numberOfPeople - item.participants
             labelOverview.text = "\(percent)% 할인까지 \(number)명!"
+        } else if item.participants >= item.numberOfGoal {
+            labelOverview.text = "최고 할인율 달성!"
         } else {
             labelOverview.text = nil
         }
