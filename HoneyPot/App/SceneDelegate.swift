@@ -17,6 +17,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
+        let date = Date().addingTimeInterval(0.7)
+        RunLoop.current.run(until: date)
+
         let window = UIWindow(windowScene: windowScene)
         let provider = ServiceProvider()
         let mainViewController = HomeViewController(provider: provider)
