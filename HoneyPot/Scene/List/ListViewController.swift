@@ -126,6 +126,12 @@ class ListViewController: BaseViewController, ReactorKit.View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
+        tableView.rx.didEndDragging
+            .withLatestFrom(reactor.state)
+            .map { $0.isRefreshing }
+            .bind(to: refreshControl.rx.isRefreshing)
+            .disposed(by: disposeBag)
+
         tableView.rx.modelSelected(ItemEntity.self)
             .map { $0.id }
             .subscribe(onNext: { [weak self] id in
@@ -153,8 +159,10 @@ class ListViewController: BaseViewController, ReactorKit.View {
             }
             .disposed(by: disposeBag)
 
+        let tableView = self.tableView
         reactor.state
             .map { $0.isRefreshing }
+            .filter({ $0 || !tableView.isDragging })
             .distinctUntilChanged()
             .filter { !$0 }
             .bind(to: refreshControl.rx.isRefreshing)
