@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9C545BDD24BF4C3C00138C78"
+               BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
                BuildableName = "HoneyPot.app"
-               BlueprintName = "Development"
+               BlueprintName = "HoneyPot"
                ReferencedContainer = "container:HoneyPot.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -44,9 +44,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9C545BDD24BF4C3C00138C78"
+            BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
             BuildableName = "HoneyPot.app"
-            BlueprintName = "Development"
+            BlueprintName = "HoneyPot"
             ReferencedContainer = "container:HoneyPot.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -61,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9C545BDD24BF4C3C00138C78"
+            BlueprintIdentifier = "9C9040FC24EA93E1000E21A3"
             BuildableName = "HoneyPot.app"
-            BlueprintName = "Development"
+            BlueprintName = "HoneyPot"
             ReferencedContainer = "container:HoneyPot.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

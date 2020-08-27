@@ -12,7 +12,7 @@ jobs:
       XC_VERSION: ${{ '11.6' }}
       XC_WORKSPACE: ${{ 'HoneyPot.xcworkspace' }}
       XC_ARCHIVE: ${{ 'HoneyPot.xcarchive' }}
-      XC_SCHEME: ${{ 'Release' }}
+      XC_SCHEME: ${{ 'HoneyPot' }}
       KEYCHAIN: ${{ 'temporary.keychain' }}
       DECRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/cert.p12' }}
       ENCRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/cert.p12.gpg' }}
@@ -51,11 +51,11 @@ jobs:
         xcodebuild archive -workspace $XC_WORKSPACE -scheme $XC_SCHEME -configuration release -archivePath $XC_ARCHIVE
     - name: Export app
       run: |
-        xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist ExportOptions.plist -exportPath . -allowProvisioningUpdates
+        xcodebuild -exportArchive -archivePath $XC_ARCHIVE -exportOptionsPlist Export.plist -exportPath . -allowProvisioningUpdates
     - name: Upload app to TestFlight
       uses: apple-actions/upload-testflight-build@v1
       with:
-        app-path: 'Release.ipa'
+        app-path: 'HoneyPot.ipa'
         issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
         api-key-id: ${{ secrets.APPSTORE_API_KEY_ID }}
         api-private-key: ${{ secrets.APPSTORE_API_PRIVATE_KEY }}
