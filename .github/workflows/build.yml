@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: iOS - ${{ matrix.destination }}
-        run: xcodebuild -workspace "HoneyPot.xcworkspace" -scheme "Development" -destination "${{ matrix.destination }}"
+        run: xcodebuild -workspace "HoneyPot.xcworkspace" -scheme "HoneyPot" -destination "${{ matrix.destination }}"
   swiftlint:
     runs-on: ubuntu-latest
     steps:
