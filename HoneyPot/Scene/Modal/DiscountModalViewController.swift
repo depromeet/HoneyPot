@@ -119,5 +119,6 @@ extension DiscountModalViewController {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().inset(18)
         }
+        view.layoutIfNeeded()
     }
 }
