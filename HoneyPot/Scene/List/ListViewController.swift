@@ -129,6 +129,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         tableView.rx.didEndDragging
             .withLatestFrom(reactor.state)
             .map { $0.isRefreshing }
+            .filter { _ in tableView.contentOffset.y < 0 }
             .bind(to: refreshControl.rx.isRefreshing)
             .disposed(by: disposeBag)
 
