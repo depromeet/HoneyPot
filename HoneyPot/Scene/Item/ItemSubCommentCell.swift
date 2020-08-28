@@ -6,24 +6,27 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class ItemSubCommentCell: BaseTableViewCell {
     private enum Color {
         static let mainText = 0x323232.color
         static let subText = 0xA5A5A5.color
     }
+
     private enum Font {
         static let usernameText = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)!
         static let contentText = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
         static let extraText = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
     }
+
     private enum Style {
         static let paragraph = NSMutableParagraphStyle().then {
             $0.lineSpacing = 3
         }
+
         static let contentText: [NSAttributedString.Key: Any] = [
             .kern: -0.4,
             .font: Font.contentText,
@@ -40,10 +43,12 @@ class ItemSubCommentCell: BaseTableViewCell {
         $0.textColor = Color.mainText
         $0.font = Font.usernameText
     }
+
     let labelTime = UILabel().then {
         $0.textColor = Color.subText
         $0.font = Font.extraText
     }
+
     let buttonMore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_more_w24h24"), for: .normal)
     }
@@ -117,6 +122,7 @@ extension ItemSubCommentCell {
             $0.centerY.equalTo(labelUsername)
         }
     }
+
     private func setupContent() {
         viewContainer.addSubview(labelContent)
         labelContent.snp.makeConstraints {
@@ -124,6 +130,7 @@ extension ItemSubCommentCell {
             $0.leading.trailing.equalToSuperview()
         }
     }
+
     private func setupAction() {
         viewContainer.addSubview(buttonLike)
         buttonLike.snp.makeConstraints {

@@ -33,9 +33,9 @@ enum CommentSectionItem {
     var item: Comment {
         get {
             switch self {
-            case .comment(let comment):
+            case let .comment(comment):
                 return comment
-            case .subcomment(let comment):
+            case let .subcomment(comment):
                 return comment
             }
         }
@@ -53,9 +53,9 @@ enum CommentSectionItem {
 extension CommentSectionItem: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
-        case (.comment(let first), .comment(let second)):
+        case let (.comment(first), .comment(second)):
             return first == second
-        case (.subcomment(let first), .subcomment(let second)):
+        case let (.subcomment(first), .subcomment(second)):
             return first == second
         default:
             return false

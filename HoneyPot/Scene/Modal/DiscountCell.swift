@@ -12,10 +12,12 @@ class DiscountCell: BaseTableViewCell {
     let imageViewStep = UIImageView().then {
         $0.image = nil
     }
+
     let labelPercent = UILabel().then {
         $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
         $0.textColor = 0x323232.color
     }
+
     let labelCount = UILabel().then {
         $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
         $0.textColor = 0x8C8C8C.color

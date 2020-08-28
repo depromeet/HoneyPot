@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
         registerXib()
         setupNavigationBar()
     }
+
     func registerXib() {
         let productImageCell = UINib(nibName: "ProductImageCell", bundle: nil)
         let productRelatedCell = UINib(nibName: "ProductRelatedCell", bundle: nil)
@@ -33,15 +34,18 @@ class DetailViewController: UIViewController {
         tableView.register(commentCell, forCellReuseIdentifier: "CommentCell")
         tableView.register(functionCell, forCellReuseIdentifier: "FunctionCell")
     }
+
     func setupNavigationBar() {
-        self.navigationController?.navigationBar.backgroundColor = .systemBackground
+        navigationController?.navigationBar.backgroundColor = .systemBackground
     }
 }
+
 extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 7
     }
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 5:
             return 3
@@ -49,6 +53,7 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
         }
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
@@ -78,7 +83,8 @@ extension DetailViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
     }
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
             return 375.0

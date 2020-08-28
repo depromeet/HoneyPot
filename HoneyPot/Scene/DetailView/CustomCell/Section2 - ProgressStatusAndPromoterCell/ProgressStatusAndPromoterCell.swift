@@ -18,6 +18,7 @@ class ProgressStatusAndPromoterCell: UITableViewCell {
         super.awakeFromNib()
         setupDiscountGuideButton()
     }
+
     func setupDiscountGuideButton() {
         discountGuideButton.backgroundColor = 0xF8F8F8.color
         discountGuideButton.layer.cornerRadius = 5

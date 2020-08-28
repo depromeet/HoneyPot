@@ -6,12 +6,12 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
 import RxCocoa
+import RxSwift
 import SnapKit
 import Then
+import UIKit
 
 class SettingViewController: BaseViewController, View {
     private enum Color {
@@ -23,6 +23,7 @@ class SettingViewController: BaseViewController, View {
     ).then {
         $0.backgroundColor = .clear
     }
+
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
@@ -36,7 +37,7 @@ class SettingViewController: BaseViewController, View {
         self.reactor = reactor
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -91,6 +92,7 @@ extension SettingViewController {
             $0.bottom.equalTo(navigationBar)
         }
     }
+
     private func setupTextField() {
         view.addSubview(textFieldUserID)
         textFieldUserID.snp.makeConstraints {

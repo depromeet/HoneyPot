@@ -6,13 +6,13 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
+import ReusableKit
 import RxCocoa
 import RxKeyboard
 import RxKingfisher
-import ReusableKit
+import RxSwift
+import UIKit
 
 class ItemViewController: BaseViewController, View {
     private enum Color {
@@ -25,6 +25,7 @@ class ItemViewController: BaseViewController, View {
         static let lightGray3 = 0x8C8C8C.color
         static let lightGray4 = 0xCACACA.color
     }
+
     private enum Font {
         static let godoB24 = UIFont(name: "GodoB", size: 24)!
         static let godoB16 = UIFont(name: "GodoB", size: 16)!
@@ -36,14 +37,12 @@ class ItemViewController: BaseViewController, View {
         static let sdB14 = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)!
         static let sdB12 = UIFont(name: "AppleSDGothicNeo-Bold", size: 12)!
     }
-    private enum Metric {
-        static let leadingOffset: CGFloat = 18
-        static let trailingOffset: CGFloat = 18
-    }
+
     private enum Style {
         static let paragraph = NSMutableParagraphStyle().then {
             $0.lineSpacing = 4
         }
+
         static let itemText: [NSAttributedString.Key: Any] = [
             .kern: -0.72,
             .font: Font.godoB24,
@@ -67,6 +66,7 @@ class ItemViewController: BaseViewController, View {
             .foregroundColor: Color.lightGray3
         ]
     }
+
     struct Reusable {
         static let commentCell = ReusableCell<ItemCommentCell>()
     }
@@ -76,11 +76,13 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Navigation
+
     lazy var navigationBar = NavigationBar(
         leftView: buttonBack
     ).then {
         $0.backgroundColor = .clear
     }
+
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
@@ -98,10 +100,12 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Banner
+
     let imageViewItem = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = 0xEEEEEE.color
     }
+
     let buttonCategory = UIButton().then {
         $0.setTitleColor(Color.black2, for: .normal)
         $0.titleLabel?.font = Font.sdR14
@@ -113,20 +117,25 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Title & Price
+
     let labelItem = UILabel().then {
         $0.numberOfLines = 0
     }
+
     let labelPriceOriginal = UILabel().then {
         $0.numberOfLines = 1
     }
+
     let labelPricePercent = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.red1
     }
+
     let labelPriceDiscount = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.black1
     }
+
     let labelCurrency = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.black1
@@ -134,6 +143,7 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Progress
+
     let buttonDiscountUntil = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_logo_w24h22"), for: .normal)
         $0.setTitleColor(Color.black1, for: .normal)
@@ -141,6 +151,7 @@ class ItemViewController: BaseViewController, View {
         $0.titleLabel?.font = Font.sdB18
         $0.isUserInteractionEnabled = false
     }
+
     let buttonDiscountInfo = UIButton().then {
         $0.setTitle("할인안내", for: .normal)
         $0.setTitleColor(Color.black2, for: .normal)
@@ -150,18 +161,22 @@ class ItemViewController: BaseViewController, View {
         $0.layer.cornerRadius = 5
         $0.layer.masksToBounds = true
     }
+
     let viewProgressBackground = UIView().then {
         $0.backgroundColor = 0xEAEAEA.color
     }
+
     var constraintProgressTrailing: NSLayoutConstraint!
 
     // MARK: - Count & Time
+
     let buttonCount = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_people_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
+
     let buttonTime = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_clock_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 1, left: 5, bottom: 0, right: -5)
@@ -170,14 +185,17 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Seller
+
     let labelSeller = UILabel().then {
         $0.textColor = Color.black2
         $0.font = Font.sdB16
     }
+
     let labelReview = UILabel().then {
         $0.textColor = Color.black2
         $0.font = Font.sdR12
     }
+
     let imageViewThumbnail = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         let layer = CALayer()
@@ -187,16 +205,20 @@ class ItemViewController: BaseViewController, View {
     }
 
     // MARK: - Detail
+
     let imageViewDetail = UIImageView().then {
         $0.contentMode = .scaleAspectFill
         $0.backgroundColor = 0xEEEEEE.color
     }
+
     var constraintDetailHeight: NSLayoutConstraint!
 
     // MARK: - Input
+
     let viewInput = UIView().then {
         $0.backgroundColor = .clear
     }
+
     let buttonComment = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w24h24"), for: .normal)
         $0.setTitleColor(Color.lightGray1, for: .normal)
@@ -204,11 +226,13 @@ class ItemViewController: BaseViewController, View {
         $0.titleEdgeInsets = .init(top: 1, left: 2, bottom: 0, right: -2)
         $0.adjustsImageWhenHighlighted = false
     }
+
     let buttonViewAll = UIButton(type: .system).then {
         $0.setTitle("댓글 전체보기", for: .normal)
         $0.setTitleColor(Color.lightGray1, for: .normal)
         $0.titleLabel?.font = Font.sdR14
     }
+
     let textViewInput = ResizableTextView().then {
         $0.font = Font.sdR14
         $0.textColor = Color.black1
@@ -216,36 +240,43 @@ class ItemViewController: BaseViewController, View {
         $0.showsVerticalScrollIndicator = false
         $0.bounces = false
     }
+
     let buttonSend = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_write_selected_w16h16"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .disabled)
         $0.adjustsImageWhenHighlighted = false
         $0.isEnabled = false
     }
+
     let labelInputPlaceholder = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.lightGray4
         $0.text = "댓글 달기"
     }
+
     let buttonRedirect = UIButton().then {
         $0.backgroundColor = .clear
     }
 
     // MARK: - Bottom
+
     let viewBottom = UIView().then {
         $0.backgroundColor = .white
     }
+
     var constraintBottomView: NSLayoutConstraint!
     let buttonShare = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_share_w48h50"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
     }
+
     let buttonLike = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_favorite_w48h50"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "image_favorite_selected_w48h50"), for: .selected)
         $0.setImage(#imageLiteral(resourceName: "image_favorite_selected_w48h50"), for: [.selected, .highlighted])
         $0.adjustsImageWhenHighlighted = false
     }
+
     let buttonSubmit = UIButton().then {
         $0.setTitle("참여하기", for: .normal)
         $0.setTitle("참여중", for: .selected)
@@ -260,6 +291,7 @@ class ItemViewController: BaseViewController, View {
         $0.adjustsImageWhenHighlighted = false
         $0.adjustsImageWhenDisabled = false
     }
+
     let buttonSharePopUp = UIButton().then {
         $0.setTitle("소문내고 더 할인받기", for: .normal)
         $0.setTitleColor(.white, for: .normal)
@@ -267,18 +299,20 @@ class ItemViewController: BaseViewController, View {
         $0.contentEdgeInsets = .init(top: 7, left: 8, bottom: 12, right: 25)
         $0.titleLabel?.font = Font.sdR12
     }
+
     let buttonScrollToTop = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "image_floating_top_w38h38"), for: .normal)
         $0.adjustsImageWhenHighlighted = false
     }
 
     // MARK: - Life Cycle
+
     init(reactor: ItemReactor) {
         super.init(provider: reactor.provider)
         self.reactor = reactor
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -335,16 +369,17 @@ class ItemViewController: BaseViewController, View {
             .disposed(by: disposeBag)
 
         Observable.of(
-            buttonViewAll.rx.tap.map({ false }),
-            buttonRedirect.rx.tap.map({ true }),
-            tableView.rx.itemSelected.map({ _ in false })
+            buttonViewAll.rx.tap.map { false },
+            buttonRedirect.rx.tap.map { true },
+            tableView.rx.itemSelected.map { _ in false }
         ).merge()
             .subscribe(onNext: { [weak self] isTyping in
                 guard let self = self else { return }
                 let id = reactor.currentState.itemID
                 let viewController = CommentViewController(
                     reactor: .init(provider: self.provider, itemID: id),
-                    isTyping: isTyping)
+                    isTyping: isTyping
+                )
                 self.navigationController?.pushViewController(viewController, animated: true)
             })
             .disposed(by: disposeBag)
@@ -365,6 +400,7 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonScrollToTop.rx.isHidden)
             .disposed(by: disposeBag)
     }
+
     private func bindAction(reactor: ItemReactor) {
         rx.viewWillAppear
             .map { _ in Reactor.Action.refresh }
@@ -386,12 +422,14 @@ class ItemViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
+
     private func bindState(reactor: ItemReactor) {
         bindURLsAndDescription(reactor: reactor)
         bindPrice(reactor: reactor)
         bindInfoAndSeller(reactor: reactor)
         bindComments(reactor: reactor)
     }
+
     private func bindURLsAndDescription(reactor: ItemReactor) {
         reactor.state
             .compactMap { $0.bannerURL }
@@ -405,7 +443,7 @@ class ItemViewController: BaseViewController, View {
             .compactMap { $0.contentURL }
             .distinctUntilChanged()
             .compactMap(URL.init)
-            .flatMap({ imageViewDetail.kf.rx.setImage(with: $0) })
+            .flatMap { imageViewDetail.kf.rx.setImage(with: $0) }
             .subscribe(onNext: { [weak self] image in
                 guard let self = self else { return }
                 let size = image.size
@@ -439,6 +477,7 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonCategory.rx.title(for: .normal))
             .disposed(by: disposeBag)
     }
+
     private func bindPrice(reactor: ItemReactor) {
         reactor.state
             .map { $0.priceOriginal }
@@ -487,6 +526,7 @@ class ItemViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
     }
+
     private func bindInfoAndSeller(reactor: ItemReactor) {
         reactor.state
             .compactMap { $0.sellerURL }
@@ -544,6 +584,7 @@ class ItemViewController: BaseViewController, View {
             .bind(to: buttonSharePopUp.rx.isHidden)
             .disposed(by: disposeBag)
     }
+
     private func bindComments(reactor: ItemReactor) {
         reactor.state
             .map { $0.commentText }
@@ -581,16 +622,19 @@ class ItemViewController: BaseViewController, View {
         actionSheet.addAction(actionCancel)
         present(actionSheet, animated: true, completion: nil)
     }
+
     private func attributedStringFor(title: String?) -> NSAttributedString? {
         guard let title = title else { return nil }
         let attributedText = NSAttributedString(string: title, attributes: Style.itemText)
         return attributedText
     }
+
     private func attributedStringFor(price: String?) -> NSAttributedString? {
         guard let price = price else { return nil }
         let attributedText = NSAttributedString(string: price, attributes: Style.priceOriginalText)
         return attributedText
     }
+
     private func attributedStringFor(number: Int?) -> NSAttributedString? {
         guard let number = number else { return nil }
         if number == 0 {
@@ -604,6 +648,7 @@ class ItemViewController: BaseViewController, View {
             return attributedText
         }
     }
+
     private func attributedStringFor(time: String?) -> NSAttributedString? {
         guard let time = time else { return nil }
         let first = NSAttributedString(string: time, attributes: Style.countFocusText)
@@ -612,346 +657,5 @@ class ItemViewController: BaseViewController, View {
         attributedText.append(first)
         attributedText.append(second)
         return attributedText
-    }
-}
-
-extension ItemViewController {
-    private func setupNavigationBar() {
-        view.backgroundColor = .systemBackground
-        view.addSubview(navigationBar)
-        navigationBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.top).inset(44)
-        }
-        view.insertSubview(viewBackground, belowSubview: navigationBar)
-        viewBackground.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(navigationBar)
-        }
-    }
-    private func setupTableView() {
-        view.insertSubview(tableView, at: 0)
-        tableView.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-        }
-
-        let viewBanner = setupItemBanner()
-        let viewInfo = setupItemInfo(view: viewBanner)
-        let viewDiscount = setupItemDiscount(view: viewInfo)
-        let viewDeadline = setupItemDeadline(view: viewDiscount)
-        let viewProfile = setupItemProfile(view: viewDeadline)
-        setupItemDetail(view: viewProfile)
-        setupInput()
-
-        let viewTableHeader = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewTableHeader.addSubview(viewHeader)
-        viewHeader.snp.makeConstraints {
-            $0.top.leading.trailing.bottom.equalToSuperview()
-        }
-
-        tableView.tableHeaderView = viewTableHeader
-    }
-    private func setupItemBanner() -> UIView {
-        let viewBanner = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewHeader.addSubview(viewBanner)
-        viewBanner.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-            $0.height.equalTo(viewBanner.snp.width)
-        }
-        viewBanner.addSubview(imageViewItem)
-        imageViewItem.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-
-        viewBanner.addSubview(buttonCategory)
-        buttonCategory.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(18)
-            $0.bottom.equalToSuperview().inset(15)
-        }
-        return viewBanner
-    }
-    private func setupItemInfo(view: UIView) -> UIView {
-        let viewInfo = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewHeader.addSubview(viewInfo)
-        viewInfo.snp.makeConstraints {
-            $0.top.equalTo(imageViewItem.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        viewInfo.addSubview(labelItem)
-        labelItem.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(24)
-            $0.leading.trailing.equalToSuperview().inset(18).priority(999)
-        }
-        let stackViewPrice = UIStackView().then {
-            $0.axis = .vertical
-            $0.distribution = .equalSpacing
-            $0.alignment = .leading
-            $0.spacing = 3
-        }
-        viewInfo.addSubview(stackViewPrice)
-        stackViewPrice.snp.makeConstraints {
-            $0.top.equalTo(labelItem.snp.bottom).offset(8)
-            $0.leading.equalTo(labelItem)
-            $0.bottom.equalToSuperview().inset(16)
-        }
-        let stackViewDiscount = UIStackView().then {
-            $0.axis = .horizontal
-            $0.distribution = .equalSpacing
-            $0.alignment = .leading
-            $0.spacing = 11
-        }
-        stackViewDiscount.addArrangedSubview(labelPricePercent)
-        stackViewDiscount.addArrangedSubview(labelPriceDiscount)
-        viewInfo.addSubview(labelCurrency)
-        labelCurrency.snp.makeConstraints {
-            $0.leading.equalTo(stackViewPrice.snp.trailing).offset(2)
-            $0.bottom.equalTo(stackViewPrice).inset(6)
-        }
-        stackViewPrice.addArrangedSubview(labelPriceOriginal)
-        stackViewPrice.addArrangedSubview(stackViewDiscount)
-        let viewSeparator = UIView().then {
-            $0.backgroundColor = 0xEEEEEE.color
-        }
-        viewInfo.addSubview(viewSeparator)
-        viewSeparator.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20).priority(999)
-            $0.bottom.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        return viewInfo
-    }
-    private func setupItemDiscount(view: UIView) -> UIView {
-        let viewDiscount = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewHeader.addSubview(viewDiscount)
-        viewDiscount.snp.makeConstraints {
-            $0.top.equalTo(view.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        viewDiscount.addSubview(buttonDiscountUntil)
-        buttonDiscountUntil.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(19)
-            $0.leading.equalToSuperview().inset(17)
-        }
-        viewDiscount.addSubview(buttonDiscountInfo)
-        buttonDiscountInfo.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(17)
-            $0.trailing.equalToSuperview().inset(18)
-        }
-        viewDiscount.addSubview(viewProgressBackground)
-        viewProgressBackground.snp.makeConstraints {
-            $0.top.equalTo(buttonDiscountUntil.snp.bottom).offset(10)
-            $0.leading.trailing.equalToSuperview().inset(Metric.leadingOffset).priority(999)
-            $0.height.equalTo(4)
-            $0.bottom.equalToSuperview()
-        }
-        let viewProgress = UIView().then {
-            $0.backgroundColor = 0xFFC500.color
-        }
-        viewProgressBackground.addSubview(viewProgress)
-        viewProgress.snp.makeConstraints {
-            $0.top.leading.bottom.equalToSuperview()
-        }
-        constraintProgressTrailing = viewProgressBackground.trailingAnchor.constraint(equalTo: viewProgress.trailingAnchor, constant: 100)
-        constraintProgressTrailing.isActive = true
-        return viewDiscount
-    }
-    private func setupItemDeadline(view: UIView) -> UIView {
-        let viewDeadline = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewHeader.addSubview(viewDeadline)
-        viewDeadline.snp.makeConstraints {
-            $0.top.equalTo(view.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        viewDeadline.addSubview(buttonCount)
-        buttonCount.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(11)
-            $0.leading.equalToSuperview().inset(Metric.leadingOffset)
-            $0.bottom.equalToSuperview()
-        }
-        viewDeadline.addSubview(buttonTime)
-        buttonTime.snp.makeConstraints {
-            $0.leading.equalTo(buttonCount.snp.trailing).offset(8)
-            $0.top.bottom.equalTo(buttonCount)
-        }
-
-        return viewDeadline
-    }
-    private func setupItemProfile(view: UIView) -> UIView {
-        let viewProfile = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewHeader.addSubview(viewProfile)
-        viewProfile.snp.makeConstraints {
-            $0.top.equalTo(view.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        let viewBackground = UIView().then {
-            $0.backgroundColor = Color.lightGray2
-            $0.layer.cornerRadius = 5
-            $0.layer.masksToBounds = true
-        }
-        viewProfile.addSubview(viewBackground)
-        viewBackground.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(20)
-            $0.leading.trailing.equalToSuperview().inset(18).priority(999)
-            $0.height.equalTo(66)
-        }
-        viewBackground.addSubview(imageViewThumbnail)
-        imageViewThumbnail.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(16)
-            $0.centerY.equalToSuperview()
-            $0.width.height.equalTo(40)
-        }
-        let viewText = UIView().then {
-            $0.backgroundColor = .clear
-        }
-        viewBackground.addSubview(viewText)
-        viewText.snp.makeConstraints {
-            $0.leading.equalTo(imageViewThumbnail.snp.trailing).offset(8)
-            $0.centerY.equalToSuperview().offset(1)
-        }
-        viewText.addSubview(labelSeller)
-        labelSeller.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-        }
-        viewText.addSubview(labelReview)
-        labelReview.snp.makeConstraints {
-            $0.top.equalTo(labelSeller.snp.bottom).offset(2)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        let buttonEdit = UIButton().then {
-            $0.setImage(#imageLiteral(resourceName: "icon_indicator_w24h24"), for: .normal)
-        }
-        viewBackground.addSubview(buttonEdit)
-        buttonEdit.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(viewText.snp.trailing)
-            $0.trailing.equalToSuperview().inset(10)
-            $0.width.height.equalTo(44)
-        }
-        return viewProfile
-    }
-    private func setupItemDetail(view: UIView) {
-        viewHeader.addSubview(imageViewDetail)
-        imageViewDetail.snp.makeConstraints {
-            $0.top.equalTo(view.snp.bottom)
-            $0.leading.trailing.equalToSuperview()
-        }
-        constraintDetailHeight = imageViewDetail.heightAnchor.constraint(equalToConstant: 300)
-        constraintDetailHeight.isActive = true
-    }
-    private func setupInput() {
-        viewHeader.addSubview(viewInput)
-        viewInput.snp.makeConstraints {
-            $0.top.equalTo(imageViewDetail.snp.bottom)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
-        viewInput.addSubview(buttonComment)
-        buttonComment.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(24)
-            $0.leading.equalToSuperview().inset(18)
-        }
-        viewInput.addSubview(buttonViewAll)
-        buttonViewAll.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(18)
-            $0.centerY.equalTo(buttonComment)
-        }
-        let viewBackground = UIView().then {
-            $0.backgroundColor = Color.lightGray2
-            $0.layer.cornerRadius = 10
-            $0.layer.masksToBounds = true
-        }
-        viewInput.addSubview(viewBackground)
-        viewBackground.snp.makeConstraints {
-            $0.top.equalTo(buttonComment.snp.bottom).offset(7)
-            $0.leading.trailing.equalToSuperview().inset(18).priority(999)
-            $0.bottom.equalToSuperview().inset(25)
-        }
-        viewBackground.addSubview(textViewInput)
-        textViewInput.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(1)
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview().inset(12)
-            $0.trailing.equalToSuperview().inset(32).priority(999)
-        }
-        viewBackground.addSubview(buttonSend)
-        buttonSend.snp.makeConstraints {
-            $0.top.trailing.equalToSuperview()
-            $0.width.height.equalTo(32)
-        }
-        viewBackground.addSubview(labelInputPlaceholder)
-        labelInputPlaceholder.snp.makeConstraints {
-            $0.leading.equalTo(textViewInput).inset(5)
-            $0.centerY.equalTo(textViewInput)
-        }
-        let viewSeparator = UIView().then {
-            $0.backgroundColor = 0xEEEEEE.color
-        }
-        viewInput.addSubview(viewSeparator)
-        viewSeparator.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        viewInput.addSubview(buttonRedirect)
-        buttonRedirect.snp.makeConstraints {
-            $0.edges.equalTo(viewBackground)
-        }
-    }
-    private func setupBottomView() {
-        view.addSubview(viewBottom)
-        viewBottom.snp.makeConstraints {
-            $0.top.equalTo(tableView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(80)
-        }
-        constraintBottomView = viewBottom.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        constraintBottomView.isActive = true
-        viewBottom.addSubview(buttonShare)
-        buttonShare.snp.makeConstraints {
-            $0.top.equalToSuperview().inset(16)
-            $0.leading.equalToSuperview().inset(Metric.leadingOffset)
-        }
-        viewBottom.addSubview(buttonLike)
-        buttonLike.snp.makeConstraints {
-            $0.leading.equalTo(buttonShare.snp.trailing).offset(10)
-            $0.centerY.equalTo(buttonShare)
-        }
-        viewBottom.addSubview(buttonSubmit)
-        buttonSubmit.snp.makeConstraints {
-            $0.leading.equalTo(buttonLike.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().inset(Metric.trailingOffset)
-            $0.centerY.equalTo(buttonLike)
-        }
-        let viewSeparator = UIView().then {
-            $0.backgroundColor = 0xCACACA.color
-        }
-        viewBottom.addSubview(viewSeparator)
-        viewSeparator.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(-1)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        view.addSubview(buttonSharePopUp)
-        buttonSharePopUp.snp.makeConstraints {
-            $0.leading.equalTo(buttonShare)
-            $0.bottom.equalTo(buttonShare.snp.top).offset(-2)
-        }
-        view.addSubview(buttonScrollToTop)
-        buttonScrollToTop.snp.makeConstraints {
-            $0.trailing.equalToSuperview().inset(16)
-            $0.bottom.equalTo(viewBottom.snp.top).offset(-20)
-        }
     }
 }

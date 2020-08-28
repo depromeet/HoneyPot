@@ -6,9 +6,9 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class ItemCell: BaseTableViewCell {
     private enum Color {
@@ -18,6 +18,7 @@ class ItemCell: BaseTableViewCell {
         static let priceFocusedTitle = 0xEB5757.color
         static let countTitle = 0x8C8C8C.color
     }
+
     private enum Font {
         static let godoB20 = UIFont(name: "GodoB", size: 20)!
         static let sdR16 = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)!
@@ -27,14 +28,17 @@ class ItemCell: BaseTableViewCell {
         static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
         static let sdR12 = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
     }
+
     private enum Metric {
         static let leadingOffset: CGFloat = 18
         static let trailingOffset: CGFloat = 18
     }
+
     private enum Style {
         static let paragraph = NSMutableParagraphStyle().then {
             $0.lineSpacing = 4
         }
+
         static let itemText: [NSAttributedString.Key: Any] = [
             .kern: -0.6,
             .font: Font.godoB20,
@@ -56,9 +60,11 @@ class ItemCell: BaseTableViewCell {
     let viewContainer = UIView().then {
         $0.backgroundColor = .clear
     }
+
     let viewProgressBackground = UIView().then {
         $0.backgroundColor = 0xEAEAEA.color
     }
+
     let viewProgress = UIView().then {
         $0.backgroundColor = 0xFFC500.color
     }
@@ -81,6 +87,7 @@ class ItemCell: BaseTableViewCell {
         $0.contentEdgeInsets = .init(top: 5, left: 5, bottom: 5, right: 9)
         $0.titleEdgeInsets = .init(top: 0, left: 3, bottom: 0, right: -3)
     }
+
     let buttonComment = UIButton().then {
         $0.isUserInteractionEnabled = false
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_w16h16"), for: .normal)
@@ -96,6 +103,7 @@ class ItemCell: BaseTableViewCell {
     let labelTitle = UILabel().then {
         $0.numberOfLines = 2
     }
+
     let labelCategory = UILabel().then {
         $0.textColor = Color.categoryTitle
         $0.font = Font.sdR16
@@ -107,25 +115,30 @@ class ItemCell: BaseTableViewCell {
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
+
     let buttonTime = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_clock_w18h18"), for: .normal)
         $0.titleEdgeInsets = .init(top: 0, left: 5, bottom: 0, right: -5)
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 5)
         $0.isUserInteractionEnabled = false
     }
+
     let labelPricePercent = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.priceFocusedTitle
     }
+
     let labelPriceDiscount = UILabel().then {
         $0.font = Font.sdB24
         $0.textColor = Color.mainTitle
     }
+
     let labelCurrency = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.mainTitle
         $0.text = "원"
     }
+
     let labelOverview = UILabel().then {
         $0.textColor = Color.likeCommentTitle
         $0.font = Font.sdR12
@@ -205,6 +218,7 @@ class ItemCell: BaseTableViewCell {
             return attributedText
         }
     }
+
     private func attributedStringFor(time: String?) -> NSAttributedString? {
         guard let time = time else { return nil }
         let first = NSAttributedString(string: time, attributes: Style.countFocusText)
@@ -214,12 +228,14 @@ class ItemCell: BaseTableViewCell {
         attributedText.append(second)
         return attributedText
     }
+
     private func formattedPrice(price: Int) -> String? {
         let formatter = NumberFormatter()
         formatter.decimalSeparator = ","
         formatter.numberStyle = .decimal
         return formatter.string(from: .init(value: price))
     }
+
     private func formattedDate(date: Date?) -> String? {
         guard let date = date else { return nil }
         let interval = Int(round(date.timeIntervalSinceNow))
@@ -262,6 +278,7 @@ extension ItemCell {
             $0.top.trailing.equalTo(imageViewItem).inset(15)
         }
     }
+
     private func setupItem() {
         viewContainer.addSubview(labelTitle)
         labelTitle.snp.makeConstraints {
@@ -274,6 +291,7 @@ extension ItemCell {
             $0.leading.trailing.equalToSuperview().inset(Metric.leadingOffset)
         }
     }
+
     private func setupProgress() {
         viewContainer.addSubview(viewProgressBackground)
         viewProgressBackground.snp.makeConstraints {
@@ -283,6 +301,7 @@ extension ItemCell {
         }
         viewProgressBackground.addSubview(viewProgress)
     }
+
     private func setupInfo() {
         viewContainer.addSubview(buttonCount)
         buttonCount.snp.makeConstraints {

@@ -6,9 +6,9 @@
 //  Copyright © 2020 Soso. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class NavigationBar: UIView {
     init(
@@ -20,7 +20,7 @@ class NavigationBar: UIView {
         setupViews(title: title, leftView: leftView, rightViews: rightViews)
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -28,11 +28,13 @@ class NavigationBar: UIView {
         $0.image = #imageLiteral(resourceName: "image_logo_w79h24")
         $0.contentMode = .scaleAspectFit
     }
+
     let labelTitle = UILabel().then {
         $0.textColor = 0x323232.color
         $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
         $0.textAlignment = .center
     }
+
     let stackViewRight = UIStackView().then {
         $0.axis = .horizontal
         $0.distribution = .fillEqually

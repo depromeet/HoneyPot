@@ -6,15 +6,16 @@
 //  Copyright © 2020 Soso. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
+import RxSwift
+import UIKit
 
 class PagerBar: UIView {
     private lazy var scrollView = UIScrollView().then {
         $0.showsHorizontalScrollIndicator = false
         $0.alwaysBounceHorizontal = true
     }
+
     private let stackView = UIStackView().then {
         $0.axis = .horizontal
         $0.alignment = .fill
@@ -23,6 +24,7 @@ class PagerBar: UIView {
         $0.isLayoutMarginsRelativeArrangement = true
         $0.directionalLayoutMargins = .init(top: 0, leading: 27, bottom: 0, trailing: 27)
     }
+
     private let viewIndicator = UIView().then {
         $0.backgroundColor = 0x323232.color
         $0.layer.cornerRadius = 3
@@ -62,7 +64,7 @@ class PagerBar: UIView {
         setupViews(subviews: subviews)
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

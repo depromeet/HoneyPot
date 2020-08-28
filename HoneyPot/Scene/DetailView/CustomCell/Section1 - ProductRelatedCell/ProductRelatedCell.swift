@@ -17,6 +17,7 @@ class ProductRelatedCell: UITableViewCell {
     override func awakeFromNib() {
         setupPriceBarView()
     }
+
     func setupPriceBarView() {
         priceBarView.backgroundColor = 0xA5A5A5.color
     }

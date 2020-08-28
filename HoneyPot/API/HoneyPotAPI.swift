@@ -35,21 +35,21 @@ extension HoneyPotAPI: SugarTargetType {
             return .get("/users/info")
         case .posts:
             return .get("/posts")
-        case .post(let id):
+        case let .post(id):
             return .get("/posts/\(id)")
-        case .postLike(let id):
+        case let .postLike(id):
             return .post("/posts/\(id)/like")
-        case .participate(let id):
+        case let .participate(id):
             return .post("/posts/\(id)/participate")
-        case .comments(let id, _):
+        case let .comments(id, _):
             return .get("/posts/\(id)/comments/detail")
         case .commentAdd:
             return .post("/comments")
-        case .commentRemove(let id):
+        case let .commentRemove(id):
             return .delete("/comments/\(id)")
-        case .commentLike(let id):
+        case let .commentLike(id):
             return .post("/comments/\(id)/like")
-        case .subcomments(let id):
+        case let .subcomments(id):
             return .get("/comments/\(id)")
         }
     }
@@ -58,7 +58,7 @@ extension HoneyPotAPI: SugarTargetType {
         switch self {
         case .user:
             return nil
-        case .posts(let keyword, let category, let sort, let index):
+        case let .posts(keyword, category, sort, index):
             let values: [String: Any] = [
                 "keyword": keyword,
                 "category": category,
@@ -73,13 +73,13 @@ extension HoneyPotAPI: SugarTargetType {
             return nil
         case .participate:
             return nil
-        case .comments(_, let index):
+        case let .comments(_, index):
             let values: [String: Any] = [
                 "page": index,
                 "size": 10
             ]
             return .init(encoding: URLEncoding(), values: values)
-        case .commentAdd(let postID, let commentID, let userID, let content):
+        case let .commentAdd(postID, commentID, userID, content):
             var values: [String: Any] = [
                 "postId": postID,
                 "userId": userID,

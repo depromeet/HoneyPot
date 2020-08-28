@@ -6,13 +6,13 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
 import RxCocoa
-import SwiftyColor
+import RxSwift
 import SnapKit
+import SwiftyColor
 import Then
+import UIKit
 
 class MyPageViewController: BaseViewController, View {
     private enum Color {
@@ -21,6 +21,7 @@ class MyPageViewController: BaseViewController, View {
         static let buttonTitle = 0x323232.color
         static let separatorBackground = 0xECECEC.color
     }
+
     private enum Font {
         static let buttonTitle = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
     }
@@ -48,6 +49,7 @@ class MyPageViewController: BaseViewController, View {
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
+
     let buttonAlert = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_alert_w24h24"), for: .normal)
     }
@@ -56,16 +58,19 @@ class MyPageViewController: BaseViewController, View {
         $0.layer.cornerRadius = 10
         $0.backgroundColor = 0xF8F8F8.color
     }
+
     let labelUsername = UILabel().then {
         $0.font = .systemFont(ofSize: 18, weight: .bold)
         $0.text = "노은종"
         $0.textColor = Color.profileTitle
     }
+
     let labelUserType = UILabel().then {
         $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)
         $0.text = "개인회원"
         $0.textColor = Color.profileTitle
     }
+
     let buttonEdit = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_indicator_w24h24"), for: .normal)
     }
@@ -78,6 +83,7 @@ class MyPageViewController: BaseViewController, View {
         $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
     }
+
     let buttonPurchase = VerticalButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_cart_w60h60"), for: .normal)
         $0.setTitle("구매내역", for: .normal)
@@ -86,6 +92,7 @@ class MyPageViewController: BaseViewController, View {
         $0.titleLabel?.font = Font.buttonTitle
         $0.titleLabel?.textAlignment = .center
     }
+
     let buttonLike = VerticalButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_heart_w60h60"), for: .normal)
         $0.setTitle("관심정보", for: .normal)
@@ -100,7 +107,7 @@ class MyPageViewController: BaseViewController, View {
         self.reactor = reactor
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -172,6 +179,7 @@ extension MyPageViewController {
             $0.bottom.equalTo(navigationBar)
         }
     }
+
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
@@ -180,6 +188,7 @@ extension MyPageViewController {
             $0.bottom.equalToSuperview()
         }
     }
+
     private func setupProfile() {
         viewContainer.addSubview(viewProfile)
         viewProfile.snp.makeConstraints {
@@ -204,6 +213,7 @@ extension MyPageViewController {
             $0.leading.equalTo(labelUsername.snp.trailing).offset(8)
         }
     }
+
     private func setupInfo() {
         let stackViewButtons = UIStackView(
             arrangedSubviews: [buttonPay, buttonPurchase, buttonLike]

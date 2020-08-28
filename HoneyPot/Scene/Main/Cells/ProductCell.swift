@@ -6,11 +6,10 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 class ProductCell: UITableViewCell {
-
     let productImageView = UIImageView().then {
         $0.image = nil
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -120,27 +119,27 @@ class ProductCell: UITableViewCell {
         super.awakeFromNib()
 
         addSubview(productImageView)
-        productImageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        productImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
-        productImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        productImageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        productImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
+        productImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         productImageView.heightAnchor.constraint(equalToConstant: 222).isActive = true
 
         addSubview(productNameLabel)
         productNameLabel.topAnchor.constraint(equalTo: productImageView.bottomAnchor, constant: 17).isActive = true
-        productNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
+        productNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
 
         addSubview(productSortLabel)
         productSortLabel.topAnchor.constraint(equalTo: productNameLabel.bottomAnchor, constant: 8).isActive = true
-        productSortLabel.leadingAnchor.constraint(lessThanOrEqualTo: self.leadingAnchor, constant: 18).isActive = true
+        productSortLabel.leadingAnchor.constraint(lessThanOrEqualTo: leadingAnchor, constant: 18).isActive = true
 
         addSubview(productSlider)
         productSlider.topAnchor.constraint(equalTo: productSortLabel.bottomAnchor, constant: 10).isActive = true
-        productSlider.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
-        productSlider.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        productSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
+        productSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
 
         addSubview(myImageView)
         myImageView.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 11).isActive = true
-        myImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
+        myImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
 
         let join1 = NSAttributedString(string: "426명 ", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)])
         let join2 = NSAttributedString(string: "참여중", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .light)])
@@ -155,7 +154,7 @@ class ProductCell: UITableViewCell {
 
         addSubview(timeImageView)
         timeImageView.topAnchor.constraint(equalTo: myImageView.bottomAnchor, constant: 4).isActive = true
-        timeImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 18).isActive = true
+        timeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 18).isActive = true
 
         let time1 = NSAttributedString(string: "4일 21시간 ", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .bold)])
         let time2 = NSAttributedString(string: "남음", attributes: [.font: UIFont.systemFont(ofSize: 15, weight: .light)])
@@ -176,7 +175,7 @@ class ProductCell: UITableViewCell {
         numberLabel.attributedText = numAttrString
 
         addSubview(numberLabel)
-        numberLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        numberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         numberLabel.topAnchor.constraint(equalTo: productSlider.bottomAnchor, constant: 8).isActive = true
 
         addSubview(percentLabel)
@@ -184,7 +183,7 @@ class ProductCell: UITableViewCell {
         percentLabel.trailingAnchor.constraint(equalTo: numberLabel.leadingAnchor, constant: -10).isActive = true
 
         addSubview(leaveLabel)
-        leaveLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        leaveLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18).isActive = true
         leaveLabel.topAnchor.constraint(equalTo: numberLabel.bottomAnchor, constant: 3).isActive = true
 
         addSubview(commentView)
@@ -219,7 +218,6 @@ class ProductCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }
 
 class ProductSlider: UISlider {

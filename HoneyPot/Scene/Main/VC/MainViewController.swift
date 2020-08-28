@@ -6,11 +6,10 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 class MainViewController: BaseViewController, CustomMenuBarDelegate {
-
     let menu = ["전체", "살림", "패션", "뷰티", "푸드", "가전", "스포츠", "잡화"]
 
     let pageCollectionView: UICollectionView = {
@@ -36,22 +35,23 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
     let buttonSearch = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_search_w24h24"), for: .normal)
     }
+
     let buttonAccount = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_my_w24h24"), for: .normal)
     }
 
     func customMenuBar(scrollTo index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
-        self.pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        pageCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
-        self.setupNavigationBar()
-        self.setupCustomTabBar()
-        self.setupPageCollectionView()
+        view.backgroundColor = .white
+        setupNavigationBar()
+        setupCustomTabBar()
+        setupPageCollectionView()
     }
 
     private func setupNavigationBar() {
@@ -72,13 +72,13 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
     }
 
     func setupCustomTabBar() {
-        self.view.addSubview(customMenuBar)
+        view.addSubview(customMenuBar)
         customMenuBar.delegate = self
         customMenuBar.translatesAutoresizingMaskIntoConstraints = false
-        customMenuBar.indicatorViewWidthConstraint.constant = self.view.frame.width / 8
-        customMenuBar.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        customMenuBar.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        customMenuBar.topAnchor.constraint(equalTo: self.navigationBar.bottomAnchor).isActive = true
+        customMenuBar.indicatorViewWidthConstraint.constant = view.frame.width / 8
+        customMenuBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        customMenuBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        customMenuBar.topAnchor.constraint(equalTo: navigationBar.bottomAnchor).isActive = true
         customMenuBar.heightAnchor.constraint(equalToConstant: 36).isActive = true
     }
 
@@ -89,11 +89,11 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
         pageCollectionView.showsHorizontalScrollIndicator = false
         pageCollectionView.isPagingEnabled = true
         pageCollectionView.register(UINib(nibName: PageCell.reusableIdentifier, bundle: nil), forCellWithReuseIdentifier: PageCell.reusableIdentifier)
-        self.view.addSubview(pageCollectionView)
-        pageCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        pageCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
-        pageCollectionView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        pageCollectionView.topAnchor.constraint(equalTo: self.customMenuBar.bottomAnchor).isActive = true
+        view.addSubview(pageCollectionView)
+        pageCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        pageCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        pageCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        pageCollectionView.topAnchor.constraint(equalTo: customMenuBar.bottomAnchor).isActive = true
     }
 
     override func setupBindings() {
@@ -113,11 +113,10 @@ class MainViewController: BaseViewController, CustomMenuBarDelegate {
             })
             .disposed(by: disposeBag)
     }
-
 }
 
 extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return menu.count
     }
 
@@ -130,17 +129,17 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
         customMenuBar.indicatorViewLeadingConstraint.constant = scrollView.contentOffset.x / 8
     }
 
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        let itemAt = Int(targetContentOffset.pointee.x / self.view.frame.width)
+    func scrollViewWillEndDragging(_: UIScrollView, withVelocity _: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        let itemAt = Int(targetContentOffset.pointee.x / view.frame.width)
         let indexPath = IndexPath(item: itemAt, section: 0)
         customMenuBar.customTabBarCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
         return CGSize(width: pageCollectionView.frame.width, height: pageCollectionView.frame.height)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 0
     }
 }

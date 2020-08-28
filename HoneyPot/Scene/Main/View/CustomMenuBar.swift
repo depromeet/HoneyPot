@@ -6,8 +6,8 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 protocol CustomMenuBarDelegate: class {
     func customMenuBar(scrollTo index: Int)
@@ -19,11 +19,11 @@ class CustomMenuBar: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        backgroundColor = .white
         setupCustomTabBar()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -57,40 +57,38 @@ class CustomMenuBar: UIView {
 
     func setupCustomTabBar() {
         setupCollectioView()
-        self.addSubview(customTabBarCollectionView)
-        customTabBarCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        customTabBarCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        customTabBarCollectionView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        addSubview(customTabBarCollectionView)
+        customTabBarCollectionView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        customTabBarCollectionView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        customTabBarCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         customTabBarCollectionView.heightAnchor.constraint(equalToConstant: 36).isActive = true
 
-        self.addSubview(indicatorView)
-        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: self.frame.width / 8)
+        addSubview(indicatorView)
+        indicatorViewWidthConstraint = indicatorView.widthAnchor.constraint(equalToConstant: frame.width / 8)
         indicatorViewWidthConstraint.isActive = true
         indicatorView.heightAnchor.constraint(equalToConstant: 5).isActive = true
-        indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: self.leadingAnchor)
+        indicatorViewLeadingConstraint = indicatorView.leadingAnchor.constraint(equalTo: leadingAnchor)
         indicatorViewLeadingConstraint.isActive = true
-        indicatorView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        indicatorView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
-
 }
 
 extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCell.reusableIdentifier, for: indexPath) as! CustomCell
         cell.tabLabel.text = menu[indexPath.row]
         return cell
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_: UICollectionView, numberOfItemsInSection _: Int) -> Int {
         return 8
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width / 8, height: 36)
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, sizeForItemAt _: IndexPath) -> CGSize {
+        return CGSize(width: frame.width / 8, height: 36)
     }
 
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(_: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         delegate?.customMenuBar(scrollTo: indexPath.row)
     }
 
@@ -99,11 +97,11 @@ extension CustomMenuBar: UICollectionViewDelegate, UICollectionViewDataSource, U
         cell.tabLabel.textColor = UIColor(named: "color_unselect")
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, insetForSectionAt _: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_: UICollectionView, layout _: UICollectionViewLayout, minimumLineSpacingForSectionAt _: Int) -> CGFloat {
         return 0
     }
 }

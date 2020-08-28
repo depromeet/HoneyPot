@@ -16,6 +16,7 @@ class FunctionCell: UITableViewCell {
         super.awakeFromNib()
         setupButtonUI()
     }
+
     func setupButtonUI() {
         participateButton.layer.cornerRadius = 5
         participateButton.backgroundColor = 0xFFC500.color

@@ -6,14 +6,15 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class MenuCell: BaseTableViewCell {
     let imageViewIcon = UIImageView().then {
         $0.image = nil
     }
+
     let labelTitle = UILabel().then {
         $0.textColor = 0x323232.color
         $0.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)

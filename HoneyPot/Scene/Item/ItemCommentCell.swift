@@ -6,25 +6,28 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class ItemCommentCell: BaseTableViewCell {
     private enum Color {
         static let mainText = 0x323232.color
         static let subText = 0xA5A5A5.color
     }
+
     private enum Font {
         static let usernameText = UIFont(name: "AppleSDGothicNeo-Bold", size: 14)!
         static let contentText = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
         static let extraText = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
         static let commentText = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)!
     }
+
     private enum Style {
         static let paragraph = NSMutableParagraphStyle().then {
             $0.lineSpacing = 3
         }
+
         static let contentText: [NSAttributedString.Key: Any] = [
             .kern: -0.4,
             .font: Font.contentText,
@@ -36,6 +39,7 @@ class ItemCommentCell: BaseTableViewCell {
     let viewContainer = UIView().then {
         $0.backgroundColor = .clear
     }
+
     let viewBottom = UIView().then {
         $0.backgroundColor = .clear
         $0.isHidden = true
@@ -51,10 +55,12 @@ class ItemCommentCell: BaseTableViewCell {
         $0.textColor = Color.mainText
         $0.font = Font.usernameText
     }
+
     let labelTime = UILabel().then {
         $0.textColor = Color.subText
         $0.font = Font.extraText
     }
+
     let buttonMore = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_more_w24h24"), for: .normal)
     }
@@ -72,6 +78,7 @@ class ItemCommentCell: BaseTableViewCell {
         $0.contentEdgeInsets = .init(top: 0, left: 0, bottom: 0, right: 3)
         $0.adjustsImageWhenHighlighted = false
     }
+
     let buttonComment = UIButton().then {
         $0.setTitleColor(Color.subText, for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_bubble_light_w16h16"), for: .normal)
@@ -81,6 +88,7 @@ class ItemCommentCell: BaseTableViewCell {
         $0.adjustsImageWhenHighlighted = false
         $0.isUserInteractionEnabled = false
     }
+
     let buttonReply = UIButton().then {
         $0.setTitle("대댓글 달기", for: .normal)
         $0.setTitleColor(Color.subText, for: .normal)
@@ -172,6 +180,7 @@ extension ItemCommentCell {
             $0.centerY.equalTo(labelUsername)
         }
     }
+
     private func setupContent() {
         viewContainer.addSubview(labelContent)
         labelContent.snp.makeConstraints {
@@ -179,6 +188,7 @@ extension ItemCommentCell {
             $0.leading.trailing.equalToSuperview()
         }
     }
+
     private func setupAction() {
         viewContainer.addSubview(buttonLike)
         buttonLike.snp.makeConstraints {

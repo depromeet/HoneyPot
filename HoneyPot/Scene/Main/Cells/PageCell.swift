@@ -6,11 +6,10 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 class PageCell: UICollectionViewCell {
-
     let productTableView = UITableView().then {
         $0.separatorStyle = .none
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -18,30 +17,28 @@ class PageCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
+        backgroundColor = .white
 
-        self.addSubview(productTableView)
+        addSubview(productTableView)
 
-        productTableView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        productTableView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        productTableView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        productTableView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        productTableView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        productTableView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        productTableView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        productTableView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
 
         productTableView.delegate = self
         productTableView.dataSource = self
         productTableView.register(UINib(nibName: ProductCell.reusableIdentifier, bundle: nil), forCellReuseIdentifier: ProductCell.reusableIdentifier)
         productTableView.register(UINib(nibName: SortCell.reusableIdentifier, bundle: nil), forCellReuseIdentifier: SortCell.reusableIdentifier)
     }
-
 }
 
 extension PageCell: UITableViewDelegate, UITableViewDataSource {
-
-    func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in _: UITableView) -> Int {
         return 2
     }
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
         } else {
@@ -60,12 +57,11 @@ extension PageCell: UITableViewDelegate, UITableViewDataSource {
         }
     }
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == 0 {
             return 37
         } else {
             return 377
         }
     }
-
 }

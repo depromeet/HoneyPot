@@ -18,10 +18,11 @@ final class ListReactor: Reactor {
         category: String = ""
     ) {
         self.provider = provider
-        self.initialState = State(keyword: keyword, category: category)
+        initialState = State(keyword: keyword, category: category)
     }
 
     // MARK: - Reactor
+
     var initialState: State
 
     struct State {
@@ -36,12 +37,14 @@ final class ListReactor: Reactor {
         var isLoading: Bool = false
         var isLast: Bool = false
     }
+
     enum Action {
         case refresh
         case load
         case selectCategory(String)
         case selectSortIndex(Int)
     }
+
     enum Mutation {
         case setItems([ItemEntity])
         case appendItems([ItemEntity])
@@ -64,19 +67,19 @@ final class ListReactor: Reactor {
                 .just(Mutation.setLast(false))
             )
         case .load:
-            guard !currentState.isLoading && !currentState.isLast else { return .empty() }
+            guard !currentState.isLoading, !currentState.isLast else { return .empty() }
             let index = currentState.pageIndex + 1
             return Observable.concat(
                 load(index: index),
                 .just(Mutation.setPageIndex(index))
             )
-        case .selectCategory(let category):
+        case let .selectCategory(category):
             let sort = currentState.sortList[currentState.sortIndex].rawValue
             return Observable.concat(
                 .just(Mutation.setCategory(category)),
                 refresh(category: category, sort: sort)
             )
-        case .selectSortIndex(let index):
+        case let .selectSortIndex(index):
             let category = currentState.category
             let sort = currentState.sortList[index].rawValue
             return Observable.concat(
@@ -89,22 +92,22 @@ final class ListReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setItems(let items):
+        case let .setItems(items):
             state.items = items
-        case .appendItems(let items):
+        case let .appendItems(items):
             state.items += items
-        case .setCategory(let category):
+        case let .setCategory(category):
             state.category = category
-        case .setSortTitle(let index):
+        case let .setSortTitle(index):
             state.sortIndex = index
             state.sortTitle = state.sortList[index].title
-        case .setRefreshing(let isRefreshing):
+        case let .setRefreshing(isRefreshing):
             state.isRefreshing = isRefreshing
-        case .setLoading(let isLoading):
+        case let .setLoading(isLoading):
             state.isLoading = isLoading
-        case .setPageIndex(let index):
+        case let .setPageIndex(index):
             state.pageIndex = index
-        case .setLast(let isLast):
+        case let .setLast(isLast):
             state.isLast = isLast
         }
         return state
@@ -117,16 +120,17 @@ final class ListReactor: Reactor {
         return Observable.concat(
             .just(Mutation.setRefreshing(true)),
             requestItems(category: category, sort: sort)
-                .flatMap({ items, isLast -> Observable<Mutation> in
-                    return Observable.concat(
+                .flatMap { items, isLast -> Observable<Mutation> in
+                    Observable.concat(
                         .just(Mutation.setItems(items)),
                         .just(Mutation.setLast(isLast))
                     )
-                })
+                }
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setRefreshing(false))
         )
     }
+
     private func load(
         index: Int
     ) -> Observable<Mutation> {
@@ -135,16 +139,17 @@ final class ListReactor: Reactor {
         return Observable.concat(
             .just(Mutation.setLoading(true)),
             requestItems(category: category, sort: sort, index: index)
-                .flatMap({ items, isLast -> Observable<Mutation> in
-                    return Observable.concat(
+                .flatMap { items, isLast -> Observable<Mutation> in
+                    Observable.concat(
                         .just(Mutation.appendItems(items)),
                         .just(Mutation.setLast(isLast))
                     )
-                })
+                }
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setLoading(false))
         )
     }
+
     private func requestItems(
         category: String,
         sort: String,

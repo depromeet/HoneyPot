@@ -15,9 +15,11 @@ final class ItemReactor: Reactor {
     init(provider: ServiceProviderType, itemID: Int) {
         self.provider = provider
         let hasClosed = provider.flagService.value(forKey: .hasClosedSharePopup)
-        self.initialState = State(itemID: itemID, isSharePopUpHidden: hasClosed)
+        initialState = State(itemID: itemID, isSharePopUpHidden: hasClosed)
     }
+
     // MARK: - Reactor
+
     var initialState: State
 
     struct State {
@@ -46,6 +48,7 @@ final class ItemReactor: Reactor {
         var isParticipating: Bool = false
         var isSharePopUpHidden: Bool
     }
+
     enum Action {
         case refresh
         case likePost
@@ -53,6 +56,7 @@ final class ItemReactor: Reactor {
         case participate
         case toggleSharePopUp
     }
+
     enum Mutation {
         case setItem(PostEntity)
         case setLike(Bool)
@@ -73,20 +77,20 @@ final class ItemReactor: Reactor {
                 .request(.postLike(currentState.itemID), type: Bool.self, #file, #function, #line)
                 .asObservable()
                 .map { Mutation.setLike($0) }
-        case .likeComment(let id):
+        case let .likeComment(id):
             guard var comment = currentState.comments.first(where: { $0.commentID == id }) else { return .empty() }
             return provider.networkService
                 .request(.commentLike(id), type: Bool.self, #file, #function, #line)
                 .asObservable()
-                .map({ isLiked in
+                .map { isLiked in
                     comment.isLiked = isLiked
                     if isLiked {
                         comment.likeCount += 1
                     } else {
-                        comment.likeCount = max(comment.likeCount-1, 0)
+                        comment.likeCount = max(comment.likeCount - 1, 0)
                     }
                     return Mutation.setComment(comment)
-                })
+                }
         case .participate:
             return provider.networkService
                 .request(.participate(currentState.itemID), type: Bool.self, #file, #function, #line)
@@ -101,20 +105,20 @@ final class ItemReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setItem(let post):
+        case let .setItem(post):
             setItem(state: &state, post: post)
-        case .setLike(let isLiked):
+        case let .setLike(isLiked):
             state.isLiked = isLiked
-        case .setParticipate(let isParticipating):
+        case let .setParticipate(isParticipating):
             state.isParticipating = isParticipating
             if isParticipating, let participants = state.participants {
                 state.participants = participants + 1
             }
-        case .setComment(let comment):
+        case let .setComment(comment):
             if let index = state.comments.firstIndex(where: { $0.commentID == comment.commentID }) {
                 state.comments[index] = comment
             }
-        case .setSharePopUpHidden(let isHidden):
+        case let .setSharePopUpHidden(isHidden):
             state.isSharePopUpHidden = isHidden
         }
         return state
@@ -150,8 +154,9 @@ final class ItemReactor: Reactor {
             state.isDiscounted = false
         }
         if description.isClosed,
-            let date = description.deadlineDate {
-            let next = date.addingTimeInterval(60*60*24)
+            let date = description.deadlineDate
+        {
+            let next = date.addingTimeInterval(60 * 60 * 24)
             let calendar = Calendar(identifier: .gregorian)
             let month = calendar.component(.month, from: next)
             let day = calendar.component(.day, from: next)
@@ -165,7 +170,7 @@ final class ItemReactor: Reactor {
         } else {
             state.discountUntil = nil
         }
-        if let total =  description.discounts.last?.numberOfPeople {
+        if let total = description.discounts.last?.numberOfPeople {
             let current = Double(description.participants) / Double(total)
             state.percent = max(min(current, 1), 0)
         }
@@ -178,12 +183,14 @@ final class ItemReactor: Reactor {
         state.isParticipating = post.participated
         state.sellerURL = seller.thumbnail
     }
+
     private func formattedPrice(price: Int) -> String? {
         let formatter = NumberFormatter()
         formatter.decimalSeparator = ","
         formatter.numberStyle = .decimal
         return formatter.string(from: .init(value: price))
     }
+
     private func formattedDate(date: Date?) -> String? {
         guard let date = date else { return nil }
         let interval = Int(round(date.timeIntervalSinceNow))

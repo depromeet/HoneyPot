@@ -10,7 +10,7 @@ import UIKit
 
 extension UITableView {
     func layoutTableHeaderView() {
-        guard let headerView = self.tableHeaderView else { return }
+        guard let headerView = tableHeaderView else { return }
         headerView.translatesAutoresizingMaskIntoConstraints = false
 
         let headerWidth = headerView.bounds.size.width
@@ -28,7 +28,7 @@ extension UITableView {
         frame.size.height = height
         headerView.frame = frame
 
-        self.tableHeaderView = headerView
+        tableHeaderView = headerView
 
         headerView.removeConstraint(temporaryWidthConstraint)
         headerView.translatesAutoresizingMaskIntoConstraints = true

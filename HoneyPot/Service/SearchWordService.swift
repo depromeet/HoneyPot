@@ -25,8 +25,8 @@ protocol SearchWordServiceType {
 final class SearchWordService: BaseService, SearchWordServiceType {
     @discardableResult
     private func saveWords(_ words: [String: Double]?) -> Observable<Void> {
-        self.provider.userDefaultsService.set(value: words, forKey: .searchWords)
-        return .just(Void())
+        provider.userDefaultsService.set(value: words, forKey: .searchWords)
+        return .just(())
     }
 
     func getWords() -> Observable<[String: Double]> {
@@ -39,34 +39,34 @@ final class SearchWordService: BaseService, SearchWordServiceType {
 
     func addWord(word: String) -> Observable<[String: Double]> {
         return getWords()
-            .flatMap({ [weak self] words -> Observable<Void> in
+            .flatMap { [weak self] words -> Observable<Void> in
                 guard let self = self else { return .empty() }
                 var words = words
                 words[word] = Date().timeIntervalSince1970
                 return self.saveWords(words)
-            })
-            .flatMap({ [weak self] in
-                return self?.getWords() ?? .empty()
-            })
+            }
+            .flatMap { [weak self] in
+                self?.getWords() ?? .empty()
+            }
     }
 
     func removeWord(word: String) -> Observable<[String: Double]> {
         return getWords()
-            .flatMap({ [weak self] words -> Observable<Void> in
+            .flatMap { [weak self] words -> Observable<Void> in
                 guard let self = self else { return .empty() }
                 var words = words
                 words[word] = nil
                 return self.saveWords(words)
-            })
-            .flatMap({ [weak self] in
-                return self?.getWords() ?? .empty()
-            })
+            }
+            .flatMap { [weak self] in
+                self?.getWords() ?? .empty()
+            }
     }
 
     func removeAllWords() -> Observable<[String: Double]> {
         return saveWords(nil)
-            .flatMap({ [weak self] in
-                return self?.getWords() ?? .empty()
-            })
+            .flatMap { [weak self] in
+                self?.getWords() ?? .empty()
+            }
     }
 }

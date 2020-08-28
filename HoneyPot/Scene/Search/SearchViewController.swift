@@ -6,29 +6,32 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
-import RxCocoa
-import RxGesture
-import RxViewController
-import RxDataSources
 import ReusableKit
-import SwiftyColor
+import RxCocoa
+import RxDataSources
+import RxGesture
+import RxSwift
+import RxViewController
 import SnapKit
+import SwiftyColor
 import Then
+import UIKit
 
 class SearchViewController: BaseViewController, ReactorKit.View {
     private enum Color {
         static let navigationBackground = 0xFFD136.color
         static let placeholderText = 0xA5A5A5.color
     }
+
     private enum Metric {
         static let textFieldViewFrame = CGRect(x: 0, y: 0, width: 80, height: 0)
     }
+
     private enum Font {
         static let textFieldText = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
     }
+
     struct Reusable {
         static let searchCell = ReusableCell<SearchCell>()
         static let searchHeader = ReusableView<SearchHeader>()
@@ -56,13 +59,16 @@ class SearchViewController: BaseViewController, ReactorKit.View {
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
+
     let imageViewSearch = UIImageView().then {
         $0.contentMode = .center
         $0.image = #imageLiteral(resourceName: "icon_search_light_w24h24")
     }
+
     let buttonClear = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_close_hexagon_w24h24"), for: .normal)
     }
+
     lazy var textFieldSearch = UITextField().then {
         $0.layer.cornerRadius = 8
         $0.font = Font.textFieldText
@@ -75,6 +81,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
         let attributedString = NSAttributedString(string: "검색어를 입력해주세요", attributes: attributes)
         $0.attributedPlaceholder = attributedString
     }
+
     let tableView = UITableView(frame: .zero, style: .grouped).then {
         $0.register(Reusable.searchCell)
         $0.register(Reusable.searchHeader)
@@ -89,7 +96,7 @@ class SearchViewController: BaseViewController, ReactorKit.View {
         self.reactor = reactor
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -229,6 +236,7 @@ extension SearchViewController {
             $0.bottom.equalTo(navigationBar)
         }
     }
+
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {

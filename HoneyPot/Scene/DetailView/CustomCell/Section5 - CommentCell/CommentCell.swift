@@ -18,7 +18,7 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var moreButton: UIButton!
     weak var delegate: UIViewController?
 
-    @IBAction func tappedMoreButton(_ sender: UIButton) {
+    @IBAction func tappedMoreButton(_: UIButton) {
         presentActionSheet()
     }
 

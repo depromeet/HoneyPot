@@ -14,9 +14,11 @@ final class CommentReactor: Reactor {
 
     init(provider: ServiceProviderType, itemID: Int) {
         self.provider = provider
-        self.initialState = State(itemID: itemID)
+        initialState = State(itemID: itemID)
     }
+
     // MARK: - Reactor
+
     var initialState: State
 
     struct State {
@@ -29,6 +31,7 @@ final class CommentReactor: Reactor {
         var isLoading: Bool = false
         var isLast: Bool = false
     }
+
     enum Action {
         case refresh
         case load
@@ -38,6 +41,7 @@ final class CommentReactor: Reactor {
         case deleteComment(IndexPath)
         case selectIndexPath(IndexPath?)
     }
+
     enum Mutation {
         case setComments([CommentSection])
         case addComment(Int?, Comment)
@@ -50,6 +54,7 @@ final class CommentReactor: Reactor {
         case setPageIndex(Int)
         case setLast(Bool)
     }
+
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .refresh:
@@ -59,15 +64,15 @@ final class CommentReactor: Reactor {
                 .just(Mutation.setLast(false))
             )
         case .load:
-            guard !currentState.isLoading && !currentState.isLast else { return .empty() }
+            guard !currentState.isLoading, !currentState.isLast else { return .empty() }
             let index = currentState.pageIndex + 1
             return Observable.concat(
                 load(index: index),
                 .just(Mutation.setPageIndex(0))
             )
-        case .toggleComment(let indexPath):
+        case let .toggleComment(indexPath):
             return toggleComment(indexPath: indexPath)
-        case .addComment(let text):
+        case let .addComment(text):
             var commentID: Int?
             if let indexPath = currentState.selectedIndexPath {
                 let section = indexPath.section
@@ -81,14 +86,14 @@ final class CommentReactor: Reactor {
                 .map(Comment.init)
                 .map { Mutation.addComment(commentID, $0) }
                 .asObservable()
-        case .likeComment(let indexPath):
+        case let .likeComment(indexPath):
             let section = indexPath.section
             let row = indexPath.row
             var comment = currentState.comments[section].items[row].item
             let id = comment.commentID
             return provider.networkService
                 .request(.commentLike(id), type: Bool.self, #file, #function, #line)
-                .map({ isLiked -> Comment in
+                .map { isLiked -> Comment in
                     comment.isLiked = isLiked
                     if isLiked {
                         comment.likeCount += 1
@@ -96,10 +101,10 @@ final class CommentReactor: Reactor {
                         comment.likeCount = max(comment.likeCount - 1, 0)
                     }
                     return comment
-                })
+                }
                 .map { Mutation.updateComment(indexPath, $0) }
                 .asObservable()
-        case .deleteComment(let indexPath):
+        case let .deleteComment(indexPath):
             let section = indexPath.section
             let row = indexPath.row
             let id = currentState.comments[section].items[row].item.commentID
@@ -107,7 +112,7 @@ final class CommentReactor: Reactor {
                 .request(.commentRemove(id), type: Bool.self, #file, #function, #line)
                 .map { _ in Mutation.deleteComment(indexPath) }
                 .asObservable()
-        case .selectIndexPath(let indexPath):
+        case let .selectIndexPath(indexPath):
             return .just(Mutation.setSelectedIndexPath(indexPath))
         }
     }
@@ -115,32 +120,32 @@ final class CommentReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setComments(let comments):
+        case let .setComments(comments):
             state.comments = comments
-        case .addComment(let id, let comment):
+        case let .addComment(id, comment):
             addComment(state: &state, id: id, comment: comment)
-        case .updateComment(let indexPath, let comment):
+        case let .updateComment(indexPath, comment):
             updateComment(state: &state, indexPath: indexPath, comment: comment)
-        case .deleteComment(let indexPath):
+        case let .deleteComment(indexPath):
             deleteComment(state: &state, indexPath: indexPath)
-        case .updateSection(let section, let comment):
+        case let .updateSection(section, comment):
             updateSection(state: &state, section: section, comment: comment)
-        case .setSelectedIndexPath(let indexPath):
+        case let .setSelectedIndexPath(indexPath):
             state.selectedIndexPath = indexPath
             state.selectedText = selectedText(for: indexPath)
-        case .setRefreshing(let isRefreshing):
+        case let .setRefreshing(isRefreshing):
             state.isRefreshing = isRefreshing
-        case .setLoading(let isLoading):
+        case let .setLoading(isLoading):
             state.isLoading = isLoading
-        case .setPageIndex(let index):
+        case let .setPageIndex(index):
             state.pageIndex = index
-        case .setLast(let isLast):
+        case let .setLast(isLast):
             state.isLast = isLast
         }
         return state
     }
 
-    private func toggleComment(indexPath: IndexPath)  -> Observable<Mutation> {
+    private func toggleComment(indexPath: IndexPath) -> Observable<Mutation> {
         let section = indexPath.section
         let row = indexPath.row
         var comment = currentState.comments[section].items[row].item
@@ -152,11 +157,11 @@ final class CommentReactor: Reactor {
                 return provider.networkService
                     .request(.subcomments(commentID), type: [CommentEntity].self, #file, #function, #line)
                     .map { $0.map(Comment.init) }
-                    .map({ comments in
+                    .map { comments in
                         comment.subcommentCount = comments.count
                         comment.comments = comments
                         return comment
-                    })
+                    }
                     .map { Mutation.updateSection(indexPath.section, $0) }
                     .asObservable()
             }
@@ -165,6 +170,7 @@ final class CommentReactor: Reactor {
         }
         return .just(Mutation.updateSection(indexPath.section, comment))
     }
+
     private func addComment(state: inout State, id: Int?, comment: Comment) {
         if let id = id, let index = state.comments.firstIndex(where: { $0.id == id }) {
             state.comments[index].items.insert(.subcomment(comment), at: 1)
@@ -173,11 +179,13 @@ final class CommentReactor: Reactor {
         } else {
             let data = CommentSection(
                 id: comment.commentID,
-                items: [.comment(comment)])
+                items: [.comment(comment)]
+            )
             state.comments.insert(data, at: 0)
         }
         state.selectedIndexPath = nil
     }
+
     private func updateComment(state: inout State, indexPath: IndexPath, comment: Comment) {
         let section = indexPath.section
         let row = indexPath.row
@@ -187,6 +195,7 @@ final class CommentReactor: Reactor {
             state.comments[section].items[row] = .subcomment(comment)
         }
     }
+
     private func deleteComment(state: inout State, indexPath: IndexPath) {
         let section = indexPath.section
         let row = indexPath.row
@@ -198,6 +207,7 @@ final class CommentReactor: Reactor {
             state.comments[section].items[0].item.subcommentCount -= 1
         }
     }
+
     private func updateSection(state: inout State, section: Int, comment: Comment) {
         state.comments[section].items[0].item = comment
         if comment.isExpanded {
@@ -208,6 +218,7 @@ final class CommentReactor: Reactor {
             state.comments[section].items = items
         }
     }
+
     private func selectedText(for indexPath: IndexPath?) -> String? {
         if let indexPath = indexPath {
             let section = indexPath.section
@@ -218,21 +229,23 @@ final class CommentReactor: Reactor {
             return nil
         }
     }
+
     private func refresh(
     ) -> Observable<Mutation> {
         return Observable.concat(
             .just(Mutation.setRefreshing(true)),
             requestItems()
-                .flatMap({ items, isLast -> Observable<Mutation> in
-                    return Observable.concat(
+                .flatMap { items, isLast -> Observable<Mutation> in
+                    Observable.concat(
                         .just(Mutation.setComments(items)),
                         .just(Mutation.setLast(isLast))
                     )
-                })
+                }
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setRefreshing(false))
         )
     }
+
     private func load(
         index: Int
     ) -> Observable<Mutation> {
@@ -240,31 +253,32 @@ final class CommentReactor: Reactor {
         return Observable.concat(
             .just(Mutation.setRefreshing(true)),
             requestItems(index: index)
-                .flatMap({ items, isLast -> Observable<Mutation> in
-                    return Observable.concat(
+                .flatMap { items, isLast -> Observable<Mutation> in
+                    Observable.concat(
                         .just(Mutation.setComments(comments + items)),
                         .just(Mutation.setLast(isLast))
                     )
-                })
+                }
                 .observeOn(MainScheduler.asyncInstance),
             .just(Mutation.setRefreshing(false))
         )
     }
+
     private func requestItems(
         index: Int = 0
     ) -> Observable<([CommentSection], Bool)> {
         let id = currentState.itemID
         return provider.networkService
             .request(.comments(id, index), type: PageableList<CommentEntity>.self, #file, #function, #line)
-            .map({ response -> ([CommentSection], Bool) in
+            .map { response -> ([CommentSection], Bool) in
                 let isLast = response.last
                 let items = response.content
                     .map(Comment.init)
-                    .map({
+                    .map {
                         ($0.commentID, [CommentSectionItem.comment($0)] + $0.comments.map(CommentSectionItem.subcomment))
-                    })
+                    }
                     .map(CommentSection.init)
                 return (items, isLast)
-            }).asObservable()
+            }.asObservable()
     }
 }

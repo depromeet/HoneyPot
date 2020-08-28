@@ -6,11 +6,11 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
-import RxSwift
-import RxCocoa
 import PanModal
+import RxCocoa
+import RxSwift
 import SwiftyColor
+import UIKit
 
 class SortModalViewController: BaseViewController {
     var titles: [String]
@@ -37,7 +37,7 @@ class SortModalViewController: BaseViewController {
         super.init(provider: provider)
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

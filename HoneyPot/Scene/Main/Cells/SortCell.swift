@@ -6,11 +6,10 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 class SortCell: UITableViewCell {
-
     let sortButton = UIButton().then {
         $0.setImage(UIImage(named: "icon_expand_w24h24"), for: .normal)
         $0.translatesAutoresizingMaskIntoConstraints = false
@@ -27,16 +26,15 @@ class SortCell: UITableViewCell {
         super.awakeFromNib()
 
         addSubview(sortButton)
-        sortButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        sortButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -17.1).isActive = true
+        sortButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        sortButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -17.1).isActive = true
 
         addSubview(sortLabel)
-        sortLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        sortLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         sortLabel.trailingAnchor.constraint(equalTo: sortButton.leadingAnchor).isActive = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }

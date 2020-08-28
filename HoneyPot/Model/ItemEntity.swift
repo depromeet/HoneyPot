@@ -29,6 +29,7 @@ struct ItemEntity: Decodable {
         formatter.timeZone = TimeZone(secondsFromGMT: 0)
         return formatter.date(from: deadline)
     }
+
     var isClosed: Bool {
         let current = Date()
         if let date = deadlineDate {

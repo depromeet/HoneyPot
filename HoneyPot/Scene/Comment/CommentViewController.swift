@@ -6,13 +6,13 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
-import RxCocoa
-import RxKeyboard
-import RxDataSources
 import ReusableKit
+import RxCocoa
+import RxDataSources
+import RxKeyboard
+import RxSwift
+import UIKit
 
 class CommentViewController: BaseViewController, View {
     var isTyping: Bool
@@ -24,10 +24,12 @@ class CommentViewController: BaseViewController, View {
         static let lightGray2 = 0xF8F8F8.color
         static let lightGray4 = 0xCACACA.color
     }
+
     private enum Font {
         static let sdR14 = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)!
         static let sdR12 = UIFont(name: "AppleSDGothicNeo-Regular", size: 12)!
     }
+
     struct Reusable {
         static let commentCell = ReusableCell<ItemCommentCell>()
         static let subCommentCell = ReusableCell<ItemSubCommentCell>()
@@ -39,6 +41,7 @@ class CommentViewController: BaseViewController, View {
     ).then {
         $0.backgroundColor = .clear
     }
+
     let buttonBack = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_back_w24h24"), for: .normal)
     }
@@ -55,6 +58,7 @@ class CommentViewController: BaseViewController, View {
     let viewInput = UIView().then {
         $0.backgroundColor = .systemBackground
     }
+
     let textViewInput = ResizableTextView().then {
         $0.font = Font.sdR14
         $0.textColor = Color.black1
@@ -62,32 +66,39 @@ class CommentViewController: BaseViewController, View {
         $0.showsVerticalScrollIndicator = false
         $0.bounces = false
     }
+
     let buttonSend = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_write_selected_w16h16"), for: .normal)
         $0.setImage(#imageLiteral(resourceName: "icon_write_w16h16"), for: .disabled)
         $0.adjustsImageWhenHighlighted = false
     }
+
     let labelInputPlaceholder = UILabel().then {
         $0.font = Font.sdR14
         $0.textColor = Color.lightGray4
         $0.text = "댓글 달기"
     }
+
     var constraintInputBottom: NSLayoutConstraint!
     let viewReply = UIView().then {
         $0.backgroundColor = Color.lightGray2
     }
+
     let labelReply = UILabel().then {
         $0.textColor = Color.lightGray1
         $0.font = Font.sdR12
     }
+
     let buttonReplyClose = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_close_w10h10"), for: .normal)
     }
+
     var constraintReplyBottom: NSLayoutConstraint!
 
     let refreshControl = UIRefreshControl().then {
         $0.backgroundColor = .clear
     }
+
     let activityIndicator = UIActivityIndicatorView(
         frame: .init(x: 0, y: 0, width: 0, height: 0)
     ).then {
@@ -99,61 +110,63 @@ class CommentViewController: BaseViewController, View {
         super.init(provider: reactor.provider)
         self.reactor = reactor
     }
-    required init?(coder: NSCoder) {
+
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
     lazy var dataSource = RxTableViewSectionedReloadDataSource
-        <CommentSection>(configureCell: { [weak self] _, tableView, indexPath, sectionItem in
-            guard let self = self,
-                let reactor = self.reactor
-                else { return .init() }
-            let userID = self.provider.accountService.userID
-            switch sectionItem {
-            case .comment(let comment):
-                let cell = tableView.dequeue(Reusable.commentCell, for: indexPath)
-                cell.setData(comment: comment, isExpandable: true)
-                cell.buttonReply.rx.tap
-                    .map { Reactor.Action.selectIndexPath(indexPath) }
-                    .do(onNext: { [weak self] _ in
-                        self?.textViewInput.becomeFirstResponder()
-                    })
-                    .bind(to: reactor.action)
-                    .disposed(by: cell.disposeBag)
-                cell.buttonReply.rx.tap
-                    .observeOn(MainScheduler.instance)
-                    .subscribe(onNext: { [weak self] in self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true) })
-                    .disposed(by: cell.disposeBag)
-                cell.buttonMore.rx.tap
-                    .map { (indexPath, comment.author.userId == userID) }
-                    .subscribe(onNext: { [weak self] indexPath, isOwner in
-                        self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
-                    })
-                    .disposed(by: cell.disposeBag)
-                cell.buttonLike.rx.tap
-                    .map { Reactor.Action.likeComment(indexPath) }
-                    .bind(to: reactor.action)
-                    .disposed(by: cell.disposeBag)
-                cell.buttonBottom.rx.tap
-                    .map { Reactor.Action.toggleComment(indexPath) }
-                    .bind(to: reactor.action)
-                    .disposed(by: cell.disposeBag)
-                return cell
-            case .subcomment(let comment):
-                let cell = tableView.dequeue(Reusable.subCommentCell, for: indexPath)
-                cell.setData(comment: comment)
-                cell.buttonMore.rx.tap
-                    .map { (indexPath, comment.author.userId == userID) }
-                    .subscribe(onNext: { [weak self] indexPath, isOwner in
-                        self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
-                    })
-                    .disposed(by: cell.disposeBag)
-                cell.buttonLike.rx.tap
-                    .map { Reactor.Action.likeComment(indexPath) }
-                    .bind(to: reactor.action)
-                    .disposed(by: cell.disposeBag)
-                return cell
-            }
-        })
+    <CommentSection>(configureCell: { [weak self] _, tableView, indexPath, sectionItem in
+        guard let self = self,
+            let reactor = self.reactor
+        else { return .init() }
+        let userID = self.provider.accountService.userID
+        switch sectionItem {
+        case let .comment(comment):
+            let cell = tableView.dequeue(Reusable.commentCell, for: indexPath)
+            cell.setData(comment: comment, isExpandable: true)
+            cell.buttonReply.rx.tap
+                .map { Reactor.Action.selectIndexPath(indexPath) }
+                .do(onNext: { [weak self] _ in
+                    self?.textViewInput.becomeFirstResponder()
+                })
+                .bind(to: reactor.action)
+                .disposed(by: cell.disposeBag)
+            cell.buttonReply.rx.tap
+                .observeOn(MainScheduler.instance)
+                .subscribe(onNext: { [weak self] in self?.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true) })
+                .disposed(by: cell.disposeBag)
+            cell.buttonMore.rx.tap
+                .map { (indexPath, comment.author.userId == userID) }
+                .subscribe(onNext: { [weak self] indexPath, isOwner in
+                    self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
+                })
+                .disposed(by: cell.disposeBag)
+            cell.buttonLike.rx.tap
+                .map { Reactor.Action.likeComment(indexPath) }
+                .bind(to: reactor.action)
+                .disposed(by: cell.disposeBag)
+            cell.buttonBottom.rx.tap
+                .map { Reactor.Action.toggleComment(indexPath) }
+                .bind(to: reactor.action)
+                .disposed(by: cell.disposeBag)
+            return cell
+        case let .subcomment(comment):
+            let cell = tableView.dequeue(Reusable.subCommentCell, for: indexPath)
+            cell.setData(comment: comment)
+            cell.buttonMore.rx.tap
+                .map { (indexPath, comment.author.userId == userID) }
+                .subscribe(onNext: { [weak self] indexPath, isOwner in
+                    self?.presentCommentActionSheet(indexPath: indexPath, isOwner: isOwner)
+                })
+                .disposed(by: cell.disposeBag)
+            cell.buttonLike.rx.tap
+                .map { Reactor.Action.likeComment(indexPath) }
+                .bind(to: reactor.action)
+                .disposed(by: cell.disposeBag)
+            return cell
+        }
+    })
 
     override func setupConstraints() {
         setupNavigationBar()
@@ -175,7 +188,8 @@ class CommentViewController: BaseViewController, View {
         bindAction(reactor: reactor)
         bindState(reactor: reactor)
     }
-    private func bindView(reactor: CommentReactor) {
+
+    private func bindView(reactor _: CommentReactor) {
         buttonBack.rx.tap
             .subscribe(onNext: { [weak self] in
                 self?.navigationController?.popViewController(animated: true)
@@ -203,6 +217,7 @@ class CommentViewController: BaseViewController, View {
             })
             .disposed(by: disposeBag)
     }
+
     private func bindAction(reactor: CommentReactor) {
         rx.viewWillAppear
             .take(1)
@@ -220,7 +235,7 @@ class CommentViewController: BaseViewController, View {
             .withLatestFrom(textViewInput.rx.text.orEmpty)
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .map { Reactor.Action.addComment($0) }
-            .do(onNext: { _ in textViewInput.text = nil  })
+            .do(onNext: { _ in textViewInput.text = nil })
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
 
@@ -240,6 +255,7 @@ class CommentViewController: BaseViewController, View {
             .bind(to: reactor.action)
             .disposed(by: disposeBag)
     }
+
     private func bindState(reactor: CommentReactor) {
         reactor.state
             .map { $0.isRefreshing }
@@ -288,7 +304,7 @@ class CommentViewController: BaseViewController, View {
         let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         if isOwner {
             let actionEdit = UIAlertAction(title: "수정", style: .default, handler: nil)
-            let actionDelete = UIAlertAction(title: "삭제하기", style: .destructive, handler: { [weak self] action in
+            let actionDelete = UIAlertAction(title: "삭제하기", style: .destructive, handler: { [weak self] _ in
                 self?.reactor?.action.onNext(.deleteComment(indexPath))
             })
             actionSheet.addAction(actionEdit)
@@ -320,6 +336,7 @@ extension CommentViewController {
             $0.bottom.equalTo(navigationBar)
         }
     }
+
     private func setupTableView() {
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
@@ -329,6 +346,7 @@ extension CommentViewController {
 //        tableView.refreshControl = refreshControl
         tableView.tableFooterView = activityIndicator
     }
+
     private func setupInputView() {
         view.addSubview(viewInput)
         viewInput.snp.makeConstraints {
@@ -372,6 +390,7 @@ extension CommentViewController {
             $0.height.equalTo(1)
         }
     }
+
     private func setupSelected() {
         view.insertSubview(viewReply, belowSubview: viewInput)
         viewReply.snp.makeConstraints {

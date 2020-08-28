@@ -6,11 +6,10 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import Then
+import UIKit
 
 class CustomCell: UICollectionViewCell {
-
     let tabLabel = UILabel().then {
         $0.textAlignment = .center
         $0.textColor = UIColor(named: "color_unselect")
@@ -31,9 +30,8 @@ class CustomCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.addSubview(tabLabel)
-        tabLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        tabLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        addSubview(tabLabel)
+        tabLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        tabLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
-
 }

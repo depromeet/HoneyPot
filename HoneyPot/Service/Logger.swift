@@ -22,7 +22,6 @@ extension DDLogFlag {
 }
 
 private class LogFormatter: NSObject, DDLogFormatter {
-
     static let dateFormatter = DateFormatter().then {
         $0.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
     }
@@ -40,14 +39,12 @@ private class LogFormatter: NSObject, DDLogFormatter {
     private func formattedDate(from date: Date) -> String {
         return LogFormatter.dateFormatter.string(from: date)
     }
-
 }
 
 /// A shared instance of `Logger`.
 let log = Logger()
 
 final class Logger {
-
     // MARK: Initialize
 
     init() {
@@ -56,7 +53,7 @@ final class Logger {
         // TTY = Xcode console
         DDTTYLogger.sharedInstance?.do {
             $0.logFormatter = LogFormatter()
-            $0.colorsEnabled = false /*true*/ // Note: doesn't work in Xcode 8
+            $0.colorsEnabled = false /* true */ // Note: doesn't work in Xcode 8
             $0.setForegroundColor(DDMakeColor(30, 121, 214), backgroundColor: nil, for: .info)
             $0.setForegroundColor(DDMakeColor(50, 143, 72), backgroundColor: nil, for: .debug)
             DDLog.add($0)
@@ -129,5 +126,4 @@ final class Logger {
             .map { String(describing: $0) }
             .joined(separator: " ")
     }
-
 }

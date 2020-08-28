@@ -39,6 +39,7 @@ struct Comment {
     var canExpand: Bool {
         return !comments.isEmpty
     }
+
     var expandText: String {
         let number = max(subcommentCount - comments.count, 0)
         if number == 0 {
@@ -51,6 +52,7 @@ struct Comment {
             return "이전 대댓글 \(number)개 더 보기"
         }
     }
+
     var dateText: String? {
         guard let date = createdDate else { return nil }
         let interval = Int(round(abs(date.timeIntervalSinceNow)))

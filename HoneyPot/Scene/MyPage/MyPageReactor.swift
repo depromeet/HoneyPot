@@ -15,16 +15,20 @@ final class MyPageReactor: Reactor {
     init(provider: ServiceProviderType) {
         self.provider = provider
     }
+
     // MARK: - Reactor
+
     var initialState = State()
 
     struct State {
         var name: String = "노은종"
         let menus: [Menu] = [.invite, .notice, .customer, .setting]
     }
+
     enum Action {
         case refresh
     }
+
     enum Mutation {
         case setUser(UserEntity)
     }
@@ -42,7 +46,7 @@ final class MyPageReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setUser(let user):
+        case let .setUser(user):
             state.name = user.name
         }
         return state

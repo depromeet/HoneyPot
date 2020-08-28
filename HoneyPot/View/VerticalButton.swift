@@ -20,6 +20,5 @@ class VerticalButton: UIButton {
 
         imageView?.frame = imageViewFrame
         titleLabel?.frame = labelFrame
-
     }
 }

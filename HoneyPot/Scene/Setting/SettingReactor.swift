@@ -10,22 +10,25 @@ import Foundation
 import ReactorKit
 
 final class SettingReactor: Reactor {
-
     let provider: ServiceProviderType
 
     init(provider: ServiceProviderType) {
         self.provider = provider
     }
+
     // MARK: - Reactor
+
     var initialState = State()
 
     struct State {
         var userID: String = ""
     }
+
     enum Action {
         case getUserID
         case setUserID(String)
     }
+
     enum Mutation {
         case setUserID(String)
     }
@@ -36,7 +39,7 @@ final class SettingReactor: Reactor {
             return provider.accountService
                 .getUserID()
                 .map { Mutation.setUserID($0) }
-        case .setUserID(let userID):
+        case let .setUserID(userID):
             return provider.accountService
                 .setUserID(newUserID: userID)
                 .map { Mutation.setUserID($0) }
@@ -46,7 +49,7 @@ final class SettingReactor: Reactor {
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         switch mutation {
-        case .setUserID(let newUserID):
+        case let .setUserID(newUserID):
             state.userID = newUserID
         }
         return state

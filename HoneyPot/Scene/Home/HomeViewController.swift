@@ -6,8 +6,8 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class HomeViewController: BaseViewController {
     let categories = ["전체", "살림", "패션", "뷰티", "푸드", "가전", "스포츠", "잡화"]
@@ -17,6 +17,7 @@ class HomeViewController: BaseViewController {
         static let normalText = 0x686868.color
         static let focusedText = 0x323232.color
     }
+
     private enum Font {
         static let normalText = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)!
         static let focusedText = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)!
@@ -27,9 +28,11 @@ class HomeViewController: BaseViewController {
     ).then {
         $0.backgroundColor = .clear
     }
+
     let buttonSearch = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_search_w24h24"), for: .normal)
     }
+
     let buttonAccount = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_my_w24h24"), for: .normal)
     }
@@ -37,26 +40,28 @@ class HomeViewController: BaseViewController {
     lazy var pagerBar = PagerBar(subviews: buttons).then {
         $0.backgroundColor = .systemBackground
     }
-    lazy var buttons = categories.map({ title -> UIButton in
+
+    lazy var buttons = categories.map { title -> UIButton in
         UIButton().then {
             $0.setTitle(title, for: .normal)
             $0.setTitleColor(Color.normalText, for: .normal)
             $0.titleLabel?.font = Font.normalText
         }
-    })
+    }
+
     lazy var listViewController = ListViewController(
         reactor: .init(provider: provider)
     ).then {
         if let reactor = $0.reactor {
             var list = categories
             list[0] = ""
-            let taps = zip(buttons, list).map({ button, category in
-                button.rx.tap.map({ category })
-            })
+            let taps = zip(buttons, list).map { button, category in
+                button.rx.tap.map { category }
+            }
             Observable.from(taps)
                 .merge()
                 .distinctUntilChanged()
-                .map { ListReactor.Action.selectCategory($0)}
+                .map { ListReactor.Action.selectCategory($0) }
                 .bind(to: reactor.action)
                 .disposed(by: disposeBag)
         }
@@ -70,11 +75,11 @@ class HomeViewController: BaseViewController {
 
     override func setupBindings() {
         let tappedButton = Observable
-            .from(buttons.map({ button in button.rx.tap.map({ button }) }))
+            .from(buttons.map { button in button.rx.tap.map { button } })
             .merge()
             .share()
 
-        buttons.enumerated().forEach { (index, button) in
+        buttons.enumerated().forEach { index, button in
             tappedButton
                 .map { $0 == button }
                 .subscribe(onNext: { isTapped in
@@ -131,6 +136,7 @@ extension HomeViewController {
         buttons.first?.titleLabel?.font = Font.focusedText
         buttons.first?.setTitleColor(Color.focusedText, for: .normal)
     }
+
     private func setupPagerBar() {
         view.addSubview(pagerBar)
         pagerBar.snp.makeConstraints {
@@ -148,6 +154,7 @@ extension HomeViewController {
             $0.height.equalTo(1)
         }
     }
+
     private func setupListViewController() {
         addChild(listViewController)
         view.addSubview(listViewController.view)

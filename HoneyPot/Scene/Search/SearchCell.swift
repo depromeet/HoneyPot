@@ -6,15 +6,16 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import SnapKit
 import Then
+import UIKit
 
 class SearchCell: BaseTableViewCell {
     let labelTitle = UILabel().then {
         $0.textColor = 0x323232.color
         $0.font = .systemFont(ofSize: 16)
     }
+
     let buttonClose = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_close_w10h10"), for: .normal)
     }

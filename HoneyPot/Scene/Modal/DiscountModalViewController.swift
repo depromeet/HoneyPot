@@ -6,12 +6,12 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
-import RxSwift
 import RxCocoa
-import SwiftyColor
+import RxSwift
 import SnapKit
+import SwiftyColor
 import Then
+import UIKit
 
 class DiscountModalViewController: BaseViewController {
     var discounts: [DiscountEntity]
@@ -21,6 +21,7 @@ class DiscountModalViewController: BaseViewController {
         $0.textColor = 0x464646.color
         $0.text = "할인혜택 안내"
     }
+
     let buttonClose = UIButton().then {
         $0.setImage(#imageLiteral(resourceName: "icon_close_w24h24"), for: .normal)
     }
@@ -44,7 +45,7 @@ class DiscountModalViewController: BaseViewController {
         modalTransitionStyle = .crossDissolve
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 

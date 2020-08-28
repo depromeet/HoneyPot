@@ -1,0 +1,3 @@
+# rules
+--disable trailingCommas
+--disable strongOutlets

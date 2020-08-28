@@ -6,18 +6,18 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import ReactorKit
-import RxSwift
-import RxCocoa
-import RxViewController
-import RxDataSources
 import ReusableKit
-import RxReusableKit
+import RxCocoa
+import RxDataSources
 import RxGesture
-import SwiftyColor
+import RxReusableKit
+import RxSwift
+import RxViewController
 import SnapKit
+import SwiftyColor
 import Then
+import UIKit
 
 enum SortKind: String, CaseIterable {
     case suggestion = "RECOMMEND"
@@ -50,6 +50,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.semanticContentAttribute = .forceRightToLeft
         $0.titleEdgeInsets = .init(top: 0, left: 4, bottom: 0, right: -4)
     }
+
     let tableView = UITableView().then {
         $0.register(Reusable.itemCell)
         $0.contentInsetAdjustmentBehavior = .never
@@ -57,9 +58,11 @@ class ListViewController: BaseViewController, ReactorKit.View {
         $0.separatorStyle = .none
         $0.estimatedRowHeight = 380
     }
+
     let refreshControl = UIRefreshControl().then {
         $0.backgroundColor = .clear
     }
+
     let activityIndicator = UIActivityIndicatorView(
         frame: .init(x: 0, y: 0, width: 0, height: 30)
     ).then {
@@ -71,7 +74,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         self.reactor = reactor
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -142,6 +145,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
             })
             .disposed(by: disposeBag)
     }
+
     private func bindState(reactor: ListReactor) {
         reactor.state
             .map { $0.sortTitle }
@@ -163,7 +167,7 @@ class ListViewController: BaseViewController, ReactorKit.View {
         let tableView = self.tableView
         reactor.state
             .map { $0.isRefreshing }
-            .filter({ $0 || !tableView.isDragging })
+            .filter { $0 || !tableView.isDragging }
             .distinctUntilChanged()
             .filter { !$0 }
             .bind(to: refreshControl.rx.isRefreshing)

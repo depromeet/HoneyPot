@@ -7,10 +7,10 @@
 //
 
 import Foundation
-import RxSwift
-import RxMoya
 import Moya
 import MoyaSugar
+import RxMoya
+import RxSwift
 
 protocol NetworkServiceType {
     func request<T: Decodable>(
@@ -36,6 +36,7 @@ class NetworkService: BaseService, NetworkServiceType {
             return defaultEndpoint
         }
     }
+
     private lazy var networkProvider = MoyaSugarProvider(endpointClosure: endpointClosure)
     private var disposeBag = DisposeBag()
 
@@ -64,7 +65,7 @@ class NetworkService: BaseService, NetworkServiceType {
 
     func request<T: Decodable>(
         _ target: HoneyPotAPI,
-        type: T.Type,
+        type _: T.Type,
         _ file: StaticString,
         _ function: StaticString,
         _ line: UInt
@@ -112,7 +113,7 @@ class NetworkService: BaseService, NetworkServiceType {
                         }
                         log.warning(message, file: file, function: function, line: line)
                     }
-            }
-        )
+                }
+            )
     }
 }

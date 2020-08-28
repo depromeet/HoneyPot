@@ -12,15 +12,18 @@ class SearchHeader: BaseTableViewHeader {
     let viewContainer = UIView().then {
         $0.backgroundColor = .systemBackground
     }
+
     let labelTitle = UILabel().then {
         $0.textColor = 0x323232.color
         $0.font = UIFont(name: "AppleSDGothicNeo-Bold", size: 18)
     }
+
     let buttonDelete = UIButton().then {
         $0.setTitle("전체삭제", for: .normal)
         $0.setTitleColor(0xA5A5A5.color, for: .normal)
         $0.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-Regular", size: 14)
     }
+
     let viewSeparator = UIView().then {
         $0.backgroundColor = 0xEEEEEE.color
     }

@@ -6,31 +6,27 @@
 //  Copyright © 2020 Depromeet. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class BaseTableViewHeader: UITableViewHeaderFooterView {
-
     var disposeBag = DisposeBag()
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
 
-        self.initialize()
+        initialize()
     }
 
-    required init?(coder aDecoder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func initialize() {
-
-    }
+    func initialize() {}
 
     override func prepareForReuse() {
         super.prepareForReuse()
 
         disposeBag = DisposeBag()
     }
-
 }

@@ -19,11 +19,11 @@ final class UserDefaultsService: BaseService, UserDefaultsServiceType {
     }
 
     func value<T>(forKey key: UserDefaultsKey<T>) -> T? {
-        return self.defaults.value(forKey: key.key) as? T
+        return defaults.value(forKey: key.key) as? T
     }
 
     func set<T>(value: T?, forKey key: UserDefaultsKey<T>) {
-        self.defaults.set(value, forKey: key.key)
-        self.defaults.synchronize()
+        defaults.set(value, forKey: key.key)
+        defaults.synchronize()
     }
 }

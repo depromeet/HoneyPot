@@ -13,6 +13,7 @@ class BottomSheetItemCell: BaseTableViewCell {
         static let normalTitle = 0xA5A5A5.color
         static let selectedTitle = 0x323232.color
     }
+
     private enum Font {
         static let normalTitle = UIFont(name: "AppleSDGothicNeo-Regular", size: 16)
         static let selectedTitle = UIFont(name: "AppleSDGothicNeo-Bold", size: 16)
@@ -22,6 +23,7 @@ class BottomSheetItemCell: BaseTableViewCell {
         $0.textColor = Color.normalTitle
         $0.font = Font.normalTitle
     }
+
     let imageViewCheck = UIImageView().then {
         $0.image = #imageLiteral(resourceName: "image_item_checked_w24h24")
         $0.isHidden = true

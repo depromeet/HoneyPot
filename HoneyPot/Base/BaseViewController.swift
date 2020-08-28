@@ -6,11 +6,10 @@
 //  Copyright © 2020 Soso. All rights reserved.
 //
 
-import UIKit
 import RxSwift
+import UIKit
 
 class BaseViewController: UIViewController {
-
     let provider: ServiceProviderType
     var disposeBag = DisposeBag()
 
@@ -20,31 +19,26 @@ class BaseViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
 
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     private(set) var didSetupConstraints = false
 
     override func viewDidLoad() {
-        self.view.setNeedsUpdateConstraints()
+        view.setNeedsUpdateConstraints()
     }
 
     override func updateViewConstraints() {
-        if !self.didSetupConstraints {
-            self.didSetupConstraints = true
-            self.setupConstraints()
-            self.setupBindings()
+        if !didSetupConstraints {
+            didSetupConstraints = true
+            setupConstraints()
+            setupBindings()
         }
         super.updateViewConstraints()
     }
 
-    func setupConstraints() {
+    func setupConstraints() {}
 
-    }
-
-    func setupBindings() {
-
-    }
-
+    func setupBindings() {}
 }

@@ -16,6 +16,7 @@ class ProductImageCell: UITableViewCell {
         super.awakeFromNib()
         setupCategoryView()
     }
+
     func setupCategoryView() {
         categoryView.layer.cornerRadius = 5
         categoryView.backgroundColor = 0xFFFFFF.color

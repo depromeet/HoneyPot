@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import RxSwift
 import RxCocoa
+import RxSwift
 
 extension UserDefaultsKey {
     static var userID: Key<String> { return "userID" }
