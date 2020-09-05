@@ -9,7 +9,7 @@
 	<key>provisioningProfiles</key>
 	<dict>
 		<key>com.soso.HoneyPot</key>
-		<string>HoneyPot-Provisioning</string>
+		<string>HoneyPot - AppStore</string>
 	</dict>
 	<key>signingCertificate</key>
 	<string>Apple Distribution</string>
