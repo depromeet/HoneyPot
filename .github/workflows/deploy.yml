@@ -14,10 +14,10 @@ jobs:
       XC_ARCHIVE: ${{ 'HoneyPot.xcarchive' }}
       XC_SCHEME: ${{ 'HoneyPot' }}
       KEYCHAIN: ${{ 'temporary.keychain' }}
-      DECRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/cert.p12' }}
-      ENCRYPTED_CERT_FILE_PATH: ${{ '.github/secrets/cert.p12.gpg' }}
-      DECRYPTED_PROVISION_FILE_PATH: ${{ '.github/secrets/HoneyPotProvisioning.mobileprovision' }}
-      ENCRYPTED_PROVISION_FILE_PATH: ${{ '.github/secrets/HoneyPotProvisioning.mobileprovision.gpg' }}
+      DECRYPTED_CERTIFICATE_FILE_PATH: ${{ '.github/secrets/Distribution.p12' }}
+      ENCRYPTED_CERTIFICATE_FILE_PATH: ${{ '.github/secrets/Distribution.p12.gpg' }}
+      DECRYPTED_PROVISION_FILE_PATH: ${{ '.github/secrets/HoneyPot.mobileprovision' }}
+      ENCRYPTED_PROVISION_FILE_PATH: ${{ '.github/secrets/HoneyPot.mobileprovision.gpg' }}
       CERT_EXPORT_KEY: ${{ secrets.CERT_EXPORT_KEY }}
       CERT_ENCRYPTION_KEY: ${{ secrets.CERT_ENCRYPTION_KEY }}
       PROVISIONING_ENCRYPTION_KEY: ${{ secrets.PROVISIONING_ENCRYPTION_KEY }}
@@ -36,9 +36,9 @@ jobs:
         security set-keychain-settings
     - name : Configure Code Signing
       run: |
-        gpg -d -o "$DECRYPTED_CERT_FILE_PATH" --pinentry-mode=loopback --passphrase "$CERT_ENCRYPTION_KEY" "$ENCRYPTED_CERT_FILE_PATH"
+        gpg -d -o "$DECRYPTED_CERTIFICATE_FILE_PATH" --pinentry-mode=loopback --passphrase "$CERT_ENCRYPTION_KEY" "$ENCRYPTED_CERTIFICATE_FILE_PATH"
         gpg -d -o "$DECRYPTED_PROVISION_FILE_PATH" --pinentry-mode=loopback --passphrase "$PROVISIONING_ENCRYPTION_KEY" "$ENCRYPTED_PROVISION_FILE_PATH"
-        security import "$DECRYPTED_CERT_FILE_PATH" -k "$KEYCHAIN" -P "$CERT_EXPORT_KEY" -A
+        security import "$DECRYPTED_CERTIFICATE_FILE_PATH" -k "$KEYCHAIN" -P "$CERT_EXPORT_KEY" -A
         security set-key-partition-list -S apple-tool:,apple: -s -k "" "$KEYCHAIN"
         mkdir -p "$HOME/Library/MobileDevice/Provisioning Profiles"
           for PROVISION in `ls .github/secrets/*.mobileprovision`
