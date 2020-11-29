@@ -21,16 +21,11 @@
 		9C7AD85D24C020FA00AAEBB0 /* RxMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 9C7AD85C24C020FA00AAEBB0 /* RxMoya */; };
 		9C7AD86024C0212A00AAEBB0 /* MoyaSugar in Frameworks */ = {isa = PBXBuildFile; productRef = 9C7AD85F24C0212A00AAEBB0 /* MoyaSugar */; };
 		9CA2CBC324E8C81D00AE5322 /* PanModal in Frameworks */ = {isa = PBXBuildFile; productRef = 9CA2CBC224E8C81D00AE5322 /* PanModal */; };
-		9CB156BC24CBEAAB0014BF96 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 9CB156BB24CBEAAB0014BF96 /* Kingfisher */; };
 		9CB525A524B05D15005CEFEA /* RxViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 9CB525A424B05D15005CEFEA /* RxViewController */; };
 		9CEE727224AADBAD00F649EC /* ProModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 9CEE727024AADBAD00F649EC /* ProModule.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9CEE727A24AADBEC00F649EC /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE727924AADBEC00F649EC /* SnapKit */; };
 		9CEE728224AADC8D00F649EC /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728124AADC8D00F649EC /* Then */; };
 		9CEE728524AADD1600F649EC /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728424AADD1600F649EC /* RIBs */; };
-		9CEE728824AADD2300F649EC /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728724AADD2300F649EC /* RxSwift */; };
-		9CEE728A24AADD2300F649EC /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728924AADD2300F649EC /* RxRelay */; };
-		9CEE728C24AADD2300F649EC /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728B24AADD2300F649EC /* RxCocoa */; };
-		9CEE728E24AADD2300F649EC /* RxBlocking in Frameworks */ = {isa = PBXBuildFile; productRef = 9CEE728D24AADD2300F649EC /* RxBlocking */; };
 		9CF439F024E6BD510029D6FA /* RxKeyboard in Frameworks */ = {isa = PBXBuildFile; productRef = 9CF439EF24E6BD510029D6FA /* RxKeyboard */; };
 		9CFDA61A24B4166C00097BF0 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 9CFDA61924B4166C00097BF0 /* RxGesture */; };
 /* End PBXBuildFile section */
@@ -49,8 +44,6 @@
 				9C59C2F224B190BA00402BC5 /* ReusableKit in Frameworks */,
 				9C59C2F724B190E700402BC5 /* Differentiator in Frameworks */,
 				9C39B5B324AF27BA0003D013 /* SwiftyColor in Frameworks */,
-				9CEE728C24AADD2300F649EC /* RxCocoa in Frameworks */,
-				9CEE728A24AADD2300F649EC /* RxRelay in Frameworks */,
 				9CB525A524B05D15005CEFEA /* RxViewController in Frameworks */,
 				9CEE727A24AADBEC00F649EC /* SnapKit in Frameworks */,
 				9C697D4B24ED4D4500ABCC7C /* RxKingfisher in Frameworks */,
@@ -63,14 +56,11 @@
 				9C697D3424ED247E00ABCC7C /* CocoaLumberjackSwift in Frameworks */,
 				9CEE728224AADC8D00F649EC /* Then in Frameworks */,
 				9C7AD85B24C020FA00AAEBB0 /* Moya in Frameworks */,
-				9CEE728824AADD2300F649EC /* RxSwift in Frameworks */,
 				9C7AD85D24C020FA00AAEBB0 /* RxMoya in Frameworks */,
 				9C1D557424DADC0C0048BBDF /* URLNavigator in Frameworks */,
 				9CEE728524AADD1600F649EC /* RIBs in Frameworks */,
 				9C59C2F924B190E700402BC5 /* RxDataSources in Frameworks */,
 				9C59C2F424B190BA00402BC5 /* RxReusableKit in Frameworks */,
-				9CB156BC24CBEAAB0014BF96 /* Kingfisher in Frameworks */,
-				9CEE728E24AADD2300F649EC /* RxBlocking in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,10 +124,6 @@
 				9CEE727924AADBEC00F649EC /* SnapKit */,
 				9CEE728124AADC8D00F649EC /* Then */,
 				9CEE728424AADD1600F649EC /* RIBs */,
-				9CEE728724AADD2300F649EC /* RxSwift */,
-				9CEE728924AADD2300F649EC /* RxRelay */,
-				9CEE728B24AADD2300F649EC /* RxCocoa */,
-				9CEE728D24AADD2300F649EC /* RxBlocking */,
 				9C39B5B224AF27BA0003D013 /* SwiftyColor */,
 				9C39B5B524AF27E20003D013 /* ReactorKit */,
 				9CB525A424B05D15005CEFEA /* RxViewController */,
@@ -149,7 +135,6 @@
 				9C7AD85A24C020FA00AAEBB0 /* Moya */,
 				9C7AD85C24C020FA00AAEBB0 /* RxMoya */,
 				9C7AD85F24C0212A00AAEBB0 /* MoyaSugar */,
-				9CB156BB24CBEAAB0014BF96 /* Kingfisher */,
 				9C1D557324DADC0C0048BBDF /* URLNavigator */,
 				9CF439EF24E6BD510029D6FA /* RxKeyboard */,
 				9CA2CBC224E8C81D00AE5322 /* PanModal */,
@@ -167,7 +152,7 @@
 		9CEE726424AADBAD00F649EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1160;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = Soso;
 				TargetAttributes = {
 					9CEE726C24AADBAD00F649EC = {
@@ -188,7 +173,6 @@
 				9CEE727824AADBEC00F649EC /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9CEE728024AADC8D00F649EC /* XCRemoteSwiftPackageReference "Then" */,
 				9CEE728324AADD1600F649EC /* XCRemoteSwiftPackageReference "RIBs" */,
-				9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */,
 				9C39B5B124AF27BA0003D013 /* XCRemoteSwiftPackageReference "SwiftyColor" */,
 				9C39B5B424AF27E20003D013 /* XCRemoteSwiftPackageReference "ReactorKit" */,
 				9CB525A324B05D15005CEFEA /* XCRemoteSwiftPackageReference "RxViewController" */,
@@ -197,7 +181,6 @@
 				9CFDA61824B4166C00097BF0 /* XCRemoteSwiftPackageReference "RxGesture" */,
 				9C7AD85924C020FA00AAEBB0 /* XCRemoteSwiftPackageReference "Moya" */,
 				9C7AD85E24C0212A00AAEBB0 /* XCRemoteSwiftPackageReference "MoyaSugar" */,
-				9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				9C1D557224DADC0C0048BBDF /* XCRemoteSwiftPackageReference "URLNavigator" */,
 				9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */,
 				9CA2CBC124E8C81D00AE5322 /* XCRemoteSwiftPackageReference "PanModal" */,
@@ -260,6 +243,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -285,7 +269,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -323,6 +307,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -342,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -367,7 +352,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ProModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -396,7 +381,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = ProModule/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -456,8 +441,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ReactorKit/ReactorKit";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.1.0;
+				kind = revision;
+				revision = 17c33781d2f1285ef3a8b562dc40a1438e8d3df8;
 			};
 		};
 		9C59C2F024B190BA00402BC5 /* XCRemoteSwiftPackageReference "ReusableKit" */ = {
@@ -516,14 +501,6 @@
 				minimumVersion = 1.2.7;
 			};
 		};
-		9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/onevcat/Kingfisher";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.14.1;
-			};
-		};
 		9CB525A324B05D15005CEFEA /* XCRemoteSwiftPackageReference "RxViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/devxoul/RxViewController";
@@ -554,14 +531,6 @@
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReactiveX/RxSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.1;
 			};
 		};
 		9CF439EE24E6BD510029D6FA /* XCRemoteSwiftPackageReference "RxKeyboard" */ = {
@@ -653,11 +622,6 @@
 			package = 9CA2CBC124E8C81D00AE5322 /* XCRemoteSwiftPackageReference "PanModal" */;
 			productName = PanModal;
 		};
-		9CB156BB24CBEAAB0014BF96 /* Kingfisher */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CB156BA24CBEAAB0014BF96 /* XCRemoteSwiftPackageReference "Kingfisher" */;
-			productName = Kingfisher;
-		};
 		9CB525A424B05D15005CEFEA /* RxViewController */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 9CB525A324B05D15005CEFEA /* XCRemoteSwiftPackageReference "RxViewController" */;
@@ -677,26 +641,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9CEE728324AADD1600F649EC /* XCRemoteSwiftPackageReference "RIBs" */;
 			productName = RIBs;
-		};
-		9CEE728724AADD2300F649EC /* RxSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxSwift;
-		};
-		9CEE728924AADD2300F649EC /* RxRelay */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxRelay;
-		};
-		9CEE728B24AADD2300F649EC /* RxCocoa */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxCocoa;
-		};
-		9CEE728D24AADD2300F649EC /* RxBlocking */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CEE728624AADD2300F649EC /* XCRemoteSwiftPackageReference "RxSwift" */;
-			productName = RxBlocking;
 		};
 		9CF439EF24E6BD510029D6FA /* RxKeyboard */ = {
 			isa = XCSwiftPackageProductDependency;
