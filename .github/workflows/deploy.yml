@@ -9,6 +9,7 @@ jobs:
   deploy:
     runs-on: macOS-latest
     env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       XC_VERSION: ${{ '11.6' }}
       XC_WORKSPACE: ${{ 'HoneyPot.xcworkspace' }}
       XC_ARCHIVE: ${{ 'HoneyPot.xcarchive' }}
